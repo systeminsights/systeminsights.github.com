@@ -4,7 +4,7 @@
   <title><![CDATA[Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-07T08:38:12+05:30</updated>
+  <updated>2012-06-07T16:43:58+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -12,42 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[blah]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/06/07/blah/"/>
-    <updated>2012-06-07T08:16:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/06/07/blah</id>
-    <content type="html"><![CDATA[<p>Blah blah blah</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[foo]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/06/07/foo/"/>
-    <updated>2012-06-07T08:10:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/06/07/foo</id>
-    <content type="html"><![CDATA[<h2>Test</h2>
-
-<p>This is a test
-* Test 1
-* Test 2
-- Test 3</p>
-
-<h2>Tester</h2>
-
-<p>Tester?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[moving_to_octopress]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/06/06/moving-to-octopress/"/>
-    <updated>2012-06-06T20:37:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/06/06/moving-to-octopress</id>
-    <content type="html"><![CDATA[<p>We are moving to the Octopress Blogging framework!</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Powered by Octopress]]></title>
@@ -63,7 +27,7 @@
     <link href="http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets/"/>
     <updated>2012-05-08T10:50:00+05:30</updated>
     <id>http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets</id>
-    <content type="html"><![CDATA[<p>Why do we care</p>
+    <content type="html"><![CDATA[<h2>Why do we care</h2>
 
 <p>We use mongoDB to persist data from the vimana tenants. All historical data from our customers is stored in mongo, and its very important that we can continuously persist into mongo without losing data. We are using replica sets to make sure that our data is redundantly stored and to ensure that we have a failover mechanism when one of the mongoDBs lose connection.</p>
 
@@ -440,16 +404,24 @@ Here are the alarms that occurred during this period:</p>
     <id>http://systeminsights.github.com/blog/2011/12/26/What-is-Manufacturing-Big-Data</id>
     <content type="html"><![CDATA[<p>Big Data has increasingly been in the <a href="http://www.nytimes.com/2011/12/26/technology/for-start-ups-sorting-the-data-cloud-is-the-next-big-thing.html?pagewanted=all">news</a>, and is being touted as a kind of universal panacea to improve efficiency, decrease costs, and make the world a better place. We like keeping the conversation a lot more focused, and this blog will focus on Big Data from the manufacturing shop floor: how to collect it and more importantly, what to make of it.</p>
 
-<p>What kind of data is available from the manufacturing shop floor? Here are some examples:
-- Operational: Device uptime, downtime, modes, states
-- Diagnostic: Alarms, warnings, messages, notifications
-- Process: Positions, velocities, acceleration, flow rates
-- Environmental: Resource usage, energy consumption, effluents and emissions</p>
+<p>What kind of data is available from the manufacturing shop floor? Here are some examples:</p>
 
-<p>So, what can we do with Manufacturing Big Data?
-- Preventive Maintenance: Big Data can help us identify which devices are going to be fail by comparing their current operational patterns with past failure behavior. By mining across data from similar devices, we can even predict the failure of devices that have not failed in the past.<br/>
-- Part genealogy: Big Data can be used to build detailed genealogical models of complex parts, bringing together data on device operational states, process parameters, and machine health.
-- Design-to-manufacturing pipeline: Big Data can improve design decisions by enabling the use of manufacturing operational and diagnostic data to the design phase.</p>
+<ul>
+<li>Operational: Device uptime, downtime, modes, states</li>
+<li>Diagnostic: Alarms, warnings, messages, notifications</li>
+<li>Process: Positions, velocities, acceleration, flow rates</li>
+<li>Environmental: Resource usage, energy consumption, effluents and emissions</li>
+</ul>
+
+
+<p>So, what can we do with Manufacturing Big Data?</p>
+
+<ul>
+<li>Preventive Maintenance: Big Data can help us identify which devices are going to be fail by comparing their current operational patterns with past failure behavior. By mining across data from similar devices, we can even predict the failure of devices that have not failed in the past.</li>
+<li>Part genealogy: Big Data can be used to build detailed genealogical models of complex parts, bringing together data on device operational states, process parameters, and machine health.</li>
+<li>Design-to-manufacturing pipeline: Big Data can improve design decisions by enabling the use of manufacturing operational and diagnostic data to the design phase.</li>
+</ul>
+
 
 <p>At System Insights we apply Big Data to improve the efficiency and productivity of complex manufacturing systems. Our vimana software application is the first of its kind solution for the high speed collection, storage, and analysis of data from the manufacturing shop floor.</p>
 ]]></content>

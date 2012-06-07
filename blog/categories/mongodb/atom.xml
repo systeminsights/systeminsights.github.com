@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mongodb | Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/blog/categories/mongodb/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-07T08:38:12+05:30</updated>
+  <updated>2012-06-07T16:43:58+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -18,7 +18,7 @@
     <link href="http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets/"/>
     <updated>2012-05-08T10:50:00+05:30</updated>
     <id>http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets</id>
-    <content type="html"><![CDATA[<p>Why do we care</p>
+    <content type="html"><![CDATA[<h2>Why do we care</h2>
 
 <p>We use mongoDB to persist data from the vimana tenants. All historical data from our customers is stored in mongo, and its very important that we can continuously persist into mongo without losing data. We are using replica sets to make sure that our data is redundantly stored and to ensure that we have a failover mechanism when one of the mongoDBs lose connection.</p>
 

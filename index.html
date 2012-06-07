@@ -9,7 +9,7 @@
   <meta name="author" content="Team System Insights">
 
   
-  <meta name="description" content="Blah blah blah
+  <meta name="description" content="We are moving to the Octopress framework. The blog will be hosted on Github Pages.
 ">
   
 
@@ -65,123 +65,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/07/blah/">Blah</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-07T08:16:00+05:30" pubdate data-updated="true">Jun 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Blah blah blah</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/07/foo/">Foo</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-07T08:10:00+05:30" pubdate data-updated="true">Jun 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Test</h2>
-
-<p>This is a test
-* Test 1
-* Test 2
-- Test 3</p>
-
-<h2>Tester</h2>
-
-<p>Tester?</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/06/moving-to-octopress/">Moving_to_octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-06T20:37:00+05:30" pubdate data-updated="true">Jun 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>We are moving to the Octopress Blogging framework!</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -247,7 +130,7 @@
   </header>
 
 
-  <div class="entry-content"><p>Why do we care</p>
+  <div class="entry-content"><h2>Why do we care</h2>
 
 <p>We use mongoDB to persist data from the vimana tenants. All historical data from our customers is stored in mongo, and its very important that we can continuously persist into mongo without losing data. We are using replica sets to make sure that our data is redundantly stored and to ensure that we have a failover mechanism when one of the mongoDBs lose connection.</p>
 
@@ -597,6 +480,133 @@ Here is a screenshot of viewing realtime data from an MTConnect Agent. The app p
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/17/Presentation-on-BEC/">Presentation on Baseline Energy Consumption</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-17T12:52:00+05:30" pubdate data-updated="true">Feb 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Following up to the previous posts (here and here) on Baseline Energy Consumption, here is a presentation about the standard:</p>
+
+<script src="http://speakerdeck.com/embed/4f3dd5bcdf5d29001f0047d8.js"></script>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/14/McKinsey-Part-1-How-Much-Data/">McKinsey on (Manufacturing) Big Data - Part 1 - How Much Data?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-14T12:20:00+05:30" pubdate data-updated="true">Feb 14<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>McKinsey recently published a report about Big Data, going into considerable detail about its impact on different fields, including manufacturing. In the next few posts, I will be digging into this report looking at the specific impacts of big data on machining-related manufacturing, focusing on ways that improve productivity and efficiency.
+First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
+
+<blockquote><p>“Big data” refers to datasets whose size is beyond the ability of typical database software tools to capture, store, manage, and analyze. This definition is intentionally subjective and incorporates a moving definition of how big a dataset needs to be in order to be considered big data—i.e., we don’t define big data in terms of being larger than a certain number of terabytes (thousands of gigabytes).
+This definition applies remarkably well to Manufacturing Big Data. The &#8220;bigness&#8221; of the data is not necessarily its absolute size, because process data from a machine tool might be in the tens of gigabytes, which is paltry compared to Internet data like website click-throughs or ad impressions. The bigness comes from the fact that traditional manufacturing decision making systems (spreadsheets, sticky-notes-on-whiteboards, MES systems) deal with very small sets of data – perhaps in the megabytes – and we are now looking at harnessing data that is several orders of magnitude larger than that.</p></blockquote>
+
+<p>So how much data are we exactly talking about? Lets take the case of collecting MTConnect-based data streams from manufacturing equipment. With Basic monitoring (looking at production efficiency, part count, alarms, messages, and overrides), we can estimate a data rate of about 10 samples a second, with each sample consisting of 10 data items. This generates over 400MB of data daily, or more than 150GB annually per device. With Advanced monitoring (which will complement Basic monitoring with data from embedded and external sensors), this grows to over 21 GB a day, or close to 8 TB a year. With these estimates, a small manufacturing shop with about 10 devices, wil generate over 2 TB of data a day with Basic monitoring, or close to 80 TB with Advanced monitoring. Moving up to a multi-facility enterprise with about 500 devices, we are looking at about 80 TB a year with Basic monitoring, and close to 4 PB (Petabytes) with Advanced monitoring. The table below gives a few more examples.</p>
+
+<p>If we extrapolated this further to look at the total number of machine tools currently installed in the United States today (approximately 1.2 Million, based on estimates from AMT), Basic monitoring will generate over 189 PB of data, while Advanced monitoring will generate over 9,400 PB of data (over 9.4 Exabytes). Of course, this does overstate the total data load since not all of these machines can be readily addressed, but it gives a sense of the scale of manufacturing data, and &#8211; more importantly &#8211; the opportunity to harness it.</p>
+
+<p>McKinsey estimates about 966 PB of stored data in the Discrete Manufacturing sector (see above). Add Process data to that, we are looking at greatly increasing the total storage requirements of the sector. Manufacturing has the largest storage needs of all the surveyed sectors, and the potential of Big Data analytics on process data will further increase them.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/13/Big-Data-in-the-news/">Big Data in the News</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-13T13:49:00+05:30" pubdate data-updated="true">Feb 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The New York Times <a href="http://www.nytimes.com/2012/02/12/sunday-review/big-datas-impact-in-the-world.html">talks</a> about the impact of Big Data across a variety of fields, including retailing, voice recognition, and public health. They cite a report by Prof. Erik Brynjolfsson from MIT Sloan that</p>
+
+<blockquote><p>studied 179 large companies and found that those adopting “data-driven decision making” achieved productivity gains that were 5 percent to 6 percent higher than other factors could explain.
+Certainly we can expect a larger impact in productivity gains in manufacturing. Traditional &#8220;data driven&#8221; techniques like process monitoring has itself brought productivity gains of over 10%. Big Data Analytics gives the opportunity to wring out further gains, because of the ability to handle unstructured data, which the article mentions:
+Data is not only becoming more available but also more understandable to computers. Most of the Big Data surge is data in the wild — unruly stuff like words, images and video on the Web and those streams of sensor data. It is called unstructured data and is not typically grist for traditional databases.
+But the computer tools for gleaning knowledge and insights from the Internet era’s vast trove of unstructured data are fast gaining ground. At the forefront are the rapidly advancing techniques of artificial intelligence like natural-language processing, pattern recognition and machine learning.
+We apply similar tools and techniques to look at unstructured manufacturing data. More about this coming up!</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -612,23 +622,23 @@ Here is a screenshot of viewing realtime data from an MTConnect Agent. The app p
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2012/06/07/blah/">blah</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/06/07/foo/">foo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/06/06/moving-to-octopress/">moving_to_octopress</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2012/05/30/powered-by-octopress/">Powered by Octopress</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/05/08/mongo-replica-sets/">MongoDB and Replica Sets</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/14/welcome-deepak/">Welcome Deepak!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/">McKinsey on (Manufacturing) Big Data - Part 2 - What do do with it</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/">Setting up a MTConnect Agent on a Linux (Ubuntu) machine</a>
       </li>
     
   </ul>
