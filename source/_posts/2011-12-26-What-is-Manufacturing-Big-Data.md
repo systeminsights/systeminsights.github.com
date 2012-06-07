@@ -4,7 +4,7 @@ title: What is Manufacturing Big Data?
 date: 2011-12-26 16:35:00 UTC
 comments: true
 categories: big-data
-tags: athulan
+author: athulan
 ---
 
 Big Data has increasingly been in the [news](http://www.nytimes.com/2011/12/26/technology/for-start-ups-sorting-the-data-cloud-is-the-next-big-thing.html?pagewanted=all), and is being touted as a kind of universal panacea to improve efficiency, decrease costs, and make the world a better place. We like keeping the conversation a lot more focused, and this blog will focus on Big Data from the manufacturing shop floor: how to collect it and more importantly, what to make of it. 

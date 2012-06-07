@@ -4,16 +4,20 @@ title: McKinsey on (Manufacturing) Big Data - Part 2 - What do do with it
 date: 2012-03-21 08:17:00 UTC
 comments: true
 categories: big-data vimana
+author: athulan
 ---
 
 We are back studying McKinsey's report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several "levers" where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:
+
 1. Implementing Lean Manufacturing (#5)
 2. Using sensor data-driven operations analytics (#6)
 
 Lets look at the first of these in this post.
 
-Lean Manufacturing and the Digital Factory
+## Lean Manufacturing and the Digital Factory
+
 McKinsey identifies using Big Data to "create process transparency, develop dashboards, and visualize bottlenecks". Our vimana application is one example of applying Big Data to create realtime dashboards of manufacturing equipment (to learn more about vimana, please visit www.systeminsights.com/vimana.) The idea here is to provide a shopfloor user both a high-level "macro" view of the shopfloor, as well as a low-level "micro" view of a single device.  Questions the dashboards can help answer include:
+
 * Which devices are producing parts today?
 * Which parts are being made right now?
 * How many parts have I made?
