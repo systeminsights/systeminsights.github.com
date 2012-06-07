@@ -94,36 +94,33 @@
 
 <p>While working on my internship project, I got a chance to test out an MTConnect agent built in C++ for Linux (ubuntu). I was surprised to find that absolutely no documentation existed for setting up the Agent in a Linux environment. Although it didn't turn out to be a big hassle in the end, I thought that it would be a good idea to list down the process of setting up a MTConnect agent on Linux. So, here you go:</p>
 
-<p><em>Step 1</em>: Download the zip archive of the latest version of MTConnect C++ Agent SDK from MTConnect Github and extract its contents onto your local disk.</p>
+<ul>
+<li>Download the zip archive of the latest version of MTConnect C++ Agent SDK from MTConnect Github and extract its contents onto your local disk.</li>
+<li><p>Download &amp; Install libxml-2.0 and libxml-dev packages from the apt repository.</p>
 
-<p><em>Step 2</em>: Download &amp; Install libxml-2.0 and libxml-dev packages from the apt repository.</p>
+<pre><code>  apt-get install libxml2 
+  apt-get install libxml2-dev 
+</code></pre></li>
+<li><p>Now you need to prepare a Makefile in order to compile the agent. This can be done using the Cmake package. Download &amp; install cmake if you don't already have it.</p>
 
-<pre><code>apt-get install libxml2 
-apt-get install libxml2-dev 
-</code></pre>
+<pre><code>  apt-get install cmake   
+</code></pre></li>
+<li><p>Open the 'agent' folder in the terminal and run cmake and make.</p>
 
-<p><em>Step 3</em>: Now you need to prepare a Makefile in order to compile the agent. This can be done using the Cmake package.
-Download &amp; install cmake if you don't already have it.</p>
+<pre><code>  cd agent/
+  cmake .
+  make 
+</code></pre></li>
+<li><p>If everything went right, your agent would have been build. You can now start it off as a service.</p>
 
-<pre><code>apt-get install cmake 
-</code></pre>
+<pre><code>  ./agent daemonize 
+</code></pre></li>
+<li><p>If you are unsure whether the process is running, you can check out the process status:</p>
 
-<p>Open the 'agent' folder in the terminal and run cmake and make.</p>
+<pre><code>  ps aux | grep agent 
+</code></pre></li>
+</ul>
 
-<pre><code>cd agent/
-cmake .
-make 
-</code></pre>
-
-<p><em>Step 4</em>: If everything went right, your agent would have been build. You can now start it off as a service.</p>
-
-<pre><code>./agent daemonize 
-</code></pre>
-
-<p>If you are unsure whether the process is running, you can check out the process status:</p>
-
-<pre><code>ps aux | grep agent 
-</code></pre>
 
 <p>The agent service should be up and running. You may change the agent.cfg file in any text editor based on the instructions here.</p>
 

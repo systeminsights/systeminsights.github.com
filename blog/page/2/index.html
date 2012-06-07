@@ -137,11 +137,15 @@
   </header>
 
 
-  <div class="entry-content"><p>Measuring machine tool energy consumption has always been tricky because of the diversity and complexity of machine tools. We took a first stab at developing a standard to measure machine tool energy consumption as part of a project supported by General Dynamics – OTS, National Center for Defense Manufacturing and Machining (NCDMM), and AMT. We developed the Baseline Energy Consumption (BEC) metric as a standard measure of the energy consumption of machine tools along with a companion test methodology. Applications of this metric include:
-* Estimating the approximate energy requirements of operating a machine tool to manufacture a specific part
-* Comparing the energy requirements of two machine tools that are being applied in similar activities
-* Performing Return-on-Investment calculations to justify energy efficiency improvements in machine tool and machining technologies
-* Assessing environmental impact of manufacturing processes from equipment energy consumption</p>
+  <div class="entry-content"><p>Measuring machine tool energy consumption has always been tricky because of the diversity and complexity of machine tools. We took a first stab at developing a standard to measure machine tool energy consumption as part of a project supported by General Dynamics – OTS, National Center for Defense Manufacturing and Machining (NCDMM), and AMT. We developed the Baseline Energy Consumption (BEC) metric as a standard measure of the energy consumption of machine tools along with a companion test methodology. Applications of this metric include:</p>
+
+<ul>
+<li>Estimating the approximate energy requirements of operating a machine tool to manufacture a specific part</li>
+<li>Comparing the energy requirements of two machine tools that are being applied in similar activities</li>
+<li>Performing Return-on-Investment calculations to justify energy efficiency improvements in machine tool and machining technologies</li>
+<li>Assessing environmental impact of manufacturing processes from equipment energy consumption</li>
+</ul>
+
 
 <p>A key consideration in designing the test methodology was to ensure that they could be performed within a reasonable amount of a time in a standard industrial setting without requiring any special workpieces, fixtures, or equipment. This pragmatic approach was explicitly selected because the goal of this metric is to serve as a figure of merit for the energy consumption of machine tools and manufacturing equipment. This metric does not intend to serve as a precise indication of the energy required by a machine tool to manufacture a specific part or to execute a specific operation. The first edition of the standard focused on measuring the BEC of lathe-type machine tools based on recording the power consumption during a series of controlled tests.</p>
 
@@ -189,10 +193,14 @@
 
 <p>A part itself is an asset, but for the treatment in the standard we will consider it as a collection of assets. These assets are composed of the various programs, measurement plans, and processes that will be applied to it. They may also indicate the schedule and operation, but that is questionable. If we consider a part an asset that references other assets, then the problem becomes one of asset references, instead of having a master document that has everything.</p>
 
-<p>One consideration is to make parts have the following information:
-1. Descriptive information
-2. Reference to part programs for each device
-3. Reference to quality execution program for each device</p>
+<p>One consideration is to make parts have the following information:</p>
+
+<ol>
+<li>Descriptive information</li>
+<li>Reference to part programs for each device</li>
+<li>Reference to quality execution program for each device</li>
+</ol>
+
 
 <p>Another area that needs to be considered is the quality measurement data collected from gauges and coordinate measurement devices and from process metrology. The information collected for the part measurements will be associated with the part itself through a parent reference. The part may or may not need to be updated to refer back to the measurement data, but this could be done. The measurements may reference a quality execution plan for that step and may replicate the tolerance information as well as the geometric information as well.</p>
 
@@ -274,13 +282,17 @@
   </header>
 
 
-  <div class="entry-content"><p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:
-- <code>+ OVERTRAVEL ( SOFT 1 )</code>
-- <code>1-ROT MOTOR SENSOR ERROR 81</code>
-- <code>HYDRAULIC PRESSURE DOWN</code>
-- <code>HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL</code>
-- <code>OIL-MATIC TEMP./FILTER ALARM</code>
-- <code>Y AXIS HOME POSITION RETURN REQUEST</code></p>
+  <div class="entry-content"><p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:</p>
+
+<ul>
+<li><code>+ OVERTRAVEL ( SOFT 1 )</code></li>
+<li><code>1-ROT MOTOR SENSOR ERROR 81</code></li>
+<li><code>HYDRAULIC PRESSURE DOWN</code></li>
+<li><code>HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL</code></li>
+<li><code>OIL-MATIC TEMP./FILTER ALARM</code></li>
+<li><code>Y AXIS HOME POSITION RETURN REQUEST</code></li>
+</ul>
+
 
 <p>While some of these alarms are self-explanatory (like &#8221;<code>HYDRAULIC PRESSURE DOWN</code>&#8221;), other alarms can be a little harder to understand without any context. One way of adding context to Alarms is to look at the ControllerMode and the ExecutionStatus when the Alarm fired, and how they changed across the duration the alarm was active.</p>
 

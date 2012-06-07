@@ -4,7 +4,7 @@
   <title><![CDATA[Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-07T16:57:58+05:30</updated>
+  <updated>2012-06-07T18:52:01+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -133,21 +133,30 @@ Deepak.</p>
     <link href="http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/"/>
     <updated>2012-03-21T13:47:00+05:30</updated>
     <id>http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it</id>
-    <content type="html"><![CDATA[<p>We are back studying McKinsey&#8217;s report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several &#8220;levers&#8221; where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:
-1. Implementing Lean Manufacturing (#5)
-2. Using sensor data-driven operations analytics (#6)</p>
+    <content type="html"><![CDATA[<p>We are back studying McKinsey&#8217;s report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several &#8220;levers&#8221; where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:</p>
+
+<ol>
+<li>Implementing Lean Manufacturing (#5)</li>
+<li>Using sensor data-driven operations analytics (#6)</li>
+</ol>
+
 
 <p>Lets look at the first of these in this post.</p>
 
-<p>Lean Manufacturing and the Digital Factory
-McKinsey identifies using Big Data to &#8220;create process transparency, develop dashboards, and visualize bottlenecks&#8221;. Our vimana application is one example of applying Big Data to create realtime dashboards of manufacturing equipment (to learn more about vimana, please visit www.systeminsights.com/vimana.) The idea here is to provide a shopfloor user both a high-level &#8220;macro&#8221; view of the shopfloor, as well as a low-level &#8220;micro&#8221; view of a single device.  Questions the dashboards can help answer include:
-* Which devices are producing parts today?
-* Which parts are being made right now?
-* How many parts have I made?
-* What has my device been doing today?
-* What is my efficiency?
-* Why have I been in a downtime?
-(This is a much more interesting question to answer than just &#8220;What are my downtimes&#8221;. Knowing why downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing{ that a has downtime occurred).</p>
+<h2>Lean Manufacturing and the Digital Factory</h2>
+
+<p>McKinsey identifies using Big Data to &#8220;create process transparency, develop dashboards, and visualize bottlenecks&#8221;. Our vimana application is one example of applying Big Data to create realtime dashboards of manufacturing equipment (to learn more about vimana, please visit www.systeminsights.com/vimana.) The idea here is to provide a shopfloor user both a high-level &#8220;macro&#8221; view of the shopfloor, as well as a low-level &#8220;micro&#8221; view of a single device.  Questions the dashboards can help answer include:</p>
+
+<ul>
+<li>Which devices are producing parts today?</li>
+<li>Which parts are being made right now?</li>
+<li>How many parts have I made?</li>
+<li>What has my device been doing today?</li>
+<li>What is my efficiency?</li>
+<li>Why have I been in a downtime?
+(This is a much more interesting question to answer than just &#8220;What are my downtimes&#8221;. Knowing why downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing{ that a has downtime occurred).</li>
+</ul>
+
 
 <p>The data for vimana is streamed using the MTConnect Agent associated with each machine tool. The application itself runs in the cloud, aggregating hundreds of events every second from each machine tool. The analysis is done in realtime, and the visualizations are rendered instantly. Process transparency is achieved here because the application serves as a central repository of what is going on in the shopfloor, and multiple stakeholders (production, engineering, maintenance, management) can all use it to support decisions that come under their purview. This also takes us one step closer to the Digital Factory, where detailed operational data from the factory equipment is applied in building a complete digital model of the factory&#8217;s operations, which can then be applied in optimizing its performance.</p>
 
@@ -168,36 +177,33 @@ McKinsey identifies using Big Data to &#8220;create process transparency, develo
 
 <p>While working on my internship project, I got a chance to test out an MTConnect agent built in C++ for Linux (ubuntu). I was surprised to find that absolutely no documentation existed for setting up the Agent in a Linux environment. Although it didn&#8217;t turn out to be a big hassle in the end, I thought that it would be a good idea to list down the process of setting up a MTConnect agent on Linux. So, here you go:</p>
 
-<p><em>Step 1</em>: Download the zip archive of the latest version of MTConnect C++ Agent SDK from MTConnect Github and extract its contents onto your local disk.</p>
+<ul>
+<li>Download the zip archive of the latest version of MTConnect C++ Agent SDK from MTConnect Github and extract its contents onto your local disk.</li>
+<li><p>Download &amp; Install libxml-2.0 and libxml-dev packages from the apt repository.</p>
 
-<p><em>Step 2</em>: Download &amp; Install libxml-2.0 and libxml-dev packages from the apt repository.</p>
+<pre><code>  apt-get install libxml2 
+  apt-get install libxml2-dev 
+</code></pre></li>
+<li><p>Now you need to prepare a Makefile in order to compile the agent. This can be done using the Cmake package. Download &amp; install cmake if you don&#8217;t already have it.</p>
 
-<pre><code>apt-get install libxml2 
-apt-get install libxml2-dev 
-</code></pre>
+<pre><code>  apt-get install cmake   
+</code></pre></li>
+<li><p>Open the &#8216;agent&#8217; folder in the terminal and run cmake and make.</p>
 
-<p><em>Step 3</em>: Now you need to prepare a Makefile in order to compile the agent. This can be done using the Cmake package.
-Download &amp; install cmake if you don&#8217;t already have it.</p>
+<pre><code>  cd agent/
+  cmake .
+  make 
+</code></pre></li>
+<li><p>If everything went right, your agent would have been build. You can now start it off as a service.</p>
 
-<pre><code>apt-get install cmake 
-</code></pre>
+<pre><code>  ./agent daemonize 
+</code></pre></li>
+<li><p>If you are unsure whether the process is running, you can check out the process status:</p>
 
-<p>Open the &#8216;agent&#8217; folder in the terminal and run cmake and make.</p>
+<pre><code>  ps aux | grep agent 
+</code></pre></li>
+</ul>
 
-<pre><code>cd agent/
-cmake .
-make 
-</code></pre>
-
-<p><em>Step 4</em>: If everything went right, your agent would have been build. You can now start it off as a service.</p>
-
-<pre><code>./agent daemonize 
-</code></pre>
-
-<p>If you are unsure whether the process is running, you can check out the process status:</p>
-
-<pre><code>ps aux | grep agent 
-</code></pre>
 
 <p>The agent service should be up and running. You may change the agent.cfg file in any text editor based on the instructions here.</p>
 
@@ -212,16 +218,26 @@ make
     <id>http://systeminsights.github.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora</id>
     <content type="html"><![CDATA[<p>I want to introduce Prince Arora, a student from IIT Madras, who is interning with us at our Chennai office. Prince is developing a suite of MTConnect-based tools to track the maintenance status of machine tools. He is blogging about his experiences at System Insights at his blog, <a href="http://princearora.in">The 20four hour log</a>.</p>
 
-<p>Prince started out by building a simple webapp to display various maintenance-related parameters from an MTConnect data stream. Specifically <a href="http://princearora.wordpress.com/2012/02/14/mtconnect-the-problem-statement/">he developed an app</a> to:
-* Connect to any MTConnect Stream specified by the user
-* Recognize all the devices within the stream
-* Continuously read &amp; display multiple parameters for each of the device
-* Display condition of all components
-* Plot a curve of the variation of a parameter over time
-* Allow user to monitor a parameter and alarm if it moves outside the range of values entered
-Here is a screenshot of viewing realtime data from an MTConnect Agent. The app plots the value of an MTConnect Sample DataItem in realtime. The screen below shows the app plotting the X position, but this can also be used to plot maintenance-related data like a vibration or temperature.</p>
+<p>Prince started out by building a simple webapp to display various maintenance-related parameters from an MTConnect data stream. Specifically <a href="http://princearora.wordpress.com/2012/02/14/mtconnect-the-problem-statement/">he developed an app</a> to:</p>
+
+<ul>
+<li>Connect to any MTConnect Stream specified by the user</li>
+<li>Recognize all the devices within the stream</li>
+<li>Continuously read &amp; display multiple parameters for each of the device</li>
+<li>Display condition of all components</li>
+<li>Plot a curve of the variation of a parameter over time</li>
+<li>Allow user to monitor a parameter and alarm if it moves outside the range of values entered</li>
+</ul>
+
+
+<p>Here is a screenshot of viewing realtime data from an MTConnect Agent. The app plots the value of an MTConnect Sample DataItem in realtime. The screen below shows the app plotting the X position, but this can also be used to plot maintenance-related data like a vibration or temperature.</p>
+
+<p>Error processing input, expected syntax: {% img [class name(s)] [http[s]:/]/path/to/image [width [height]] [title text | &#8220;title text&#8221; [&#8220;alt text&#8221;]] %}</p>
 
 <p>You can also load up the status of various conditions active in the machine tool, and see if the parameter that is being plotted is within some user-determined bounds. The screen below shows bounds set for the DataItem Commanded Y Position between 3 and -2. A green indication is shown because the data item is operating within bounds.</p>
+
+<!-- <img src="http://placekitten.com/890/280"> &#8211;>
+
 
 <p>Prince will be posting more about his internship in these pages. Stay tuned!</p>
 ]]></content>
@@ -260,8 +276,9 @@ Here is a screenshot of viewing realtime data from an MTConnect Agent. The app p
     <content type="html"><![CDATA[<p>McKinsey recently published a report about Big Data, going into considerable detail about its impact on different fields, including manufacturing. In the next few posts, I will be digging into this report looking at the specific impacts of big data on machining-related manufacturing, focusing on ways that improve productivity and efficiency.
 First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
 
-<blockquote><p>“Big data” refers to datasets whose size is beyond the ability of typical database software tools to capture, store, manage, and analyze. This definition is intentionally subjective and incorporates a moving definition of how big a dataset needs to be in order to be considered big data—i.e., we don’t define big data in terms of being larger than a certain number of terabytes (thousands of gigabytes).
-This definition applies remarkably well to Manufacturing Big Data. The &#8220;bigness&#8221; of the data is not necessarily its absolute size, because process data from a machine tool might be in the tens of gigabytes, which is paltry compared to Internet data like website click-throughs or ad impressions. The bigness comes from the fact that traditional manufacturing decision making systems (spreadsheets, sticky-notes-on-whiteboards, MES systems) deal with very small sets of data – perhaps in the megabytes – and we are now looking at harnessing data that is several orders of magnitude larger than that.</p></blockquote>
+<blockquote><p>“Big data” refers to datasets whose size is beyond the ability of typical database software tools to capture, store, manage, and analyze. This definition is intentionally subjective and incorporates a moving definition of how big a dataset needs to be in order to be considered big data—i.e., we don’t define big data in terms of being larger than a certain number of terabytes (thousands of gigabytes).</p></blockquote>
+
+<p>This definition applies remarkably well to Manufacturing Big Data. The &#8220;bigness&#8221; of the data is not necessarily its absolute size, because process data from a machine tool might be in the tens of gigabytes, which is paltry compared to Internet data like website click-throughs or ad impressions. The bigness comes from the fact that traditional manufacturing decision making systems (spreadsheets, sticky-notes-on-whiteboards, MES systems) deal with very small sets of data – perhaps in the megabytes – and we are now looking at harnessing data that is several orders of magnitude larger than that.</p>
 
 <p>So how much data are we exactly talking about? Lets take the case of collecting MTConnect-based data streams from manufacturing equipment. With Basic monitoring (looking at production efficiency, part count, alarms, messages, and overrides), we can estimate a data rate of about 10 samples a second, with each sample consisting of 10 data items. This generates over 400MB of data daily, or more than 150GB annually per device. With Advanced monitoring (which will complement Basic monitoring with data from embedded and external sensors), this grows to over 21 GB a day, or close to 8 TB a year. With these estimates, a small manufacturing shop with about 10 devices, wil generate over 2 TB of data a day with Basic monitoring, or close to 80 TB with Advanced monitoring. Moving up to a multi-facility enterprise with about 500 devices, we are looking at about 80 TB a year with Basic monitoring, and close to 4 PB (Petabytes) with Advanced monitoring. The table below gives a few more examples.</p>
 
@@ -278,11 +295,15 @@ This definition applies remarkably well to Manufacturing Big Data. The &#8220;bi
     <id>http://systeminsights.github.com/blog/2012/02/13/Big-Data-in-the-news</id>
     <content type="html"><![CDATA[<p>The New York Times <a href="http://www.nytimes.com/2012/02/12/sunday-review/big-datas-impact-in-the-world.html">talks</a> about the impact of Big Data across a variety of fields, including retailing, voice recognition, and public health. They cite a report by Prof. Erik Brynjolfsson from MIT Sloan that</p>
 
-<blockquote><p>studied 179 large companies and found that those adopting “data-driven decision making” achieved productivity gains that were 5 percent to 6 percent higher than other factors could explain.
-Certainly we can expect a larger impact in productivity gains in manufacturing. Traditional &#8220;data driven&#8221; techniques like process monitoring has itself brought productivity gains of over 10%. Big Data Analytics gives the opportunity to wring out further gains, because of the ability to handle unstructured data, which the article mentions:
-Data is not only becoming more available but also more understandable to computers. Most of the Big Data surge is data in the wild — unruly stuff like words, images and video on the Web and those streams of sensor data. It is called unstructured data and is not typically grist for traditional databases.
-But the computer tools for gleaning knowledge and insights from the Internet era’s vast trove of unstructured data are fast gaining ground. At the forefront are the rapidly advancing techniques of artificial intelligence like natural-language processing, pattern recognition and machine learning.
-We apply similar tools and techniques to look at unstructured manufacturing data. More about this coming up!</p></blockquote>
+<blockquote><p>studied 179 large companies and found that those adopting “data-driven decision making” achieved productivity gains that were 5 percent to 6 percent higher than other factors could explain.</p></blockquote>
+
+<p>Certainly we can expect a larger impact in productivity gains in manufacturing. Traditional &#8220;data driven&#8221; techniques like process monitoring has itself brought productivity gains of over 10%. Big Data Analytics gives the opportunity to wring out further gains, because of the ability to handle unstructured data, which the article mentions:</p>
+
+<blockquote><p>Data is not only becoming more available but also more understandable to computers. Most of the Big Data surge is data in the wild — unruly stuff like words, images and video on the Web and those streams of sensor data. It is called unstructured data and is not typically grist for traditional databases.</p></blockquote>
+
+<p>But the computer tools for gleaning knowledge and insights from the Internet era’s vast trove of unstructured data are fast gaining ground. At the forefront are the rapidly advancing techniques of artificial intelligence like natural-language processing, pattern recognition and machine learning.</p>
+
+<p>We apply similar tools and techniques to look at unstructured manufacturing data. More about this coming up!</p>
 ]]></content>
   </entry>
   
@@ -308,11 +329,15 @@ We apply similar tools and techniques to look at unstructured manufacturing data
     <link href="http://systeminsights.github.com/blog/2012/01/17/Baseline-Energy-Consumption/"/>
     <updated>2012-01-17T13:09:00+05:30</updated>
     <id>http://systeminsights.github.com/blog/2012/01/17/Baseline-Energy-Consumption</id>
-    <content type="html"><![CDATA[<p>Measuring machine tool energy consumption has always been tricky because of the diversity and complexity of machine tools. We took a first stab at developing a standard to measure machine tool energy consumption as part of a project supported by General Dynamics – OTS, National Center for Defense Manufacturing and Machining (NCDMM), and AMT. We developed the Baseline Energy Consumption (BEC) metric as a standard measure of the energy consumption of machine tools along with a companion test methodology. Applications of this metric include:
-* Estimating the approximate energy requirements of operating a machine tool to manufacture a specific part
-* Comparing the energy requirements of two machine tools that are being applied in similar activities
-* Performing Return-on-Investment calculations to justify energy efficiency improvements in machine tool and machining technologies
-* Assessing environmental impact of manufacturing processes from equipment energy consumption</p>
+    <content type="html"><![CDATA[<p>Measuring machine tool energy consumption has always been tricky because of the diversity and complexity of machine tools. We took a first stab at developing a standard to measure machine tool energy consumption as part of a project supported by General Dynamics – OTS, National Center for Defense Manufacturing and Machining (NCDMM), and AMT. We developed the Baseline Energy Consumption (BEC) metric as a standard measure of the energy consumption of machine tools along with a companion test methodology. Applications of this metric include:</p>
+
+<ul>
+<li>Estimating the approximate energy requirements of operating a machine tool to manufacture a specific part</li>
+<li>Comparing the energy requirements of two machine tools that are being applied in similar activities</li>
+<li>Performing Return-on-Investment calculations to justify energy efficiency improvements in machine tool and machining technologies</li>
+<li>Assessing environmental impact of manufacturing processes from equipment energy consumption</li>
+</ul>
+
 
 <p>A key consideration in designing the test methodology was to ensure that they could be performed within a reasonable amount of a time in a standard industrial setting without requiring any special workpieces, fixtures, or equipment. This pragmatic approach was explicitly selected because the goal of this metric is to serve as a figure of merit for the energy consumption of machine tools and manufacturing equipment. This metric does not intend to serve as a precise indication of the energy required by a machine tool to manufacture a specific part or to execute a specific operation. The first edition of the standard focused on measuring the BEC of lathe-type machine tools based on recording the power consumption during a series of controlled tests.</p>
 
@@ -333,10 +358,14 @@ We apply similar tools and techniques to look at unstructured manufacturing data
 
 <p>A part itself is an asset, but for the treatment in the standard we will consider it as a collection of assets. These assets are composed of the various programs, measurement plans, and processes that will be applied to it. They may also indicate the schedule and operation, but that is questionable. If we consider a part an asset that references other assets, then the problem becomes one of asset references, instead of having a master document that has everything.</p>
 
-<p>One consideration is to make parts have the following information:
-1. Descriptive information
-2. Reference to part programs for each device
-3. Reference to quality execution program for each device</p>
+<p>One consideration is to make parts have the following information:</p>
+
+<ol>
+<li>Descriptive information</li>
+<li>Reference to part programs for each device</li>
+<li>Reference to quality execution program for each device</li>
+</ol>
+
 
 <p>Another area that needs to be considered is the quality measurement data collected from gauges and coordinate measurement devices and from process metrology. The information collected for the part measurements will be associated with the part itself through a parent reference. The part may or may not need to be updated to refer back to the measurement data, but this could be done. The measurements may reference a quality execution plan for that step and may replicate the tolerance information as well as the geometric information as well.</p>
 
@@ -364,13 +393,17 @@ We apply similar tools and techniques to look at unstructured manufacturing data
     <link href="http://systeminsights.github.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data/"/>
     <updated>2011-12-28T17:53:00+05:30</updated>
     <id>http://systeminsights.github.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data</id>
-    <content type="html"><![CDATA[<p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:
-- <code>+ OVERTRAVEL ( SOFT 1 )</code>
-- <code>1-ROT MOTOR SENSOR ERROR 81</code>
-- <code>HYDRAULIC PRESSURE DOWN</code>
-- <code>HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL</code>
-- <code>OIL-MATIC TEMP./FILTER ALARM</code>
-- <code>Y AXIS HOME POSITION RETURN REQUEST</code></p>
+    <content type="html"><![CDATA[<p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:</p>
+
+<ul>
+<li><code>+ OVERTRAVEL ( SOFT 1 )</code></li>
+<li><code>1-ROT MOTOR SENSOR ERROR 81</code></li>
+<li><code>HYDRAULIC PRESSURE DOWN</code></li>
+<li><code>HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL</code></li>
+<li><code>OIL-MATIC TEMP./FILTER ALARM</code></li>
+<li><code>Y AXIS HOME POSITION RETURN REQUEST</code></li>
+</ul>
+
 
 <p>While some of these alarms are self-explanatory (like &#8221;<code>HYDRAULIC PRESSURE DOWN</code>&#8221;), other alarms can be a little harder to understand without any context. One way of adding context to Alarms is to look at the ControllerMode and the ExecutionStatus when the Alarm fired, and how they changed across the duration the alarm was active.</p>
 

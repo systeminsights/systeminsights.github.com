@@ -4,7 +4,7 @@
   <title><![CDATA[Category: big-data | Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/blog/categories/big-data/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-07T16:57:58+05:30</updated>
+  <updated>2012-06-07T18:52:01+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -18,21 +18,30 @@
     <link href="http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/"/>
     <updated>2012-03-21T13:47:00+05:30</updated>
     <id>http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it</id>
-    <content type="html"><![CDATA[<p>We are back studying McKinsey's report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several "levers" where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:
-1. Implementing Lean Manufacturing (#5)
-2. Using sensor data-driven operations analytics (#6)</p>
+    <content type="html"><![CDATA[<p>We are back studying McKinsey's report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several "levers" where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:</p>
+
+<ol>
+<li>Implementing Lean Manufacturing (#5)</li>
+<li>Using sensor data-driven operations analytics (#6)</li>
+</ol>
+
 
 <p>Lets look at the first of these in this post.</p>
 
-<p>Lean Manufacturing and the Digital Factory
-McKinsey identifies using Big Data to "create process transparency, develop dashboards, and visualize bottlenecks". Our vimana application is one example of applying Big Data to create realtime dashboards of manufacturing equipment (to learn more about vimana, please visit www.systeminsights.com/vimana.) The idea here is to provide a shopfloor user both a high-level "macro" view of the shopfloor, as well as a low-level "micro" view of a single device.  Questions the dashboards can help answer include:
-* Which devices are producing parts today?
-* Which parts are being made right now?
-* How many parts have I made?
-* What has my device been doing today?
-* What is my efficiency?
-* Why have I been in a downtime?
-(This is a much more interesting question to answer than just "What are my downtimes". Knowing why downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing{ that a has downtime occurred).</p>
+<h2>Lean Manufacturing and the Digital Factory</h2>
+
+<p>McKinsey identifies using Big Data to "create process transparency, develop dashboards, and visualize bottlenecks". Our vimana application is one example of applying Big Data to create realtime dashboards of manufacturing equipment (to learn more about vimana, please visit www.systeminsights.com/vimana.) The idea here is to provide a shopfloor user both a high-level "macro" view of the shopfloor, as well as a low-level "micro" view of a single device.  Questions the dashboards can help answer include:</p>
+
+<ul>
+<li>Which devices are producing parts today?</li>
+<li>Which parts are being made right now?</li>
+<li>How many parts have I made?</li>
+<li>What has my device been doing today?</li>
+<li>What is my efficiency?</li>
+<li>Why have I been in a downtime?
+(This is a much more interesting question to answer than just "What are my downtimes". Knowing why downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing{ that a has downtime occurred).</li>
+</ul>
+
 
 <p>The data for vimana is streamed using the MTConnect Agent associated with each machine tool. The application itself runs in the cloud, aggregating hundreds of events every second from each machine tool. The analysis is done in realtime, and the visualizations are rendered instantly. Process transparency is achieved here because the application serves as a central repository of what is going on in the shopfloor, and multiple stakeholders (production, engineering, maintenance, management) can all use it to support decisions that come under their purview. This also takes us one step closer to the Digital Factory, where detailed operational data from the factory equipment is applied in building a complete digital model of the factory's operations, which can then be applied in optimizing its performance.</p>
 
@@ -52,8 +61,9 @@ McKinsey identifies using Big Data to "create process transparency, develop dash
     <content type="html"><![CDATA[<p>McKinsey recently published a report about Big Data, going into considerable detail about its impact on different fields, including manufacturing. In the next few posts, I will be digging into this report looking at the specific impacts of big data on machining-related manufacturing, focusing on ways that improve productivity and efficiency.
 First, lets start with how the "Big Data" is defined:</p>
 
-<blockquote><p>“Big data” refers to datasets whose size is beyond the ability of typical database software tools to capture, store, manage, and analyze. This definition is intentionally subjective and incorporates a moving definition of how big a dataset needs to be in order to be considered big data—i.e., we don’t define big data in terms of being larger than a certain number of terabytes (thousands of gigabytes).
-This definition applies remarkably well to Manufacturing Big Data. The "bigness" of the data is not necessarily its absolute size, because process data from a machine tool might be in the tens of gigabytes, which is paltry compared to Internet data like website click-throughs or ad impressions. The bigness comes from the fact that traditional manufacturing decision making systems (spreadsheets, sticky-notes-on-whiteboards, MES systems) deal with very small sets of data – perhaps in the megabytes – and we are now looking at harnessing data that is several orders of magnitude larger than that.</p></blockquote>
+<blockquote><p>“Big data” refers to datasets whose size is beyond the ability of typical database software tools to capture, store, manage, and analyze. This definition is intentionally subjective and incorporates a moving definition of how big a dataset needs to be in order to be considered big data—i.e., we don’t define big data in terms of being larger than a certain number of terabytes (thousands of gigabytes).</p></blockquote>
+
+<p>This definition applies remarkably well to Manufacturing Big Data. The "bigness" of the data is not necessarily its absolute size, because process data from a machine tool might be in the tens of gigabytes, which is paltry compared to Internet data like website click-throughs or ad impressions. The bigness comes from the fact that traditional manufacturing decision making systems (spreadsheets, sticky-notes-on-whiteboards, MES systems) deal with very small sets of data – perhaps in the megabytes – and we are now looking at harnessing data that is several orders of magnitude larger than that.</p>
 
 <p>So how much data are we exactly talking about? Lets take the case of collecting MTConnect-based data streams from manufacturing equipment. With Basic monitoring (looking at production efficiency, part count, alarms, messages, and overrides), we can estimate a data rate of about 10 samples a second, with each sample consisting of 10 data items. This generates over 400MB of data daily, or more than 150GB annually per device. With Advanced monitoring (which will complement Basic monitoring with data from embedded and external sensors), this grows to over 21 GB a day, or close to 8 TB a year. With these estimates, a small manufacturing shop with about 10 devices, wil generate over 2 TB of data a day with Basic monitoring, or close to 80 TB with Advanced monitoring. Moving up to a multi-facility enterprise with about 500 devices, we are looking at about 80 TB a year with Basic monitoring, and close to 4 PB (Petabytes) with Advanced monitoring. The table below gives a few more examples.</p>
 
@@ -70,11 +80,15 @@ This definition applies remarkably well to Manufacturing Big Data. The "bigness"
     <id>http://systeminsights.github.com/blog/2012/02/13/Big-Data-in-the-news</id>
     <content type="html"><![CDATA[<p>The New York Times <a href="http://www.nytimes.com/2012/02/12/sunday-review/big-datas-impact-in-the-world.html">talks</a> about the impact of Big Data across a variety of fields, including retailing, voice recognition, and public health. They cite a report by Prof. Erik Brynjolfsson from MIT Sloan that</p>
 
-<blockquote><p>studied 179 large companies and found that those adopting “data-driven decision making” achieved productivity gains that were 5 percent to 6 percent higher than other factors could explain.
-Certainly we can expect a larger impact in productivity gains in manufacturing. Traditional "data driven" techniques like process monitoring has itself brought productivity gains of over 10%. Big Data Analytics gives the opportunity to wring out further gains, because of the ability to handle unstructured data, which the article mentions:
-Data is not only becoming more available but also more understandable to computers. Most of the Big Data surge is data in the wild — unruly stuff like words, images and video on the Web and those streams of sensor data. It is called unstructured data and is not typically grist for traditional databases.
-But the computer tools for gleaning knowledge and insights from the Internet era’s vast trove of unstructured data are fast gaining ground. At the forefront are the rapidly advancing techniques of artificial intelligence like natural-language processing, pattern recognition and machine learning.
-We apply similar tools and techniques to look at unstructured manufacturing data. More about this coming up!</p></blockquote>
+<blockquote><p>studied 179 large companies and found that those adopting “data-driven decision making” achieved productivity gains that were 5 percent to 6 percent higher than other factors could explain.</p></blockquote>
+
+<p>Certainly we can expect a larger impact in productivity gains in manufacturing. Traditional "data driven" techniques like process monitoring has itself brought productivity gains of over 10%. Big Data Analytics gives the opportunity to wring out further gains, because of the ability to handle unstructured data, which the article mentions:</p>
+
+<blockquote><p>Data is not only becoming more available but also more understandable to computers. Most of the Big Data surge is data in the wild — unruly stuff like words, images and video on the Web and those streams of sensor data. It is called unstructured data and is not typically grist for traditional databases.</p></blockquote>
+
+<p>But the computer tools for gleaning knowledge and insights from the Internet era’s vast trove of unstructured data are fast gaining ground. At the forefront are the rapidly advancing techniques of artificial intelligence like natural-language processing, pattern recognition and machine learning.</p>
+
+<p>We apply similar tools and techniques to look at unstructured manufacturing data. More about this coming up!</p>
 ]]></content>
   </entry>
   

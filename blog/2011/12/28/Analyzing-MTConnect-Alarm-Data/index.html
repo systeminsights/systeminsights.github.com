@@ -90,13 +90,17 @@
   </header>
 
 
-<div class="entry-content"><p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:
-- <code>+ OVERTRAVEL ( SOFT 1 )</code>
-- <code>1-ROT MOTOR SENSOR ERROR 81</code>
-- <code>HYDRAULIC PRESSURE DOWN</code>
-- <code>HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL</code>
-- <code>OIL-MATIC TEMP./FILTER ALARM</code>
-- <code>Y AXIS HOME POSITION RETURN REQUEST</code></p>
+<div class="entry-content"><p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:</p>
+
+<ul>
+<li><code>+ OVERTRAVEL ( SOFT 1 )</code></li>
+<li><code>1-ROT MOTOR SENSOR ERROR 81</code></li>
+<li><code>HYDRAULIC PRESSURE DOWN</code></li>
+<li><code>HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL</code></li>
+<li><code>OIL-MATIC TEMP./FILTER ALARM</code></li>
+<li><code>Y AXIS HOME POSITION RETURN REQUEST</code></li>
+</ul>
+
 
 <p>While some of these alarms are self-explanatory (like "<code>HYDRAULIC PRESSURE DOWN</code>"), other alarms can be a little harder to understand without any context. One way of adding context to Alarms is to look at the ControllerMode and the ExecutionStatus when the Alarm fired, and how they changed across the duration the alarm was active.</p>
 
@@ -130,7 +134,7 @@ Here are the alarms that occurred during this period:</p>
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Team System Insights</span></span>
+<span class="byline author vcard">Posted by <span class="fn">athulan</span></span>
 
       
 

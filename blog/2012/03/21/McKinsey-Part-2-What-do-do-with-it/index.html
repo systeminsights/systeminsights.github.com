@@ -90,21 +90,30 @@
   </header>
 
 
-<div class="entry-content"><p>We are back studying McKinsey's report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several "levers" where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:
-1. Implementing Lean Manufacturing (#5)
-2. Using sensor data-driven operations analytics (#6)</p>
+<div class="entry-content"><p>We are back studying McKinsey's report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several "levers" where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:</p>
+
+<ol>
+<li>Implementing Lean Manufacturing (#5)</li>
+<li>Using sensor data-driven operations analytics (#6)</li>
+</ol>
+
 
 <p>Lets look at the first of these in this post.</p>
 
-<p>Lean Manufacturing and the Digital Factory
-McKinsey identifies using Big Data to "create process transparency, develop dashboards, and visualize bottlenecks". Our vimana application is one example of applying Big Data to create realtime dashboards of manufacturing equipment (to learn more about vimana, please visit www.systeminsights.com/vimana.) The idea here is to provide a shopfloor user both a high-level "macro" view of the shopfloor, as well as a low-level "micro" view of a single device.  Questions the dashboards can help answer include:
-* Which devices are producing parts today?
-* Which parts are being made right now?
-* How many parts have I made?
-* What has my device been doing today?
-* What is my efficiency?
-* Why have I been in a downtime?
-(This is a much more interesting question to answer than just "What are my downtimes". Knowing why downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing{ that a has downtime occurred).</p>
+<h2>Lean Manufacturing and the Digital Factory</h2>
+
+<p>McKinsey identifies using Big Data to "create process transparency, develop dashboards, and visualize bottlenecks". Our vimana application is one example of applying Big Data to create realtime dashboards of manufacturing equipment (to learn more about vimana, please visit www.systeminsights.com/vimana.) The idea here is to provide a shopfloor user both a high-level "macro" view of the shopfloor, as well as a low-level "micro" view of a single device.  Questions the dashboards can help answer include:</p>
+
+<ul>
+<li>Which devices are producing parts today?</li>
+<li>Which parts are being made right now?</li>
+<li>How many parts have I made?</li>
+<li>What has my device been doing today?</li>
+<li>What is my efficiency?</li>
+<li>Why have I been in a downtime?
+(This is a much more interesting question to answer than just "What are my downtimes". Knowing why downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing{ that a has downtime occurred).</li>
+</ul>
+
 
 <p>The data for vimana is streamed using the MTConnect Agent associated with each machine tool. The application itself runs in the cloud, aggregating hundreds of events every second from each machine tool. The analysis is done in realtime, and the visualizations are rendered instantly. Process transparency is achieved here because the application serves as a central repository of what is going on in the shopfloor, and multiple stakeholders (production, engineering, maintenance, management) can all use it to support decisions that come under their purview. This also takes us one step closer to the Digital Factory, where detailed operational data from the factory equipment is applied in building a complete digital model of the factory's operations, which can then be applied in optimizing its performance.</p>
 
@@ -121,7 +130,7 @@ McKinsey identifies using Big Data to "create process transparency, develop dash
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Team System Insights</span></span>
+<span class="byline author vcard">Posted by <span class="fn">athulan</span></span>
 
       
 

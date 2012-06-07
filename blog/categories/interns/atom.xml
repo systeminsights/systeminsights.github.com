@@ -4,7 +4,7 @@
   <title><![CDATA[Category: interns | Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/blog/categories/interns/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-07T16:57:58+05:30</updated>
+  <updated>2012-06-07T18:52:01+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -22,36 +22,33 @@
 
 <p>While working on my internship project, I got a chance to test out an MTConnect agent built in C++ for Linux (ubuntu). I was surprised to find that absolutely no documentation existed for setting up the Agent in a Linux environment. Although it didn't turn out to be a big hassle in the end, I thought that it would be a good idea to list down the process of setting up a MTConnect agent on Linux. So, here you go:</p>
 
-<p><em>Step 1</em>: Download the zip archive of the latest version of MTConnect C++ Agent SDK from MTConnect Github and extract its contents onto your local disk.</p>
+<ul>
+<li>Download the zip archive of the latest version of MTConnect C++ Agent SDK from MTConnect Github and extract its contents onto your local disk.</li>
+<li><p>Download &amp; Install libxml-2.0 and libxml-dev packages from the apt repository.</p>
 
-<p><em>Step 2</em>: Download &amp; Install libxml-2.0 and libxml-dev packages from the apt repository.</p>
+<pre><code>  apt-get install libxml2 
+  apt-get install libxml2-dev 
+</code></pre></li>
+<li><p>Now you need to prepare a Makefile in order to compile the agent. This can be done using the Cmake package. Download &amp; install cmake if you don't already have it.</p>
 
-<pre><code>apt-get install libxml2 
-apt-get install libxml2-dev 
-</code></pre>
+<pre><code>  apt-get install cmake   
+</code></pre></li>
+<li><p>Open the 'agent' folder in the terminal and run cmake and make.</p>
 
-<p><em>Step 3</em>: Now you need to prepare a Makefile in order to compile the agent. This can be done using the Cmake package.
-Download &amp; install cmake if you don't already have it.</p>
+<pre><code>  cd agent/
+  cmake .
+  make 
+</code></pre></li>
+<li><p>If everything went right, your agent would have been build. You can now start it off as a service.</p>
 
-<pre><code>apt-get install cmake 
-</code></pre>
+<pre><code>  ./agent daemonize 
+</code></pre></li>
+<li><p>If you are unsure whether the process is running, you can check out the process status:</p>
 
-<p>Open the 'agent' folder in the terminal and run cmake and make.</p>
+<pre><code>  ps aux | grep agent 
+</code></pre></li>
+</ul>
 
-<pre><code>cd agent/
-cmake .
-make 
-</code></pre>
-
-<p><em>Step 4</em>: If everything went right, your agent would have been build. You can now start it off as a service.</p>
-
-<pre><code>./agent daemonize 
-</code></pre>
-
-<p>If you are unsure whether the process is running, you can check out the process status:</p>
-
-<pre><code>ps aux | grep agent 
-</code></pre>
 
 <p>The agent service should be up and running. You may change the agent.cfg file in any text editor based on the instructions here.</p>
 
@@ -66,16 +63,26 @@ make
     <id>http://systeminsights.github.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora</id>
     <content type="html"><![CDATA[<p>I want to introduce Prince Arora, a student from IIT Madras, who is interning with us at our Chennai office. Prince is developing a suite of MTConnect-based tools to track the maintenance status of machine tools. He is blogging about his experiences at System Insights at his blog, <a href="http://princearora.in">The 20four hour log</a>.</p>
 
-<p>Prince started out by building a simple webapp to display various maintenance-related parameters from an MTConnect data stream. Specifically <a href="http://princearora.wordpress.com/2012/02/14/mtconnect-the-problem-statement/">he developed an app</a> to:
-* Connect to any MTConnect Stream specified by the user
-* Recognize all the devices within the stream
-* Continuously read &amp; display multiple parameters for each of the device
-* Display condition of all components
-* Plot a curve of the variation of a parameter over time
-* Allow user to monitor a parameter and alarm if it moves outside the range of values entered
-Here is a screenshot of viewing realtime data from an MTConnect Agent. The app plots the value of an MTConnect Sample DataItem in realtime. The screen below shows the app plotting the X position, but this can also be used to plot maintenance-related data like a vibration or temperature.</p>
+<p>Prince started out by building a simple webapp to display various maintenance-related parameters from an MTConnect data stream. Specifically <a href="http://princearora.wordpress.com/2012/02/14/mtconnect-the-problem-statement/">he developed an app</a> to:</p>
+
+<ul>
+<li>Connect to any MTConnect Stream specified by the user</li>
+<li>Recognize all the devices within the stream</li>
+<li>Continuously read &amp; display multiple parameters for each of the device</li>
+<li>Display condition of all components</li>
+<li>Plot a curve of the variation of a parameter over time</li>
+<li>Allow user to monitor a parameter and alarm if it moves outside the range of values entered</li>
+</ul>
+
+
+<p>Here is a screenshot of viewing realtime data from an MTConnect Agent. The app plots the value of an MTConnect Sample DataItem in realtime. The screen below shows the app plotting the X position, but this can also be used to plot maintenance-related data like a vibration or temperature.</p>
+
+<p>Error processing input, expected syntax: {% img [class name(s)] [http[s]:/]/path/to/image [width [height]] [title text | "title text" ["alt text"]] %}</p>
 
 <p>You can also load up the status of various conditions active in the machine tool, and see if the parameter that is being plotted is within some user-determined bounds. The screen below shows bounds set for the DataItem Commanded Y Position between 3 and -2. A green indication is shown because the data item is operating within bounds.</p>
+
+<!-- <img src="http://placekitten.com/890/280"> -->
+
 
 <p>Prince will be posting more about his internship in these pages. Stay tuned!</p>
 ]]></content>
