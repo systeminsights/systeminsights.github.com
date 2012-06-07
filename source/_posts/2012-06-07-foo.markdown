@@ -1,0 +1,15 @@
+---
+layout: post
+title: "foo"
+date: 2012-06-07 08:10
+comments: true
+categories: 
+---
+## Test
+This is a test
+* Test 1
+* Test 2
+- Test 3
+
+## Tester
+Tester?
