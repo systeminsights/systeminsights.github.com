@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Manufacturing Big Data]]></title>
+  <link href="http://systeminsights.github.com/atom.xml" rel="self"/>
+  <link href="http://systeminsights.github.com/"/>
+  <updated>2012-06-07T16:57:58+05:30</updated>
+  <id>http://systeminsights.github.com/</id>
+  <author>
+    <name><![CDATA[Team System Insights]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Powered by Octopress]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/05/30/powered-by-octopress/"/>
+    <updated>2012-05-30T10:00:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/05/30/powered-by-octopress</id>
+    <content type="html"><![CDATA[<p>We are moving to the Octopress framework. The blog will be hosted on Github Pages.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MongoDB and Replica Sets]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets/"/>
+    <updated>2012-05-08T10:50:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets</id>
+    <content type="html"><![CDATA[<h2>Why do we care</h2>
+
+<p>We use mongoDB to persist data from the vimana tenants. All historical data from our customers is stored in mongo, and its very important that we can continuously persist into mongo without losing data. We are using replica sets to make sure that our data is redundantly stored and to ensure that we have a failover mechanism when one of the mongoDBs lose connection.</p>
+
+<h2>Introduction to Replica Sets</h2>
+
+<p>Replica sets are a form of asynchronous master/slave replication, adding automatic failover and automatic recovery of member nodes. A replica set consists of two or more nodes that are copies of each other. (i.e.: replicas). The replica set automatically elects a primary (master). Drivers (and mongos) can automatically detect when a replica set primary changes and will begin sending writes to the new primary.</p>
+
+<h2>Those GOTCHAs</h2>
+
+<p>In order enable replica sets, you need to pass the &#8220;replSet&#8221; parameter while starting the mongod processes.
+Replica sets cannot be initiated on those mongod instance which were already started with out &#8220;replSet&#8221; parameter.  Stop and restart the mongod processes with replSet parameter.
+When replica sets are configured, all the writes will only go to the primary!!! Mongo has its own algorithms for syncing the data across the nodes.</p>
+
+<h2>That setup</h2>
+
+<p>Starting multiple mongo instances.</p>
+
+<pre><code>$ mongod --dbpath mongo_rpl/data1 --replSet set1 --port 27018
+$ mongod --dbpath mongo_rpl/data2 --replSet set1 --port 27019
+$ mongod --dbpath mongo_rpl/data3 --replSet set1 --port 27020
+</code></pre>
+
+<p>This starts 3 different instances of mongo running on different ports.</p>
+
+<h2>Setting up the replica config</h2>
+
+<pre><code>➜  ~  mongo localhost:27018
+MongoDB shell version: 1.8.2
+Mon Apr 30 11:13:59 *** warning: spider monkey build without utf8 support.  consider rebuilding with utf8 support
+connecting to: localhost:27018/test
+&gt; config = {_id: "set1", members: [{_id: 0, host: "localhost:27018"}, {_id: 1, host: "localhost:27019"},{_id: 2, host:"localhost:27020"}]}
+{
+   "_id" : "set1",
+  "members" : [
+ {
+    "_id" : 0, 
+   "host" : "localhost:27018"
+},
+{
+   "_id" : 1,
+  "host" : "localhost:27019"
+},
+{
+   "_id" : 2,
+  "host" : "localhost:27020"
+}
+]
+}
+&gt; rs.initiate(config)
+{
+   "info" : "Config now saved locally.  Should come online in about a minute.",
+  "ok" : 1
+}
+&gt;
+</code></pre>
+
+<p>This config enables the replicas to talk with each other. The talking would involve the replicas communicating who is the primary and who are all the secondaries.</p>
+
+<h2>That app</h2>
+
+<p>We wrote a small ruby script which would tail the oplog of our test servers and insert some interesting records into the replicas. The oplog watcher is available (here)[https://github.com/deepakprasanna/mongo_oplog_watcher].</p>
+
+<h2>Those observations</h2>
+
+<h3>Writing scenarios</h3>
+
+<p>Secondary goes down: There is no problem at all. If the secondary comes up again, mongo will take care of replicating the records which were lost by the time when it was down. Perfect!
+Primary goes down: The ruby mongo driver raises &#8220;Mongo::ConnectionFailure&#8221;. Checkout the oplog watcher, we have caught this exception and we are doing a puts that the connection is lost. But how ever the after a few seconds, when one of the other secondaries get elected as the primary the writes become successful. The interesting fact is that all the writes which failed during this recovery process is lost. Since we are able to catch &#8220;Mongo::ConnectionFailure&#8221;, it is up-to the client to pull the sleeves and persist the data somewhere else until another secondary becomes a primary.While testing we lost about 20-30 records when the primary was down. I guess this number would be more or less depending the latency which we would face in the realtime.
+Last mongod instance is not becoming primary: As you can see from the config above, we have 3 replicas. So we would have one primary(27018) and two secondaries(27019 and 27020). We are stopping the primary(27018). Now one of the secondaries becomes a primary(say 28019). Now we would have one primary(27019) and one secondary(27020). Again we are stopping the primary(27019). But the left over secondary(27020) will not become the primary!!!!!!! This causes all the writes to fail. But if we bring another dead mongod instance(27018) up, the leftover secondary(27020) becomes the primary and from then on the writes become successful.  This was found while digging into the mongo logs.
+[rs Manager] replSet can&#8217;t see a majority, will not try to elect self: From what I understand , Replica sets will do the election process only if there are 2 or more replicas available. If at all we have only one replica alive, the election will not happen and all the writes will fail because there will be no primary. We need have 2 replicas alive at anytime for the writes to become successful. This is interesting.</p>
+
+<h3>Reading Scenarios</h3>
+
+<p>MongoDB doesnot by default support serving reads from the replicas. MongoDB will serve all reads from primary by default. Reads from secondaries can be configured, which is actually a 2 step process.  The first step is to configure &#8220;slaveOK&#8221; in the mongo console. This will tell mongo, it is okay to serve the reads from the secondaries. The second step is to instantiate the MongoReplConnection with :read => :secondary option.
+This will tell the driver that it is okay to send the reads to the secondaries. Mongo driver will randomly select one of the secondaries to serve the reads. The distribution of the reads across the secondaries is handled by the driver.</p>
+
+<p>Secondary goes down:
+slaveOk -> Mongo::ConnectionFailure will be raised when there is a failure. Mongo driver is intelligent, when it sees a Mongo::ConnectionFailure it prevents the next reads from going to that dead secondary.
+The driver has its own algorithm to find out if the dead secondary is back alive or not. As far a read is concerned we need to catch Mongo::ConnectionFailure and make the read once more(Assuming that another secondary will be up).If the secondaries are configured to serve the reads, then the primary is not touched at all until all other secondaries are dead. But there is no real way to find out which mongod instance served the read.</p>
+
+<p>Without SlaveOk ->  Rest of the world goes as usual.
+Primary goes down:
+slaveOk -> Rest of the world goes as usual.</p>
+
+<p>without SlaveOk -> All the reads are going to fail since primary can only serve the reads. There are 2 ways to solve this problem, catch the exception and throw an error message. Or keep polling the server until one of the other secondaries becomes a primary and read becomes successful. If the client decides to retry, it&#8217;s not guaranteed that another member of the replica set will have been promoted to primary right away, so it&#8217;s still possible that the driver will raise another Mongo::ConnectionFailure.</p>
+
+<p>Happy hacking,
+Deepak.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Welcome Deepak!]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/04/14/welcome-deepak/"/>
+    <updated>2012-04-14T10:48:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/04/14/welcome-deepak</id>
+    <content type="html"><![CDATA[<p>We would like to welcome Deepak Prasanna to System Insights. Deepak starts this month as a Software Developer working from our Chennai office. You will be hearing from him soon in this blog.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[McKinsey on (Manufacturing) Big Data - Part 2 - What do do with it]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/"/>
+    <updated>2012-03-21T13:47:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it</id>
+    <content type="html"><![CDATA[<p>We are back studying McKinsey&#8217;s report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several &#8220;levers&#8221; where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:
+1. Implementing Lean Manufacturing (#5)
+2. Using sensor data-driven operations analytics (#6)</p>
+
+<p>Lets look at the first of these in this post.</p>
+
+<p>Lean Manufacturing and the Digital Factory
+McKinsey identifies using Big Data to &#8220;create process transparency, develop dashboards, and visualize bottlenecks&#8221;. Our vimana application is one example of applying Big Data to create realtime dashboards of manufacturing equipment (to learn more about vimana, please visit www.systeminsights.com/vimana.) The idea here is to provide a shopfloor user both a high-level &#8220;macro&#8221; view of the shopfloor, as well as a low-level &#8220;micro&#8221; view of a single device.  Questions the dashboards can help answer include:
+* Which devices are producing parts today?
+* Which parts are being made right now?
+* How many parts have I made?
+* What has my device been doing today?
+* What is my efficiency?
+* Why have I been in a downtime?
+(This is a much more interesting question to answer than just &#8220;What are my downtimes&#8221;. Knowing why downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing{ that a has downtime occurred).</p>
+
+<p>The data for vimana is streamed using the MTConnect Agent associated with each machine tool. The application itself runs in the cloud, aggregating hundreds of events every second from each machine tool. The analysis is done in realtime, and the visualizations are rendered instantly. Process transparency is achieved here because the application serves as a central repository of what is going on in the shopfloor, and multiple stakeholders (production, engineering, maintenance, management) can all use it to support decisions that come under their purview. This also takes us one step closer to the Digital Factory, where detailed operational data from the factory equipment is applied in building a complete digital model of the factory&#8217;s operations, which can then be applied in optimizing its performance.</p>
+
+<p><em>Macro Dashboard: Shopfloor</em></p>
+
+<p>_Micro Dashboard: Device _</p>
+
+<p>Coming back to McKinsey, they estimate a reduction of 10 to 50% in costs from applying Big Data to implement Lean Manufacturing and the Digital Factory, accompanied by a marginal increase in revenue (2%). We have already seen vimana helping improve device utilization by over 25%, which directly leads to cost reductions. The real impact of Big Data here is not as much as in enabling us to ask new questions about a shop&#8217;s productivity, but in helping us find even better answers for the same questions we have been asking for a long time and thus driving down costs. Of course, thats not to say that we cannot ask new questions based on the data –this is where data specifically from ubiquitous and low cost sensors can play a role, which we will examine in a future post.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Setting up a MTConnect Agent on a Linux (Ubuntu) machine]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/"/>
+    <updated>2012-03-16T16:10:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine</id>
+    <content type="html"><![CDATA[<p>This was blogged first at my personal blog <a href="http://princearora.wordpress.com/2012/02/24/setting-up-a-mtconnect-agent-on-a-unixubuntu-machine/">here</a>.</p>
+
+<p>While working on my internship project, I got a chance to test out an MTConnect agent built in C++ for Linux (ubuntu). I was surprised to find that absolutely no documentation existed for setting up the Agent in a Linux environment. Although it didn&#8217;t turn out to be a big hassle in the end, I thought that it would be a good idea to list down the process of setting up a MTConnect agent on Linux. So, here you go:</p>
+
+<p><em>Step 1</em>: Download the zip archive of the latest version of MTConnect C++ Agent SDK from MTConnect Github and extract its contents onto your local disk.</p>
+
+<p><em>Step 2</em>: Download &amp; Install libxml-2.0 and libxml-dev packages from the apt repository.</p>
+
+<pre><code>apt-get install libxml2 
+apt-get install libxml2-dev 
+</code></pre>
+
+<p><em>Step 3</em>: Now you need to prepare a Makefile in order to compile the agent. This can be done using the Cmake package.
+Download &amp; install cmake if you don&#8217;t already have it.</p>
+
+<pre><code>apt-get install cmake 
+</code></pre>
+
+<p>Open the &#8216;agent&#8217; folder in the terminal and run cmake and make.</p>
+
+<pre><code>cd agent/
+cmake .
+make 
+</code></pre>
+
+<p><em>Step 4</em>: If everything went right, your agent would have been build. You can now start it off as a service.</p>
+
+<pre><code>./agent daemonize 
+</code></pre>
+
+<p>If you are unsure whether the process is running, you can check out the process status:</p>
+
+<pre><code>ps aux | grep agent 
+</code></pre>
+
+<p>The agent service should be up and running. You may change the agent.cfg file in any text editor based on the instructions here.</p>
+
+<p>Have fun!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing our Intern - Prince Arora]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora/"/>
+    <updated>2012-03-16T09:30:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora</id>
+    <content type="html"><![CDATA[<p>I want to introduce Prince Arora, a student from IIT Madras, who is interning with us at our Chennai office. Prince is developing a suite of MTConnect-based tools to track the maintenance status of machine tools. He is blogging about his experiences at System Insights at his blog, <a href="http://princearora.in">The 20four hour log</a>.</p>
+
+<p>Prince started out by building a simple webapp to display various maintenance-related parameters from an MTConnect data stream. Specifically <a href="http://princearora.wordpress.com/2012/02/14/mtconnect-the-problem-statement/">he developed an app</a> to:
+* Connect to any MTConnect Stream specified by the user
+* Recognize all the devices within the stream
+* Continuously read &amp; display multiple parameters for each of the device
+* Display condition of all components
+* Plot a curve of the variation of a parameter over time
+* Allow user to monitor a parameter and alarm if it moves outside the range of values entered
+Here is a screenshot of viewing realtime data from an MTConnect Agent. The app plots the value of an MTConnect Sample DataItem in realtime. The screen below shows the app plotting the X position, but this can also be used to plot maintenance-related data like a vibration or temperature.</p>
+
+<p>You can also load up the status of various conditions active in the machine tool, and see if the parameter that is being plotted is within some user-determined bounds. The screen below shows bounds set for the DataItem Commanded Y Position between 3 and -2. A green indication is shown because the data item is operating within bounds.</p>
+
+<p>Prince will be posting more about his internship in these pages. Stay tuned!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MTConnect Screencasts]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/02/28/MTConnect-Screencasts/"/>
+    <updated>2012-02-28T02:27:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/02/28/MTConnect-Screencasts</id>
+    <content type="html"><![CDATA[<p>I will producing a series of MTConnect screencasts in the near future on various topics. The first in the series will cover extending the MTConnect standard by adding custom Data Items and Components. The tutorial will take you through all the steps necessary to develop an extension using the open source tools and deploy an integrated solution with all the schema files deployed on the MTConnect Agent. I am working on the screen casts right now and learning my way through the various technologies necessary to make a usable online education series.</p>
+
+<p>If this is a success, we will be producing additional tutorials on adapter development demonstrating how to get data from machine tools as well as many more. Another I&#8217;m considering will provide guidance on collecting tooling data from your controller and publishing it through MTConnect in compliance with part 1.2. All the source code, tools, and documentation will be made freely available to the community. I am currently looking for an XMLSpy equivalent or at least a good schema validator to use since XMLSpy has a high price tag. If anyone knows of anything, please reply. Any help in that area will be appreciated. I have used XMLSpy for many years, but for the purposes of these tutorials, I don&#8217;t want to burden everyone with the cost, even though it is a great tool.</p>
+
+<p>If there are any tutorials you would be interested in seeing, I will be taking suggestions and will prioritize based on the responses I get. Otherwise I will make up my own priorities and guess as best I can what the community would like to see&#8230;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Presentation on Baseline Energy Consumption]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/02/17/Presentation-on-BEC/"/>
+    <updated>2012-02-17T12:52:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/02/17/Presentation-on-BEC</id>
+    <content type="html"><![CDATA[<p>Following up to the previous posts (here and here) on Baseline Energy Consumption, here is a presentation about the standard:</p>
+
+<script src="http://speakerdeck.com/embed/4f3dd5bcdf5d29001f0047d8.js"></script>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[McKinsey on (Manufacturing) Big Data - Part 1 - How Much Data?]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data/"/>
+    <updated>2012-02-14T12:20:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data</id>
+    <content type="html"><![CDATA[<p>McKinsey recently published a report about Big Data, going into considerable detail about its impact on different fields, including manufacturing. In the next few posts, I will be digging into this report looking at the specific impacts of big data on machining-related manufacturing, focusing on ways that improve productivity and efficiency.
+First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
+
+<blockquote><p>“Big data” refers to datasets whose size is beyond the ability of typical database software tools to capture, store, manage, and analyze. This definition is intentionally subjective and incorporates a moving definition of how big a dataset needs to be in order to be considered big data—i.e., we don’t define big data in terms of being larger than a certain number of terabytes (thousands of gigabytes).
+This definition applies remarkably well to Manufacturing Big Data. The &#8220;bigness&#8221; of the data is not necessarily its absolute size, because process data from a machine tool might be in the tens of gigabytes, which is paltry compared to Internet data like website click-throughs or ad impressions. The bigness comes from the fact that traditional manufacturing decision making systems (spreadsheets, sticky-notes-on-whiteboards, MES systems) deal with very small sets of data – perhaps in the megabytes – and we are now looking at harnessing data that is several orders of magnitude larger than that.</p></blockquote>
+
+<p>So how much data are we exactly talking about? Lets take the case of collecting MTConnect-based data streams from manufacturing equipment. With Basic monitoring (looking at production efficiency, part count, alarms, messages, and overrides), we can estimate a data rate of about 10 samples a second, with each sample consisting of 10 data items. This generates over 400MB of data daily, or more than 150GB annually per device. With Advanced monitoring (which will complement Basic monitoring with data from embedded and external sensors), this grows to over 21 GB a day, or close to 8 TB a year. With these estimates, a small manufacturing shop with about 10 devices, wil generate over 2 TB of data a day with Basic monitoring, or close to 80 TB with Advanced monitoring. Moving up to a multi-facility enterprise with about 500 devices, we are looking at about 80 TB a year with Basic monitoring, and close to 4 PB (Petabytes) with Advanced monitoring. The table below gives a few more examples.</p>
+
+<p>If we extrapolated this further to look at the total number of machine tools currently installed in the United States today (approximately 1.2 Million, based on estimates from AMT), Basic monitoring will generate over 189 PB of data, while Advanced monitoring will generate over 9,400 PB of data (over 9.4 Exabytes). Of course, this does overstate the total data load since not all of these machines can be readily addressed, but it gives a sense of the scale of manufacturing data, and &#8211; more importantly &#8211; the opportunity to harness it.</p>
+
+<p>McKinsey estimates about 966 PB of stored data in the Discrete Manufacturing sector (see above). Add Process data to that, we are looking at greatly increasing the total storage requirements of the sector. Manufacturing has the largest storage needs of all the surveyed sectors, and the potential of Big Data analytics on process data will further increase them.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Big Data in the news]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/02/13/Big-Data-in-the-news/"/>
+    <updated>2012-02-13T13:49:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/02/13/Big-Data-in-the-news</id>
+    <content type="html"><![CDATA[<p>The New York Times <a href="http://www.nytimes.com/2012/02/12/sunday-review/big-datas-impact-in-the-world.html">talks</a> about the impact of Big Data across a variety of fields, including retailing, voice recognition, and public health. They cite a report by Prof. Erik Brynjolfsson from MIT Sloan that</p>
+
+<blockquote><p>studied 179 large companies and found that those adopting “data-driven decision making” achieved productivity gains that were 5 percent to 6 percent higher than other factors could explain.
+Certainly we can expect a larger impact in productivity gains in manufacturing. Traditional &#8220;data driven&#8221; techniques like process monitoring has itself brought productivity gains of over 10%. Big Data Analytics gives the opportunity to wring out further gains, because of the ability to handle unstructured data, which the article mentions:
+Data is not only becoming more available but also more understandable to computers. Most of the Big Data surge is data in the wild — unruly stuff like words, images and video on the Web and those streams of sensor data. It is called unstructured data and is not typically grist for traditional databases.
+But the computer tools for gleaning knowledge and insights from the Internet era’s vast trove of unstructured data are fast gaining ground. At the forefront are the rapidly advancing techniques of artificial intelligence like natural-language processing, pattern recognition and machine learning.
+We apply similar tools and techniques to look at unstructured manufacturing data. More about this coming up!</p></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Baseline Energy Consumption - Case Study 1]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/02/08/BEC-Case-Study-1/"/>
+    <updated>2012-02-08T16:06:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/02/08/BEC-Case-Study-1</id>
+    <content type="html"><![CDATA[<p>The BEC standard discussed in the last post was applied in comparing the performance of three similar small-sized Lathes. The three devices were as follows (all brand names anonymized to protect the innocent!):</p>
+
+<p>The test conditions were as follows:</p>
+
+<p>The BEC metric for the three devices is as follows:</p>
+
+<p>Here is how the metric looks broken down into its components:</p>
+
+<p>The results showed that Device A consumes significantly less energy than Device B and Device C. Extrapolating the BEC metric, the estimated annual energy usage for these machine tools can be calculated assuming that each device operates for 8,000 hours per year at a cost of US $0.09 per kWh of energy; similarly, the Carbon Footprint of the devices is also calculated, assuming a footprint of 0.6 kg CO2-eq/kWh. As we can see in the table below, selecting Device A saves more than $800/year compared to Device C, and $400/year compared to Device B.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Baseline Energy Consumption]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/01/17/Baseline-Energy-Consumption/"/>
+    <updated>2012-01-17T13:09:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/01/17/Baseline-Energy-Consumption</id>
+    <content type="html"><![CDATA[<p>Measuring machine tool energy consumption has always been tricky because of the diversity and complexity of machine tools. We took a first stab at developing a standard to measure machine tool energy consumption as part of a project supported by General Dynamics – OTS, National Center for Defense Manufacturing and Machining (NCDMM), and AMT. We developed the Baseline Energy Consumption (BEC) metric as a standard measure of the energy consumption of machine tools along with a companion test methodology. Applications of this metric include:
+* Estimating the approximate energy requirements of operating a machine tool to manufacture a specific part
+* Comparing the energy requirements of two machine tools that are being applied in similar activities
+* Performing Return-on-Investment calculations to justify energy efficiency improvements in machine tool and machining technologies
+* Assessing environmental impact of manufacturing processes from equipment energy consumption</p>
+
+<p>A key consideration in designing the test methodology was to ensure that they could be performed within a reasonable amount of a time in a standard industrial setting without requiring any special workpieces, fixtures, or equipment. This pragmatic approach was explicitly selected because the goal of this metric is to serve as a figure of merit for the energy consumption of machine tools and manufacturing equipment. This metric does not intend to serve as a precise indication of the energy required by a machine tool to manufacture a specific part or to execute a specific operation. The first edition of the standard focused on measuring the BEC of lathe-type machine tools based on recording the power consumption during a series of controlled tests.</p>
+
+<p>The energy consumption of a machine tool in a factory environment is determined by the relative time it spends in different states, including, idle, axes movement, and cutting. To capture the effect of these states, the baseline tests measure the average power consumption during tare usage, axes / component usage, and machining usage. Tare usage is measured based on the power consumption of the machine tool when it is in standby with its peripheral units turned on. Component usage is measured based on the power consumption when the machine tool components are being exercised, without any loaded workpiece (analogous to “air-cutting”). Machining usage is measured based on power consumption  during metal cutting at a fixed spindle speed at varying material removal rates on an arbitrary workpiece. These tests are based on the observation that the energy required to remove unit volume of material in a machine tool is largely dependent on the volumetric rate of removal, or material removal rate, and not on the process parameters.</p>
+
+<p>The BEC metric is based on the average power consumed during these states. The three terms are weighted by duration factors to estimate the energy consumed by the machine during one hour of representative operation, where it is assumed that the machine tool spends 25% of the duration in tare usage, 25% in component usage (air-cutting/warmup etc.,) and 50% in machining usage.</p>
+
+<p>We will be following up with case studies looking at how this standard was applied in comparing different machine tools.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[It's all about Parts]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/01/11/It%27s-all-about-Parts/"/>
+    <updated>2012-01-11T00:30:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/01/11/It&#8217;s-all-about-Parts</id>
+    <content type="html"><![CDATA[<p>As we begin work on the 1.3 version of the MTConnect standard, the next big area to tackle is Parts. A part can be roughly defined as a piece of material that will have some transformative processes done to it to obtain another shape, composition, or structure. Along the way information will be collected about these transformative processes as they are performed and validated.</p>
+
+<p>A part itself is an asset, but for the treatment in the standard we will consider it as a collection of assets. These assets are composed of the various programs, measurement plans, and processes that will be applied to it. They may also indicate the schedule and operation, but that is questionable. If we consider a part an asset that references other assets, then the problem becomes one of asset references, instead of having a master document that has everything.</p>
+
+<p>One consideration is to make parts have the following information:
+1. Descriptive information
+2. Reference to part programs for each device
+3. Reference to quality execution program for each device</p>
+
+<p>Another area that needs to be considered is the quality measurement data collected from gauges and coordinate measurement devices and from process metrology. The information collected for the part measurements will be associated with the part itself through a parent reference. The part may or may not need to be updated to refer back to the measurement data, but this could be done. The measurements may reference a quality execution plan for that step and may replicate the tolerance information as well as the geometric information as well.</p>
+
+<p>We will be talking more about Parts in MTConnect as we work on the standard. Watch this space!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Reports of Manufacturing's Death Greatly Exaggerated]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/01/03/Reports-of-Manufacturing%27s-Death-Greatly-Exaggerated/"/>
+    <updated>2012-01-03T09:46:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/01/03/Reports-of-Manufacturing&#8217;s-Death-Greatly-Exaggerated</id>
+    <content type="html"><![CDATA[<p>Scott Anderson, a senior economist at Wells Fargo, in an interview with the Star Tribune (hat tip to @JHJackoCMO for tweeting about this):</p>
+
+<blockquote><p>&#8230; before 1980 there was a strong positive correlation between manufacturing and jobs, but since then that correlation has basically been turned upside down. What that means is that we&#8217;re producing more and more, yet we&#8217;re actually losing jobs. The extent of that shift tells us there&#8217;s a structural change that&#8217;s gone on that deserves a deeper look.</p></blockquote>
+
+<p>The interesting implication here is that companies are finding ways of increasing their output even as their labor size shrinks. This places greater importance on the tools that manufacturers have available to analyze and improve the efficiency of their operations. Greater automation means that more data is being generated by more equipment and we will need ways of reasoning over them in both realtime and over longer (historical) periods. Big Data to the rescue? We think so!</p>
+
+<p>A good example is again going back to the MTConnect Alarms discussed in the previous post. While previously shops might have had one operator per machine tool at all times, with greater automation and multi-tasking machines, one operator might be supervising a cell of several machine tools. Instead of barraging the operator with all the Alarms these machines generate, we can apply filtering and classification techniques to only display pertinent Alarms. We will examine some of these techniques in an upcoming post.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Analyzing MTConnect Alarm Data]]></title>
+    <link href="http://systeminsights.github.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data/"/>
+    <updated>2011-12-28T17:53:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data</id>
+    <content type="html"><![CDATA[<p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:
+- <code>+ OVERTRAVEL ( SOFT 1 )</code>
+- <code>1-ROT MOTOR SENSOR ERROR 81</code>
+- <code>HYDRAULIC PRESSURE DOWN</code>
+- <code>HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL</code>
+- <code>OIL-MATIC TEMP./FILTER ALARM</code>
+- <code>Y AXIS HOME POSITION RETURN REQUEST</code></p>
+
+<p>While some of these alarms are self-explanatory (like &#8221;<code>HYDRAULIC PRESSURE DOWN</code>&#8221;), other alarms can be a little harder to understand without any context. One way of adding context to Alarms is to look at the ControllerMode and the ExecutionStatus when the Alarm fired, and how they changed across the duration the alarm was active.</p>
+
+<p>We took several months of data from a multi-axis CNC-controlled Lathe, and we looked at the different Alarms that occurred in this period. To keep the list manageable, we only looked at Alarms which had the severity level &#8220;Fault&#8221;.
+Here are the alarms that occurred during this period:</p>
+
+<p><em>Alarm Count</em></p>
+
+<p><em>Alarm Duration</em></p>
+
+<p>We can see that the Chuck Barrier alarm occurred the most number of of times, but was not active the longest (that distinction went to the two Spindle-related alarms). To place these alarms in better light, we can look at the ControllerMode and ExecutionStatus when these alarms were active:</p>
+
+<p><em>Alarm Duration by Execution Status</em></p>
+
+<p><em>Alarm Duration by Controller Mode</em></p>
+
+<p>We are most interested in Alarms that have stopped part production, so we can focus on those have have occurred when the ExecutionStatus was <code>STOPPED</code> or <code>INTERRUPTED</code>. Similarly, Alarms that occur when the Controller was in <code>Manual</code> or <code>MDI</code> mode are probably those which were a by-product of something a user was manually doing on the machine, so we can ignore those to focus on those that occurred when the mode was <code>AUTOMATIC</code>. With this filter, we can see for example that the &#8220;CHUCK BARRIER&#8221; alarm which occurred the most number of times, seems to have exclusively occurred when the ExecutionStatus was <code>READY</code> (implying that it was not interrupting program execution) and when the ControllerMode was <code>MANUAL</code> (implying that a user was manually operating the machine when the alarm fired). The two Spindle Alarms now look more interesting, since they occurred when the ExecutionStatus was <code>STOPPED</code>, and the ControllerMode was both <code>AUTOMATIC</code> and <code>MANUAL</code>. This can imply that this alarm did interrupt production, and that it led the the Mode being changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
+
+<p>We can dig one level deeper, and look at the combined state mapped by the <code>ControllerMode</code> and <code>ExecutionStatus</code>:</p>
+
+<p><em>Alarm Duration by MetaState</em></p>
+
+<p>This gives us even more clarity: we can see that two Spindle Alarms switched two states – between <code>STOPPED/AUTOMATIC</code> and <code>STOPPED/MANUAL</code>, further confirming that this Alarm did stop program execution, and that the mode changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
+
+<p>Given the lack of clarity in alarm data, looking at the ControllerMode and ExecutionStatus gives us a better understanding of Alarms that can have an impact on Production. In vimana, we filter Alarms based on the ControllerMode and ExecutionStatus so that we can filter and look at only those that interrupt Production. We also look at temporal patterns between alarms, so that the ordering of alarms can be studied to better understand the phenomena they are describing. Downtimes are classified based on these characteristics of alarms. These will be discussed in this blog in an upcoming post.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What is Manufacturing Big Data?]]></title>
+    <link href="http://systeminsights.github.com/blog/2011/12/26/What-is-Manufacturing-Big-Data/"/>
+    <updated>2011-12-26T22:05:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2011/12/26/What-is-Manufacturing-Big-Data</id>
+    <content type="html"><![CDATA[<p>Big Data has increasingly been in the <a href="http://www.nytimes.com/2011/12/26/technology/for-start-ups-sorting-the-data-cloud-is-the-next-big-thing.html?pagewanted=all">news</a>, and is being touted as a kind of universal panacea to improve efficiency, decrease costs, and make the world a better place. We like keeping the conversation a lot more focused, and this blog will focus on Big Data from the manufacturing shop floor: how to collect it and more importantly, what to make of it.</p>
+
+<p>What kind of data is available from the manufacturing shop floor? Here are some examples:</p>
+
+<ul>
+<li>Operational: Device uptime, downtime, modes, states</li>
+<li>Diagnostic: Alarms, warnings, messages, notifications</li>
+<li>Process: Positions, velocities, acceleration, flow rates</li>
+<li>Environmental: Resource usage, energy consumption, effluents and emissions</li>
+</ul>
+
+
+<p>So, what can we do with Manufacturing Big Data?</p>
+
+<ul>
+<li>Preventive Maintenance: Big Data can help us identify which devices are going to be fail by comparing their current operational patterns with past failure behavior. By mining across data from similar devices, we can even predict the failure of devices that have not failed in the past.</li>
+<li>Part genealogy: Big Data can be used to build detailed genealogical models of complex parts, bringing together data on device operational states, process parameters, and machine health.</li>
+<li>Design-to-manufacturing pipeline: Big Data can improve design decisions by enabling the use of manufacturing operational and diagnostic data to the design phase.</li>
+</ul>
+
+
+<p>At System Insights we apply Big Data to improve the efficiency and productivity of complex manufacturing systems. Our vimana software application is the first of its kind solution for the high speed collection, storage, and analysis of data from the manufacturing shop floor.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>McKinsey on (Manufacturing) Big Data - Part 2 - What do do with it - Manufacturing Big Data</title>
+  <meta name="author" content="Team System Insights">
+
+  
+  <meta name="description" content="We are back studying McKinsey's report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Manufacturing Big Data" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Manufacturing Big Data</a></h1>
+  
+    <h2>System Insights Corporate Blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:systeminsights.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">McKinsey on (Manufacturing) Big Data - Part 2 - What Do Do With It</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-21T13:47:00+05:30" pubdate data-updated="true">Mar 21<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>We are back studying McKinsey's report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several "levers" where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:
+1. Implementing Lean Manufacturing (#5)
+2. Using sensor data-driven operations analytics (#6)</p>
+
+<p>Lets look at the first of these in this post.</p>
+
+<p>Lean Manufacturing and the Digital Factory
+McKinsey identifies using Big Data to "create process transparency, develop dashboards, and visualize bottlenecks". Our vimana application is one example of applying Big Data to create realtime dashboards of manufacturing equipment (to learn more about vimana, please visit www.systeminsights.com/vimana.) The idea here is to provide a shopfloor user both a high-level "macro" view of the shopfloor, as well as a low-level "micro" view of a single device.  Questions the dashboards can help answer include:
+* Which devices are producing parts today?
+* Which parts are being made right now?
+* How many parts have I made?
+* What has my device been doing today?
+* What is my efficiency?
+* Why have I been in a downtime?
+(This is a much more interesting question to answer than just "What are my downtimes". Knowing why downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing{ that a has downtime occurred).</p>
+
+<p>The data for vimana is streamed using the MTConnect Agent associated with each machine tool. The application itself runs in the cloud, aggregating hundreds of events every second from each machine tool. The analysis is done in realtime, and the visualizations are rendered instantly. Process transparency is achieved here because the application serves as a central repository of what is going on in the shopfloor, and multiple stakeholders (production, engineering, maintenance, management) can all use it to support decisions that come under their purview. This also takes us one step closer to the Digital Factory, where detailed operational data from the factory equipment is applied in building a complete digital model of the factory's operations, which can then be applied in optimizing its performance.</p>
+
+<p><em>Macro Dashboard: Shopfloor</em></p>
+
+<p>_Micro Dashboard: Device _</p>
+
+<p>Coming back to McKinsey, they estimate a reduction of 10 to 50% in costs from applying Big Data to implement Lean Manufacturing and the Digital Factory, accompanied by a marginal increase in revenue (2%). We have already seen vimana helping improve device utilization by over 25%, which directly leads to cost reductions. The real impact of Big Data here is not as much as in enabling us to ask new questions about a shop's productivity, but in helping us find even better answers for the same questions we have been asking for a long time and thus driving down costs. Of course, thats not to say that we cannot ask new questions based on the data –this is where data specifically from ubiquitous and low cost sensors can play a role, which we will examine in a future post.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Team System Insights</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-21T13:47:00+05:30" pubdate data-updated="true">Mar 21<span>st</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/big-data/'>big-data</a>, <a class='category' href='/blog/categories/vimana/'>vimana</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/" data-via="systeminsights" data-counturl="http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/" title="Previous Post: Setting up a MTConnect Agent on a Linux (Ubuntu) machine">&laquo; Setting up a MTConnect Agent on a Linux (Ubuntu) machine</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/04/14/welcome-deepak/" title="Next Post: Welcome Deepak!">Welcome Deepak! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/05/30/powered-by-octopress/">Powered by Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/08/mongo-replica-sets/">MongoDB and Replica Sets</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/14/welcome-deepak/">Welcome Deepak!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/">McKinsey on (Manufacturing) Big Data - Part 2 - What do do with it</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/">Setting up a MTConnect Agent on a Linux (Ubuntu) machine</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/systeminsights">@systeminsights</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'systeminsights',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("systeminsights", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/systeminsights" class="twitter-follow-button" data-show-count="false">Follow @systeminsights</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Team System Insights -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'manufacturingbigdata';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/';
+        var disqus_url = 'http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
