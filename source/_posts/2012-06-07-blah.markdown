@@ -1,0 +1,8 @@
+---
+layout: post
+title: "blah"
+date: 2012-06-07 08:16
+comments: true
+categories: 
+---
+Blah blah blah
