@@ -4,7 +4,7 @@
   <title><![CDATA[Category: interns | Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/blog/categories/interns/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-07T19:00:46+05:30</updated>
+  <updated>2012-06-07T21:21:14+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -77,12 +77,9 @@
 
 <p>Here is a screenshot of viewing realtime data from an MTConnect Agent. The app plots the value of an MTConnect Sample DataItem in realtime. The screen below shows the app plotting the X position, but this can also be used to plot maintenance-related data like a vibration or temperature.</p>
 
-<p>Error processing input, expected syntax: {% img [class name(s)] [http[s]:/]/path/to/image [width [height]] [title text | "title text" ["alt text"]] %}</p>
-
 <p>You can also load up the status of various conditions active in the machine tool, and see if the parameter that is being plotted is within some user-determined bounds. The screen below shows bounds set for the DataItem Commanded Y Position between 3 and -2. A green indication is shown because the data item is operating within bounds.</p>
 
-<!-- <img src="http://placekitten.com/890/280"> -->
-
+<p><img class="center" src="/images/2012-03-16-Introducing-our-Intern-Price-Arora-pic-2.jpeg"></p>
 
 <p>Prince will be posting more about his internship in these pages. Stay tuned!</p>
 ]]></content>
