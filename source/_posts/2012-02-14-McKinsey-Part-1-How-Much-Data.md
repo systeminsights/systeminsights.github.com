@@ -4,11 +4,13 @@ title: McKinsey on (Manufacturing) Big Data - Part 1 - How Much Data?
 date: 2012-02-14 06:50:00 UTC
 comments: true
 categories: big-data
+author: athulan
 ---
 
 McKinsey recently published a report about Big Data, going into considerable detail about its impact on different fields, including manufacturing. In the next few posts, I will be digging into this report looking at the specific impacts of big data on machining-related manufacturing, focusing on ways that improve productivity and efficiency.
 First, lets start with how the "Big Data" is defined:
 >“Big data” refers to datasets whose size is beyond the ability of typical database software tools to capture, store, manage, and analyze. This definition is intentionally subjective and incorporates a moving definition of how big a dataset needs to be in order to be considered big data—i.e., we don’t define big data in terms of being larger than a certain number of terabytes (thousands of gigabytes).
+
 This definition applies remarkably well to Manufacturing Big Data. The "bigness" of the data is not necessarily its absolute size, because process data from a machine tool might be in the tens of gigabytes, which is paltry compared to Internet data like website click-throughs or ad impressions. The bigness comes from the fact that traditional manufacturing decision making systems (spreadsheets, sticky-notes-on-whiteboards, MES systems) deal with very small sets of data – perhaps in the megabytes – and we are now looking at harnessing data that is several orders of magnitude larger than that.
 
 So how much data are we exactly talking about? Lets take the case of collecting MTConnect-based data streams from manufacturing equipment. With Basic monitoring (looking at production efficiency, part count, alarms, messages, and overrides), we can estimate a data rate of about 10 samples a second, with each sample consisting of 10 data items. This generates over 400MB of data daily, or more than 150GB annually per device. With Advanced monitoring (which will complement Basic monitoring with data from embedded and external sensors), this grows to over 21 GB a day, or close to 8 TB a year. With these estimates, a small manufacturing shop with about 10 devices, wil generate over 2 TB of data a day with Basic monitoring, or close to 80 TB with Advanced monitoring. Moving up to a multi-facility enterprise with about 500 devices, we are looking at about 80 TB a year with Basic monitoring, and close to 4 PB (Petabytes) with Advanced monitoring. The table below gives a few more examples.

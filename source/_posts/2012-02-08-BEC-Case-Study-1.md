@@ -4,6 +4,7 @@ title: Baseline Energy Consumption - Case Study 1
 date: 2012-02-08 10:36:00 UTC
 comments: true
 categories: energy
+author: athulan
 ---
 
 The BEC standard discussed in the last post was applied in comparing the performance of three similar small-sized Lathes. The three devices were as follows (all brand names anonymized to protect the innocent!):

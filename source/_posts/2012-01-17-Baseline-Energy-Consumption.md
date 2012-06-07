@@ -4,8 +4,10 @@ title: Baseline Energy Consumption
 date: 2012-01-17 07:39:00 UTC
 comments: true
 categories: energy
+author: athulan
 ---
 Measuring machine tool energy consumption has always been tricky because of the diversity and complexity of machine tools. We took a first stab at developing a standard to measure machine tool energy consumption as part of a project supported by General Dynamics – OTS, National Center for Defense Manufacturing and Machining (NCDMM), and AMT. We developed the Baseline Energy Consumption (BEC) metric as a standard measure of the energy consumption of machine tools along with a companion test methodology. Applications of this metric include:
+
 * Estimating the approximate energy requirements of operating a machine tool to manufacture a specific part
 * Comparing the energy requirements of two machine tools that are being applied in similar activities
 * Performing Return-on-Investment calculations to justify energy efficiency improvements in machine tool and machining technologies

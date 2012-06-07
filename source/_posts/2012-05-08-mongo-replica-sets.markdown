@@ -4,6 +4,7 @@ title: MongoDB and Replica Sets
 date: 2012-05-08 10:50
 comments: true
 categories: mongodb 
+author: deepak
 ---
 
 ## Why do we care
