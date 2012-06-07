@@ -20,7 +20,7 @@ Prince started out by building a simple webapp to display various maintenance-re
 
 Here is a screenshot of viewing realtime data from an MTConnect Agent. The app plots the value of an MTConnect Sample DataItem in realtime. The screen below shows the app plotting the X position, but this can also be used to plot maintenance-related data like a vibration or temperature.
 
-<!-- {% img 2012-03-16-Introducing-our-Intern-Price-Arora-pic-2.jpeg %} -->
+{% img 2012-03-16-Introducing-our-Intern-Price-Arora-pic-2.jpeg %}
 
 You can also load up the status of various conditions active in the machine tool, and see if the parameter that is being plotted is within some user-determined bounds. The screen below shows bounds set for the DataItem Commanded Y Position between 3 and -2. A green indication is shown because the data item is operating within bounds.
 
