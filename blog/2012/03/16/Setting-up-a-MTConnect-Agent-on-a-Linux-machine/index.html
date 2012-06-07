@@ -5,15 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>foo - Manufacturing Big Data</title>
+  <title>Setting up a MTConnect Agent on a Linux (Ubuntu) machine - Manufacturing Big Data</title>
   <meta name="author" content="Team System Insights">
 
   
-  <meta name="description" content="Test This is a test
-* Test 1
-* Test 2
-- Test 3 Tester Tester?
-">
+  <meta name="description" content="This was blogged first at my personal blog here. While working on my internship project, I got a chance to test out an MTConnect agent built in C++ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://systeminsights.github.com/blog/2012/06/07/foo/">
+  <link rel="canonical" href="http://systeminsights.github.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -71,7 +67,7 @@
   
   <header>
     
-      <h1 class="entry-title">Foo</h1>
+      <h1 class="entry-title">Setting Up a MTConnect Agent on a Linux (Ubuntu) Machine</h1>
     
     
       <p class="meta">
@@ -87,23 +83,51 @@
   
 
 
-<time datetime="2012-06-07T08:10:00+05:30" pubdate data-updated="true">Jun 7<span>th</span>, 2012</time>
+<time datetime="2012-03-16T16:10:00+05:30" pubdate data-updated="true">Mar 16<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>Test</h2>
+<div class="entry-content"><p>This was blogged first at my personal blog <a href="http://princearora.wordpress.com/2012/02/24/setting-up-a-mtconnect-agent-on-a-unixubuntu-machine/">here</a>.</p>
 
-<p>This is a test
-* Test 1
-* Test 2
-- Test 3</p>
+<p>While working on my internship project, I got a chance to test out an MTConnect agent built in C++ for Linux (ubuntu). I was surprised to find that absolutely no documentation existed for setting up the Agent in a Linux environment. Although it didn't turn out to be a big hassle in the end, I thought that it would be a good idea to list down the process of setting up a MTConnect agent on Linux. So, here you go:</p>
 
-<h2>Tester</h2>
+<p><em>Step 1</em>: Download the zip archive of the latest version of MTConnect C++ Agent SDK from MTConnect Github and extract its contents onto your local disk.</p>
 
-<p>Tester?</p>
+<p><em>Step 2</em>: Download &amp; Install libxml-2.0 and libxml-dev packages from the apt repository.</p>
+
+<pre><code>apt-get install libxml2 
+apt-get install libxml2-dev 
+</code></pre>
+
+<p><em>Step 3</em>: Now you need to prepare a Makefile in order to compile the agent. This can be done using the Cmake package.
+Download &amp; install cmake if you don't already have it.</p>
+
+<pre><code>apt-get install cmake 
+</code></pre>
+
+<p>Open the 'agent' folder in the terminal and run cmake and make.</p>
+
+<pre><code>cd agent/
+cmake .
+make 
+</code></pre>
+
+<p><em>Step 4</em>: If everything went right, your agent would have been build. You can now start it off as a service.</p>
+
+<pre><code>./agent daemonize 
+</code></pre>
+
+<p>If you are unsure whether the process is running, you can check out the process status:</p>
+
+<pre><code>ps aux | grep agent 
+</code></pre>
+
+<p>The agent service should be up and running. You may change the agent.cfg file in any text editor based on the instructions here.</p>
+
+<p>Have fun!</p>
 </div>
 
 
@@ -112,7 +136,7 @@
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Team System Insights</span></span>
+<span class="byline author vcard">Posted by <span class="fn">prince</span></span>
 
       
 
@@ -126,15 +150,21 @@
   
 
 
-<time datetime="2012-06-07T08:10:00+05:30" pubdate data-updated="true">Jun 7<span>th</span>, 2012</time>
+<time datetime="2012-03-16T16:10:00+05:30" pubdate data-updated="true">Mar 16<span>th</span>, 2012</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/interns/'>interns</a>, <a class='category' href='/blog/categories/mtconnect/'>mtconnect</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://systeminsights.github.com/blog/2012/06/07/foo/" data-via="systeminsights" data-counturl="http://systeminsights.github.com/blog/2012/06/07/foo/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://systeminsights.github.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/" data-via="systeminsights" data-counturl="http://systeminsights.github.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/" >Tweet</a>
   
   
   
@@ -143,10 +173,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/06/moving-to-octopress/" title="Previous Post: moving_to_octopress">&laquo; moving_to_octopress</a>
+        <a class="basic-alignment left" href="/blog/2012/03/16/Introducing-our-Intern-Price-Arora/" title="Previous Post: Introducing our Intern - Prince Arora">&laquo; Introducing our Intern - Prince Arora</a>
       
       
-        <a class="basic-alignment right" href="/blog/2012/06/07/blah/" title="Next Post: blah">blah &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/" title="Next Post: McKinsey on (Manufacturing) Big Data - Part 2 - What do do with it">McKinsey on (Manufacturing) Big Data - Part 2 - What do do with it &raquo;</a>
       
     </p>
   </footer>
@@ -258,8 +288,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://systeminsights.github.com/blog/2012/06/07/foo/';
-        var disqus_url = 'http://systeminsights.github.com/blog/2012/06/07/foo/';
+        var disqus_identifier = 'http://systeminsights.github.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/';
+        var disqus_url = 'http://systeminsights.github.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/';
         var disqus_script = 'embed.js';
       
     (function () {

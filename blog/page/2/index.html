@@ -1,0 +1,626 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Manufacturing Big Data</title>
+  <meta name="author" content="Team System Insights">
+
+  
+  <meta name="description" content="Following up to the previous posts (here and here) on Baseline Energy Consumption, here is a presentation about the standard: ">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://systeminsights.github.com/blog/page/2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Manufacturing Big Data" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Manufacturing Big Data</a></h1>
+  
+    <h2>System Insights Corporate Blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:systeminsights.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/17/Presentation-on-BEC/">Presentation on Baseline Energy Consumption</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-17T12:52:00+05:30" pubdate data-updated="true">Feb 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Following up to the previous posts (here and here) on Baseline Energy Consumption, here is a presentation about the standard:</p>
+
+<script src="http://speakerdeck.com/embed/4f3dd5bcdf5d29001f0047d8.js"></script>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/14/McKinsey-Part-1-How-Much-Data/">McKinsey on (Manufacturing) Big Data - Part 1 - How Much Data?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-14T12:20:00+05:30" pubdate data-updated="true">Feb 14<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>McKinsey recently published a report about Big Data, going into considerable detail about its impact on different fields, including manufacturing. In the next few posts, I will be digging into this report looking at the specific impacts of big data on machining-related manufacturing, focusing on ways that improve productivity and efficiency.
+First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
+
+<blockquote><p>“Big data” refers to datasets whose size is beyond the ability of typical database software tools to capture, store, manage, and analyze. This definition is intentionally subjective and incorporates a moving definition of how big a dataset needs to be in order to be considered big data—i.e., we don’t define big data in terms of being larger than a certain number of terabytes (thousands of gigabytes).
+This definition applies remarkably well to Manufacturing Big Data. The &#8220;bigness&#8221; of the data is not necessarily its absolute size, because process data from a machine tool might be in the tens of gigabytes, which is paltry compared to Internet data like website click-throughs or ad impressions. The bigness comes from the fact that traditional manufacturing decision making systems (spreadsheets, sticky-notes-on-whiteboards, MES systems) deal with very small sets of data – perhaps in the megabytes – and we are now looking at harnessing data that is several orders of magnitude larger than that.</p></blockquote>
+
+<p>So how much data are we exactly talking about? Lets take the case of collecting MTConnect-based data streams from manufacturing equipment. With Basic monitoring (looking at production efficiency, part count, alarms, messages, and overrides), we can estimate a data rate of about 10 samples a second, with each sample consisting of 10 data items. This generates over 400MB of data daily, or more than 150GB annually per device. With Advanced monitoring (which will complement Basic monitoring with data from embedded and external sensors), this grows to over 21 GB a day, or close to 8 TB a year. With these estimates, a small manufacturing shop with about 10 devices, wil generate over 2 TB of data a day with Basic monitoring, or close to 80 TB with Advanced monitoring. Moving up to a multi-facility enterprise with about 500 devices, we are looking at about 80 TB a year with Basic monitoring, and close to 4 PB (Petabytes) with Advanced monitoring. The table below gives a few more examples.</p>
+
+<p>If we extrapolated this further to look at the total number of machine tools currently installed in the United States today (approximately 1.2 Million, based on estimates from AMT), Basic monitoring will generate over 189 PB of data, while Advanced monitoring will generate over 9,400 PB of data (over 9.4 Exabytes). Of course, this does overstate the total data load since not all of these machines can be readily addressed, but it gives a sense of the scale of manufacturing data, and &#8211; more importantly &#8211; the opportunity to harness it.</p>
+
+<p>McKinsey estimates about 966 PB of stored data in the Discrete Manufacturing sector (see above). Add Process data to that, we are looking at greatly increasing the total storage requirements of the sector. Manufacturing has the largest storage needs of all the surveyed sectors, and the potential of Big Data analytics on process data will further increase them.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/13/Big-Data-in-the-news/">Big Data in the News</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-13T13:49:00+05:30" pubdate data-updated="true">Feb 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The New York Times <a href="http://www.nytimes.com/2012/02/12/sunday-review/big-datas-impact-in-the-world.html">talks</a> about the impact of Big Data across a variety of fields, including retailing, voice recognition, and public health. They cite a report by Prof. Erik Brynjolfsson from MIT Sloan that</p>
+
+<blockquote><p>studied 179 large companies and found that those adopting “data-driven decision making” achieved productivity gains that were 5 percent to 6 percent higher than other factors could explain.
+Certainly we can expect a larger impact in productivity gains in manufacturing. Traditional &#8220;data driven&#8221; techniques like process monitoring has itself brought productivity gains of over 10%. Big Data Analytics gives the opportunity to wring out further gains, because of the ability to handle unstructured data, which the article mentions:
+Data is not only becoming more available but also more understandable to computers. Most of the Big Data surge is data in the wild — unruly stuff like words, images and video on the Web and those streams of sensor data. It is called unstructured data and is not typically grist for traditional databases.
+But the computer tools for gleaning knowledge and insights from the Internet era’s vast trove of unstructured data are fast gaining ground. At the forefront are the rapidly advancing techniques of artificial intelligence like natural-language processing, pattern recognition and machine learning.
+We apply similar tools and techniques to look at unstructured manufacturing data. More about this coming up!</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/08/BEC-Case-Study-1/">Baseline Energy Consumption - Case Study 1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-08T16:06:00+05:30" pubdate data-updated="true">Feb 8<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The BEC standard discussed in the last post was applied in comparing the performance of three similar small-sized Lathes. The three devices were as follows (all brand names anonymized to protect the innocent!):</p>
+
+<p>The test conditions were as follows:</p>
+
+<p>The BEC metric for the three devices is as follows:</p>
+
+<p>Here is how the metric looks broken down into its components:</p>
+
+<p>The results showed that Device A consumes significantly less energy than Device B and Device C. Extrapolating the BEC metric, the estimated annual energy usage for these machine tools can be calculated assuming that each device operates for 8,000 hours per year at a cost of US $0.09 per kWh of energy; similarly, the Carbon Footprint of the devices is also calculated, assuming a footprint of 0.6 kg CO2-eq/kWh. As we can see in the table below, selecting Device A saves more than $800/year compared to Device C, and $400/year compared to Device B.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/17/Baseline-Energy-Consumption/">Baseline Energy Consumption</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-17T13:09:00+05:30" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Measuring machine tool energy consumption has always been tricky because of the diversity and complexity of machine tools. We took a first stab at developing a standard to measure machine tool energy consumption as part of a project supported by General Dynamics – OTS, National Center for Defense Manufacturing and Machining (NCDMM), and AMT. We developed the Baseline Energy Consumption (BEC) metric as a standard measure of the energy consumption of machine tools along with a companion test methodology. Applications of this metric include:
+* Estimating the approximate energy requirements of operating a machine tool to manufacture a specific part
+* Comparing the energy requirements of two machine tools that are being applied in similar activities
+* Performing Return-on-Investment calculations to justify energy efficiency improvements in machine tool and machining technologies
+* Assessing environmental impact of manufacturing processes from equipment energy consumption</p>
+
+<p>A key consideration in designing the test methodology was to ensure that they could be performed within a reasonable amount of a time in a standard industrial setting without requiring any special workpieces, fixtures, or equipment. This pragmatic approach was explicitly selected because the goal of this metric is to serve as a figure of merit for the energy consumption of machine tools and manufacturing equipment. This metric does not intend to serve as a precise indication of the energy required by a machine tool to manufacture a specific part or to execute a specific operation. The first edition of the standard focused on measuring the BEC of lathe-type machine tools based on recording the power consumption during a series of controlled tests.</p>
+
+<p>The energy consumption of a machine tool in a factory environment is determined by the relative time it spends in different states, including, idle, axes movement, and cutting. To capture the effect of these states, the baseline tests measure the average power consumption during tare usage, axes / component usage, and machining usage. Tare usage is measured based on the power consumption of the machine tool when it is in standby with its peripheral units turned on. Component usage is measured based on the power consumption when the machine tool components are being exercised, without any loaded workpiece (analogous to “air-cutting”). Machining usage is measured based on power consumption  during metal cutting at a fixed spindle speed at varying material removal rates on an arbitrary workpiece. These tests are based on the observation that the energy required to remove unit volume of material in a machine tool is largely dependent on the volumetric rate of removal, or material removal rate, and not on the process parameters.</p>
+
+<p>The BEC metric is based on the average power consumed during these states. The three terms are weighted by duration factors to estimate the energy consumed by the machine during one hour of representative operation, where it is assumed that the machine tool spends 25% of the duration in tare usage, 25% in component usage (air-cutting/warmup etc.,) and 50% in machining usage.</p>
+
+<p>We will be following up with case studies looking at how this standard was applied in comparing different machine tools.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/11/It%27s-all-about-Parts/">It&#8217;s All About Parts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-11T00:30:00+05:30" pubdate data-updated="true">Jan 11<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As we begin work on the 1.3 version of the MTConnect standard, the next big area to tackle is Parts. A part can be roughly defined as a piece of material that will have some transformative processes done to it to obtain another shape, composition, or structure. Along the way information will be collected about these transformative processes as they are performed and validated.</p>
+
+<p>A part itself is an asset, but for the treatment in the standard we will consider it as a collection of assets. These assets are composed of the various programs, measurement plans, and processes that will be applied to it. They may also indicate the schedule and operation, but that is questionable. If we consider a part an asset that references other assets, then the problem becomes one of asset references, instead of having a master document that has everything.</p>
+
+<p>One consideration is to make parts have the following information:
+1. Descriptive information
+2. Reference to part programs for each device
+3. Reference to quality execution program for each device</p>
+
+<p>Another area that needs to be considered is the quality measurement data collected from gauges and coordinate measurement devices and from process metrology. The information collected for the part measurements will be associated with the part itself through a parent reference. The part may or may not need to be updated to refer back to the measurement data, but this could be done. The measurements may reference a quality execution plan for that step and may replicate the tolerance information as well as the geometric information as well.</p>
+
+<p>We will be talking more about Parts in MTConnect as we work on the standard. Watch this space!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/03/Reports-of-Manufacturing%27s-Death-Greatly-Exaggerated/">Reports of Manufacturing&#8217;s Death Greatly Exaggerated</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-03T09:46:00+05:30" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Scott Anderson, a senior economist at Wells Fargo, in an interview with the Star Tribune (hat tip to @JHJackoCMO for tweeting about this):</p>
+
+<blockquote><p>&#8230; before 1980 there was a strong positive correlation between manufacturing and jobs, but since then that correlation has basically been turned upside down. What that means is that we&#8217;re producing more and more, yet we&#8217;re actually losing jobs. The extent of that shift tells us there&#8217;s a structural change that&#8217;s gone on that deserves a deeper look.</p></blockquote>
+
+<p>The interesting implication here is that companies are finding ways of increasing their output even as their labor size shrinks. This places greater importance on the tools that manufacturers have available to analyze and improve the efficiency of their operations. Greater automation means that more data is being generated by more equipment and we will need ways of reasoning over them in both realtime and over longer (historical) periods. Big Data to the rescue? We think so!</p>
+
+<p>A good example is again going back to the MTConnect Alarms discussed in the previous post. While previously shops might have had one operator per machine tool at all times, with greater automation and multi-tasking machines, one operator might be supervising a cell of several machine tools. Instead of barraging the operator with all the Alarms these machines generate, we can apply filtering and classification techniques to only display pertinent Alarms. We will examine some of these techniques in an upcoming post.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data/">Analyzing MTConnect Alarm Data</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-28T17:53:00+05:30" pubdate data-updated="true">Dec 28<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:
+- <code>+ OVERTRAVEL ( SOFT 1 )</code>
+- <code>1-ROT MOTOR SENSOR ERROR 81</code>
+- <code>HYDRAULIC PRESSURE DOWN</code>
+- <code>HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL</code>
+- <code>OIL-MATIC TEMP./FILTER ALARM</code>
+- <code>Y AXIS HOME POSITION RETURN REQUEST</code></p>
+
+<p>While some of these alarms are self-explanatory (like &#8221;<code>HYDRAULIC PRESSURE DOWN</code>&#8221;), other alarms can be a little harder to understand without any context. One way of adding context to Alarms is to look at the ControllerMode and the ExecutionStatus when the Alarm fired, and how they changed across the duration the alarm was active.</p>
+
+<p>We took several months of data from a multi-axis CNC-controlled Lathe, and we looked at the different Alarms that occurred in this period. To keep the list manageable, we only looked at Alarms which had the severity level &#8220;Fault&#8221;.
+Here are the alarms that occurred during this period:</p>
+
+<p><em>Alarm Count</em></p>
+
+<p><em>Alarm Duration</em></p>
+
+<p>We can see that the Chuck Barrier alarm occurred the most number of of times, but was not active the longest (that distinction went to the two Spindle-related alarms). To place these alarms in better light, we can look at the ControllerMode and ExecutionStatus when these alarms were active:</p>
+
+<p><em>Alarm Duration by Execution Status</em></p>
+
+<p><em>Alarm Duration by Controller Mode</em></p>
+
+<p>We are most interested in Alarms that have stopped part production, so we can focus on those have have occurred when the ExecutionStatus was <code>STOPPED</code> or <code>INTERRUPTED</code>. Similarly, Alarms that occur when the Controller was in <code>Manual</code> or <code>MDI</code> mode are probably those which were a by-product of something a user was manually doing on the machine, so we can ignore those to focus on those that occurred when the mode was <code>AUTOMATIC</code>. With this filter, we can see for example that the &#8220;CHUCK BARRIER&#8221; alarm which occurred the most number of times, seems to have exclusively occurred when the ExecutionStatus was <code>READY</code> (implying that it was not interrupting program execution) and when the ControllerMode was <code>MANUAL</code> (implying that a user was manually operating the machine when the alarm fired). The two Spindle Alarms now look more interesting, since they occurred when the ExecutionStatus was <code>STOPPED</code>, and the ControllerMode was both <code>AUTOMATIC</code> and <code>MANUAL</code>. This can imply that this alarm did interrupt production, and that it led the the Mode being changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
+
+<p>We can dig one level deeper, and look at the combined state mapped by the <code>ControllerMode</code> and <code>ExecutionStatus</code>:</p>
+
+<p><em>Alarm Duration by MetaState</em></p>
+
+<p>This gives us even more clarity: we can see that two Spindle Alarms switched two states – between <code>STOPPED/AUTOMATIC</code> and <code>STOPPED/MANUAL</code>, further confirming that this Alarm did stop program execution, and that the mode changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
+
+<p>Given the lack of clarity in alarm data, looking at the ControllerMode and ExecutionStatus gives us a better understanding of Alarms that can have an impact on Production. In vimana, we filter Alarms based on the ControllerMode and ExecutionStatus so that we can filter and look at only those that interrupt Production. We also look at temporal patterns between alarms, so that the ordering of alarms can be studied to better understand the phenomena they are describing. Downtimes are classified based on these characteristics of alarms. These will be discussed in this blog in an upcoming post.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/12/26/What-is-Manufacturing-Big-Data/">What Is Manufacturing Big Data?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-26T22:05:00+05:30" pubdate data-updated="true">Dec 26<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Big Data has increasingly been in the <a href="http://www.nytimes.com/2011/12/26/technology/for-start-ups-sorting-the-data-cloud-is-the-next-big-thing.html?pagewanted=all">news</a>, and is being touted as a kind of universal panacea to improve efficiency, decrease costs, and make the world a better place. We like keeping the conversation a lot more focused, and this blog will focus on Big Data from the manufacturing shop floor: how to collect it and more importantly, what to make of it.</p>
+
+<p>What kind of data is available from the manufacturing shop floor? Here are some examples:
+- Operational: Device uptime, downtime, modes, states
+- Diagnostic: Alarms, warnings, messages, notifications
+- Process: Positions, velocities, acceleration, flow rates
+- Environmental: Resource usage, energy consumption, effluents and emissions</p>
+
+<p>So, what can we do with Manufacturing Big Data?
+- Preventive Maintenance: Big Data can help us identify which devices are going to be fail by comparing their current operational patterns with past failure behavior. By mining across data from similar devices, we can even predict the failure of devices that have not failed in the past.<br/>
+- Part genealogy: Big Data can be used to build detailed genealogical models of complex parts, bringing together data on device operational states, process parameters, and machine health.
+- Design-to-manufacturing pipeline: Big Data can improve design decisions by enabling the use of manufacturing operational and diagnostic data to the design phase.</p>
+
+<p>At System Insights we apply Big Data to improve the efficiency and productivity of complex manufacturing systems. Our vimana software application is the first of its kind solution for the high speed collection, storage, and analysis of data from the manufacturing shop floor.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/06/07/blah/">blah</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/07/foo/">foo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/06/moving-to-octopress/">moving_to_octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/30/powered-by-octopress/">Powered by Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/08/mongo-replica-sets/">MongoDB and Replica Sets</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/systeminsights">@systeminsights</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'systeminsights',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("systeminsights", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/systeminsights" class="twitter-follow-button" data-show-count="false">Follow @systeminsights</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Team System Insights -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'manufacturingbigdata';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

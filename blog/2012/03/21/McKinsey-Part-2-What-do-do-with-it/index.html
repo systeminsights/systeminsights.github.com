@@ -5,15 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>foo - Manufacturing Big Data</title>
+  <title>McKinsey on (Manufacturing) Big Data - Part 2 - What do do with it - Manufacturing Big Data</title>
   <meta name="author" content="Team System Insights">
 
   
-  <meta name="description" content="Test This is a test
-* Test 1
-* Test 2
-- Test 3 Tester Tester?
-">
+  <meta name="description" content="We are back studying McKinsey's report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://systeminsights.github.com/blog/2012/06/07/foo/">
+  <link rel="canonical" href="http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -71,7 +67,7 @@
   
   <header>
     
-      <h1 class="entry-title">Foo</h1>
+      <h1 class="entry-title">McKinsey on (Manufacturing) Big Data - Part 2 - What Do Do With It</h1>
     
     
       <p class="meta">
@@ -87,23 +83,36 @@
   
 
 
-<time datetime="2012-06-07T08:10:00+05:30" pubdate data-updated="true">Jun 7<span>th</span>, 2012</time>
+<time datetime="2012-03-21T13:47:00+05:30" pubdate data-updated="true">Mar 21<span>st</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>Test</h2>
+<div class="entry-content"><p>We are back studying McKinsey's report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several "levers" where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:
+1. Implementing Lean Manufacturing (#5)
+2. Using sensor data-driven operations analytics (#6)</p>
 
-<p>This is a test
-* Test 1
-* Test 2
-- Test 3</p>
+<p>Lets look at the first of these in this post.</p>
 
-<h2>Tester</h2>
+<p>Lean Manufacturing and the Digital Factory
+McKinsey identifies using Big Data to "create process transparency, develop dashboards, and visualize bottlenecks". Our vimana application is one example of applying Big Data to create realtime dashboards of manufacturing equipment (to learn more about vimana, please visit www.systeminsights.com/vimana.) The idea here is to provide a shopfloor user both a high-level "macro" view of the shopfloor, as well as a low-level "micro" view of a single device.  Questions the dashboards can help answer include:
+* Which devices are producing parts today?
+* Which parts are being made right now?
+* How many parts have I made?
+* What has my device been doing today?
+* What is my efficiency?
+* Why have I been in a downtime?
+(This is a much more interesting question to answer than just "What are my downtimes". Knowing why downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing{ that a has downtime occurred).</p>
 
-<p>Tester?</p>
+<p>The data for vimana is streamed using the MTConnect Agent associated with each machine tool. The application itself runs in the cloud, aggregating hundreds of events every second from each machine tool. The analysis is done in realtime, and the visualizations are rendered instantly. Process transparency is achieved here because the application serves as a central repository of what is going on in the shopfloor, and multiple stakeholders (production, engineering, maintenance, management) can all use it to support decisions that come under their purview. This also takes us one step closer to the Digital Factory, where detailed operational data from the factory equipment is applied in building a complete digital model of the factory's operations, which can then be applied in optimizing its performance.</p>
+
+<p><em>Macro Dashboard: Shopfloor</em></p>
+
+<p>_Micro Dashboard: Device _</p>
+
+<p>Coming back to McKinsey, they estimate a reduction of 10 to 50% in costs from applying Big Data to implement Lean Manufacturing and the Digital Factory, accompanied by a marginal increase in revenue (2%). We have already seen vimana helping improve device utilization by over 25%, which directly leads to cost reductions. The real impact of Big Data here is not as much as in enabling us to ask new questions about a shop's productivity, but in helping us find even better answers for the same questions we have been asking for a long time and thus driving down costs. Of course, thats not to say that we cannot ask new questions based on the data –this is where data specifically from ubiquitous and low cost sensors can play a role, which we will examine in a future post.</p>
 </div>
 
 
@@ -126,15 +135,21 @@
   
 
 
-<time datetime="2012-06-07T08:10:00+05:30" pubdate data-updated="true">Jun 7<span>th</span>, 2012</time>
+<time datetime="2012-03-21T13:47:00+05:30" pubdate data-updated="true">Mar 21<span>st</span>, 2012</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/big-data/'>big-data</a>, <a class='category' href='/blog/categories/vimana/'>vimana</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://systeminsights.github.com/blog/2012/06/07/foo/" data-via="systeminsights" data-counturl="http://systeminsights.github.com/blog/2012/06/07/foo/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/" data-via="systeminsights" data-counturl="http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/" >Tweet</a>
   
   
   
@@ -143,10 +158,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/06/moving-to-octopress/" title="Previous Post: moving_to_octopress">&laquo; moving_to_octopress</a>
+        <a class="basic-alignment left" href="/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/" title="Previous Post: Setting up a MTConnect Agent on a Linux (Ubuntu) machine">&laquo; Setting up a MTConnect Agent on a Linux (Ubuntu) machine</a>
       
       
-        <a class="basic-alignment right" href="/blog/2012/06/07/blah/" title="Next Post: blah">blah &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2012/04/14/welcome-deepak/" title="Next Post: Welcome Deepak!">Welcome Deepak! &raquo;</a>
       
     </p>
   </footer>
@@ -258,8 +273,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://systeminsights.github.com/blog/2012/06/07/foo/';
-        var disqus_url = 'http://systeminsights.github.com/blog/2012/06/07/foo/';
+        var disqus_identifier = 'http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/';
+        var disqus_url = 'http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>MongoDB and Replica Sets - Manufacturing Big Data</title>
+  <meta name="author" content="Team System Insights">
+
+  
+  <meta name="description" content="Why do we care We use mongoDB to persist data from the vimana tenants. All historical data from our customers is stored in mongo, and its very &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Manufacturing Big Data" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Manufacturing Big Data</a></h1>
+  
+    <h2>System Insights Corporate Blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:systeminsights.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">MongoDB and Replica Sets</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-08T10:50:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Why do we care</p>
+
+<p>We use mongoDB to persist data from the vimana tenants. All historical data from our customers is stored in mongo, and its very important that we can continuously persist into mongo without losing data. We are using replica sets to make sure that our data is redundantly stored and to ensure that we have a failover mechanism when one of the mongoDBs lose connection.</p>
+
+<p>Introduction to Replica Sets</p>
+
+<p>Replica sets are a form of asynchronous master/slave replication, adding automatic failover and automatic recovery of member nodes. A replica set consists of two or more nodes that are copies of each other. (i.e.: replicas). The replica set automatically elects a primary (master). Drivers (and mongos) can automatically detect when a replica set primary changes and will begin sending writes to the new primary.</p>
+
+<p>Those GOTCHAs</p>
+
+<p>In order enable replica sets, you need to pass the &#8220;replSet&#8221; parameter while starting the mongod processes.
+Replica sets cannot be initiated on those mongod instance which were already started with out &#8220;replSet&#8221; parameter.  Stop and restart the mongod processes with replSet parameter.
+When replica sets are configured, all the writes will only go to the primary!!! Mongo has its own algorithms for syncing the data across the nodes.</p>
+
+<p>That setup</p>
+
+<p>Starting multiple mongo instances.
+$ mongod &#8211;dbpath mongo_rpl/data1 &#8211;replSet set1 &#8211;port 27018
+$ mongod &#8211;dbpath mongo_rpl/data2 &#8211;replSet set1 &#8211;port 27019
+$ mongod &#8211;dbpath mongo_rpl/data3 &#8211;replSet set1 &#8211;port 27020</p>
+
+<p>This starts 3 different instances of mongo running on different ports.</p>
+
+<p>Setting up the replica config</p>
+
+<p>➜  ~  mongo localhost:27018
+MongoDB shell version: 1.8.2
+Mon Apr 30 11:13:59 *** warning: spider monkey build without utf8 support.  consider rebuilding with utf8 support
+connecting to: localhost:27018/test</p>
+
+<blockquote><p>config = {<em>id: &#8220;set1&#8221;, members: [{</em>id: 0, host: &#8220;localhost:27018&#8221;}, {<em>id: 1, host: &#8220;localhost:27019&#8221;},{</em>id: 2, host:&#8221;localhost:27020&#8221;}]}
+{
+ &#8221;<em>id&#8221; : &#8220;set1&#8221;,
+ &#8220;members&#8221; : [
+ {
+ &#8221;</em>id&#8221; : 0,
+ &#8220;host&#8221; : &#8220;localhost:27018&#8221;
+ },
+ {
+ &#8221;<em>id&#8221; : 1,
+ &#8220;host&#8221; : &#8220;localhost:27019&#8221;
+ },
+ {
+ &#8221;</em>id&#8221; : 2,
+ &#8220;host&#8221; : &#8220;localhost:27020&#8221;
+ }
+ ]
+}
+rs.initiate(config)
+{
+ &#8220;info&#8221; : &#8220;Config now saved locally.  Should come online in about a minute.&#8221;,
+ &#8220;ok&#8221; : 1
+}</p></blockquote>
+
+<p>This config enables the replicas to talk with each other. The talking would involve the replicas communicating who is the primary and who are all the secondaries.</p>
+
+<p>That app</p>
+
+<p>We wrote a small ruby script which would tail the oplog of our test servers and insert some interesting records into the replicas.
+The oplog watcher is available here.</p>
+
+<p>Those observations</p>
+
+<p>Writing scenarios</p>
+
+<p>Secondary goes down: There is no problem at all. If the secondary comes up again, mongo will take care of replicating the records which were lost by the time when it was down. Perfect!
+Primary goes down: The ruby mongo driver raises &#8220;Mongo::ConnectionFailure&#8221;. Checkout the oplog watcher, we have caught this exception and we are doing a puts that the connection is lost. But how ever the after a few seconds, when one of the other secondaries get elected as the primary the writes become successful. The interesting fact is that all the writes which failed during this recovery process is lost. Since we are able to catch &#8220;Mongo::ConnectionFailure&#8221;, it is up-to the client to pull the sleeves and persist the data somewhere else until another secondary becomes a primary.While testing we lost about 20-30 records when the primary was down. I guess this number would be more or less depending the latency which we would face in the realtime.
+Last mongod instance is not becoming primary: As you can see from the config above, we have 3 replicas. So we would have one primary(27018) and two secondaries(27019 and 27020). We are stopping the primary(27018). Now one of the secondaries becomes a primary(say 28019). Now we would have one primary(27019) and one secondary(27020). Again we are stopping the primary(27019). But the left over secondary(27020) will not become the primary!!!!!!! This causes all the writes to fail. But if we bring another dead mongod instance(27018) up, the leftover secondary(27020) becomes the primary and from then on the writes become successful.  This was found while digging into the mongo logs.
+[rs Manager] replSet can&#8217;t see a majority, will not try to elect self: From what I understand , Replica sets will do the election process only if there are 2 or more replicas available. If at all we have only one replica alive, the election will not happen and all the writes will fail because there will be no primary. We need have 2 replicas alive at anytime for the writes to become successful. This is interesting.</p>
+
+<p>Reading Scenarios</p>
+
+<p>MongoDB doesnot by default support serving reads from the replicas. MongoDB will serve all reads from primary by default. Reads from secondaries can be configured, which is actually a 2 step process.  The first step is to configure &#8220;slaveOK&#8221; in the mongo console. This will tell mongo, it is okay to serve the reads from the secondaries. The second step is to instantiate the MongoReplConnection with :read => :secondary option.
+This will tell the driver that it is okay to send the reads to the secondaries. Mongo driver will randomly select one of the secondaries to serve the reads. The distribution of the reads across the secondaries is handled by the driver.</p>
+
+<p>Secondary goes down:
+slaveOk -> Mongo::ConnectionFailure will be raised when there is a failure. Mongo driver is intelligent, when it sees a Mongo::ConnectionFailure it prevents the next reads from going to that dead secondary.
+The driver has its own algorithm to find out if the dead secondary is back alive or not. As far a read is concerned we need to catch Mongo::ConnectionFailure and make the read once more(Assuming that another secondary will be up).If the secondaries are configured to serve the reads, then the primary is not touched at all until all other secondaries are dead. But there is no real way to find out which mongod instance served the read.</p>
+
+<p>Without SlaveOk ->  Rest of the world goes as usual.
+Primary goes down:
+slaveOk -> Rest of the world goes as usual.</p>
+
+<p>without SlaveOk -> All the reads are going to fail since primary can only serve the reads. There are 2 ways to solve this problem, catch the exception and throw an error message. Or keep polling the server until one of the other secondaries becomes a primary and read becomes successful. If the client decides to retry, it&#8217;s not guaranteed that another member of the replica set will have been promoted to primary right away, so it&#8217;s still possible that the driver will raise another Mongo::ConnectionFailure.</p>
+
+<p>Happy hacking,
+Deepak.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Team System Insights</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-08T10:50:00+05:30" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mongodb/'>mongodb</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets/" data-via="systeminsights" data-counturl="http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/14/welcome-deepak/" title="Previous Post: Welcome Deepak!">&laquo; Welcome Deepak!</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/05/30/powered-by-octopress/" title="Next Post: Powered by Octopress">Powered by Octopress &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/06/07/blah/">blah</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/07/foo/">foo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/06/moving-to-octopress/">moving_to_octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/30/powered-by-octopress/">Powered by Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/08/mongo-replica-sets/">MongoDB and Replica Sets</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/systeminsights">@systeminsights</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'systeminsights',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("systeminsights", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/systeminsights" class="twitter-follow-button" data-show-count="false">Follow @systeminsights</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Team System Insights -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'manufacturingbigdata';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets/';
+        var disqus_url = 'http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

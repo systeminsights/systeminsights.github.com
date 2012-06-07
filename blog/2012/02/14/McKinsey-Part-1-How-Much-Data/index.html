@@ -5,15 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>foo - Manufacturing Big Data</title>
+  <title>McKinsey on (Manufacturing) Big Data - Part 1 - How Much Data? - Manufacturing Big Data</title>
   <meta name="author" content="Team System Insights">
 
   
-  <meta name="description" content="Test This is a test
-* Test 1
-* Test 2
-- Test 3 Tester Tester?
-">
+  <meta name="description" content="McKinsey recently published a report about Big Data, going into considerable detail about its impact on different fields, including manufacturing. In &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://systeminsights.github.com/blog/2012/06/07/foo/">
+  <link rel="canonical" href="http://systeminsights.github.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -71,7 +67,7 @@
   
   <header>
     
-      <h1 class="entry-title">Foo</h1>
+      <h1 class="entry-title">McKinsey on (Manufacturing) Big Data - Part 1 - How Much Data?</h1>
     
     
       <p class="meta">
@@ -87,23 +83,24 @@
   
 
 
-<time datetime="2012-06-07T08:10:00+05:30" pubdate data-updated="true">Jun 7<span>th</span>, 2012</time>
+<time datetime="2012-02-14T12:20:00+05:30" pubdate data-updated="true">Feb 14<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>Test</h2>
+<div class="entry-content"><p>McKinsey recently published a report about Big Data, going into considerable detail about its impact on different fields, including manufacturing. In the next few posts, I will be digging into this report looking at the specific impacts of big data on machining-related manufacturing, focusing on ways that improve productivity and efficiency.
+First, lets start with how the "Big Data" is defined:</p>
 
-<p>This is a test
-* Test 1
-* Test 2
-- Test 3</p>
+<blockquote><p>“Big data” refers to datasets whose size is beyond the ability of typical database software tools to capture, store, manage, and analyze. This definition is intentionally subjective and incorporates a moving definition of how big a dataset needs to be in order to be considered big data—i.e., we don’t define big data in terms of being larger than a certain number of terabytes (thousands of gigabytes).
+This definition applies remarkably well to Manufacturing Big Data. The "bigness" of the data is not necessarily its absolute size, because process data from a machine tool might be in the tens of gigabytes, which is paltry compared to Internet data like website click-throughs or ad impressions. The bigness comes from the fact that traditional manufacturing decision making systems (spreadsheets, sticky-notes-on-whiteboards, MES systems) deal with very small sets of data – perhaps in the megabytes – and we are now looking at harnessing data that is several orders of magnitude larger than that.</p></blockquote>
 
-<h2>Tester</h2>
+<p>So how much data are we exactly talking about? Lets take the case of collecting MTConnect-based data streams from manufacturing equipment. With Basic monitoring (looking at production efficiency, part count, alarms, messages, and overrides), we can estimate a data rate of about 10 samples a second, with each sample consisting of 10 data items. This generates over 400MB of data daily, or more than 150GB annually per device. With Advanced monitoring (which will complement Basic monitoring with data from embedded and external sensors), this grows to over 21 GB a day, or close to 8 TB a year. With these estimates, a small manufacturing shop with about 10 devices, wil generate over 2 TB of data a day with Basic monitoring, or close to 80 TB with Advanced monitoring. Moving up to a multi-facility enterprise with about 500 devices, we are looking at about 80 TB a year with Basic monitoring, and close to 4 PB (Petabytes) with Advanced monitoring. The table below gives a few more examples.</p>
 
-<p>Tester?</p>
+<p>If we extrapolated this further to look at the total number of machine tools currently installed in the United States today (approximately 1.2 Million, based on estimates from AMT), Basic monitoring will generate over 189 PB of data, while Advanced monitoring will generate over 9,400 PB of data (over 9.4 Exabytes). Of course, this does overstate the total data load since not all of these machines can be readily addressed, but it gives a sense of the scale of manufacturing data, and -- more importantly -- the opportunity to harness it.</p>
+
+<p>McKinsey estimates about 966 PB of stored data in the Discrete Manufacturing sector (see above). Add Process data to that, we are looking at greatly increasing the total storage requirements of the sector. Manufacturing has the largest storage needs of all the surveyed sectors, and the potential of Big Data analytics on process data will further increase them.</p>
 </div>
 
 
@@ -126,15 +123,21 @@
   
 
 
-<time datetime="2012-06-07T08:10:00+05:30" pubdate data-updated="true">Jun 7<span>th</span>, 2012</time>
+<time datetime="2012-02-14T12:20:00+05:30" pubdate data-updated="true">Feb 14<span>th</span>, 2012</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/big-data/'>big-data</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://systeminsights.github.com/blog/2012/06/07/foo/" data-via="systeminsights" data-counturl="http://systeminsights.github.com/blog/2012/06/07/foo/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://systeminsights.github.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data/" data-via="systeminsights" data-counturl="http://systeminsights.github.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data/" >Tweet</a>
   
   
   
@@ -143,10 +146,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/06/06/moving-to-octopress/" title="Previous Post: moving_to_octopress">&laquo; moving_to_octopress</a>
+        <a class="basic-alignment left" href="/blog/2012/02/13/Big-Data-in-the-news/" title="Previous Post: Big Data in the news">&laquo; Big Data in the news</a>
       
       
-        <a class="basic-alignment right" href="/blog/2012/06/07/blah/" title="Next Post: blah">blah &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2012/02/17/Presentation-on-BEC/" title="Next Post: Presentation on Baseline Energy Consumption">Presentation on Baseline Energy Consumption &raquo;</a>
       
     </p>
   </footer>
@@ -258,8 +261,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://systeminsights.github.com/blog/2012/06/07/foo/';
-        var disqus_url = 'http://systeminsights.github.com/blog/2012/06/07/foo/';
+        var disqus_identifier = 'http://systeminsights.github.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data/';
+        var disqus_url = 'http://systeminsights.github.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data/';
         var disqus_script = 'embed.js';
       
     (function () {

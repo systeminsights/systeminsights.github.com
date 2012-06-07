@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mtconnect | Manufacturing Big Data]]></title>
+  <link href="http://systeminsights.github.com/blog/categories/mtconnect/atom.xml" rel="self"/>
+  <link href="http://systeminsights.github.com/"/>
+  <updated>2012-06-07T08:38:12+05:30</updated>
+  <id>http://systeminsights.github.com/</id>
+  <author>
+    <name><![CDATA[Team System Insights]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Setting up a MTConnect Agent on a Linux (Ubuntu) machine]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/"/>
+    <updated>2012-03-16T16:10:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine</id>
+    <content type="html"><![CDATA[<p>This was blogged first at my personal blog <a href="http://princearora.wordpress.com/2012/02/24/setting-up-a-mtconnect-agent-on-a-unixubuntu-machine/">here</a>.</p>
+
+<p>While working on my internship project, I got a chance to test out an MTConnect agent built in C++ for Linux (ubuntu). I was surprised to find that absolutely no documentation existed for setting up the Agent in a Linux environment. Although it didn't turn out to be a big hassle in the end, I thought that it would be a good idea to list down the process of setting up a MTConnect agent on Linux. So, here you go:</p>
+
+<p><em>Step 1</em>: Download the zip archive of the latest version of MTConnect C++ Agent SDK from MTConnect Github and extract its contents onto your local disk.</p>
+
+<p><em>Step 2</em>: Download &amp; Install libxml-2.0 and libxml-dev packages from the apt repository.</p>
+
+<pre><code>apt-get install libxml2 
+apt-get install libxml2-dev 
+</code></pre>
+
+<p><em>Step 3</em>: Now you need to prepare a Makefile in order to compile the agent. This can be done using the Cmake package.
+Download &amp; install cmake if you don't already have it.</p>
+
+<pre><code>apt-get install cmake 
+</code></pre>
+
+<p>Open the 'agent' folder in the terminal and run cmake and make.</p>
+
+<pre><code>cd agent/
+cmake .
+make 
+</code></pre>
+
+<p><em>Step 4</em>: If everything went right, your agent would have been build. You can now start it off as a service.</p>
+
+<pre><code>./agent daemonize 
+</code></pre>
+
+<p>If you are unsure whether the process is running, you can check out the process status:</p>
+
+<pre><code>ps aux | grep agent 
+</code></pre>
+
+<p>The agent service should be up and running. You may change the agent.cfg file in any text editor based on the instructions here.</p>
+
+<p>Have fun!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing our Intern - Prince Arora]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora/"/>
+    <updated>2012-03-16T09:30:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora</id>
+    <content type="html"><![CDATA[<p>I want to introduce Prince Arora, a student from IIT Madras, who is interning with us at our Chennai office. Prince is developing a suite of MTConnect-based tools to track the maintenance status of machine tools. He is blogging about his experiences at System Insights at his blog, <a href="http://princearora.in">The 20four hour log</a>.</p>
+
+<p>Prince started out by building a simple webapp to display various maintenance-related parameters from an MTConnect data stream. Specifically <a href="http://princearora.wordpress.com/2012/02/14/mtconnect-the-problem-statement/">he developed an app</a> to:
+* Connect to any MTConnect Stream specified by the user
+* Recognize all the devices within the stream
+* Continuously read &amp; display multiple parameters for each of the device
+* Display condition of all components
+* Plot a curve of the variation of a parameter over time
+* Allow user to monitor a parameter and alarm if it moves outside the range of values entered
+Here is a screenshot of viewing realtime data from an MTConnect Agent. The app plots the value of an MTConnect Sample DataItem in realtime. The screen below shows the app plotting the X position, but this can also be used to plot maintenance-related data like a vibration or temperature.</p>
+
+<p>You can also load up the status of various conditions active in the machine tool, and see if the parameter that is being plotted is within some user-determined bounds. The screen below shows bounds set for the DataItem Commanded Y Position between 3 and -2. A green indication is shown because the data item is operating within bounds.</p>
+
+<p>Prince will be posting more about his internship in these pages. Stay tuned!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MTConnect Screencasts]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/02/28/MTConnect-Screencasts/"/>
+    <updated>2012-02-28T02:27:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/02/28/MTConnect-Screencasts</id>
+    <content type="html"><![CDATA[<p>I will producing a series of MTConnect screencasts in the near future on various topics. The first in the series will cover extending the MTConnect standard by adding custom Data Items and Components. The tutorial will take you through all the steps necessary to develop an extension using the open source tools and deploy an integrated solution with all the schema files deployed on the MTConnect Agent. I am working on the screen casts right now and learning my way through the various technologies necessary to make a usable online education series.</p>
+
+<p>If this is a success, we will be producing additional tutorials on adapter development demonstrating how to get data from machine tools as well as many more. Another I'm considering will provide guidance on collecting tooling data from your controller and publishing it through MTConnect in compliance with part 1.2. All the source code, tools, and documentation will be made freely available to the community. I am currently looking for an XMLSpy equivalent or at least a good schema validator to use since XMLSpy has a high price tag. If anyone knows of anything, please reply. Any help in that area will be appreciated. I have used XMLSpy for many years, but for the purposes of these tutorials, I don't want to burden everyone with the cost, even though it is a great tool.</p>
+
+<p>If there are any tutorials you would be interested in seeing, I will be taking suggestions and will prioritize based on the responses I get. Otherwise I will make up my own priorities and guess as best I can what the community would like to see...</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[It's all about Parts]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/01/11/It%27s-all-about-Parts/"/>
+    <updated>2012-01-11T00:30:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/01/11/It's-all-about-Parts</id>
+    <content type="html"><![CDATA[<p>As we begin work on the 1.3 version of the MTConnect standard, the next big area to tackle is Parts. A part can be roughly defined as a piece of material that will have some transformative processes done to it to obtain another shape, composition, or structure. Along the way information will be collected about these transformative processes as they are performed and validated.</p>
+
+<p>A part itself is an asset, but for the treatment in the standard we will consider it as a collection of assets. These assets are composed of the various programs, measurement plans, and processes that will be applied to it. They may also indicate the schedule and operation, but that is questionable. If we consider a part an asset that references other assets, then the problem becomes one of asset references, instead of having a master document that has everything.</p>
+
+<p>One consideration is to make parts have the following information:
+1. Descriptive information
+2. Reference to part programs for each device
+3. Reference to quality execution program for each device</p>
+
+<p>Another area that needs to be considered is the quality measurement data collected from gauges and coordinate measurement devices and from process metrology. The information collected for the part measurements will be associated with the part itself through a parent reference. The part may or may not need to be updated to refer back to the measurement data, but this could be done. The measurements may reference a quality execution plan for that step and may replicate the tolerance information as well as the geometric information as well.</p>
+
+<p>We will be talking more about Parts in MTConnect as we work on the standard. Watch this space!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Analyzing MTConnect Alarm Data]]></title>
+    <link href="http://systeminsights.github.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data/"/>
+    <updated>2011-12-28T17:53:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data</id>
+    <content type="html"><![CDATA[<p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:
+- <code>+ OVERTRAVEL ( SOFT 1 )</code>
+- <code>1-ROT MOTOR SENSOR ERROR 81</code>
+- <code>HYDRAULIC PRESSURE DOWN</code>
+- <code>HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL</code>
+- <code>OIL-MATIC TEMP./FILTER ALARM</code>
+- <code>Y AXIS HOME POSITION RETURN REQUEST</code></p>
+
+<p>While some of these alarms are self-explanatory (like "<code>HYDRAULIC PRESSURE DOWN</code>"), other alarms can be a little harder to understand without any context. One way of adding context to Alarms is to look at the ControllerMode and the ExecutionStatus when the Alarm fired, and how they changed across the duration the alarm was active.</p>
+
+<p>We took several months of data from a multi-axis CNC-controlled Lathe, and we looked at the different Alarms that occurred in this period. To keep the list manageable, we only looked at Alarms which had the severity level "Fault".
+Here are the alarms that occurred during this period:</p>
+
+<p><em>Alarm Count</em></p>
+
+<p><em>Alarm Duration</em></p>
+
+<p>We can see that the Chuck Barrier alarm occurred the most number of of times, but was not active the longest (that distinction went to the two Spindle-related alarms). To place these alarms in better light, we can look at the ControllerMode and ExecutionStatus when these alarms were active:</p>
+
+<p><em>Alarm Duration by Execution Status</em></p>
+
+<p><em>Alarm Duration by Controller Mode</em></p>
+
+<p>We are most interested in Alarms that have stopped part production, so we can focus on those have have occurred when the ExecutionStatus was <code>STOPPED</code> or <code>INTERRUPTED</code>. Similarly, Alarms that occur when the Controller was in <code>Manual</code> or <code>MDI</code> mode are probably those which were a by-product of something a user was manually doing on the machine, so we can ignore those to focus on those that occurred when the mode was <code>AUTOMATIC</code>. With this filter, we can see for example that the "CHUCK BARRIER" alarm which occurred the most number of times, seems to have exclusively occurred when the ExecutionStatus was <code>READY</code> (implying that it was not interrupting program execution) and when the ControllerMode was <code>MANUAL</code> (implying that a user was manually operating the machine when the alarm fired). The two Spindle Alarms now look more interesting, since they occurred when the ExecutionStatus was <code>STOPPED</code>, and the ControllerMode was both <code>AUTOMATIC</code> and <code>MANUAL</code>. This can imply that this alarm did interrupt production, and that it led the the Mode being changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
+
+<p>We can dig one level deeper, and look at the combined state mapped by the <code>ControllerMode</code> and <code>ExecutionStatus</code>:</p>
+
+<p><em>Alarm Duration by MetaState</em></p>
+
+<p>This gives us even more clarity: we can see that two Spindle Alarms switched two states – between <code>STOPPED/AUTOMATIC</code> and <code>STOPPED/MANUAL</code>, further confirming that this Alarm did stop program execution, and that the mode changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
+
+<p>Given the lack of clarity in alarm data, looking at the ControllerMode and ExecutionStatus gives us a better understanding of Alarms that can have an impact on Production. In vimana, we filter Alarms based on the ControllerMode and ExecutionStatus so that we can filter and look at only those that interrupt Production. We also look at temporal patterns between alarms, so that the ordering of alarms can be studied to better understand the phenomena they are describing. Downtimes are classified based on these characteristics of alarms. These will be discussed in this blog in an upcoming post.</p>
+]]></content>
+  </entry>
+  
+</feed>
