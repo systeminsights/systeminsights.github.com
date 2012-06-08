@@ -4,7 +4,7 @@
   <title><![CDATA[Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-08T08:50:51+05:30</updated>
+  <updated>2012-06-08T08:52:50+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -18,7 +18,7 @@
     <link href="http://systeminsights.github.com/blog/2012/06/08/livebetter-article/"/>
     <updated>2012-06-08T08:23:00+05:30</updated>
     <id>http://systeminsights.github.com/blog/2012/06/08/livebetter-article</id>
-    <content type="html"><![CDATA[<p>The June issue of the (Livebetter Magazine)[http://livebettermagazine.com] features an article about the BEC standard by Ralph Resnick from the National Center for Defense Manufacturing and Machining and myself. You can read the article (here)[http://livebettermagazine.com/eng/magazine/article_detail.lasso?id=307].</p>
+    <content type="html"><![CDATA[<p>The June issue of the <a href="http://livebettermagazine.com">Livebetter Magazine</a> features an article about the BEC standard by Ralph Resnick from the National Center for Defense Manufacturing and Machining and myself. You can read the article <a href="http://livebettermagazine.com/eng/magazine/article_detail.lasso?id=307">here</a>.</p>
 ]]></content>
   </entry>
   
