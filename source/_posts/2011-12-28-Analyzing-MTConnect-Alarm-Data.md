@@ -9,12 +9,12 @@ author: athulan
 
 Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:
 
-- `+ OVERTRAVEL ( SOFT 1 )`
-- `1-ROT MOTOR SENSOR ERROR 81`
-- `HYDRAULIC PRESSURE DOWN`
-- `HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL`
-- `OIL-MATIC TEMP./FILTER ALARM`
-- `Y AXIS HOME POSITION RETURN REQUEST`
+- + OVERTRAVEL ( SOFT 1 )
+- 1-ROT MOTOR SENSOR ERROR 81
+- HYDRAULIC PRESSURE DOWN
+- HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL
+- OIL-MATIC TEMP./FILTER ALARM
+- Y AXIS HOME POSITION RETURN REQUEST
 
 While some of these alarms are self-explanatory (like "`HYDRAULIC PRESSURE DOWN`"), other alarms can be a little harder to understand without any context. One way of adding context to Alarms is to look at the ControllerMode and the ExecutionStatus when the Alarm fired, and how they changed across the duration the alarm was active. 
 
