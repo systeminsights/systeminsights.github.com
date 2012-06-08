@@ -4,7 +4,7 @@
   <title><![CDATA[Category: energy | Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/blog/categories/energy/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-07T21:22:27+05:30</updated>
+  <updated>2012-06-08T08:50:51+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[BEC Article in Livebetter Magazine]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/06/08/livebetter-article/"/>
+    <updated>2012-06-08T08:23:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/06/08/livebetter-article</id>
+    <content type="html"><![CDATA[<p>The June issue of the (Livebetter Magazine)[http://livebettermagazine.com] features an article about the BEC standard by Ralph Resnick from the National Center for Defense Manufacturing and Machining and myself. You can read the article (here)[http://livebettermagazine.com/eng/magazine/article_detail.lasso?id=307].</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Presentation on Baseline Energy Consumption]]></title>
