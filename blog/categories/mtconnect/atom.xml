@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mtconnect | Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/blog/categories/mtconnect/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-08T08:52:50+05:30</updated>
+  <updated>2012-06-08T21:20:17+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -130,12 +130,15 @@
     <content type="html"><![CDATA[<p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:</p>
 
 <ul>
-<li><code>+ OVERTRAVEL ( SOFT 1 )</code></li>
-<li><code>1-ROT MOTOR SENSOR ERROR 81</code></li>
-<li><code>HYDRAULIC PRESSURE DOWN</code></li>
-<li><code>HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL</code></li>
-<li><code>OIL-MATIC TEMP./FILTER ALARM</code></li>
-<li><code>Y AXIS HOME POSITION RETURN REQUEST</code></li>
+<li><ul>
+<li>OVERTRAVEL ( SOFT 1 )</li>
+</ul>
+</li>
+<li>1-ROT MOTOR SENSOR ERROR 81</li>
+<li>HYDRAULIC PRESSURE DOWN</li>
+<li>HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL</li>
+<li>OIL-MATIC TEMP./FILTER ALARM</li>
+<li>Y AXIS HOME POSITION RETURN REQUEST</li>
 </ul>
 
 

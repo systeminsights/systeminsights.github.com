@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vimana | Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/blog/categories/vimana/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-08T08:52:50+05:30</updated>
+  <updated>2012-06-08T21:20:17+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Why SaaS?]]></title>
+    <link href="http://systeminsights.github.com/blog/2012/06/08/why-saas/"/>
+    <updated>2012-06-08T11:16:00+05:30</updated>
+    <id>http://systeminsights.github.com/blog/2012/06/08/why-saas</id>
+    <content type="html"><![CDATA[<p>A common question we always get is why is vimana a software-as-a-service (SaaS) product. Surely, given how much data we are collecting, it must be easier to run it locally inside a plant, right? Well, if all vimama was doing was creating plots of part counts and utilization, then yes, running it locally does make sense. But vimana does a lot more -- it helps understand the patterns behind productivity (and the lack thereof), and being able to support these capabilities requires a whole lot more of computational resources.</p>
+
+<p>So lets dig deeper -- why SaaS?</p>
+
+<ol>
+<li><strong>Keep it Growing</strong>: SaaS allows us to scale product functionality as your operations grow. This means that vimana can scale to support an increasing number of devices, along with the analytical capabilities required to support them. SaaS also allows us to keep the app at the latest version without requiring long downtimes for the updates.</li>
+<li><strong>Keep it All</strong>: SaaS allows us to keep historical plant data securely for as long as you want us to. This makes it possible to baseline against historical data to put current performance in context, and to make better decisions about the future based on past usage and operational patterns.</li>
+<li><strong>Keep it Lean</strong>: SaaS enables simple, annual, pay-as-you-go pricing, where you pay based on the number of devices you have connected to vimana, and the kind of analysis being performed on the devices. Since the app is delivered over the web, any number of users can access it (even simultaneously!).</li>
+</ol>
+
+
+<p>SaaS deployments also allow us to farm out specific analytical processes to elastic clusters, using map reduce and other big-data-crunching technologies. We will be talking about this in detail in upcoming posts.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[McKinsey on (Manufacturing) Big Data - Part 2 - What do do with it]]></title>
@@ -47,7 +67,7 @@
 
 <p><em>Macro Dashboard: Shopfloor</em></p>
 
-<p>_Micro Dashboard: Device _</p>
+<p><em>Micro Dashboard: Device</em></p>
 
 <p>Coming back to McKinsey, they estimate a reduction of 10 to 50% in costs from applying Big Data to implement Lean Manufacturing and the Digital Factory, accompanied by a marginal increase in revenue (2%). We have already seen vimana helping improve device utilization by over 25%, which directly leads to cost reductions. The real impact of Big Data here is not as much as in enabling us to ask new questions about a shop's productivity, but in helping us find even better answers for the same questions we have been asking for a long time and thus driving down costs. Of course, thats not to say that we cannot ask new questions based on the data –this is where data specifically from ubiquitous and low cost sensors can play a role, which we will examine in a future post.</p>
 ]]></content>
