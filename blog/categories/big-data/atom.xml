@@ -4,7 +4,7 @@
   <title><![CDATA[Category: big-data | Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/blog/categories/big-data/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-11T14:01:59+05:30</updated>
+  <updated>2012-06-11T14:05:17+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -18,7 +18,7 @@
     <link href="http://systeminsights.github.com/blog/2012/06/08/why-saas/"/>
     <updated>2012-06-08T11:16:00+05:30</updated>
     <id>http://systeminsights.github.com/blog/2012/06/08/why-saas</id>
-    <content type="html"><![CDATA[<p>A common question we always get is why is vimana a software-as-a-service (SaaS) product. Surely, given how much data we are collecting, it must be easier to run it locally inside a plant, right? Well, if all vimama was doing was creating plots of part counts and utilization, then yes, running it locally does make sense. But vimana does a lot more -- it helps understand the patterns behind productivity (and the lack thereof), and being able to support these capabilities requires a whole lot more of computational resources.</p>
+    <content type="html"><![CDATA[<p>A common question we always get is why is vimana a software-as-a-service (SaaS) product. Surely, given how much data we are collecting, it must be easier to run it locally inside a plant, right? Well, if all vimana was doing was creating plots of part counts and utilization, then yes, running it locally does make sense. But vimana does a lot more -- it helps understand the patterns behind productivity (and the lack thereof), and being able to support these capabilities requires a whole lot more of computational resources.</p>
 
 <p>So lets dig deeper -- why SaaS?</p>
 
