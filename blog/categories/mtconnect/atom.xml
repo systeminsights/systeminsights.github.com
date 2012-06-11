@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mtconnect | Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/blog/categories/mtconnect/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-11T09:29:16+05:30</updated>
+  <updated>2012-06-11T14:01:59+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -130,10 +130,7 @@
     <content type="html"><![CDATA[<p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:</p>
 
 <ul>
-<li><ul>
 <li>OVERTRAVEL ( SOFT 1 )</li>
-</ul>
-</li>
 <li>1-ROT MOTOR SENSOR ERROR 81</li>
 <li>HYDRAULIC PRESSURE DOWN</li>
 <li>HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL</li>
@@ -147,25 +144,25 @@
 <p>We took several months of data from a multi-axis CNC-controlled Lathe, and we looked at the different Alarms that occurred in this period. To keep the list manageable, we only looked at Alarms which had the severity level "Fault".
 Here are the alarms that occurred during this period:</p>
 
-<p><em>Alarm Count</em></p>
+<p><img class="center" src="/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmCount.png"></p>
 
-<p><em>Alarm Duration</em></p>
+<p><img class="center" src="/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDuration.png"></p>
 
-<p>We can see that the Chuck Barrier alarm occurred the most number of of times, but was not active the longest (that distinction went to the two Spindle-related alarms). To place these alarms in better light, we can look at the ControllerMode and ExecutionStatus when these alarms were active:</p>
+<p>We can see that the Chuck Barrier alarm occurred the most number of of times, but was not active the longest (that distinction went to the two Spindle-related alarms). To place these alarms in better light, we can look at the <code>ControllerMode</code> and <code>ExecutionStatus</code> when these alarms were active:</p>
 
-<p><em>Alarm Duration by Execution Status</em></p>
+<p><img class="center" src="/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDurationByExec.png"></p>
 
-<p><em>Alarm Duration by Controller Mode</em></p>
+<p><img class="center" src="/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDurationByMode.png"></p>
 
-<p>We are most interested in Alarms that have stopped part production, so we can focus on those have have occurred when the ExecutionStatus was <code>STOPPED</code> or <code>INTERRUPTED</code>. Similarly, Alarms that occur when the Controller was in <code>Manual</code> or <code>MDI</code> mode are probably those which were a by-product of something a user was manually doing on the machine, so we can ignore those to focus on those that occurred when the mode was <code>AUTOMATIC</code>. With this filter, we can see for example that the "CHUCK BARRIER" alarm which occurred the most number of times, seems to have exclusively occurred when the ExecutionStatus was <code>READY</code> (implying that it was not interrupting program execution) and when the ControllerMode was <code>MANUAL</code> (implying that a user was manually operating the machine when the alarm fired). The two Spindle Alarms now look more interesting, since they occurred when the ExecutionStatus was <code>STOPPED</code>, and the ControllerMode was both <code>AUTOMATIC</code> and <code>MANUAL</code>. This can imply that this alarm did interrupt production, and that it led the the Mode being changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
+<p>We are most interested in Alarms that have stopped part production, so we can focus on those have have occurred when the <code>ExecutionStatus</code> was <code>STOPPED</code> or <code>INTERRUPTED</code>. Similarly, Alarms that occur when the Controller was in <code>Manual</code> or <code>MDI</code> mode are probably those which were a by-product of something a user was manually doing on the machine, so we can ignore those to focus on those that occurred when the mode was <code>AUTOMATIC</code>. With this filter, we can see for example that the <code>CHUCK BARRIER</code> alarm which occurred the most number of times, seems to have exclusively occurred when the ExecutionStatus was <code>READY</code> (implying that it was not interrupting program execution) and when the ControllerMode was <code>MANUAL</code> (implying that a user was manually operating the machine when the alarm fired). The two Spindle Alarms now look more interesting, since they occurred when the ExecutionStatus was <code>STOPPED</code>, and the ControllerMode was both <code>AUTOMATIC</code> and <code>MANUAL</code>. This can imply that this alarm did interrupt production, and that it led the the Mode being changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
 
 <p>We can dig one level deeper, and look at the combined state mapped by the <code>ControllerMode</code> and <code>ExecutionStatus</code>:</p>
 
-<p><em>Alarm Duration by MetaState</em></p>
+<p><img class="center" src="/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDurationByState.png"></p>
 
 <p>This gives us even more clarity: we can see that two Spindle Alarms switched two states – between <code>STOPPED/AUTOMATIC</code> and <code>STOPPED/MANUAL</code>, further confirming that this Alarm did stop program execution, and that the mode changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
 
-<p>Given the lack of clarity in alarm data, looking at the ControllerMode and ExecutionStatus gives us a better understanding of Alarms that can have an impact on Production. In vimana, we filter Alarms based on the ControllerMode and ExecutionStatus so that we can filter and look at only those that interrupt Production. We also look at temporal patterns between alarms, so that the ordering of alarms can be studied to better understand the phenomena they are describing. Downtimes are classified based on these characteristics of alarms. These will be discussed in this blog in an upcoming post.</p>
+<p>Given the lack of clarity in alarm data, looking at the <code>ControllerMode</code> and <code>ExecutionStatus</code> gives us a better understanding of Alarms that can have an impact on Production. In vimana, we filter Alarms based on the <code>ControllerMode</code> and <code>ExecutionStatus</code> so that we can filter and look at only those that interrupt Production. We also look at temporal patterns between alarms, so that the ordering of alarms can be studied to better understand the phenomena they are describing. Downtimes are classified based on these characteristics of alarms. These will be discussed in this blog in an upcoming post.</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-11T09:29:16+05:30</updated>
+  <updated>2012-06-11T14:01:59+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -179,6 +179,8 @@ Deepak.</p>
     <id>http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it</id>
     <content type="html"><![CDATA[<p>We are back studying McKinsey&#8217;s report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several &#8220;levers&#8221; where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:</p>
 
+<p><img class="center" src="http://systeminsights.github.com/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-levers.png"></p>
+
 <ol>
 <li>Implementing Lean Manufacturing (#5)</li>
 <li>Using sensor data-driven operations analytics (#6)</li>
@@ -198,15 +200,17 @@ Deepak.</p>
 <li>What has my device been doing today?</li>
 <li>What is my efficiency?</li>
 <li>Why have I been in a downtime?
-(This is a much more interesting question to answer than just &#8220;What are my downtimes&#8221;. Knowing why downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing{ that a has downtime occurred).</li>
+  (This is a much more interesting question to answer than just &#8220;What are my downtimes&#8221;. Knowing <em>why</em> downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing <em>that</em> a has downtime occurred).</li>
 </ul>
 
 
 <p>The data for vimana is streamed using the MTConnect Agent associated with each machine tool. The application itself runs in the cloud, aggregating hundreds of events every second from each machine tool. The analysis is done in realtime, and the visualizations are rendered instantly. Process transparency is achieved here because the application serves as a central repository of what is going on in the shopfloor, and multiple stakeholders (production, engineering, maintenance, management) can all use it to support decisions that come under their purview. This also takes us one step closer to the Digital Factory, where detailed operational data from the factory equipment is applied in building a complete digital model of the factory&#8217;s operations, which can then be applied in optimizing its performance.</p>
 
-<p><em>Macro Dashboard: Shopfloor</em></p>
+<p><em>Macro Dashboard: Shopfloor</em>
+<img class="center" src="http://systeminsights.github.com/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-dashboard.png"></p>
 
-<p><em>Micro Dashboard: Device</em></p>
+<p><em>Micro Dashboard: Device</em>
+<img class="center" src="http://systeminsights.github.com/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-details.png"></p>
 
 <p>Coming back to McKinsey, they estimate a reduction of 10 to 50% in costs from applying Big Data to implement Lean Manufacturing and the Digital Factory, accompanied by a marginal increase in revenue (2%). We have already seen vimana helping improve device utilization by over 25%, which directly leads to cost reductions. The real impact of Big Data here is not as much as in enabling us to ask new questions about a shop&#8217;s productivity, but in helping us find even better answers for the same questions we have been asking for a long time and thus driving down costs. Of course, thats not to say that we cannot ask new questions based on the data –this is where data specifically from ubiquitous and low cost sensors can play a role, which we will examine in a future post.</p>
 ]]></content>
@@ -323,7 +327,12 @@ First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
 
 <p>So how much data are we exactly talking about? Lets take the case of collecting MTConnect-based data streams from manufacturing equipment. With Basic monitoring (looking at production efficiency, part count, alarms, messages, and overrides), we can estimate a data rate of about 10 samples a second, with each sample consisting of 10 data items. This generates over 400MB of data daily, or more than 150GB annually per device. With Advanced monitoring (which will complement Basic monitoring with data from embedded and external sensors), this grows to over 21 GB a day, or close to 8 TB a year. With these estimates, a small manufacturing shop with about 10 devices, wil generate over 2 TB of data a day with Basic monitoring, or close to 80 TB with Advanced monitoring. Moving up to a multi-facility enterprise with about 500 devices, we are looking at about 80 TB a year with Basic monitoring, and close to 4 PB (Petabytes) with Advanced monitoring. The table below gives a few more examples.</p>
 
+<iframe frameborder="0" height="360" src="https://docs.google.com/spreadsheet/pub?key=0AnJkF2eeISMAdG5yTjZ4TkgyVEVEWE5rM2E5bmE1eUE&amp;single=true&amp;gid=0&amp;output=html&amp;widget=true" width="500"></iframe>
+
+
 <p>If we extrapolated this further to look at the total number of machine tools currently installed in the United States today (approximately 1.2 Million, based on estimates from AMT), Basic monitoring will generate over 189 PB of data, while Advanced monitoring will generate over 9,400 PB of data (over 9.4 Exabytes). Of course, this does overstate the total data load since not all of these machines can be readily addressed, but it gives a sense of the scale of manufacturing data, and &#8211; more importantly &#8211; the opportunity to harness it.</p>
+
+<p><img class="center" src="http://systeminsights.github.com/images/2012-02-14-McKinsey-Part-1-How-Much-Data-Sectoral-Data-Storage.png"></p>
 
 <p>McKinsey estimates about 966 PB of stored data in the Discrete Manufacturing sector (see above). Add Process data to that, we are looking at greatly increasing the total storage requirements of the sector. Manufacturing has the largest storage needs of all the surveyed sectors, and the potential of Big Data analytics on process data will further increase them.</p>
 ]]></content>
@@ -355,13 +364,23 @@ First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
     <id>http://systeminsights.github.com/blog/2012/02/08/BEC-Case-Study-1</id>
     <content type="html"><![CDATA[<p>The BEC standard discussed in the last post was applied in comparing the performance of three similar small-sized Lathes. The three devices were as follows (all brand names anonymized to protect the innocent!):</p>
 
+<p><img class="center" src="http://systeminsights.github.com/images/2012-02-08-BEC-Case-Study-1-A.png"></p>
+
 <p>The test conditions were as follows:</p>
+
+<p><img class="center" src="http://systeminsights.github.com/images/2012-02-08-BEC-Case-Study-1-B.png"></p>
 
 <p>The BEC metric for the three devices is as follows:</p>
 
+<p><img class="center" src="http://systeminsights.github.com/images/2012-02-08-BEC-Case-Study-1-C.png"></p>
+
 <p>Here is how the metric looks broken down into its components:</p>
 
+<p><img class="center" src="http://systeminsights.github.com/images/2012-02-08-BEC-Case-Study-1-D.png"></p>
+
 <p>The results showed that Device A consumes significantly less energy than Device B and Device C. Extrapolating the BEC metric, the estimated annual energy usage for these machine tools can be calculated assuming that each device operates for 8,000 hours per year at a cost of US $0.09 per kWh of energy; similarly, the Carbon Footprint of the devices is also calculated, assuming a footprint of 0.6 kg CO2-eq/kWh. As we can see in the table below, selecting Device A saves more than $800/year compared to Device C, and $400/year compared to Device B.</p>
+
+<p><img class="center" src="http://systeminsights.github.com/images/2012-02-08-BEC-Case-Study-1-E.png"></p>
 ]]></content>
   </entry>
   
@@ -437,10 +456,7 @@ First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
     <content type="html"><![CDATA[<p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:</p>
 
 <ul>
-<li><ul>
 <li>OVERTRAVEL ( SOFT 1 )</li>
-</ul>
-</li>
 <li>1-ROT MOTOR SENSOR ERROR 81</li>
 <li>HYDRAULIC PRESSURE DOWN</li>
 <li>HIGH PRESSURE COOLANT CLEAN TANK OIL LOW LEVEL</li>
@@ -454,25 +470,25 @@ First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
 <p>We took several months of data from a multi-axis CNC-controlled Lathe, and we looked at the different Alarms that occurred in this period. To keep the list manageable, we only looked at Alarms which had the severity level &#8220;Fault&#8221;.
 Here are the alarms that occurred during this period:</p>
 
-<p><em>Alarm Count</em></p>
+<p><img class="center" src="http://systeminsights.github.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmCount.png"></p>
 
-<p><em>Alarm Duration</em></p>
+<p><img class="center" src="http://systeminsights.github.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDuration.png"></p>
 
-<p>We can see that the Chuck Barrier alarm occurred the most number of of times, but was not active the longest (that distinction went to the two Spindle-related alarms). To place these alarms in better light, we can look at the ControllerMode and ExecutionStatus when these alarms were active:</p>
+<p>We can see that the Chuck Barrier alarm occurred the most number of of times, but was not active the longest (that distinction went to the two Spindle-related alarms). To place these alarms in better light, we can look at the <code>ControllerMode</code> and <code>ExecutionStatus</code> when these alarms were active:</p>
 
-<p><em>Alarm Duration by Execution Status</em></p>
+<p><img class="center" src="http://systeminsights.github.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDurationByExec.png"></p>
 
-<p><em>Alarm Duration by Controller Mode</em></p>
+<p><img class="center" src="http://systeminsights.github.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDurationByMode.png"></p>
 
-<p>We are most interested in Alarms that have stopped part production, so we can focus on those have have occurred when the ExecutionStatus was <code>STOPPED</code> or <code>INTERRUPTED</code>. Similarly, Alarms that occur when the Controller was in <code>Manual</code> or <code>MDI</code> mode are probably those which were a by-product of something a user was manually doing on the machine, so we can ignore those to focus on those that occurred when the mode was <code>AUTOMATIC</code>. With this filter, we can see for example that the &#8220;CHUCK BARRIER&#8221; alarm which occurred the most number of times, seems to have exclusively occurred when the ExecutionStatus was <code>READY</code> (implying that it was not interrupting program execution) and when the ControllerMode was <code>MANUAL</code> (implying that a user was manually operating the machine when the alarm fired). The two Spindle Alarms now look more interesting, since they occurred when the ExecutionStatus was <code>STOPPED</code>, and the ControllerMode was both <code>AUTOMATIC</code> and <code>MANUAL</code>. This can imply that this alarm did interrupt production, and that it led the the Mode being changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
+<p>We are most interested in Alarms that have stopped part production, so we can focus on those have have occurred when the <code>ExecutionStatus</code> was <code>STOPPED</code> or <code>INTERRUPTED</code>. Similarly, Alarms that occur when the Controller was in <code>Manual</code> or <code>MDI</code> mode are probably those which were a by-product of something a user was manually doing on the machine, so we can ignore those to focus on those that occurred when the mode was <code>AUTOMATIC</code>. With this filter, we can see for example that the <code>CHUCK BARRIER</code> alarm which occurred the most number of times, seems to have exclusively occurred when the ExecutionStatus was <code>READY</code> (implying that it was not interrupting program execution) and when the ControllerMode was <code>MANUAL</code> (implying that a user was manually operating the machine when the alarm fired). The two Spindle Alarms now look more interesting, since they occurred when the ExecutionStatus was <code>STOPPED</code>, and the ControllerMode was both <code>AUTOMATIC</code> and <code>MANUAL</code>. This can imply that this alarm did interrupt production, and that it led the the Mode being changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
 
 <p>We can dig one level deeper, and look at the combined state mapped by the <code>ControllerMode</code> and <code>ExecutionStatus</code>:</p>
 
-<p><em>Alarm Duration by MetaState</em></p>
+<p><img class="center" src="http://systeminsights.github.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDurationByState.png"></p>
 
 <p>This gives us even more clarity: we can see that two Spindle Alarms switched two states – between <code>STOPPED/AUTOMATIC</code> and <code>STOPPED/MANUAL</code>, further confirming that this Alarm did stop program execution, and that the mode changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
 
-<p>Given the lack of clarity in alarm data, looking at the ControllerMode and ExecutionStatus gives us a better understanding of Alarms that can have an impact on Production. In vimana, we filter Alarms based on the ControllerMode and ExecutionStatus so that we can filter and look at only those that interrupt Production. We also look at temporal patterns between alarms, so that the ordering of alarms can be studied to better understand the phenomena they are describing. Downtimes are classified based on these characteristics of alarms. These will be discussed in this blog in an upcoming post.</p>
+<p>Given the lack of clarity in alarm data, looking at the <code>ControllerMode</code> and <code>ExecutionStatus</code> gives us a better understanding of Alarms that can have an impact on Production. In vimana, we filter Alarms based on the <code>ControllerMode</code> and <code>ExecutionStatus</code> so that we can filter and look at only those that interrupt Production. We also look at temporal patterns between alarms, so that the ordering of alarms can be studied to better understand the phenomena they are describing. Downtimes are classified based on these characteristics of alarms. These will be discussed in this blog in an upcoming post.</p>
 ]]></content>
   </entry>
   

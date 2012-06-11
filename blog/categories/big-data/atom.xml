@@ -4,7 +4,7 @@
   <title><![CDATA[Category: big-data | Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/blog/categories/big-data/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-11T09:29:16+05:30</updated>
+  <updated>2012-06-11T14:01:59+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[Team System Insights]]></name>
@@ -40,6 +40,8 @@
     <id>http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it</id>
     <content type="html"><![CDATA[<p>We are back studying McKinsey's report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several "levers" where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:</p>
 
+<p><img class="center" src="/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-levers.png"></p>
+
 <ol>
 <li>Implementing Lean Manufacturing (#5)</li>
 <li>Using sensor data-driven operations analytics (#6)</li>
@@ -59,15 +61,17 @@
 <li>What has my device been doing today?</li>
 <li>What is my efficiency?</li>
 <li>Why have I been in a downtime?
-(This is a much more interesting question to answer than just "What are my downtimes". Knowing why downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing{ that a has downtime occurred).</li>
+  (This is a much more interesting question to answer than just "What are my downtimes". Knowing <em>why</em> downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing <em>that</em> a has downtime occurred).</li>
 </ul>
 
 
 <p>The data for vimana is streamed using the MTConnect Agent associated with each machine tool. The application itself runs in the cloud, aggregating hundreds of events every second from each machine tool. The analysis is done in realtime, and the visualizations are rendered instantly. Process transparency is achieved here because the application serves as a central repository of what is going on in the shopfloor, and multiple stakeholders (production, engineering, maintenance, management) can all use it to support decisions that come under their purview. This also takes us one step closer to the Digital Factory, where detailed operational data from the factory equipment is applied in building a complete digital model of the factory's operations, which can then be applied in optimizing its performance.</p>
 
-<p><em>Macro Dashboard: Shopfloor</em></p>
+<p><em>Macro Dashboard: Shopfloor</em>
+<img class="center" src="/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-dashboard.png"></p>
 
-<p><em>Micro Dashboard: Device</em></p>
+<p><em>Micro Dashboard: Device</em>
+<img class="center" src="/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-details.png"></p>
 
 <p>Coming back to McKinsey, they estimate a reduction of 10 to 50% in costs from applying Big Data to implement Lean Manufacturing and the Digital Factory, accompanied by a marginal increase in revenue (2%). We have already seen vimana helping improve device utilization by over 25%, which directly leads to cost reductions. The real impact of Big Data here is not as much as in enabling us to ask new questions about a shop's productivity, but in helping us find even better answers for the same questions we have been asking for a long time and thus driving down costs. Of course, thats not to say that we cannot ask new questions based on the data –this is where data specifically from ubiquitous and low cost sensors can play a role, which we will examine in a future post.</p>
 ]]></content>
@@ -87,7 +91,12 @@ First, lets start with how the "Big Data" is defined:</p>
 
 <p>So how much data are we exactly talking about? Lets take the case of collecting MTConnect-based data streams from manufacturing equipment. With Basic monitoring (looking at production efficiency, part count, alarms, messages, and overrides), we can estimate a data rate of about 10 samples a second, with each sample consisting of 10 data items. This generates over 400MB of data daily, or more than 150GB annually per device. With Advanced monitoring (which will complement Basic monitoring with data from embedded and external sensors), this grows to over 21 GB a day, or close to 8 TB a year. With these estimates, a small manufacturing shop with about 10 devices, wil generate over 2 TB of data a day with Basic monitoring, or close to 80 TB with Advanced monitoring. Moving up to a multi-facility enterprise with about 500 devices, we are looking at about 80 TB a year with Basic monitoring, and close to 4 PB (Petabytes) with Advanced monitoring. The table below gives a few more examples.</p>
 
+<iframe frameborder="0" height="360" src="https://docs.google.com/spreadsheet/pub?key=0AnJkF2eeISMAdG5yTjZ4TkgyVEVEWE5rM2E5bmE1eUE&amp;single=true&amp;gid=0&amp;output=html&amp;widget=true" width="500"></iframe>
+
+
 <p>If we extrapolated this further to look at the total number of machine tools currently installed in the United States today (approximately 1.2 Million, based on estimates from AMT), Basic monitoring will generate over 189 PB of data, while Advanced monitoring will generate over 9,400 PB of data (over 9.4 Exabytes). Of course, this does overstate the total data load since not all of these machines can be readily addressed, but it gives a sense of the scale of manufacturing data, and -- more importantly -- the opportunity to harness it.</p>
+
+<p><img class="center" src="/images/2012-02-14-McKinsey-Part-1-How-Much-Data-Sectoral-Data-Storage.png"></p>
 
 <p>McKinsey estimates about 966 PB of stored data in the Discrete Manufacturing sector (see above). Add Process data to that, we are looking at greatly increasing the total storage requirements of the sector. Manufacturing has the largest storage needs of all the surveyed sectors, and the potential of Big Data analytics on process data will further increase them.</p>
 ]]></content>
