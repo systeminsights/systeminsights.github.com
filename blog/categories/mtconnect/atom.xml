@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mtconnect | Manufacturing Big Data]]></title>
   <link href="http://systeminsights.github.com/blog/categories/mtconnect/atom.xml" rel="self"/>
   <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-11T14:33:23+05:30</updated>
+  <updated>2012-06-11T16:21:00+05:30</updated>
   <id>http://systeminsights.github.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -26,26 +26,26 @@
 <li>Download the zip archive of the latest version of MTConnect C++ Agent SDK from MTConnect Github and extract its contents onto your local disk.</li>
 <li><p>Download &amp; Install libxml-2.0 and libxml-dev packages from the apt repository.</p>
 
-<pre><code>  apt-get install libxml2 
-  apt-get install libxml2-dev 
+<pre><code>  $ apt-get install libxml2
+  $ apt-get install libxml2-dev
 </code></pre></li>
 <li><p>Now you need to prepare a Makefile in order to compile the agent. This can be done using the Cmake package. Download &amp; install cmake if you don't already have it.</p>
 
-<pre><code>  apt-get install cmake   
+<pre><code>  $ apt-get install cmake     
 </code></pre></li>
 <li><p>Open the 'agent' folder in the terminal and run cmake and make.</p>
 
-<pre><code>  cd agent/
-  cmake .
-  make 
+<pre><code>  $ cd agent/
+  $ cmake .
+  $ make 
 </code></pre></li>
 <li><p>If everything went right, your agent would have been build. You can now start it off as a service.</p>
 
-<pre><code>  ./agent daemonize 
+<pre><code>  $ ./agent daemonize 
 </code></pre></li>
 <li><p>If you are unsure whether the process is running, you can check out the process status:</p>
 
-<pre><code>  ps aux | grep agent 
+<pre><code>  $ ps aux | grep agent 
 </code></pre></li>
 </ul>
 
