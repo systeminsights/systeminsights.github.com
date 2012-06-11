@@ -3,7 +3,7 @@ layout: post
 title: Why SaaS?
 date: 2012-06-08 11:16
 comments: true
-categories: big-data
+categories: big-data vimana
 author: athulan
 ---
 
@@ -11,8 +11,8 @@ A common question we always get is why is vimana a software-as-a-service (SaaS) 
 
 So lets dig deeper -- why SaaS?
 
-1. **Keep it Growing**: SaaS allows us to scale product functionality as your operations grow. This means that vimana can scale to support an increasing number of devices, along with the analytical capabilities required to support them. SaaS also allows us to keep the app updated with out requiring long downtimes for the updates. 
-2. **Keep it All**: SaaS allows us to keep all historical plant data securely for as long as you want us to. This makes it possible to baseline against historical data to put current performance in context, and to make better decisions about the future based on past usage and operational patterns. 
+1. **Keep it Growing**: SaaS allows us to scale product functionality as your operations grow. This means that vimana can scale to support an increasing number of devices, along with the analytical capabilities required to support them. SaaS also allows us to keep the app at the latest version without requiring long downtimes for the updates. 
+2. **Keep it All**: SaaS allows us to keep historical plant data securely for as long as you want us to. This makes it possible to baseline against historical data to put current performance in context, and to make better decisions about the future based on past usage and operational patterns. 
 3. **Keep it Lean**: SaaS enables simple, annual, pay-as-you-go pricing, where you pay based on the number of devices you have connected to vimana, and the kind of analysis being performed on the devices. Since the app is delivered over the web, any number of users can access it (even simultaneously!). 
 
-SaaS deployments also allow us to farm out specific analytical processes to elastic clusters, using map reduce and other big-data technologies. We will be talking about this in detail in an upcoming post.
+SaaS deployments also allow us to farm out specific analytical processes to elastic clusters, using map reduce and other big-data-crunching technologies. We will be talking about this in detail in upcoming posts.
