@@ -1,0 +1,9 @@
+---
+layout: post
+title: "Octopress + S3 + Cloudfront"
+date: 2012-06-13 07:03
+comments: true
+categories: 
+author: athulan
+---
+We have finally migrated to Octopress from Google Blogger. Feels a lot better to write in Markdown than using Bloggers editor! The static content is being stored in a S3 bucket and served through AWS Cloudfront. 
