@@ -6,4 +6,4 @@ comments: true
 categories: 
 author: athulan
 ---
-We have finally migrated to Octopress from Google Blogger. Feels a lot better to write in Markdown than using Bloggers editor! The static content is being stored in a S3 bucket and served through AWS Cloudfront. 
+We have finally migrated to Octopress from Google Blogger. Feels a lot better to write in Markdown than using Blogger's editor! The static content is being stored in an S3 bucket and served through AWS Cloudfront. 
