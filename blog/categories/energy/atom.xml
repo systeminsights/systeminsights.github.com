@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: energy | Manufacturing Big Data]]></title>
-  <link href="http://systeminsights.github.com/blog/categories/energy/atom.xml" rel="self"/>
-  <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-13T06:57:35+05:30</updated>
-  <id>http://systeminsights.github.com/</id>
+  <link href="http://www.manufacturingbigdata.com/blog/categories/energy/atom.xml" rel="self"/>
+  <link href="http://www.manufacturingbigdata.com/"/>
+  <updated>2012-06-13T08:35:07+05:30</updated>
+  <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
     
@@ -15,18 +15,18 @@
   
   <entry>
     <title type="html"><![CDATA[BEC Article in Livebetter Magazine]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/06/08/livebetter-article/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/06/08/livebetter-article/"/>
     <updated>2012-06-08T08:23:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/06/08/livebetter-article</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/06/08/livebetter-article</id>
     <content type="html"><![CDATA[<p>The June issue of the <a href="http://livebettermagazine.com">Livebetter Magazine</a> features an article about the BEC standard by Ralph Resnick from the National Center for Defense Manufacturing and Machining and myself. You can read the article <a href="http://livebettermagazine.com/eng/magazine/article_detail.lasso?id=307">here</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Presentation on Baseline Energy Consumption]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/02/17/Presentation-on-BEC/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/02/17/Presentation-on-BEC/"/>
     <updated>2012-02-17T12:52:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/02/17/Presentation-on-BEC</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/02/17/Presentation-on-BEC</id>
     <content type="html"><![CDATA[<p>Following up to the previous posts (here and here) on Baseline Energy Consumption, here is a presentation about the standard:</p>
 
 <script src="http://speakerdeck.com/embed/4f3dd5bcdf5d29001f0047d8.js"></script>
@@ -36,9 +36,9 @@
   
   <entry>
     <title type="html"><![CDATA[Baseline Energy Consumption - Case Study 1]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/02/08/BEC-Case-Study-1/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/02/08/BEC-Case-Study-1/"/>
     <updated>2012-02-08T16:06:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/02/08/BEC-Case-Study-1</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/02/08/BEC-Case-Study-1</id>
     <content type="html"><![CDATA[<p>The BEC standard discussed in the last post was applied in comparing the performance of three similar small-sized Lathes. The three devices were as follows (all brand names anonymized to protect the innocent!):</p>
 
 <p><img class="center" src="/images/2012-02-08-BEC-Case-Study-1-A.png"></p>
@@ -63,9 +63,9 @@
   
   <entry>
     <title type="html"><![CDATA[Baseline Energy Consumption]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/01/17/Baseline-Energy-Consumption/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/01/17/Baseline-Energy-Consumption/"/>
     <updated>2012-01-17T13:09:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/01/17/Baseline-Energy-Consumption</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/01/17/Baseline-Energy-Consumption</id>
     <content type="html"><![CDATA[<p>Measuring machine tool energy consumption has always been tricky because of the diversity and complexity of machine tools. We took a first stab at developing a standard to measure machine tool energy consumption as part of a project supported by General Dynamics – OTS, National Center for Defense Manufacturing and Machining (NCDMM), and AMT. We developed the Baseline Energy Consumption (BEC) metric as a standard measure of the energy consumption of machine tools along with a companion test methodology. Applications of this metric include:</p>
 
 <ul>

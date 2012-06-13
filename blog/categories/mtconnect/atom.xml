@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: mtconnect | Manufacturing Big Data]]></title>
-  <link href="http://systeminsights.github.com/blog/categories/mtconnect/atom.xml" rel="self"/>
-  <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-13T06:57:35+05:30</updated>
-  <id>http://systeminsights.github.com/</id>
+  <link href="http://www.manufacturingbigdata.com/blog/categories/mtconnect/atom.xml" rel="self"/>
+  <link href="http://www.manufacturingbigdata.com/"/>
+  <updated>2012-06-13T08:35:07+05:30</updated>
+  <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Setting up a MTConnect Agent on a Linux (Ubuntu) machine]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/"/>
     <updated>2012-03-16T16:10:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine</id>
     <content type="html"><![CDATA[<p>This was blogged first at my personal blog <a href="http://princearora.wordpress.com/2012/02/24/setting-up-a-mtconnect-agent-on-a-unixubuntu-machine/">here</a>.</p>
 
 <p>While working on my internship project, I got a chance to test out an MTConnect agent built in C++ for Linux (ubuntu). I was surprised to find that absolutely no documentation existed for setting up the Agent in a Linux environment. Although it didn't turn out to be a big hassle in the end, I thought that it would be a good idea to list down the process of setting up a MTConnect agent on Linux. So, here you go:</p>
@@ -58,9 +58,9 @@
   
   <entry>
     <title type="html"><![CDATA[Introducing our Intern - Prince Arora]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora/"/>
     <updated>2012-03-16T09:30:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora</id>
     <content type="html"><![CDATA[<p>I want to introduce Prince Arora, a student from IIT Madras, who is interning with us at our Chennai office. Prince is developing a suite of MTConnect-based tools to track the maintenance status of machine tools. He is blogging about his experiences at System Insights at his blog, <a href="http://princearora.in">The 20four hour log</a>.</p>
 
 <p>Prince started out by building a simple webapp to display various maintenance-related parameters from an MTConnect data stream. Specifically <a href="http://princearora.wordpress.com/2012/02/14/mtconnect-the-problem-statement/">he developed an app</a> to:</p>
@@ -87,9 +87,9 @@
   
   <entry>
     <title type="html"><![CDATA[MTConnect Screencasts]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/02/28/MTConnect-Screencasts/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/02/28/MTConnect-Screencasts/"/>
     <updated>2012-02-28T02:27:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/02/28/MTConnect-Screencasts</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/02/28/MTConnect-Screencasts</id>
     <content type="html"><![CDATA[<p>I will producing a series of MTConnect screencasts in the near future on various topics. The first in the series will cover extending the MTConnect standard by adding custom Data Items and Components. The tutorial will take you through all the steps necessary to develop an extension using the open source tools and deploy an integrated solution with all the schema files deployed on the MTConnect Agent. I am working on the screen casts right now and learning my way through the various technologies necessary to make a usable online education series.</p>
 
 <p>If this is a success, we will be producing additional tutorials on adapter development demonstrating how to get data from machine tools as well as many more. Another I'm considering will provide guidance on collecting tooling data from your controller and publishing it through MTConnect in compliance with part 1.2. All the source code, tools, and documentation will be made freely available to the community. I am currently looking for an XMLSpy equivalent or at least a good schema validator to use since XMLSpy has a high price tag. If anyone knows of anything, please reply. Any help in that area will be appreciated. I have used XMLSpy for many years, but for the purposes of these tutorials, I don't want to burden everyone with the cost, even though it is a great tool.</p>
@@ -100,9 +100,9 @@
   
   <entry>
     <title type="html"><![CDATA[It's all about Parts]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/01/11/It%27s-all-about-Parts/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/01/11/It%27s-all-about-Parts/"/>
     <updated>2012-01-11T00:30:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/01/11/It's-all-about-Parts</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/01/11/It's-all-about-Parts</id>
     <content type="html"><![CDATA[<p>As we begin work on the 1.3 version of the MTConnect standard, the next big area to tackle is Parts. A part can be roughly defined as a piece of material that will have some transformative processes done to it to obtain another shape, composition, or structure. Along the way information will be collected about these transformative processes as they are performed and validated.</p>
 
 <p>A part itself is an asset, but for the treatment in the standard we will consider it as a collection of assets. These assets are composed of the various programs, measurement plans, and processes that will be applied to it. They may also indicate the schedule and operation, but that is questionable. If we consider a part an asset that references other assets, then the problem becomes one of asset references, instead of having a master document that has everything.</p>
@@ -124,9 +124,9 @@
   
   <entry>
     <title type="html"><![CDATA[Analyzing MTConnect Alarm Data]]></title>
-    <link href="http://systeminsights.github.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data/"/>
     <updated>2011-12-28T17:53:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data</id>
+    <id>http://www.manufacturingbigdata.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data</id>
     <content type="html"><![CDATA[<p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:</p>
 
 <ul>

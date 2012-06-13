@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: big-data | Manufacturing Big Data]]></title>
-  <link href="http://systeminsights.github.com/blog/categories/big-data/atom.xml" rel="self"/>
-  <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-13T06:57:35+05:30</updated>
-  <id>http://systeminsights.github.com/</id>
+  <link href="http://www.manufacturingbigdata.com/blog/categories/big-data/atom.xml" rel="self"/>
+  <link href="http://www.manufacturingbigdata.com/"/>
+  <updated>2012-06-13T08:35:07+05:30</updated>
+  <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Why SaaS?]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/06/08/why-saas/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/06/08/why-saas/"/>
     <updated>2012-06-08T11:16:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/06/08/why-saas</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/06/08/why-saas</id>
     <content type="html"><![CDATA[<p>A common question that we always get is why vimana is a software-as-a-service (SaaS) product. Surely, given how much data we are collecting, it must be easier to run it locally inside a plant, right? Well, if all vimana was doing was creating plots of part counts and utilization, then yes, running it locally does make sense. But vimana does a lot more -- it helps understand the patterns behind productivity (and the lack thereof), and being able to support these capabilities requires a whole lot more of computational resources.</p>
 
 <p>So lets dig deeper -- why SaaS?</p>
@@ -35,9 +35,9 @@
   
   <entry>
     <title type="html"><![CDATA[McKinsey on (Manufacturing) Big Data - Part 2 - What do do with it]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/"/>
     <updated>2012-03-21T13:47:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it</id>
     <content type="html"><![CDATA[<p>We are back studying McKinsey's report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several "levers" where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:</p>
 
 <p><img class="center" src="/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-levers.png"></p>
@@ -79,9 +79,9 @@
   
   <entry>
     <title type="html"><![CDATA[McKinsey on (Manufacturing) Big Data - Part 1 - How Much Data?]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data/"/>
     <updated>2012-02-14T12:20:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data</id>
     <content type="html"><![CDATA[<p>McKinsey recently published a report about Big Data, going into considerable detail about its impact on different fields, including manufacturing. In the next few posts, I will be digging into this report looking at the specific impacts of big data on machining-related manufacturing, focusing on ways that improve productivity and efficiency.
 First, lets start with how the "Big Data" is defined:</p>
 
@@ -104,9 +104,9 @@ First, lets start with how the "Big Data" is defined:</p>
   
   <entry>
     <title type="html"><![CDATA[Big Data in the news]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/02/13/Big-Data-in-the-news/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/02/13/Big-Data-in-the-news/"/>
     <updated>2012-02-13T13:49:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/02/13/Big-Data-in-the-news</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/02/13/Big-Data-in-the-news</id>
     <content type="html"><![CDATA[<p>The New York Times <a href="http://www.nytimes.com/2012/02/12/sunday-review/big-datas-impact-in-the-world.html">talks</a> about the impact of Big Data across a variety of fields, including retailing, voice recognition, and public health. They cite a report by Prof. Erik Brynjolfsson from MIT Sloan that</p>
 
 <blockquote><p>studied 179 large companies and found that those adopting “data-driven decision making” achieved productivity gains that were 5 percent to 6 percent higher than other factors could explain.</p></blockquote>
@@ -123,9 +123,9 @@ First, lets start with how the "Big Data" is defined:</p>
   
   <entry>
     <title type="html"><![CDATA[What is Manufacturing Big Data?]]></title>
-    <link href="http://systeminsights.github.com/blog/2011/12/26/What-is-Manufacturing-Big-Data/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2011/12/26/What-is-Manufacturing-Big-Data/"/>
     <updated>2011-12-26T22:05:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2011/12/26/What-is-Manufacturing-Big-Data</id>
+    <id>http://www.manufacturingbigdata.com/blog/2011/12/26/What-is-Manufacturing-Big-Data</id>
     <content type="html"><![CDATA[<p>Big Data has increasingly been in the <a href="http://www.nytimes.com/2011/12/26/technology/for-start-ups-sorting-the-data-cloud-is-the-next-big-thing.html?pagewanted=all">news</a>, and is being touted as a kind of universal panacea to improve efficiency, decrease costs, and make the world a better place. We like keeping the conversation a lot more focused, and this blog will focus on Big Data from the manufacturing shop floor: how to collect it and more importantly, what to make of it.</p>
 
 <p>What kind of data is available from the manufacturing shop floor? Here are some examples:</p>

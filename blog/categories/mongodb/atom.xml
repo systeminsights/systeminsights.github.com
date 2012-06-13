@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: mongodb | Manufacturing Big Data]]></title>
-  <link href="http://systeminsights.github.com/blog/categories/mongodb/atom.xml" rel="self"/>
-  <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-13T06:57:35+05:30</updated>
-  <id>http://systeminsights.github.com/</id>
+  <link href="http://www.manufacturingbigdata.com/blog/categories/mongodb/atom.xml" rel="self"/>
+  <link href="http://www.manufacturingbigdata.com/"/>
+  <updated>2012-06-13T08:35:07+05:30</updated>
+  <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[MongoDB and Replica Sets]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/05/08/mongo-replica-sets/"/>
     <updated>2012-05-08T10:50:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/05/08/mongo-replica-sets</id>
     <content type="html"><![CDATA[<h2>Why do we care</h2>
 
 <p>We use mongoDB to persist data from the vimana tenants. All historical data from our customers is stored in mongo, and its very important that we can continuously persist into mongo without losing data. We are using replica sets to make sure that our data is redundantly stored and to ensure that we have a failover mechanism when one of the mongoDBs lose connection.</p>

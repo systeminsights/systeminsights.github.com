@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Manufacturing Big Data]]></title>
-  <link href="http://systeminsights.github.com/atom.xml" rel="self"/>
-  <link href="http://systeminsights.github.com/"/>
-  <updated>2012-06-13T06:57:35+05:30</updated>
-  <id>http://systeminsights.github.com/</id>
+  <link href="http://www.manufacturingbigdata.com/atom.xml" rel="self"/>
+  <link href="http://www.manufacturingbigdata.com/"/>
+  <updated>2012-06-13T08:35:07+05:30</updated>
+  <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
     
@@ -14,10 +14,19 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Octopress + S3 + Cloudfront]]></title>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/06/13/s3/"/>
+    <updated>2012-06-13T07:03:00+05:30</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2012/06/13/s3</id>
+    <content type="html"><![CDATA[<p>We have finally migrated to Octopress from Google Blogger. Feels a lot better to write in Markdown than using Blogger&#8217;s editor! The static content is being stored in an S3 bucket and served through AWS Cloudfront.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Why SaaS?]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/06/08/why-saas/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/06/08/why-saas/"/>
     <updated>2012-06-08T11:16:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/06/08/why-saas</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/06/08/why-saas</id>
     <content type="html"><![CDATA[<p>A common question that we always get is why vimana is a software-as-a-service (SaaS) product. Surely, given how much data we are collecting, it must be easier to run it locally inside a plant, right? Well, if all vimana was doing was creating plots of part counts and utilization, then yes, running it locally does make sense. But vimana does a lot more &#8211; it helps understand the patterns behind productivity (and the lack thereof), and being able to support these capabilities requires a whole lot more of computational resources.</p>
 
 <p>So lets dig deeper &#8211; why SaaS?</p>
@@ -35,27 +44,27 @@
   
   <entry>
     <title type="html"><![CDATA[BEC Article in Livebetter Magazine]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/06/08/livebetter-article/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/06/08/livebetter-article/"/>
     <updated>2012-06-08T08:23:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/06/08/livebetter-article</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/06/08/livebetter-article</id>
     <content type="html"><![CDATA[<p>The June issue of the <a href="http://livebettermagazine.com">Livebetter Magazine</a> features an article about the BEC standard by Ralph Resnick from the National Center for Defense Manufacturing and Machining and myself. You can read the article <a href="http://livebettermagazine.com/eng/magazine/article_detail.lasso?id=307">here</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Powered by Octopress]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/05/30/powered-by-octopress/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/05/30/powered-by-octopress/"/>
     <updated>2012-05-30T10:00:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/05/30/powered-by-octopress</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/05/30/powered-by-octopress</id>
     <content type="html"><![CDATA[<p>We are moving to the Octopress framework. The blog will be hosted on Github Pages.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[MongoDB and Replica Sets]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/05/08/mongo-replica-sets/"/>
     <updated>2012-05-08T10:50:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/05/08/mongo-replica-sets</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/05/08/mongo-replica-sets</id>
     <content type="html"><![CDATA[<h2>Why do we care</h2>
 
 <p>We use mongoDB to persist data from the vimana tenants. All historical data from our customers is stored in mongo, and its very important that we can continuously persist into mongo without losing data. We are using replica sets to make sure that our data is redundantly stored and to ensure that we have a failover mechanism when one of the mongoDBs lose connection.</p>
@@ -165,21 +174,21 @@ Deepak.</p>
   
   <entry>
     <title type="html"><![CDATA[Welcome Deepak!]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/04/14/welcome-deepak/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/04/14/welcome-deepak/"/>
     <updated>2012-04-14T10:48:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/04/14/welcome-deepak</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/04/14/welcome-deepak</id>
     <content type="html"><![CDATA[<p>We would like to welcome Deepak Prasanna to System Insights. Deepak starts this month as a Software Developer working from our Chennai office. You will be hearing from him soon in this blog.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[McKinsey on (Manufacturing) Big Data - Part 2 - What do do with it]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/"/>
     <updated>2012-03-21T13:47:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it</id>
     <content type="html"><![CDATA[<p>We are back studying McKinsey&#8217;s report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several &#8220;levers&#8221; where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:</p>
 
-<p><img class="center" src="http://systeminsights.github.com/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-levers.png"></p>
+<p><img class="center" src="http://www.manufacturingbigdata.com/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-levers.png"></p>
 
 <ol>
 <li>Implementing Lean Manufacturing (#5)</li>
@@ -207,10 +216,10 @@ Deepak.</p>
 <p>The data for vimana is streamed using the MTConnect Agent associated with each machine tool. The application itself runs in the cloud, aggregating hundreds of events every second from each machine tool. The analysis is done in realtime, and the visualizations are rendered instantly. Process transparency is achieved here because the application serves as a central repository of what is going on in the shopfloor, and multiple stakeholders (production, engineering, maintenance, management) can all use it to support decisions that come under their purview. This also takes us one step closer to the Digital Factory, where detailed operational data from the factory equipment is applied in building a complete digital model of the factory&#8217;s operations, which can then be applied in optimizing its performance.</p>
 
 <p><em>Macro Dashboard: Shopfloor</em>
-<img class="center" src="http://systeminsights.github.com/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-dashboard.png"></p>
+<img class="center" src="http://www.manufacturingbigdata.com/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-dashboard.png"></p>
 
 <p><em>Micro Dashboard: Device</em>
-<img class="center" src="http://systeminsights.github.com/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-details.png"></p>
+<img class="center" src="http://www.manufacturingbigdata.com/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-details.png"></p>
 
 <p>Coming back to McKinsey, they estimate a reduction of 10 to 50% in costs from applying Big Data to implement Lean Manufacturing and the Digital Factory, accompanied by a marginal increase in revenue (2%). We have already seen vimana helping improve device utilization by over 25%, which directly leads to cost reductions. The real impact of Big Data here is not as much as in enabling us to ask new questions about a shop&#8217;s productivity, but in helping us find even better answers for the same questions we have been asking for a long time and thus driving down costs. Of course, thats not to say that we cannot ask new questions based on the data –this is where data specifically from ubiquitous and low cost sensors can play a role, which we will examine in a future post.</p>
 ]]></content>
@@ -218,9 +227,9 @@ Deepak.</p>
   
   <entry>
     <title type="html"><![CDATA[Setting up a MTConnect Agent on a Linux (Ubuntu) machine]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/"/>
     <updated>2012-03-16T16:10:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine</id>
     <content type="html"><![CDATA[<p>This was blogged first at my personal blog <a href="http://princearora.wordpress.com/2012/02/24/setting-up-a-mtconnect-agent-on-a-unixubuntu-machine/">here</a>.</p>
 
 <p>While working on my internship project, I got a chance to test out an MTConnect agent built in C++ for Linux (ubuntu). I was surprised to find that absolutely no documentation existed for setting up the Agent in a Linux environment. Although it didn&#8217;t turn out to be a big hassle in the end, I thought that it would be a good idea to list down the process of setting up a MTConnect agent on Linux. So, here you go:</p>
@@ -261,9 +270,9 @@ Deepak.</p>
   
   <entry>
     <title type="html"><![CDATA[Introducing our Intern - Prince Arora]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora/"/>
     <updated>2012-03-16T09:30:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora</id>
     <content type="html"><![CDATA[<p>I want to introduce Prince Arora, a student from IIT Madras, who is interning with us at our Chennai office. Prince is developing a suite of MTConnect-based tools to track the maintenance status of machine tools. He is blogging about his experiences at System Insights at his blog, <a href="http://princearora.in">The 20four hour log</a>.</p>
 
 <p>Prince started out by building a simple webapp to display various maintenance-related parameters from an MTConnect data stream. Specifically <a href="http://princearora.wordpress.com/2012/02/14/mtconnect-the-problem-statement/">he developed an app</a> to:</p>
@@ -282,7 +291,7 @@ Deepak.</p>
 
 <p>You can also load up the status of various conditions active in the machine tool, and see if the parameter that is being plotted is within some user-determined bounds. The screen below shows bounds set for the DataItem Commanded Y Position between 3 and -2. A green indication is shown because the data item is operating within bounds.</p>
 
-<p><img class="center" src="http://systeminsights.github.com/images/2012-03-16-Introducing-our-Intern-Price-Arora-pic-2.jpeg"></p>
+<p><img class="center" src="http://www.manufacturingbigdata.com/images/2012-03-16-Introducing-our-Intern-Price-Arora-pic-2.jpeg"></p>
 
 <p>Prince will be posting more about his internship in these pages. Stay tuned!</p>
 ]]></content>
@@ -290,9 +299,9 @@ Deepak.</p>
   
   <entry>
     <title type="html"><![CDATA[MTConnect Screencasts]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/02/28/MTConnect-Screencasts/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/02/28/MTConnect-Screencasts/"/>
     <updated>2012-02-28T02:27:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/02/28/MTConnect-Screencasts</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/02/28/MTConnect-Screencasts</id>
     <content type="html"><![CDATA[<p>I will producing a series of MTConnect screencasts in the near future on various topics. The first in the series will cover extending the MTConnect standard by adding custom Data Items and Components. The tutorial will take you through all the steps necessary to develop an extension using the open source tools and deploy an integrated solution with all the schema files deployed on the MTConnect Agent. I am working on the screen casts right now and learning my way through the various technologies necessary to make a usable online education series.</p>
 
 <p>If this is a success, we will be producing additional tutorials on adapter development demonstrating how to get data from machine tools as well as many more. Another I&#8217;m considering will provide guidance on collecting tooling data from your controller and publishing it through MTConnect in compliance with part 1.2. All the source code, tools, and documentation will be made freely available to the community. I am currently looking for an XMLSpy equivalent or at least a good schema validator to use since XMLSpy has a high price tag. If anyone knows of anything, please reply. Any help in that area will be appreciated. I have used XMLSpy for many years, but for the purposes of these tutorials, I don&#8217;t want to burden everyone with the cost, even though it is a great tool.</p>
@@ -303,9 +312,9 @@ Deepak.</p>
   
   <entry>
     <title type="html"><![CDATA[Presentation on Baseline Energy Consumption]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/02/17/Presentation-on-BEC/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/02/17/Presentation-on-BEC/"/>
     <updated>2012-02-17T12:52:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/02/17/Presentation-on-BEC</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/02/17/Presentation-on-BEC</id>
     <content type="html"><![CDATA[<p>Following up to the previous posts (here and here) on Baseline Energy Consumption, here is a presentation about the standard:</p>
 
 <script src="http://speakerdeck.com/embed/4f3dd5bcdf5d29001f0047d8.js"></script>
@@ -315,9 +324,9 @@ Deepak.</p>
   
   <entry>
     <title type="html"><![CDATA[McKinsey on (Manufacturing) Big Data - Part 1 - How Much Data?]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data/"/>
     <updated>2012-02-14T12:20:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/02/14/McKinsey-Part-1-How-Much-Data</id>
     <content type="html"><![CDATA[<p>McKinsey recently published a report about Big Data, going into considerable detail about its impact on different fields, including manufacturing. In the next few posts, I will be digging into this report looking at the specific impacts of big data on machining-related manufacturing, focusing on ways that improve productivity and efficiency.
 First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
 
@@ -332,7 +341,7 @@ First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
 
 <p>If we extrapolated this further to look at the total number of machine tools currently installed in the United States today (approximately 1.2 Million, based on estimates from AMT), Basic monitoring will generate over 189 PB of data, while Advanced monitoring will generate over 9,400 PB of data (over 9.4 Exabytes). Of course, this does overstate the total data load since not all of these machines can be readily addressed, but it gives a sense of the scale of manufacturing data, and &#8211; more importantly &#8211; the opportunity to harness it.</p>
 
-<p><img class="center" src="http://systeminsights.github.com/images/2012-02-14-McKinsey-Part-1-How-Much-Data-Sectoral-Data-Storage.png"></p>
+<p><img class="center" src="http://www.manufacturingbigdata.com/images/2012-02-14-McKinsey-Part-1-How-Much-Data-Sectoral-Data-Storage.png"></p>
 
 <p>McKinsey estimates about 966 PB of stored data in the Discrete Manufacturing sector (see above). Add Process data to that, we are looking at greatly increasing the total storage requirements of the sector. Manufacturing has the largest storage needs of all the surveyed sectors, and the potential of Big Data analytics on process data will further increase them.</p>
 ]]></content>
@@ -340,9 +349,9 @@ First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
   
   <entry>
     <title type="html"><![CDATA[Big Data in the news]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/02/13/Big-Data-in-the-news/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/02/13/Big-Data-in-the-news/"/>
     <updated>2012-02-13T13:49:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/02/13/Big-Data-in-the-news</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/02/13/Big-Data-in-the-news</id>
     <content type="html"><![CDATA[<p>The New York Times <a href="http://www.nytimes.com/2012/02/12/sunday-review/big-datas-impact-in-the-world.html">talks</a> about the impact of Big Data across a variety of fields, including retailing, voice recognition, and public health. They cite a report by Prof. Erik Brynjolfsson from MIT Sloan that</p>
 
 <blockquote><p>studied 179 large companies and found that those adopting “data-driven decision making” achieved productivity gains that were 5 percent to 6 percent higher than other factors could explain.</p></blockquote>
@@ -359,36 +368,36 @@ First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
   
   <entry>
     <title type="html"><![CDATA[Baseline Energy Consumption - Case Study 1]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/02/08/BEC-Case-Study-1/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/02/08/BEC-Case-Study-1/"/>
     <updated>2012-02-08T16:06:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/02/08/BEC-Case-Study-1</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/02/08/BEC-Case-Study-1</id>
     <content type="html"><![CDATA[<p>The BEC standard discussed in the last post was applied in comparing the performance of three similar small-sized Lathes. The three devices were as follows (all brand names anonymized to protect the innocent!):</p>
 
-<p><img class="center" src="http://systeminsights.github.com/images/2012-02-08-BEC-Case-Study-1-A.png"></p>
+<p><img class="center" src="http://www.manufacturingbigdata.com/images/2012-02-08-BEC-Case-Study-1-A.png"></p>
 
 <p>The test conditions were as follows:</p>
 
-<p><img class="center" src="http://systeminsights.github.com/images/2012-02-08-BEC-Case-Study-1-B.png"></p>
+<p><img class="center" src="http://www.manufacturingbigdata.com/images/2012-02-08-BEC-Case-Study-1-B.png"></p>
 
 <p>The BEC metric for the three devices is as follows:</p>
 
-<p><img class="center" src="http://systeminsights.github.com/images/2012-02-08-BEC-Case-Study-1-C.png"></p>
+<p><img class="center" src="http://www.manufacturingbigdata.com/images/2012-02-08-BEC-Case-Study-1-C.png"></p>
 
 <p>Here is how the metric looks broken down into its components:</p>
 
-<p><img class="center" src="http://systeminsights.github.com/images/2012-02-08-BEC-Case-Study-1-D.png"></p>
+<p><img class="center" src="http://www.manufacturingbigdata.com/images/2012-02-08-BEC-Case-Study-1-D.png"></p>
 
 <p>The results showed that Device A consumes significantly less energy than Device B and Device C. Extrapolating the BEC metric, the estimated annual energy usage for these machine tools can be calculated assuming that each device operates for 8,000 hours per year at a cost of US $0.09 per kWh of energy; similarly, the Carbon Footprint of the devices is also calculated, assuming a footprint of 0.6 kg CO2-eq/kWh. As we can see in the table below, selecting Device A saves more than $800/year compared to Device C, and $400/year compared to Device B.</p>
 
-<p><img class="center" src="http://systeminsights.github.com/images/2012-02-08-BEC-Case-Study-1-E.png"></p>
+<p><img class="center" src="http://www.manufacturingbigdata.com/images/2012-02-08-BEC-Case-Study-1-E.png"></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Baseline Energy Consumption]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/01/17/Baseline-Energy-Consumption/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/01/17/Baseline-Energy-Consumption/"/>
     <updated>2012-01-17T13:09:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/01/17/Baseline-Energy-Consumption</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/01/17/Baseline-Energy-Consumption</id>
     <content type="html"><![CDATA[<p>Measuring machine tool energy consumption has always been tricky because of the diversity and complexity of machine tools. We took a first stab at developing a standard to measure machine tool energy consumption as part of a project supported by General Dynamics – OTS, National Center for Defense Manufacturing and Machining (NCDMM), and AMT. We developed the Baseline Energy Consumption (BEC) metric as a standard measure of the energy consumption of machine tools along with a companion test methodology. Applications of this metric include:</p>
 
 <ul>
@@ -411,9 +420,9 @@ First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
   
   <entry>
     <title type="html"><![CDATA[It's all about Parts]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/01/11/It%27s-all-about-Parts/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/01/11/It%27s-all-about-Parts/"/>
     <updated>2012-01-11T00:30:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/01/11/It&#8217;s-all-about-Parts</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/01/11/It&#8217;s-all-about-Parts</id>
     <content type="html"><![CDATA[<p>As we begin work on the 1.3 version of the MTConnect standard, the next big area to tackle is Parts. A part can be roughly defined as a piece of material that will have some transformative processes done to it to obtain another shape, composition, or structure. Along the way information will be collected about these transformative processes as they are performed and validated.</p>
 
 <p>A part itself is an asset, but for the treatment in the standard we will consider it as a collection of assets. These assets are composed of the various programs, measurement plans, and processes that will be applied to it. They may also indicate the schedule and operation, but that is questionable. If we consider a part an asset that references other assets, then the problem becomes one of asset references, instead of having a master document that has everything.</p>
@@ -435,9 +444,9 @@ First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
   
   <entry>
     <title type="html"><![CDATA[Reports of Manufacturing's Death Greatly Exaggerated]]></title>
-    <link href="http://systeminsights.github.com/blog/2012/01/03/Reports-of-Manufacturing%27s-Death-Greatly-Exaggerated/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/01/03/Reports-of-Manufacturing%27s-Death-Greatly-Exaggerated/"/>
     <updated>2012-01-03T09:46:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2012/01/03/Reports-of-Manufacturing&#8217;s-Death-Greatly-Exaggerated</id>
+    <id>http://www.manufacturingbigdata.com/blog/2012/01/03/Reports-of-Manufacturing&#8217;s-Death-Greatly-Exaggerated</id>
     <content type="html"><![CDATA[<p>Scott Anderson, a senior economist at Wells Fargo, in an interview with the Star Tribune (hat tip to @JHJackoCMO for tweeting about this):</p>
 
 <blockquote><p>&#8230; before 1980 there was a strong positive correlation between manufacturing and jobs, but since then that correlation has basically been turned upside down. What that means is that we&#8217;re producing more and more, yet we&#8217;re actually losing jobs. The extent of that shift tells us there&#8217;s a structural change that&#8217;s gone on that deserves a deeper look.</p></blockquote>
@@ -450,9 +459,9 @@ First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
   
   <entry>
     <title type="html"><![CDATA[Analyzing MTConnect Alarm Data]]></title>
-    <link href="http://systeminsights.github.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data/"/>
     <updated>2011-12-28T17:53:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data</id>
+    <id>http://www.manufacturingbigdata.com/blog/2011/12/28/Analyzing-MTConnect-Alarm-Data</id>
     <content type="html"><![CDATA[<p>Machine Tools produce enormous quantities of Alarm data, but analyzing this data can be a challenge. We are primarily interested in finding out how Alarms can help us understand Production disruptions and downtimes. While Machine Tools tend to be chatty with alarms, the alarms contain only limited information of value. Part of the problem is the lack of descriptive alarm text. Take a look at some examples from a modern, multi-axis CNC-controlled machine tool:</p>
 
 <ul>
@@ -470,21 +479,21 @@ First, lets start with how the &#8220;Big Data&#8221; is defined:</p>
 <p>We took several months of data from a multi-axis CNC-controlled Lathe, and we looked at the different Alarms that occurred in this period. To keep the list manageable, we only looked at Alarms which had the severity level &#8220;Fault&#8221;.
 Here are the alarms that occurred during this period:</p>
 
-<p><img class="center" src="http://systeminsights.github.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmCount.png"></p>
+<p><img class="center" src="http://www.manufacturingbigdata.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmCount.png"></p>
 
-<p><img class="center" src="http://systeminsights.github.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDuration.png"></p>
+<p><img class="center" src="http://www.manufacturingbigdata.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDuration.png"></p>
 
 <p>We can see that the Chuck Barrier alarm occurred the most number of of times, but was not active the longest (that distinction went to the two Spindle-related alarms). To place these alarms in better light, we can look at the <code>ControllerMode</code> and <code>ExecutionStatus</code> when these alarms were active:</p>
 
-<p><img class="center" src="http://systeminsights.github.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDurationByExec.png"></p>
+<p><img class="center" src="http://www.manufacturingbigdata.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDurationByExec.png"></p>
 
-<p><img class="center" src="http://systeminsights.github.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDurationByMode.png"></p>
+<p><img class="center" src="http://www.manufacturingbigdata.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDurationByMode.png"></p>
 
 <p>We are most interested in Alarms that have stopped part production, so we can focus on those have have occurred when the <code>ExecutionStatus</code> was <code>STOPPED</code> or <code>INTERRUPTED</code>. Similarly, Alarms that occur when the Controller was in <code>Manual</code> or <code>MDI</code> mode are probably those which were a by-product of something a user was manually doing on the machine, so we can ignore those to focus on those that occurred when the mode was <code>AUTOMATIC</code>. With this filter, we can see for example that the <code>CHUCK BARRIER</code> alarm which occurred the most number of times, seems to have exclusively occurred when the ExecutionStatus was <code>READY</code> (implying that it was not interrupting program execution) and when the ControllerMode was <code>MANUAL</code> (implying that a user was manually operating the machine when the alarm fired). The two Spindle Alarms now look more interesting, since they occurred when the ExecutionStatus was <code>STOPPED</code>, and the ControllerMode was both <code>AUTOMATIC</code> and <code>MANUAL</code>. This can imply that this alarm did interrupt production, and that it led the the Mode being changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
 
 <p>We can dig one level deeper, and look at the combined state mapped by the <code>ControllerMode</code> and <code>ExecutionStatus</code>:</p>
 
-<p><img class="center" src="http://systeminsights.github.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDurationByState.png"></p>
+<p><img class="center" src="http://www.manufacturingbigdata.com/images/2011-12-28-Analyzing-MTConnect-Alarm-Data-AlarmDurationByState.png"></p>
 
 <p>This gives us even more clarity: we can see that two Spindle Alarms switched two states – between <code>STOPPED/AUTOMATIC</code> and <code>STOPPED/MANUAL</code>, further confirming that this Alarm did stop program execution, and that the mode changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
 
@@ -494,9 +503,9 @@ Here are the alarms that occurred during this period:</p>
   
   <entry>
     <title type="html"><![CDATA[What is Manufacturing Big Data?]]></title>
-    <link href="http://systeminsights.github.com/blog/2011/12/26/What-is-Manufacturing-Big-Data/"/>
+    <link href="http://www.manufacturingbigdata.com/blog/2011/12/26/What-is-Manufacturing-Big-Data/"/>
     <updated>2011-12-26T22:05:00+05:30</updated>
-    <id>http://systeminsights.github.com/blog/2011/12/26/What-is-Manufacturing-Big-Data</id>
+    <id>http://www.manufacturingbigdata.com/blog/2011/12/26/What-is-Manufacturing-Big-Data</id>
     <content type="html"><![CDATA[<p>Big Data has increasingly been in the <a href="http://www.nytimes.com/2011/12/26/technology/for-start-ups-sorting-the-data-cloud-is-the-next-big-thing.html?pagewanted=all">news</a>, and is being touted as a kind of universal panacea to improve efficiency, decrease costs, and make the world a better place. We like keeping the conversation a lot more focused, and this blog will focus on Big Data from the manufacturing shop floor: how to collect it and more importantly, what to make of it.</p>
 
 <p>What kind of data is available from the manufacturing shop floor? Here are some examples:</p>
