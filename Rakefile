@@ -379,6 +379,6 @@ end
 desc "Deploy website via s3cmd"
 task :s3 do
   puts "## Deploying website via s3cmd"
-  ok_failed system("s3cmd sync --acl-public --reduced-redundancy public/* s3://www.manufacturingbigdata.com/")
+  ok_failed system("s3cmd sync --acl-public --reduced-redundancy --cf-invalidate public/* s3://www.manufacturingbigdata.com/")
 end
 
