@@ -8,4 +8,4 @@ author: athulan
 ---
 We have finally migrated to Octopress from Google Blogger. Feels a lot better to write in Markdown than using Blogger's editor! The static content is being stored in an S3 bucket and served through AWS Cloudfront. 
 
-Thank you: [Jerome Bernard](http://www.jerome-bernard.com/blog/2011/08/20/quick-tip-for-easily-deploying-octopress-blog-on-amazon-cloudfront/), [Jacob Elder](http://blog.jacobelder.com/2012/03/octopress-and-cloudfront/), [Octopress](http://www.octopress.org), and [Github](www.github.com).
+Thank you: [Jerome Bernard](http://www.jerome-bernard.com/blog/2011/08/20/quick-tip-for-easily-deploying-octopress-blog-on-amazon-cloudfront/), [Jacob Elder](http://blog.jacobelder.com/2012/03/octopress-and-cloudfront/), [Octopress](http://www.octopress.org), and [Github](http://www.github.com).
