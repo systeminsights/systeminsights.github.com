@@ -4,7 +4,7 @@
   <title><![CDATA[Category: interns | Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/blog/categories/interns/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2012-06-13T08:35:07+05:30</updated>
+  <updated>2012-07-02T12:03:04+05:30</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -12,6 +12,129 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Monitoring MTConnect Streams: MTConnect Graphr]]></title>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr/"/>
+    <updated>2012-07-02T11:15:00+05:30</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr</id>
+    <content type="html"><![CDATA[<p>A few months back I took up the fun task of exploring MTConnect streams and the amazing possibilities which it presented to a developer. That culminated into a web base monitoring app, MTConnect Graphr, which can now be downloaded from <a href="http://github.com/princearora/mtconnect-graphr">Github</a>. In this post I'll run down through the development process of the same.</p>
+
+<p>The web scene has changed remarkably in a past few years. Web applications are expected to be compatible to smartphones and tablets. They are supposed to be clean and responsive. This requirement was enough to persuade me to use <a href="http://twitter.github.com/bootstrap/">Bootstrap by Twitter</a> as the basic framework for the app. It is tiny, expandable and has good documentation to get you started.</p>
+
+<p>Coming to the implementation, the first task was to dynamically connect to the XML stream provided by the MTConnect Agent. Though it sounds pretty easy, the task becomes a bit tricky because it requires a recurring connection with external urls. The easiest way out of this situation is to implement a PHP proxy. For this we write a PHP loader script, and then use it every time we need to connect to an external host.</p>
+
+<pre><code>header('Content-type: application/xml'); //specififying the return content type
+$q = $_GET['url'];
+  handle = fopen($q, "r");              //connecting to the url
+if ($handle) {                          
+    while (!feof($handle)) {
+        $buffer = fgets($handle, 4096);
+        echo $buffer;                  //reading and returning content
+    }
+    fclose($handle);
+}
+</code></pre>
+
+<p>That sums up our <code>loader.php</code>. Next all we need to do is to write a simple function to load the XML file via the proxy.</p>
+
+<pre><code>function getCurrentXML(conn_url) {              //function to retrieve a xml file 
+    var n = "";
+    return $.ajax({
+        url: "loader.php?url=http://"+conn_url, //using the proxy
+        cache: !1,
+        async: !1,
+        dataType: "txt",
+        success: function (t) {
+            n = t
+        }
+    }), n
+}
+</code></pre>
+
+<p>Once we have access to the XML stream, there are a plethora of tools available to parse and get data out of it. I chose to use a combination of jQuery and JSON for the job. The xml2json plugin available <a href="http://www.fyneworks.com/jquery/xml-to-json/">here</a> provided an easy conversion to JSON.</p>
+
+<pre><code>var xmldata = getCurrentXML(conn_url),
+    i = $.xml2json(xmldata);
+</code></pre>
+
+<p>With JSON, life is easy. It can't be any simpler to parse data than it is with JSON. All I did was to write regular funtions to parse conditions and device parameters. But there is a catch. Not all XML tags will be meaningful and to make them appear right, we need to write individual functions for each of them. Here I will explain the working of the function used to parse the conditions for all parameters.</p>
+
+<pre><code>this.getCondition = function (n) {
+  var r=new Object();
+  r.type= new Array(),r.value=new Array();
+  var count=0;
+  for (var t = 0; t &lt; n.ComponentStream.length; t++) {
+    var i = n.ComponentStream[t],
+        u = i.name;
+    if (i.Condition)
+    {
+      var v = i.Condition;
+      if(v.Normal){ if(v.Normal.length&gt;1){
+        for(var f =0; f &lt; v.Normal.length; f++)
+        {
+          r.type[count] =  u+' '+v.Normal[f].type;
+          r.value[count++] = "Normal"
+        }}
+      else{
+          r.type[count] =  u+' '+v.Normal.type;
+          r.value[count++] = "Normal"}
+        }
+      ..........
+      //similarly for other conditions 
+     }r.len=count;
+   }
+       return r 
+},
+</code></pre>
+
+<p>Though this takes away the reusability of the script, the data displayed turns out to be easier to comprehend.</p>
+
+<p>With all these pieces in place, a simple requirement is to refresh the input from the MTC stream every few milliseconds. A recursive function with delay takes care of that</p>
+
+<pre><code>var updateFromMTC = function(){
+.....
+  setTimeout('updateFromMTC("'+conn_url+'")' , 1000);
+.....
+}
+</code></pre>
+
+<p>The task we confront next is to display it elegantly. That is taken care by using power of HTML5. The devices in the stream are populated at the top of the page with the color of each dependent on the availability of the device. To display all the parameters we use two empty divs, in which the parameters and the conditions are populated using a javascript user function.</p>
+
+<pre><code>&lt;div class="container" id='SelStats' position='absolute'"&gt;
+  &lt;div id='conditions' position='absolute'&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+var updateSelected = function(){
+ if(thePage.ActiveShape){
+   var selShp = thePage.ActiveShape;
+    var SelDisplay = document.getElementById('SelStats');
+    if(SelDisplay &amp;&amp; selShp){
+     if(selShp.deviceName != ''){
+        $(SelDisplay).empty();
+        $(SelDisplay).append('&lt;b&gt;Machine:&lt;/b&gt;' + selShp.text);
+        ......
+</code></pre>
+
+<p>So, this completes the basic task of monitoring an MTConnect stream. Next we need to plot it. There are some really advanced open source scripts out there to assist plotting data, but for this particular task <a href="http://smoothiecharts.org/">Smoothie Charts</a> seemed a perfect fit to me. It is a really small charting library designed for live streaming data. Integration with the existing code was easy. A few more lines to the code, and it plots like a charm.</p>
+
+<pre><code>var smoothie = new SmoothieChart();
+  smoothie.streamTo(document.getElementById("mycanvas") 3000 /*delay*/);
+var line1 = new TimeSeries();
+  setInterval(function() {line1.append(new Date().getTime(), math.random());}, 3000 /*delay*/);
+</code></pre>
+
+<p>Finally, we need to add an emergency alarm light for the parameter being monitored. A slick form to enter the maximum/minimum value, and a basic function to compare instantaneous values are enough to pull it off. With the div being populated dynamically every few seconds, we need to save some info in a cookie which is made easy by the <a href="https://github.com/carhartl/jquery-cookie/">jQuery-cookie</a> plugin.</p>
+
+<div style="text-align: center;">
+<img src="http://www.manufacturingbigdata.com/images/graphr-1.jpg" width=360 height=600 /> <img src="http://www.manufacturingbigdata.com/images/graphr-2.jpg" width=360 height=600 /> </div>
+
+
+<p>I guess that's it. The app is ready to roll. I checked it out locally on a PC, iPOD touch and an android device. Seems to be working fine for me. Let me know if any of you notice anything off about it.</p>
+
+<p>PS: Please ensure that the application is run on a PHP server. Otherwise the application will fail to connect to the stream and all you will see is a white blank page. I'd recommend WAMP/LAMP for users trying it on their personal PCs.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Setting up a MTConnect Agent on a Linux (Ubuntu) machine]]></title>

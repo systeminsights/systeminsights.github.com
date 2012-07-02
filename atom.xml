@@ -4,7 +4,7 @@
   <title><![CDATA[Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2012-06-13T08:35:07+05:30</updated>
+  <updated>2012-07-02T12:03:04+05:30</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -14,11 +14,290 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Monitoring MTConnect Streams: MTConnect Graphr]]></title>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr/"/>
+    <updated>2012-07-02T11:15:00+05:30</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr</id>
+    <content type="html"><![CDATA[<p>A few months back I took up the fun task of exploring MTConnect streams and the amazing possibilities which it presented to a developer. That culminated into a web base monitoring app, MTConnect Graphr, which can now be downloaded from <a href="http://github.com/princearora/mtconnect-graphr">Github</a>. In this post I&#8217;ll run down through the development process of the same.</p>
+
+<p>The web scene has changed remarkably in a past few years. Web applications are expected to be compatible to smartphones and tablets. They are supposed to be clean and responsive. This requirement was enough to persuade me to use <a href="http://twitter.github.com/bootstrap/">Bootstrap by Twitter</a> as the basic framework for the app. It is tiny, expandable and has good documentation to get you started.</p>
+
+<p>Coming to the implementation, the first task was to dynamically connect to the XML stream provided by the MTConnect Agent. Though it sounds pretty easy, the task becomes a bit tricky because it requires a recurring connection with external urls. The easiest way out of this situation is to implement a PHP proxy. For this we write a PHP loader script, and then use it every time we need to connect to an external host.</p>
+
+<pre><code>header('Content-type: application/xml'); //specififying the return content type
+$q = $_GET['url'];
+  handle = fopen($q, "r");              //connecting to the url
+if ($handle) {                          
+    while (!feof($handle)) {
+        $buffer = fgets($handle, 4096);
+        echo $buffer;                  //reading and returning content
+    }
+    fclose($handle);
+}
+</code></pre>
+
+<p>That sums up our <code>loader.php</code>. Next all we need to do is to write a simple function to load the XML file via the proxy.</p>
+
+<pre><code>function getCurrentXML(conn_url) {              //function to retrieve a xml file 
+    var n = "";
+    return $.ajax({
+        url: "loader.php?url=http://"+conn_url, //using the proxy
+        cache: !1,
+        async: !1,
+        dataType: "txt",
+        success: function (t) {
+            n = t
+        }
+    }), n
+}
+</code></pre>
+
+<p>Once we have access to the XML stream, there are a plethora of tools available to parse and get data out of it. I chose to use a combination of jQuery and JSON for the job. The xml2json plugin available <a href="http://www.fyneworks.com/jquery/xml-to-json/">here</a> provided an easy conversion to JSON.</p>
+
+<pre><code>var xmldata = getCurrentXML(conn_url),
+    i = $.xml2json(xmldata);
+</code></pre>
+
+<p>With JSON, life is easy. It can&#8217;t be any simpler to parse data than it is with JSON. All I did was to write regular funtions to parse conditions and device parameters. But there is a catch. Not all XML tags will be meaningful and to make them appear right, we need to write individual functions for each of them. Here I will explain the working of the function used to parse the conditions for all parameters.</p>
+
+<pre><code>this.getCondition = function (n) {
+  var r=new Object();
+  r.type= new Array(),r.value=new Array();
+  var count=0;
+  for (var t = 0; t &lt; n.ComponentStream.length; t++) {
+    var i = n.ComponentStream[t],
+        u = i.name;
+    if (i.Condition)
+    {
+      var v = i.Condition;
+      if(v.Normal){ if(v.Normal.length&gt;1){
+        for(var f =0; f &lt; v.Normal.length; f++)
+        {
+          r.type[count] =  u+' '+v.Normal[f].type;
+          r.value[count++] = "Normal"
+        }}
+      else{
+          r.type[count] =  u+' '+v.Normal.type;
+          r.value[count++] = "Normal"}
+        }
+      ..........
+      //similarly for other conditions 
+     }r.len=count;
+   }
+       return r 
+},
+</code></pre>
+
+<p>Though this takes away the reusability of the script, the data displayed turns out to be easier to comprehend.</p>
+
+<p>With all these pieces in place, a simple requirement is to refresh the input from the MTC stream every few milliseconds. A recursive function with delay takes care of that</p>
+
+<pre><code>var updateFromMTC = function(){
+.....
+  setTimeout('updateFromMTC("'+conn_url+'")' , 1000);
+.....
+}
+</code></pre>
+
+<p>The task we confront next is to display it elegantly. That is taken care by using power of HTML5. The devices in the stream are populated at the top of the page with the color of each dependent on the availability of the device. To display all the parameters we use two empty divs, in which the parameters and the conditions are populated using a javascript user function.</p>
+
+<pre><code>&lt;div class="container" id='SelStats' position='absolute'"&gt;
+  &lt;div id='conditions' position='absolute'&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+var updateSelected = function(){
+ if(thePage.ActiveShape){
+   var selShp = thePage.ActiveShape;
+    var SelDisplay = document.getElementById('SelStats');
+    if(SelDisplay &amp;&amp; selShp){
+     if(selShp.deviceName != ''){
+        $(SelDisplay).empty();
+        $(SelDisplay).append('&lt;b&gt;Machine:&lt;/b&gt;' + selShp.text);
+        ......
+</code></pre>
+
+<p>So, this completes the basic task of monitoring an MTConnect stream. Next we need to plot it. There are some really advanced open source scripts out there to assist plotting data, but for this particular task <a href="http://smoothiecharts.org/">Smoothie Charts</a> seemed a perfect fit to me. It is a really small charting library designed for live streaming data. Integration with the existing code was easy. A few more lines to the code, and it plots like a charm.</p>
+
+<pre><code>var smoothie = new SmoothieChart();
+  smoothie.streamTo(document.getElementById("mycanvas") 3000 /*delay*/);
+var line1 = new TimeSeries();
+  setInterval(function() {line1.append(new Date().getTime(), math.random());}, 3000 /*delay*/);
+</code></pre>
+
+<p>Finally, we need to add an emergency alarm light for the parameter being monitored. A slick form to enter the maximum/minimum value, and a basic function to compare instantaneous values are enough to pull it off. With the div being populated dynamically every few seconds, we need to save some info in a cookie which is made easy by the <a href="https://github.com/carhartl/jquery-cookie/">jQuery-cookie</a> plugin.</p>
+
+<div style="text-align: center;">
+<img src="http://www.manufacturingbigdata.com/images/graphr-1.jpg" width=360 height=600 /> <img src="http://www.manufacturingbigdata.com/images/graphr-2.jpg" width=360 height=600 /> </div>
+
+
+<p>I guess that&#8217;s it. The app is ready to roll. I checked it out locally on a PC, iPOD touch and an android device. Seems to be working fine for me. Let me know if any of you notice anything off about it.</p>
+
+<p>PS: Please ensure that the application is run on a PHP server. Otherwise the application will fail to connect to the stream and all you will see is a white blank page. I&#8217;d recommend WAMP/LAMP for users trying it on their personal PCs.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Energy Regulations in Tamil Nadu, India]]></title>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/06/22/tneb-regulations/"/>
+    <updated>2012-06-22T17:35:00+05:30</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2012/06/22/tneb-regulations</id>
+    <content type="html"><![CDATA[<h2>Introduction</h2>
+
+<p>TNEB had revised the electricity tariff for the year 2012-13. The new tariff order is applicable from 01 April 2012.</p>
+
+<h2>The Tariff</h2>
+
+<p>The Tariff for Industrial Consumers (HT1A) is as follows:</p>
+
+<h3>Basic Charges</h3>
+
+<ul>
+<li>Demand Charges &#8211; INR 30  0 / kVA / month</li>
+<li>Energy Charges &#8211; INR 5.50 / kWh</li>
+</ul>
+
+
+<h3>Restrictions and Surchages</h3>
+
+<h4>Power Factor:</h4>
+
+<ul>
+<li>Power Factor => 0.9 &#8211; No Surcharge</li>
+<li>0.9 > Power Factor => 0.85    &#8211; 1% of Current Consumption Charges for every 0.01 reduction in PF from 0.9</li>
+<li>0.85 > Power Factor => 0.75 &#8211; 1.5% of Current Consumption Charges for every 0.01 reduction in PF from 0.9</li>
+<li>Power Factor &lt; 0.75 &#8211; 2% of Current Consumption Charges for every 0.01 reduction in PF from 0.9</li>
+</ul>
+
+
+<h4>Billable Demand:</h4>
+
+<ul>
+<li>Demand Charges will levied on Maximum Demand that has actually been registered for the month or 90% of the Sanctioned Demand whichever is higher.</li>
+</ul>
+
+
+<h4>Peak Hour Demand:</h4>
+
+<ul>
+<li>HT Industrial Consumers shall be billed 20% extra on the Energy Charges for the Energy recorded during the Peak hours</li>
+<li>Duration of Peak hours will be 6:00am to 9:00am &amp; 6:00pm to 9:00pm</li>
+</ul>
+
+
+<h4>Night Hour:</h4>
+
+<ul>
+<li>HT Industrial Consumers will get a reduction of 5% on the Energy Charges for the Energy recorded during the Night hours</li>
+<li>Duration of Night hour will be 10:00pm to 5:00am</li>
+</ul>
+
+
+<h4>Demand Integration Period:</h4>
+
+<ul>
+<li>Maximum Demand Integration period will be 15minutes</li>
+</ul>
+
+
+<h4>Harmonics:</h4>
+
+<ul>
+<li>Total Voltage Harmonic Distortion should not exceed 5%</li>
+<li>Total Current Harmonic Distortion should not exceed 8%</li>
+<li>If the harmonics level are not within the limits, then the consumer has to pay 15% of respective tariff as Compensation</li>
+</ul>
+
+
+<h2>Power Scenario in the State</h2>
+
+<p>If we have detailed look into Tamilnadu Energy Scenario, the State has a Present Installed Capacity of 10,364.5 MW &amp; the Average Power Availability is about 8500 MW. The Demand Ranges from 11,500 MW to 12,500 MW which gives a clear indication that the state has a shortage of power to the tune of 3000 to 4000 MW. Moreover if we see the growth of consumers, it keeps increasing at a rate of 5% every year. Thus it makes us clear that the issue of Power shortage in the state will not be solved in the near future.</p>
+
+<h3>Power Shortage Mitigation Measures:</h3>
+
+<p>To mitigate the power shortages the electricity board has adopted Stricter Restriction &amp; Control measures for the consumers which includes:</p>
+
+<ul>
+<li>40% cut on Demand &amp; Energy for HT Industrial and Commercial Services</li>
+<li>Load shedding of 2 hrs in Chennai &amp; its suburbs</li>
+<li>Load shedding of 4 hrs in other Urban &amp; Rural areas</li>
+<li>10% of Power supply during Peak hours for Industrial &amp; Commercial Services</li>
+<li>Power Holiday for all HT &amp; LT consumers</li>
+</ul>
+
+
+<p>These restrictions may be relaxed based on the power availability. Despite this, the HT consumers allowed to make power purchase to Inter &amp; Intra State Open Access as a part of Demand Side Management Measure by Electricity Board.</p>
+
+<p>Need of the Hour:</p>
+
+<p>Increasing Energy &amp; Fuel prices, Stringent Regulations from Electricity Board, Uncertain Pricing in Power Purchases, builds up a greater pressure on the consumers to maintain their Energy Costs within limits. This demands the consumer to have an Energy Action Plan and use Energy in an Effective way to Enhance Competitiveness &amp; Maximize profits.</p>
+
+<p>Consumers can consider some of the below mentioned measures as a part of their Energy Action Plan:</p>
+
+<p>Immediate: (To Meet Power Shortage)</p>
+
+<p>Power Purchase through Inter &amp; Intra-State Open Access</p>
+
+<p>Conduct a Walk-through Energy Audit</p>
+
+<p>Identify &amp; Implement low hanging Energy Saving projects which includes Power Factor Improvement, Reducing/Avoiding Idle Power Consumption of Equipment, Replacing/Avoiding use of inefficient equipment, Reducing
+Air Compressor Leaks</p>
+
+<p>Ensure purchase of Energy Efficient Equipment</p>
+
+<p>Short Term: (To Ensure Efficient Energy Use)</p>
+
+<p>Develop an Energy Management Plan</p>
+
+<p>Initiate Energy Monitoring in the Plant/Facility. Energy Monitoring can be broadly classified into,</p>
+
+<p>Supply Side Energy Monitoring</p>
+
+<p>Enable understanding of Overall Energy Consumption &amp; Costs</p>
+
+<p>Provide an overview about Demand Profile</p>
+
+<p>Help in identifying efficiency improvement projects of the supply side</p>
+
+<p>Enable conscious &amp; effective decision on Power Purchase</p>
+
+<p>Demand Side Energy Monitoring</p>
+
+<p>Provide break-up of Energy Consumption</p>
+
+<p>Provide Insight about reasons for Peak Demand Shooting</p>
+
+<p>Determine the losses in Distribution System</p>
+
+<p>Enable identifying key areas of Energy Wastage</p>
+
+<p>Facilitates cost justification for Energy Saving Projects</p>
+
+<p>Track the progress of projects implemented</p>
+
+<p>Conduct a Energy Audit to identify potential opportunities for Energy Savings</p>
+
+<p>Explore the options for use of systems like Waste heat recovery, Solar Hot Water Generation, Solar Street Lighting</p>
+
+<p>Long Term: (To Ensure Energy Sustainability)</p>
+
+<p>Increase the share of Renewable Energy Sources. Explore the options for Captive Power Generation through Solar, Wind &amp; other non-conventional sources</p>
+
+<p>Adopt latest &amp; Energy Efficient technology Wherever Possible</p>
+
+<p>Benchmark Energy Consumption &amp; Target Specific Energy Reduction</p>
+
+<p>To conclude, when it comes Energy Conservation &amp; Energy Sustainability it all starts with awareness..Be Aware!! Save Energy!!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Octopress + S3 + Cloudfront]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/06/13/s3/"/>
     <updated>2012-06-13T07:03:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/06/13/s3</id>
     <content type="html"><![CDATA[<p>We have finally migrated to Octopress from Google Blogger. Feels a lot better to write in Markdown than using Blogger&#8217;s editor! The static content is being stored in an S3 bucket and served through AWS Cloudfront.</p>
+
+<p>Thank you: <a href="http://www.jerome-bernard.com/blog/2011/08/20/quick-tip-for-easily-deploying-octopress-blog-on-amazon-cloudfront/">Jerome Bernard</a>, <a href="http://blog.jacobelder.com/2012/03/octopress-and-cloudfront/">Jacob Elder</a>, <a href="http://www.octopress.org">Octopress</a>, and <a href="http://www.github.com">Github</a>.</p>
 ]]></content>
   </entry>
   
@@ -498,36 +777,6 @@ Here are the alarms that occurred during this period:</p>
 <p>This gives us even more clarity: we can see that two Spindle Alarms switched two states – between <code>STOPPED/AUTOMATIC</code> and <code>STOPPED/MANUAL</code>, further confirming that this Alarm did stop program execution, and that the mode changed from <code>AUTOMATIC</code> to <code>MANUAL</code>.</p>
 
 <p>Given the lack of clarity in alarm data, looking at the <code>ControllerMode</code> and <code>ExecutionStatus</code> gives us a better understanding of Alarms that can have an impact on Production. In vimana, we filter Alarms based on the <code>ControllerMode</code> and <code>ExecutionStatus</code> so that we can filter and look at only those that interrupt Production. We also look at temporal patterns between alarms, so that the ordering of alarms can be studied to better understand the phenomena they are describing. Downtimes are classified based on these characteristics of alarms. These will be discussed in this blog in an upcoming post.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[What is Manufacturing Big Data?]]></title>
-    <link href="http://www.manufacturingbigdata.com/blog/2011/12/26/What-is-Manufacturing-Big-Data/"/>
-    <updated>2011-12-26T22:05:00+05:30</updated>
-    <id>http://www.manufacturingbigdata.com/blog/2011/12/26/What-is-Manufacturing-Big-Data</id>
-    <content type="html"><![CDATA[<p>Big Data has increasingly been in the <a href="http://www.nytimes.com/2011/12/26/technology/for-start-ups-sorting-the-data-cloud-is-the-next-big-thing.html?pagewanted=all">news</a>, and is being touted as a kind of universal panacea to improve efficiency, decrease costs, and make the world a better place. We like keeping the conversation a lot more focused, and this blog will focus on Big Data from the manufacturing shop floor: how to collect it and more importantly, what to make of it.</p>
-
-<p>What kind of data is available from the manufacturing shop floor? Here are some examples:</p>
-
-<ul>
-<li>Operational: Device uptime, downtime, modes, states</li>
-<li>Diagnostic: Alarms, warnings, messages, notifications</li>
-<li>Process: Positions, velocities, acceleration, flow rates</li>
-<li>Environmental: Resource usage, energy consumption, effluents and emissions</li>
-</ul>
-
-
-<p>So, what can we do with Manufacturing Big Data?</p>
-
-<ul>
-<li>Preventive Maintenance: Big Data can help us identify which devices are going to be fail by comparing their current operational patterns with past failure behavior. By mining across data from similar devices, we can even predict the failure of devices that have not failed in the past.</li>
-<li>Part genealogy: Big Data can be used to build detailed genealogical models of complex parts, bringing together data on device operational states, process parameters, and machine health.</li>
-<li>Design-to-manufacturing pipeline: Big Data can improve design decisions by enabling the use of manufacturing operational and diagnostic data to the design phase.</li>
-</ul>
-
-
-<p>At System Insights we apply Big Data to improve the efficiency and productivity of complex manufacturing systems. Our vimana software application is the first of its kind solution for the high speed collection, storage, and analysis of data from the manufacturing shop floor.</p>
 ]]></content>
   </entry>
   

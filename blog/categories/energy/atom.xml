@@ -4,7 +4,7 @@
   <title><![CDATA[Category: energy | Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/blog/categories/energy/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2012-06-13T08:35:07+05:30</updated>
+  <updated>2012-07-02T12:03:04+05:30</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -12,6 +12,160 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Energy Regulations in Tamil Nadu, India]]></title>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/06/22/tneb-regulations/"/>
+    <updated>2012-06-22T17:35:00+05:30</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2012/06/22/tneb-regulations</id>
+    <content type="html"><![CDATA[<h2>Introduction</h2>
+
+<p>TNEB had revised the electricity tariff for the year 2012-13. The new tariff order is applicable from 01 April 2012.</p>
+
+<h2>The Tariff</h2>
+
+<p>The Tariff for Industrial Consumers (HT1A) is as follows:</p>
+
+<h3>Basic Charges</h3>
+
+<ul>
+<li>Demand Charges -- INR 30  0 / kVA / month</li>
+<li>Energy Charges -- INR 5.50 / kWh</li>
+</ul>
+
+
+<h3>Restrictions and Surchages</h3>
+
+<h4>Power Factor:</h4>
+
+<ul>
+<li>Power Factor => 0.9 -- No Surcharge</li>
+<li>0.9 > Power Factor => 0.85    -- 1% of Current Consumption Charges for every 0.01 reduction in PF from 0.9</li>
+<li>0.85 > Power Factor => 0.75 -- 1.5% of Current Consumption Charges for every 0.01 reduction in PF from 0.9</li>
+<li>Power Factor &lt; 0.75 -- 2% of Current Consumption Charges for every 0.01 reduction in PF from 0.9</li>
+</ul>
+
+
+<h4>Billable Demand:</h4>
+
+<ul>
+<li>Demand Charges will levied on Maximum Demand that has actually been registered for the month or 90% of the Sanctioned Demand whichever is higher.</li>
+</ul>
+
+
+<h4>Peak Hour Demand:</h4>
+
+<ul>
+<li>HT Industrial Consumers shall be billed 20% extra on the Energy Charges for the Energy recorded during the Peak hours</li>
+<li>Duration of Peak hours will be 6:00am to 9:00am &amp; 6:00pm to 9:00pm</li>
+</ul>
+
+
+<h4>Night Hour:</h4>
+
+<ul>
+<li>HT Industrial Consumers will get a reduction of 5% on the Energy Charges for the Energy recorded during the Night hours</li>
+<li>Duration of Night hour will be 10:00pm to 5:00am</li>
+</ul>
+
+
+<h4>Demand Integration Period:</h4>
+
+<ul>
+<li>Maximum Demand Integration period will be 15minutes</li>
+</ul>
+
+
+<h4>Harmonics:</h4>
+
+<ul>
+<li>Total Voltage Harmonic Distortion should not exceed 5%</li>
+<li>Total Current Harmonic Distortion should not exceed 8%</li>
+<li>If the harmonics level are not within the limits, then the consumer has to pay 15% of respective tariff as Compensation</li>
+</ul>
+
+
+<h2>Power Scenario in the State</h2>
+
+<p>If we have detailed look into Tamilnadu Energy Scenario, the State has a Present Installed Capacity of 10,364.5 MW &amp; the Average Power Availability is about 8500 MW. The Demand Ranges from 11,500 MW to 12,500 MW which gives a clear indication that the state has a shortage of power to the tune of 3000 to 4000 MW. Moreover if we see the growth of consumers, it keeps increasing at a rate of 5% every year. Thus it makes us clear that the issue of Power shortage in the state will not be solved in the near future.</p>
+
+<h3>Power Shortage Mitigation Measures:</h3>
+
+<p>To mitigate the power shortages the electricity board has adopted Stricter Restriction &amp; Control measures for the consumers which includes:</p>
+
+<ul>
+<li>40% cut on Demand &amp; Energy for HT Industrial and Commercial Services</li>
+<li>Load shedding of 2 hrs in Chennai &amp; its suburbs</li>
+<li>Load shedding of 4 hrs in other Urban &amp; Rural areas</li>
+<li>10% of Power supply during Peak hours for Industrial &amp; Commercial Services</li>
+<li>Power Holiday for all HT &amp; LT consumers</li>
+</ul>
+
+
+<p>These restrictions may be relaxed based on the power availability. Despite this, the HT consumers allowed to make power purchase to Inter &amp; Intra State Open Access as a part of Demand Side Management Measure by Electricity Board.</p>
+
+<p>Need of the Hour:</p>
+
+<p>Increasing Energy &amp; Fuel prices, Stringent Regulations from Electricity Board, Uncertain Pricing in Power Purchases, builds up a greater pressure on the consumers to maintain their Energy Costs within limits. This demands the consumer to have an Energy Action Plan and use Energy in an Effective way to Enhance Competitiveness &amp; Maximize profits.</p>
+
+<p>Consumers can consider some of the below mentioned measures as a part of their Energy Action Plan:</p>
+
+<p>Immediate: (To Meet Power Shortage)</p>
+
+<p>Power Purchase through Inter &amp; Intra-State Open Access</p>
+
+<p>Conduct a Walk-through Energy Audit</p>
+
+<p>Identify &amp; Implement low hanging Energy Saving projects which includes Power Factor Improvement, Reducing/Avoiding Idle Power Consumption of Equipment, Replacing/Avoiding use of inefficient equipment, Reducing
+Air Compressor Leaks</p>
+
+<p>Ensure purchase of Energy Efficient Equipment</p>
+
+<p>Short Term: (To Ensure Efficient Energy Use)</p>
+
+<p>Develop an Energy Management Plan</p>
+
+<p>Initiate Energy Monitoring in the Plant/Facility. Energy Monitoring can be broadly classified into,</p>
+
+<p>Supply Side Energy Monitoring</p>
+
+<p>Enable understanding of Overall Energy Consumption &amp; Costs</p>
+
+<p>Provide an overview about Demand Profile</p>
+
+<p>Help in identifying efficiency improvement projects of the supply side</p>
+
+<p>Enable conscious &amp; effective decision on Power Purchase</p>
+
+<p>Demand Side Energy Monitoring</p>
+
+<p>Provide break-up of Energy Consumption</p>
+
+<p>Provide Insight about reasons for Peak Demand Shooting</p>
+
+<p>Determine the losses in Distribution System</p>
+
+<p>Enable identifying key areas of Energy Wastage</p>
+
+<p>Facilitates cost justification for Energy Saving Projects</p>
+
+<p>Track the progress of projects implemented</p>
+
+<p>Conduct a Energy Audit to identify potential opportunities for Energy Savings</p>
+
+<p>Explore the options for use of systems like Waste heat recovery, Solar Hot Water Generation, Solar Street Lighting</p>
+
+<p>Long Term: (To Ensure Energy Sustainability)</p>
+
+<p>Increase the share of Renewable Energy Sources. Explore the options for Captive Power Generation through Solar, Wind &amp; other non-conventional sources</p>
+
+<p>Adopt latest &amp; Energy Efficient technology Wherever Possible</p>
+
+<p>Benchmark Energy Consumption &amp; Target Specific Energy Reduction</p>
+
+<p>To conclude, when it comes Energy Conservation &amp; Energy Sustainability it all starts with awareness..Be Aware!! Save Energy!!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[BEC Article in Livebetter Magazine]]></title>
