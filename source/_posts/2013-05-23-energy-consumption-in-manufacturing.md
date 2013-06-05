@@ -7,7 +7,7 @@ categories: energy
 author: athulan
 ---
 
-Jesus Nieto Gonzalez from the UC Berkeley Haas School of Business Class of 2014 worked with us on a research project to identify the top energy consumers in the manufacturing sector. Here are some of his findings:
+[Jesus Nieto Gonzalez](http://www.linkedin.com/pub/jesús-nieto-gonzález/30/a92/943/) from the UC Berkeley Haas School of Business Class of 2014 worked with us on a research project to identify the top energy consumers in the manufacturing sector. Here are some of his findings:
 
 - The top five energy-intensive industries are Paper, Petroleum and Coal products, Nonmetallic Mineral Products, Chemicals, and Primary Metals (measured based on BTU/$ output)
 - The paper industry has the highest electricity consumption as well, followed by Primary Metals and Textile Mills (measured based on kWH/$)
