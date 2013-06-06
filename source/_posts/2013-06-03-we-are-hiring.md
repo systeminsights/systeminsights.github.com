@@ -30,5 +30,14 @@ You will be responsible for developing the cutting-edge software technologies th
 - Experience in using testing frameworks and unit tests
 - Excellent communication skills
 
+**R&D Engineer**
+
+You will join our R&D team to develop next-generation technology for manufacturing data analytics, this includes: data analytics, software development, and hardware engineering. 
+
+- Fresher/recent graduate with strong academics
+- Experience with technical programming languages like Matlab or R
+- Good project experience
+- Excellent communication skills
+
 If you are interested, please fill out [this application](http://systeminsights.wufoo.com/forms/z7x4m1/) (don't forget to attach your resume!).
 
