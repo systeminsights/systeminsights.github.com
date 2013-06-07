@@ -30,6 +30,16 @@ You will be responsible for developing the cutting-edge software technologies th
 - Experience in using testing frameworks and unit tests
 - Excellent communication skills
 
+**Dev-Ops Lead**
+
+You will be responsible for monitoring, managing, and maintaining the vimana platform for SaaS and on-site deployments. You will be responsible for building and growing a team of System Administrators and DevOps Engineers to maintain the vimana platform. You will be working closely with our development team based in Berkeley, California. 
+
+- Strong experience in deploying, configuring and managing applications using Amazon AWS (EC2, S3, RDS, EMR ...)
+- Skills in mongodb and SQL: Replication, sharding, tuning
+- Experience in application monitoring and log file management for multi-function, multi-tenant applications
+- System administration skills for Linux (Ubuntu, Centos) and Windows
+- Lead and work with a 24x7 distributed global team
+
 **R&D Engineer**
 
 You will join our R&D team to develop next-generation technology for manufacturing data analytics, this includes: data analytics, software development, and hardware engineering. 
