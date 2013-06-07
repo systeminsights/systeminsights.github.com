@@ -108,8 +108,8 @@ For now, we'll conclude this example by taking a much smaller sampling period, w
 97% in the regions between spikes -- not too shabby!
 
 We see several interesting things happening here:
-+ In regions between spikes, the reported and computed feedrates correlate well.
-+ While the reported feedrate maintains a particular plateau value for a while, the computed feedrate shows minor fluctuations. Interestingly, using the same position data as in this example, it is possible to see that feedrate fluctuates (usually, the reported is higher), just before the tool takes a sharp turn.
-+ Also, when there's a change in the plateau value, the computed feedrate always lags for a datapoint or two before reaching the reported value, as one would expect from a real world machine.
+* In regions between spikes, the reported and computed feedrates correlate well.
+* While the reported feedrate maintains a particular plateau value for a while, the computed feedrate shows minor fluctuations. Interestingly, using the same position data as in this example, it is possible to see that feedrate fluctuates (usually, the reported is higher), just before the tool takes a sharp turn.
+* Also, when there's a change in the plateau value, the computed feedrate always lags for a datapoint or two before reaching the reported value, as one would expect from a real world machine.
 
 That's about it, I suppose! This concludes our trivial example using the vrtk package. Be sure to check out the github page and the documentation for further details and the source-code.
