@@ -36,6 +36,8 @@ You will be responsible for monitoring, managing, and maintaining the vimana pla
 
 - Strong experience in deploying, configuring and managing applications using Amazon AWS (EC2, S3, RDS, EMR ...)
 - Skills in mongodb and SQL: Replication, sharding, tuning
+- Experience with Chef or other configuration management tool 
+- Basic understanding of network topologies and configuration (routing, subnets, NAT).
 - Experience in application monitoring and log file management for multi-function, multi-tenant applications
 - System administration skills for Linux (Ubuntu, Centos) and Windows
 - Lead and work with a 24x7 distributed global team
