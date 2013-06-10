@@ -1,0 +1,767 @@
+---
+layout: post
+title: "MTConnect ROS-I Robot CNC Integration"
+date: 2013-06-07 23:38
+comments: true
+categories: ros-i mtconnect robot
+author: Will Sobel
+---
+
+{% raw %}
+  <style type="text/css">
+    ol { margin-left: 2.5em; } 
+    article blockquote { font-size: 1em; }
+  </style>
+{% endraw %}
+
+h2. Robotic Interface – Machine Tool Perspective
+
+bq. This work was conducted under Grant Opportunity Number
+2012-NIST-MSE-01 for the Intelligent System Division of the National
+Institute of Standards and Technology (NIST) with the collaboration of
+SwRI (Southwest Research Institute), NCDMM (National Center for
+Defense Manufacturing and Machining), AMT (Association for
+Manufacturing Techknology) and Mazak USA for help with connectivity of
+the machine tool used in the demonstration.
+
+div=. <iframe src="https://docs.google.com/a/systeminsights.com/file/d/0B3fQZcJeBjGOekNuZzJQMm1IeEU/preview" width="640" height="385"></iframe>
+
+p. <br/>
+
+From the machine tool perspective, the Robot is an external entity
+that loads and unloads material into and from its work-holding. This
+function can be carried out by a person, a robot, a mobile material
+handler, an operator, or a highly trained golden retriever. The
+machine does not care how the material is supplied, just that the task
+has been completed so it can start its cutting cycle.
+
+The innovation in the MTConnect interface is the ability to abstract
+the task being performed from the underlying implementation necessary
+to complete the task. To load material into a machine tool, the robot
+has to have knowledge of the location of the work-holding and the
+necessary approach angles as well as any collision domains within the
+machine enclosure. From the machine tools perspective, this is all
+inconsequencial as long as it gets its material.
+
+Once complete, the machine tool needs to be able to ask for the
+material to be removed. This is also accomplished at the higher level
+by requesting the material get unloaded. At that point, the machine
+tool does not care where the material is going; it only needs to
+request another piece of material for subsequent processing. It is up
+to the Robot sequence the material to the next station.
+
+From the Robots perspective, it knows how to pick up a new piece of
+material and place it in the machine tool and where to place the
+material once it has removed it. It has two needs that need to be
+fulfilled from the machine tool, opening and closing the door and
+opening and closing the chuck.
+
+h4. The “interfaces” provided by each device is as follows:
+
+<div style="margin-left:2em;">
+
+*Machine Tool Requests:*
+# LoadMaterial
+# UnloadMaterial
+
+*Robot Requests:*
+# OpenDoor 
+# CloseDoor 
+# OpenCluck
+# CloseChuck
+
+</div>
+
+The rational for having the Robot make the requests of the machine
+tool is the reduction of failure due to timing related issues. When
+the machine tool has requested the material load and unload, it
+has no way to sense the location of the robot and the presence of
+material in the chuck. When the Robot begins its cycle it checks the
+current door state, if the door is closed, it will request the machine
+tool open the door. It may also ask the machine tool to open the chuck
+at the same time. The machine tool will respond with an Active →
+Complete sequence stating that it has completed the task or it will
+Fail if it is incapable.
+
+The Robot requires the machine to be have the door and the chuck must
+be open before it can insert material. Once the material is in place,
+the Robot asks the machine tool to close the chuck. It must not
+release the material until the chuck is closed or else it will be
+dropped. The machine tool will track the state of the chuck and a
+positive engagement before it changes the chuck state and signals the
+task as complete.
+
+The same goes for the door; the machine tool has no knowledge of the
+position of the Robot and therefore does not know when the Robot is
+safely outside the enclosure. The Robot therefor asks for the door to
+be closed once it knows there are no issues. This decouples the issue
+of load completion timing with the door actuation.
+
+Messaging at this higher semantic level provides the basis for a
+lighter weight protocol that has simplified failure recovery scenarios
+and less coupling of inter-related components. Decoupling of
+components allows us to more readily replace parts of the system, like
+replace the Robot or the machine tool with another device that can
+perform the required activity and have the interface layer stay the
+same.
+
+h3. Machine Tool Architecture Overview
+
+The MTConnect CNC architecture consists of three components – the
+MTConnect adapter for the machine tool to report states, the MTConnect
+agent to provide MTConnect protocol and XML formatting, and the
+Interface Control Layer (ICL) that listens to other devices and
+coordinates the activities. The adapter and agent are the standard
+out-of-the box MTConnect components for the machine tool. Minor
+additions were made to the adapter to support chuck state for use in
+this project. That addition will be proposed to the MTConnect standard
+in future versions (more on that later.)
+
+p=. !/images/2013-06-07-figure1.png(Figure 1)!
+ 
+p=. _Figure 1_
+
+The ICL layer is a client of both the CNC agent and the Robot agent
+and publishes only the state of the interface data items. This allows
+us to relegate the machine status to the machine tool and separate out
+the responsibility to react to the changes in the state of both robot
+and CNC to the ICL layer. This layer also instructs the machine tool
+to do one of the following six operations:
+
+# Open Door
+# Close Door
+# Open Chuck
+# Close Chuck
+# Start Cycle
+# Reset/Stop Cycle
+
+These actions are invoked on the machine tool controller by sending
+the instructions that resolve into the PLC or API specific
+operations. For the demonstration at NIST this was accomplished by
+invoking a small utility on the controller the set various PLC
+registers to actuate the chuck, cycle start and reset. We could not
+open and close the door since the machine was not equipped with an
+actuator; to do so would have incurred a large additional cost. The door
+behavior was therefor synthesized for the demonstration.  
+
+h3. Messaging Architecture
+
+p=. !/images/2013-06-07-figure2.png(Figure 2)!
+
+p=. _Figure 2_
+
+MTConnect uses a very simple messaging architecture based on the
+MTConnect read-only philosophy. Instead of sending a message
+requesting an action be performed or setting a variable on a remote
+device, MTConnect has each device announce its needs to any
+application or device monitoring its state. In effect,	 the request
+interface is a simple state machine that goes from Not-Ready to
+Ready. And when the interface would like the activity performed, it
+transition to Active.
+
+In turn, it waits for the device performing the activity, the
+responder, to announce it is actively performing the activity and then
+to change to the complete state when its done. This provides the basis
+for the coordination of actions between devices. Currently this scheme
+has been tested between two devices paired directly. In the future
+enhancements section of this report, we will discuss some ideas to
+extend this paradigm to multiple interconnected devices supporting
+cells or even swarms of devices in a mobile environment.
+
+Figure 1 shows the state transitions and intermediate as well as
+terminal states. This model is currently implemented using an
+MTConnect Event with the subType of @REQUEST@ or @RESPONSE@ to
+indicate its behavior. In the next section we will have a more
+in-depth discussion of the failure scenarios and how recovery is to be
+handled. The MTConnect machine tool simulator and state machine
+implements many of these scenarios and references to the actual
+implementation will be provided.
+
+ 
+p=. !/images/2013-06-07-figure3.png(Figure 3)!
+
+p=. _Figure 3_
+
+In the MTConnect standard, the current state of a device can be
+determined by making an HTTP request and specifying the device name
+and current, for example: @http://localhost:5000/cnc/current@ will
+provide the current state of the “cnc” device on the local
+machine. The result will come back to the client or requestor in XML
+which they can then parse to find the information they need. From that
+point on, near-real-time data can be received on a push basis (meaning
+there is no need to poll) using the MTConnect streaming capability
+using the sample request. To get a completely contiguous data set, one
+uses the nextSequence number presented in the current to begin the
+push based request as follows:
+
+<pre>
+http://localhost:5000/cnc/sample?from=100231&interval=0
+</pre>
+
+This will provide data immediately after it arrives (usually within
+3ms) to the client. The interval=0 means never delay and wait for
+additional data to arrive before sending out the updates. It is
+usually best accompanied by a filter to make sure we don’t load the
+communications or the processes unnecessarily. This can be done by
+providing a path as an argument.
+
+<pre>
+http://localhost:5000/cnc/sample?from=100231&interval=0&path=//DataItem[@type="CONTROLLER_MODE"or@type="EXECUTION"or@type="CHUCK_STATE"or@type="AVAILABILITY"or\@category="CONDITION”]|//Interfaces
+</pre>
+
+The example will give us only the controller mode, chuck state,
+execution, conditions, as well as all the information from the
+interfaces. This is the full set of data required by the Robot to
+operate.
+
+For the purposes of this discussion, we will focus on the interfaces
+and a few key CNC and Robot states that are required for coordination
+of interaction. The following is based on the implementation of
+interfaces for the ROS/I MTConnect demonstration. For more information
+on streaming data handling and event processing, please consult Part 1
+of the MTConnect standard.
+
+h3. State Machines
+
+h4. The implementation of the machine tool ICL consists of 7 state machines, they are as follows:
+
+# Top level machine tool
+# Material load
+# Material unload
+# Open chuck
+# Close chuck
+# Open door
+# Close door
+
+The top level state machine controls the main operational and
+non-operation states of the machine tool. There are two top-level
+states the machine can be in, disabled and operational. In the
+disabled state there are two sub-states, not-ready and fault. When the
+machine tool is in an alarm active state, the state machine is in a
+fault state. The other disabled state is not-ready which is when the
+machine tool is not in automatic mode or is not read to execute the
+part program.
+
+The operational states are one of the following: idle, cycle_start,
+loading, or unloading. The machine tool becomes operational when the
+machine tool’s controller mode is in automatic and it is ready to run
+the part program. If the robot is not ready, the machine tool will
+remain in an idle state until the robot is ready. When the robot is
+ready, the machine tool will transition into the loading or unloading
+states depending on whether the machine has material.
+
+Once the machine completes the material load, it will transition into
+a cycle start state. The cycle start state will transition once the
+cycle is complete indicated by the execution transitioning from active
+to ready. The machine will then go into an unloading state signaling
+the robot to remove the material.
+ 
+p=. !/images/2013-06-07-figure4.png(Figure 4)!
+
+p=. _Figure 4_
+
+The other 6 state machines represent two interface types, request and
+response. We have two requests (load and unload) and four responses
+(open/close chuck and door). For this discussion we will be presenting
+only one representation of each, the open door and the material load.
+
+The response state machine consists of a single level where the states
+are equivalent to the MTConnect interface proposal. The states are
+not_read, ready, active, complete, and fail. The feedback from the
+machine tool’s state variable (DoorState in this instance) will
+trigger the transitions from active to complete. Since we did not have
+a real door actuator, this was simulated by a timer. The chuck state
+did operate off of the machine tool chuck’s solenoids.
+
+The door interface values will track the states in this state machine
+and are modified directly in this module. The rest of the states and
+transitions are managed externally by the top level state machine or
+the machine tool itself. One additional feature of this state machine
+is it will coordinate with its inverse operation and validate they are
+not both active at the same time. So, in the case of the open door
+interface, the close door interface will fail if the open door is
+currently active. The door cannot be opening and closing at the same
+time.
+
+Most of the complexity in the response state machine is handling of
+failures. If anything goes wrong on the robot or machine tool side, we
+immediately fail. The failure signal is used to indicate a fault has
+occurred and transitions into a fail state. In both the request and
+the response, a fail transition will transition the top level state
+machine into a failure if the operation is active. More discussion
+will be provided in the Failure and recovery section of this document.
+ 
+p=. !/images/2013-06-07-figure5.png(Figure 5)!
+
+p=. _Figure 5_
+
+The second class of state machine is the request. The request is in
+one of the following states, not-ready, active, processing, fail, and
+ready. All states except for processing are direct parallels to the
+proposed changes to the MTConnect standard, the processing state
+tracks the active state on the Robot and transitions to not ready once
+the operation is complete. The reason we transition to not-ready
+instead of ready is because once the material has been successfully
+loaded, we cannot load again, therefor the interface is now not
+available until the machine has been unloaded.
+
+p=. !/images/2013-06-07-figure6.png(Figure 6)!
+
+p=. _Figure 6_
+ 
+h3. Failure and Recovery
+
+This section will discuss the different operational scenarios of the
+machine tools. Since all states and transitions can be derived from
+the events that occur from the state changes in robot and the machine
+tool, we will present the code used to test the state machine and the
+expected behavior. These “tests” will serve as the basis of the
+behavioral documentation for the MTConnect interface definition in the
+subsequent versions of the standard.
+
+The first set of scenarios will present the positive cases where we
+will show the successful operation of the door and the chuck. The
+later cases will walk through the steps demonstrating what happens
+when a component fails and what the recovery scenario is. All examples
+are “runnable”, meaning they have been executed and validated with the
+current implementation of the machine tool state machine.
+
+For all the tests, we make sure the devices are in an operation state
+before we begin our scenarios. Otherwise the machine tool interfaces
+will be non-operational. The initiation sequence of events are as
+follows:
+
+<pre>
+    Given robot Availability is Available
+    And robot ControllerMode is Automatic
+    And robot Execution is Active
+    And robot MaterialLoad is Ready
+    And robot MaterialUnload is Ready
+    And robot OpenDoor is Ready
+    And robot CloseDoor is Ready
+    And robot OpenChuck is Ready
+    And robot CloseChuck is Ready
+    And cnc ControllerMode is Automatic
+    Then cnc MaterialLoad should be Active
+    And cnc MaterialUnload should be Not_Ready
+</pre>
+
+The machine tool is now in an operational state waiting to have
+material loaded. This is asserted using the following expression and
+will precede all scenarios.
+
+<pre>
+  Background: Machine Tool and Robot are operational
+    Given Devices are in initial state
+</pre>
+
+Actuation of the door and chuck are operationally separate for the
+loading and unloading of material. When the machine is in cycle the
+door may not open as well as the chuck being locked. But at other
+times the robot is free to request the machine tool open and close the
+chuck and door to fulfill its needs. The following scenarios test
+these functions.
+
+<pre>
+  Scenario: Robot asks Cnc to Open Door
+    Given cnc MaterialLoad should be Active
+    When robot OpenDoor becomes Active
+    Then cnc DoorState should be Open
+
+  Scenario: Robot asks Cnc to Open Chuck
+    Given cnc MaterialLoad should be Active
+    When robot OpenChuck becomes Active
+    Then cnc OpenChuck should be Active
+    When cnc ChuckState becomes Unlatched
+    When cnc ChuckState becomes Open
+    Then cnc ChuckState should be Open
+</pre>
+
+The following is the full scenario of a material load with chuck and
+door operations. Once the robot completes the material load, we
+validate that the machine tool starts the cycle.
+
+<pre>
+  Scenario: Cnc asks Robot to Load Material
+    Given cnc MaterialLoad should be Active
+    When robot MaterialLoad becomes Active
+</pre>
+
+The following code statement validates the state of a given state
+machine.
+
+<pre>
+    Then material load state should be processing
+</pre>
+
+The following steps open the door and make sure we’re still in a
+loading state.
+
+<pre>
+    And cnc DoorState should be Open
+    And cnc ChuckState becomes Open
+    And cnc ChuckState should be Open
+    Then machine state should be loading
+</pre>
+
+Now the chuck is closed and all states are confirmed
+
+<pre>
+    When robot CloseChuck becomes Active
+    Then cnc CloseChuck should be Active
+    And cnc ChuckState becomes Closed
+    And cnc CloseChuck should be Complete
+    And robot CloseChuck becomes Ready
+    And cnc CloseChuck should be Ready
+</pre>
+
+After the chuck is closed and the robot has retracted a safe distance,
+the robot requests the machine tool close the door
+
+<pre>
+    When robot CloseDoor becomes Active
+    Then cnc CloseDoor should be Active
+    Then after 1.2 seconds cnc CloseDoor should be Complete
+    And cnc DoorState should be Closed
+</pre>
+
+The completes the material load and the machine tool cycle
+starts. Material load becomes not ready indicating the robot cannot
+load more material. The robot is still ready to load if asked to do
+so.
+
+<pre>
+    When robot MaterialLoad becomes Complete
+    And robot MaterialLoad becomes Ready
+    Then machine state should be cycle_start
+    And cnc MaterialLoad should be Not_Ready
+    And robot MaterialLoad becomes Ready
+</pre>
+    
+h4. Failure Scheario 1:
+
+<pre>
+  Scenario: Cnc fails to start cycle
+    Given robot MaterialLoad becomes Active
+</pre>
+
+The following statement causes the execution data item to fail once it
+attempt to change.
+
+<pre>
+    And simulate fail exec
+</pre>
+
+This section creates the correct state of all the data items and then
+takes it through a single set of operations
+
+<pre>
+    And Chuck is closed
+    And Door is closed
+    And robot MaterialLoad becomes Complete
+    And robot MaterialLoad becomes Ready
+    And cnc MaterialLoad should be Not_Ready
+</pre>
+
+Make sure we are in the correct fault state when the load completes
+
+<pre>
+    And machine state should be fault
+</pre>
+    
+h4. Failure scenario 2:
+
+The second failure scenario we will discuss is a failure to load a
+piece of material. This results in the machine tool entering into an
+idle state after acknowledging the failure of the material load. The
+scenario assert at the bottom that the machine state should be idle
+since the machine is ready to run, but the robot is not operational.
+
+The final steps are the robot clearing the fault and becoming ready
+again. The machine tool enters re-enters the loading state since the
+material never arrived successfully. The material unload operation
+work in much the same way with the same recovery pattern.
+
+<pre>
+  Scenario: Robot can't load material
+    Given cnc MaterialLoad should be Active
+    And robot MaterialLoad becomes Active
+    And Chuck is closed
+    And Door is closed
+
+    When robot MaterialLoad becomes Fail
+    Then cnc MaterialLoad should be Fail
+    And material load state should be fail
+
+    When robot MaterialLoad becomes Not_Ready
+    And robot faults ACTUATOR with "Flame"
+    And machine state should be idle
+
+    When robot clears ACTUATOR
+    And robot MaterialLoad becomes Ready
+    And machine state should be loading
+</pre>
+
+There are numerous additional scenarios that have been written for
+validation of the project. They can be found at: "https://github.com/.../simulator/features":https://github.com/mtconnect/ros_bridge/tree/nist/simulator/features
+
+
+h3. Enhancements to the MTConnect Standard
+
+To implement a basic Robot to machine tool interface where we have one
+Robot loading one Machine Tool, the possible additions to the MTConnect
+standard are pretty minimal. The following data items were required on
+the machine tool side to represent the states of all components and
+the necessary interface events.
+
+# @ChuckState@ was added to the primary @Rotary@ axis “C” with the values of @OPEN@, @CLOSED@, @UNLATCHED@ and @UNAVAILABLE@.
+# A top level device Interfaces component was added to hold all the interfaces.
+# A @MaterialLoader@ component was added as a child of the Interfaces component with the following data items:
+## @MATERIAL_LOAD@ with subtype @REQUEST@.
+## @MATERIAL_UNLOAD@ with subtype @REQUEST@.
+## @LINK_STATE@ that indicates if the interface is active with values @ACTIVE@ , @INACTIVE@, or @UNAVAILABLE@.
+# A @ChuckInterface@ component was added as a child of the Interfaces component with the following data items:
+## @OPEN_CHUCK@ with subtype of @RESPONSE@.
+## @CLOSE_CHUCK@ with subtype of @RESPONSE@.
+# A @DoorInterface@ component was added as a child of the Interfaces component with the following data items:
+## @OPEN_DOOR@ with subtype of @RESPONSE@.
+## @CLOSE_CLOSE@ with subtype of @RESPONSE@.
+
+The remainder of the machine tool components and data items are the
+standard composition of any standard Mazak implementation. The entire
+Devices.xml file is provided below. The sections in bold are the areas
+we have used to drive the state machine, the sections in bold italic
+are new to the standard.
+
+{% codeblock Devices.xml  %}
+  <?xml version='1.0' encoding='UTF-8'?>
+  <MTConnectDevices xmlns:mt='urn:mtconnect.org:MTConnectDevices:1.2' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns='urn:mtconnect.org:MTConnectDevices:1.2' xsi:schemaLocation='urn:mtconnect.org:MTConnectDevices:1.2 http://www.mtconnect.org/schemas/MTConnectDevices_1.2.xsd'>
+    <Header creationTime='2013-04-22T15:24:26Z' assetBufferSize='1024' sender='localhost' assetCount='0' version='1.2' instanceId='0' bufferSize='131072'/>
+    <Devices>
+      <Device name='cnc' uuid='cnc' id='cnc_1'>
+        <Description model='QTN' manufacturer='Mazak'>Mazak Quickturn - Mazak Quickturn for ROS/MTConnect</Description>
+        <DataItems>
+          <DataItem type='AVAILABILITY' category='EVENT' id='dtop_2' name='avail'/>
+        </DataItems>
+        <Components>
+          <Axes name='base' id='base_3'>
+            <DataItems>
+              <DataItem type='ACTUATOR' category='CONDITION' id='base_4' name='servo_cond'/>
+            </DataItems>
+            <Components>
+              <Linear name='X' id='X_5'>
+                <DataItems>
+                  <DataItem type='POSITION' category='SAMPLE' id='X_6' name='Xabs' subType='ACTUAL' units='MILLIMETER' nativeUnits='INCH' coordinateSystem='MACHINE'/>
+                  <DataItem type='POSITION' category='CONDITION' id='X_7' name='Xtravel'/>
+                  <DataItem type='LOAD' category='SAMPLE' id='X_8' name='Xload' units='PERCENT' nativeUnits='PERCENT'/>
+                  <DataItem type='AXIS_FEEDRATE' category='SAMPLE' id='X_9' name='Xfrt' units='MILLIMETER/SECOND' nativeUnits='FOOT/MINUTE'/>
+                </DataItems>
+              </Linear>
+              <Linear name='Z' id='Z_10'>
+                <DataItems>
+                  <DataItem type='POSITION' category='SAMPLE' id='Z_11' name='Zabs' subType='ACTUAL' units='MILLIMETER' nativeUnits='INCH' coordinateSystem='MACHINE'/>
+                  <DataItem type='POSITION' category='CONDITION' id='Z_12' name='Ztravel'/>
+                  <DataItem type='LOAD' category='SAMPLE' id='Z_13' name='Zload' units='PERCENT' nativeUnits='PERCENT'/>
+                  <DataItem type='AXIS_FEEDRATE' category='SAMPLE' id='Z_14' name='Zfrt' units='MILLIMETER/SECOND' nativeUnits='FOOT/MINUTE'/>
+                </DataItems>
+              </Linear>
+              <Rotary name='C' id='C_15'>
+                <DataItems>
+                  <!-- Rotary Part -->
+                  <DataItem type='LOAD' category='SAMPLE' id='C_16' name='Cload' units='PERCENT' nativeUnits='PERCENT'/>
+                  <DataItem type='ANGULAR_VELOCITY' category='SAMPLE' id='C_17' name='Cfrt' units='DEGREE/SECOND' nativeUnits='DEGREE/MINUTE'/>
+                  <DataItem type='ANGLE' category='SAMPLE' id='C_18' name='Cdeg' subType='ACTUAL' units='DEGREE' nativeUnits='DEGREE'/>
+                  <DataItem type='ANGLE' category='CONDITION' id='C_19' name='Ctravel'/>
+                  <!-- Spindle part -->
+                  <DataItem type='SPINDLE_SPEED' category='SAMPLE' id='C_20' name='Srpm' subType='ACTUAL' units='REVOLUTION/MINUTE' nativeUnits='REVOLUTION/MINUTE'/>
+                  <DataItem type='LOAD' category='SAMPLE' id='C_21' name='Sload' units='PERCENT' nativeUnits='PERCENT'/>
+                  <DataItem type='TEMPERATURE' category='SAMPLE' id='C_22' name='Stemp' units='CELSIUS' nativeUnits='CELSIUS'/>
+                  <DataItem type='ROTARY_MODE' category='EVENT' id='C_23'>
+                    <Constraints>
+                      <Value>SPINDLE</Value>
+                      <Value>INDEX</Value>
+                      <Value>CONTOUR</Value>
+                    </Constraints>
+                  </DataItem>
+                  <DataItem type='LOAD' category='CONDITION' id='C_24' name='Sload_cond'/>
+                  <DataItem type='TEMPERATURE' category='CONDITION' id='C_25' name='Stemp_cond'/>
+                  <DataItem type='CHUCK_STATE' category='EVENT' id='C_26' name='chuck_status'/>
+                </DataItems>
+              </Rotary>
+              <Rotary name='C2' nativeName='S2' id='C2_27'>
+                <DataItems>
+                  <DataItem type='SPINDLE_SPEED' category='SAMPLE' id='C2_28' name='S2rpm' subType='ACTUAL' units='REVOLUTION/MINUTE' nativeUnits='REVOLUTION/MINUTE'/>
+                  <DataItem type='LOAD' category='SAMPLE' id='C2_29' name='S2load' units='PERCENT' nativeUnits='PERCENT'/>
+                  <DataItem type='TEMPERATURE' category='SAMPLE' id='C2_30' name='S2temp' units='CELSIUS' nativeUnits='CELSIUS'/>
+                  <DataItem type='ROTARY_MODE' category='EVENT' id='C2_31'>
+                    <Constraints>
+                      <Value>SPINDLE</Value>
+                    </Constraints>
+                  </DataItem>
+                  <DataItem type='LOAD' category='CONDITION' id='C2_32' name='S2load_cond'/>
+                  <DataItem type='TEMPERATURE' category='CONDITION' id='C2_33' name='S2temp_cond'/>
+                </DataItems>
+              </Rotary>
+            </Components>
+          </Axes>
+          <Controller name='controller' id='controller_34'>
+            <DataItems>
+              <DataItem type='COMMUNICATIONS' category='CONDITION' id='controller_35' name='comms_cond'/>
+              <DataItem type='LOGIC_PROGRAM' category='CONDITION' id='controller_36' name='logic_cond'/>
+              <DataItem type='SYSTEM' category='CONDITION' id='controller_37' name='system_cond'/>
+              <DataItem type='EMERGENCY_STOP' category='EVENT' id='controller_38' name='estop'/>
+            </DataItems>
+            <Components>
+              <Path name='path' id='path_39'>
+                <DataItems>
+                  <DataItem type='SPINDLE_SPEED' category='SAMPLE' id='path_40' name='Sovr' subType='OVERRIDE' units='PERCENT' nativeUnits='PERCENT'/>
+                  <DataItem type='PROGRAM' category='EVENT' id='path_41' name='program'/>
+                  <DataItem type='PROGRAM' category='EVENT' id='path_42' name='subprogram' subType='x:SUB'/>
+                  <DataItem type='LINE' category='EVENT' id='path_43' name='line'/>
+                  <DataItem type='x:UNIT' category='EVENT' id='path_44' name='unitNum'/>
+                  <DataItem type='x:SEQUENCE_NUMBER' category='EVENT' id='path_45' name='sequenceNum'/>
+                  <DataItem type='PART_COUNT' category='EVENT' id='path_46' name='PartCountAct'/>
+                  <DataItem type='PATH_FEEDRATE' category='SAMPLE' id='path_47' name='Fact' subType='ACTUAL' units='MILLIMETER/SECOND' nativeUnits='FOOT/MINUTE'/>
+                  <DataItem type='PATH_FEEDRATE' category='EVENT' id='path_48' name='Frapidovr' subType='OVERRIDE' units='PERCENT' nativeUnits='PERCENT'/>
+                  <DataItem type='PATH_FEEDRATE' category='EVENT' id='path_49' name='Fovr' subType='OVERRIDE' units='PERCENT' nativeUnits='PERCENT'/>
+                  <DataItem type='TOOL_ID' category='EVENT' id='path_50' name='Tool_number'/>
+                  <DataItem type='x:TOOL_GROUP' category='EVENT' id='path_51' name='Tool_group'/>
+                  <DataItem type='x:TOOL_SUFFIX' category='EVENT' id='path_52' name='Tool_suffix'/>
+                  <DataItem type='EXECUTION' category='EVENT' id='path_53' name='execution'/>
+                  <DataItem type='CONTROLLER_MODE' category='EVENT' id='path_54' name='mode'/>
+                  <DataItem type='x:COMMENT' category='EVENT' id='path_55' name='program_cmt'/>
+                  <DataItem type='x:COMMENT' category='EVENT' id='path_56' name='subprogram_cmt' subType='x:SUB'/>
+                  <DataItem type='x:DURATION' category='EVENT' id='path_57' name='auto_time' subType='x:AUTO'/>
+                  <DataItem type='x:DURATION' category='EVENT' id='path_58' name='total_time' subType='x:TOTAL'/>
+                  <DataItem type='x:DURATION' category='EVENT' id='path_59' name='cut_time' subType='x:CUT'/>
+                  <DataItem type='MOTION_PROGRAM' category='CONDITION' id='path_60' name='motion_cond'/>
+                  <DataItem type='SYSTEM' category='CONDITION' id='path_61' name='path_system'/>
+                  <DataItem type='x:PALLET_NUM' category='EVENT' id='path_62' name='pallet_num'/>
+                </DataItems>
+              </Path>
+            </Components>
+          </Controller>
+          <Systems name='systems' id='systems_63'>
+            <Components>
+              <Electric name='electric' id='electric_64'>
+                <DataItems>
+                  <DataItem type='POWER_STATE' category='EVENT' id='electric_65' name='power'/>
+                  <DataItem type='TEMPERATURE' category='CONDITION' id='electric_66' name='electric_temp'/>
+                </DataItems>
+              </Electric>
+              <Hydraulic name='hydraulic' id='hydraulic_67'>
+                <DataItems>
+                  <DataItem type='PRESSURE' category='CONDITION' id='hydraulic_68' name='hydra_cond'/>
+                </DataItems>
+              </Hydraulic>
+              <Coolant name='coolant' id='coolant_69'>
+                <DataItems>
+                  <DataItem type='PRESSURE' category='CONDITION' id='coolant_70' name='coolant_pres'/>
+                  <DataItem type='TEMPERATURE' category='CONDITION' id='coolant_71' name='coolant_temp'/>
+                  <DataItem type='LEVEL' category='CONDITION' id='coolant_72' name='coolant_level'/>
+                </DataItems>
+              </Coolant>
+              <Pneumatic name='pneumatic' id='pneumatic_73'>
+                <DataItems>
+                  <DataItem type='PRESSURE' category='CONDITION' id='pneumatic_74' name='pneu_cond'/>
+                </DataItems>
+              </Pneumatic>
+            </Components>
+          </Systems>
+          <Interfaces name='interfaces' id='interfaces_75'>
+            <Components>
+              <MaterialLoader name='material_loader' id='material_loader_76'>
+                <DataItems>
+                  <DataItem type='MATERIAL_LOAD' category='EVENT' id='material_loader_77' name='material_load' subType='REQUEST'/>
+                  <DataItem type='MATERIAL_UNLOAD' category='EVENT' id='material_loader_78' name='material_unload' subType='REQUEST'/>
+                  <DataItem type='LINK_STATE' category='EVENT' id='material_loader_79' name='robo_link'/>
+                </DataItems>
+              </MaterialLoader>
+              <ChuckInterface name='chuck_interface' id='chuck_interface_80'>
+                <DataItems>
+                  <DataItem type='OPEN_CHUCK' category='EVENT' id='chuck_interface_81' name='open_chuck' subType='RESPONSE'/>
+                  <DataItem type='CLOSE_CHUCK' category='EVENT' id='chuck_interface_82' name='close_chuck' subType='RESPONSE'/>
+                </DataItems>
+              </ChuckInterface>
+              <DoorInterface name='door_interface' id='door_interface_83'>
+                <DataItems>
+                  <DataItem type='OPEN_DOOR' category='EVENT' id='door_interface_84' name='open_door' subType='RESPONSE'/>
+                  <DataItem type='CLOSE_DOOR' category='EVENT' id='door_interface_85' name='close_door' subType='RESPONSE'/>
+                </DataItems>
+              </DoorInterface>
+            </Components>
+          </Interfaces>
+          <Door name='door' id='door_86'>
+            <DataItems>
+              <DataItem type='DOOR_STATE' category='EVENT' id='door_87' name='door_state'/>
+            </DataItems>
+          </Door>
+          <Stock name="stock" id="stock">
+            <DataItems>
+              <DataItem category="EVENT" id="material" name="material" type="MATERIAL" />
+            </DataItems>
+          </Stock>
+        </Components>
+      </Device>
+    </Devices>
+  </MTConnectDevices>
+{% endcodeblock %}
+
+h3. Future Enhancements
+
+The most significant future enhancement to the standard and the
+messaging semantics will be the addition of multiple devices and a
+many-to-many relationship between machine tools, CMMS, gauges, and
+multiple fixed or mobile robots. This can be achieved using an
+extension to the standard to allow for interface bindings.
+
+We are proposing a lazy locking scheme where we provide a new data
+item within each interface that allows the devices to “pair” for the
+duration of the operation. For example, during the material load
+operation, the machine tool and the robot will each have a data item,
+for the sake of discussion, we can call it Binding that will have the
+following values: @UNAVAILABLE@, @AVAILABLE@, or &lt;device-id&gt;. If it is
+@AVAILABLE@ then it can be bound to a device that is capable of
+fulfilling the request. Once bound it will change to the device Id of
+the associated device.
+
+The mechanism will resolve disputes by allowing the requestor to
+choose the responder from the available devices that are
+volunteering. So, if a machine tool wants material loaded and the cell
+has multiple Robots capable of loading material, multiple Robots may
+try to bind to the request, but only one will be accepted. The
+sequence will be as follows:
+
+# Cnc 1 material loader binding @AVAILABLE@
+# Cnc 1 material loader @MaterialLoad@ @ACTIVE@
+# Robot 1 material loader binding Cnc 1
+# Robot 2 material loader binding Cnc 1
+# Cnc 1 material loader binding Robot 2
+# Robot 1 material loader binding @AVAILABLE@
+# Robot 2 material loader @MaterialLoad@ @ACTIVE@
+# Robot 2 material loader @MaterialLoad@ @COMPLETE@
+# Cnc 1 material loader @MaterialLoad@ @READY@
+# Robot 2 material loader @MaterialLoad@ @READY@
+# Cnc 1 material loader binding @AVAILABLE@
+# Robot 2 material loader binding @AVAILABLE@
+
+In this way the robot and the cnc will coordinate the associations and
+temporary bindings between devices. The requestor selection is easiest
+way to resolve the possible locking issues between multiple devices
+and still have a complete read-only interface. The failure scenarios
+remain mainly the same with some bind timeout issues that will need to
+be resolved.
+
+This is a very high level conceptual model and will require full
+design, architecture, and testing as the previous interface went
+through. This same architecture should would with both mobile and
+stationary devices (though that will need to be explored as well.) The
+scheme borrows from optimistic locking mechanisms in databases and
+other technologies for distributed resource sharing.
+
+Additional device models and interactions will also be required if
+devices other than CNC machine tools are involved in these extensions
+as well. This architecture will be well suited for an electronic
+manufacture floor with full automation and device monitoring as well
+as resource management.
+

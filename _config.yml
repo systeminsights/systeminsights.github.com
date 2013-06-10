@@ -102,3 +102,7 @@ google_analytics_tracking_id: UA-5832901-5
 
 # Facebook Like
 facebook_like: false
+
+# RedCloth configuration
+redcloth:
+  hard_breaks: false
