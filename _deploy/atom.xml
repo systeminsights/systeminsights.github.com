@@ -4,7 +4,7 @@
   <title><![CDATA[Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2013-06-11T13:12:58-07:00</updated>
+  <updated>2013-06-11T13:21:47-07:00</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -26,11 +26,13 @@ article blockquote { font-size: 1em; }
 <blockquote>
 <p>This work was conducted under Grant Opportunity Number
 2012-<span class="caps">NIST</span>-<span class="caps">MSE</span>-01 for the Intelligent System Division of the National
-Institute of Standards and Technology (<span class="caps">NIST</span>) with the collaboration of System Insights,
-SwRI (Southwest Research Institute), <span class="caps">NCDMM</span> (National Center for
-Defense Manufacturing and Machining), <span class="caps">AMT</span> (Association for
-Manufacturing Techknology) and Mazak <span class="caps">USA</span> for help with connectivity of
-the machine tool used in the demonstration.</p>
+Institute of Standards and Technology (<a href="http://www.nist.gov"><span class="caps">NIST</span></a>)
+with the collaboration of <a href="http://www.systeminsights.com">System Insights</a>, SwRI (Southwest Research
+Institute), <a href="http://ncdmm.org"><span class="caps">NCDMM</span></a> (National Center for Defense
+Manufacturing and Machining), <a href="http://amtonline.org"><span class="caps">AMT</span></a> (Association
+for Manufacturing Techknology) and <a href="http://www.mazakusa.com">Mazak <span class="caps">USA</span></a>
+for help with connectivity of the machine tool used in the
+demonstration.</p>
 </blockquote>
 <div style="text-align:center;"><iframe src="https://docs.google.com/a/systeminsights.com/file/d/0B3fQZcJeBjGOekNuZzJQMm1IeEU/preview" width="640" height="385"></iframe></div>
 <p><br/></p>
