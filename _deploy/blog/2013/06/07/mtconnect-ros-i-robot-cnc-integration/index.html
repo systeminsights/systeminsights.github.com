@@ -1,0 +1,1112 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>MTConnect ROS-I Robot CNC Integration - Manufacturing Big Data</title>
+  <meta name="author" content="System Insights">
+
+  
+  <meta name="description" content="ol { margin-left: 2.5em; }
+article blockquote { font-size: 1em; } Robotic Interface – Machine Tool Perspective This work was conducted under Grant &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Manufacturing Big Data" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-5832901-5']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Manufacturing Big Data</a></h1>
+  
+    <h2>System Insights Corporate Blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.manufacturingbigdata.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">MTConnect ROS-I Robot CNC Integration</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T23:38:00-07:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><style type="text/css">
+ol { margin-left: 2.5em; }
+article blockquote { font-size: 1em; }
+</style>
+<h2>Robotic Interface – Machine Tool Perspective</h2>
+<blockquote>
+<p>This work was conducted under Grant Opportunity Number
+2012-<span class="caps">NIST</span>-<span class="caps">MSE</span>-01 for the Intelligent System Division of the National
+Institute of Standards and Technology (<span class="caps">NIST</span>) with the collaboration of
+SwRI (Southwest Research Institute), <span class="caps">NCDMM</span> (National Center for
+Defense Manufacturing and Machining), <span class="caps">AMT</span> (Association for
+Manufacturing Techknology) and Mazak <span class="caps">USA</span> for help with connectivity of
+the machine tool used in the demonstration.</p>
+</blockquote>
+<div style="text-align:center;"><iframe src="https://docs.google.com/a/systeminsights.com/file/d/0B3fQZcJeBjGOekNuZzJQMm1IeEU/preview" width="640" height="385"></iframe></div>
+<p><br/></p>
+<p>From the machine tool perspective, the Robot is an external entity
+that loads and unloads material into and from its work-holding. This
+function can be carried out by a person, a robot, a mobile material
+handler, an operator, or a highly trained golden retriever. The
+machine does not care how the material is supplied, just that the task
+has been completed so it can start its cutting cycle.</p>
+<p>The innovation in the MTConnect interface is the ability to abstract
+the task being performed from the underlying implementation necessary
+to complete the task. To load material into a machine tool, the robot
+has to have knowledge of the location of the work-holding and the
+necessary approach angles as well as any collision domains within the
+machine enclosure. From the machine tools perspective, this is all
+inconsequencial as long as it gets its material.</p>
+<p>Once complete, the machine tool needs to be able to ask for the
+material to be removed. This is also accomplished at the higher level
+by requesting the material get unloaded. At that point, the machine
+tool does not care where the material is going; it only needs to
+request another piece of material for subsequent processing. It is up
+to the Robot sequence the material to the next station.</p>
+<p>From the Robots perspective, it knows how to pick up a new piece of
+material and place it in the machine tool and where to place the
+material once it has removed it. It has two needs that need to be
+fulfilled from the machine tool, opening and closing the door and
+opening and closing the chuck.</p>
+<h4>The “interfaces” provided by each device is as follows:</h4>
+<div style="margin-left:2em;">
+<p><strong>Machine Tool Requests:</strong></p>
+<ol>
+	<li>LoadMaterial</li>
+	<li>UnloadMaterial</li>
+</ol>
+<p><strong>Robot Requests:</strong></p>
+<ol>
+	<li>OpenDoor</li>
+	<li>CloseDoor</li>
+	<li>OpenCluck</li>
+	<li>CloseChuck</li>
+</ol>
+</div>
+<p>The rational for having the Robot make the requests of the machine
+tool is the reduction of failure due to timing related issues. When
+the machine tool has requested the material load and unload, it
+has no way to sense the location of the robot and the presence of
+material in the chuck. When the Robot begins its cycle it checks the
+current door state, if the door is closed, it will request the machine
+tool open the door. It may also ask the machine tool to open the chuck
+at the same time. The machine tool will respond with an Active →
+Complete sequence stating that it has completed the task or it will
+Fail if it is incapable.</p>
+<p>The Robot requires the machine to be have the door and the chuck must
+be open before it can insert material. Once the material is in place,
+the Robot asks the machine tool to close the chuck. It must not
+release the material until the chuck is closed or else it will be
+dropped. The machine tool will track the state of the chuck and a
+positive engagement before it changes the chuck state and signals the
+task as complete.</p>
+<p>The same goes for the door; the machine tool has no knowledge of the
+position of the Robot and therefore does not know when the Robot is
+safely outside the enclosure. The Robot therefor asks for the door to
+be closed once it knows there are no issues. This decouples the issue
+of load completion timing with the door actuation.</p>
+<p>Messaging at this higher semantic level provides the basis for a
+lighter weight protocol that has simplified failure recovery scenarios
+and less coupling of inter-related components. Decoupling of
+components allows us to more readily replace parts of the system, like
+replace the Robot or the machine tool with another device that can
+perform the required activity and have the interface layer stay the
+same.</p>
+<h3>Machine Tool Architecture Overview</h3>
+<p>The MTConnect <span class="caps">CNC</span> architecture consists of three components – the
+MTConnect adapter for the machine tool to report states, the MTConnect
+agent to provide MTConnect protocol and <span class="caps">XML</span> formatting, and the
+Interface Control Layer (<span class="caps">ICL</span>) that listens to other devices and
+coordinates the activities. The adapter and agent are the standard
+out-of-the box MTConnect components for the machine tool. Minor
+additions were made to the adapter to support chuck state for use in
+this project. That addition will be proposed to the MTConnect standard
+in future versions (more on that later.)</p>
+<p style="text-align:center;"><img src="/images/2013-06-07-figure1.png" title="Figure 1" alt="Figure 1" /></p>
+<p style="text-align:center;"><em>Figure 1</em></p>
+<p>The <span class="caps">ICL</span> layer is a client of both the <span class="caps">CNC</span> agent and the Robot agent
+and publishes only the state of the interface data items. This allows
+us to relegate the machine status to the machine tool and separate out
+the responsibility to react to the changes in the state of both robot
+and <span class="caps">CNC</span> to the <span class="caps">ICL</span> layer. This layer also instructs the machine tool
+to do one of the following six operations:</p>
+<ol>
+	<li>Open Door</li>
+	<li>Close Door</li>
+	<li>Open Chuck</li>
+	<li>Close Chuck</li>
+	<li>Start Cycle</li>
+	<li>Reset/Stop Cycle</li>
+</ol>
+<p>These actions are invoked on the machine tool controller by sending
+the instructions that resolve into the <span class="caps">PLC</span> or <span class="caps">API</span> specific
+operations. For the demonstration at <span class="caps">NIST</span> this was accomplished by
+invoking a small utility on the controller the set various <span class="caps">PLC</span>
+registers to actuate the chuck, cycle start and reset. We could not
+open and close the door since the machine was not equipped with an
+actuator; to do so would have incurred a large additional cost. The door
+behavior was therefor synthesized for the demonstration.</p>
+<h3>Messaging Architecture</h3>
+<p style="text-align:center;"><img src="/images/2013-06-07-figure2.png" title="Figure 2" alt="Figure 2" /></p>
+<p style="text-align:center;"><em>Figure 2</em></p>
+<p>MTConnect uses a very simple messaging architecture based on the
+MTConnect read-only philosophy. Instead of sending a message
+requesting an action be performed or setting a variable on a remote
+device, MTConnect has each device announce its needs to any
+application or device monitoring its state. In effect,	 the request
+interface is a simple state machine that goes from Not-Ready to
+Ready. And when the interface would like the activity performed, it
+transition to Active.</p>
+<p>In turn, it waits for the device performing the activity, the
+responder, to announce it is actively performing the activity and then
+to change to the complete state when its done. This provides the basis
+for the coordination of actions between devices. Currently this scheme
+has been tested between two devices paired directly. In the future
+enhancements section of this report, we will discuss some ideas to
+extend this paradigm to multiple interconnected devices supporting
+cells or even swarms of devices in a mobile environment.</p>
+<p>Figure 1 shows the state transitions and intermediate as well as
+terminal states. This model is currently implemented using an
+MTConnect Event with the subType of <code>REQUEST</code> or <code>RESPONSE</code> to
+indicate its behavior. In the next section we will have a more
+in-depth discussion of the failure scenarios and how recovery is to be
+handled. The MTConnect machine tool simulator and state machine
+implements many of these scenarios and references to the actual
+implementation will be provided.</p>
+
+<p style="text-align:center;"><img src="/images/2013-06-07-figure3.png" title="Figure 3" alt="Figure 3" /></p>
+<p style="text-align:center;"><em>Figure 3</em></p>
+<p>In the MTConnect standard, the current state of a device can be
+determined by making an <span class="caps">HTTP</span> request and specifying the device name
+and current, for example: <code>http://localhost:5000/cnc/current</code> will
+provide the current state of the “cnc” device on the local
+machine. The result will come back to the client or requestor in <span class="caps">XML</span>
+which they can then parse to find the information they need. From that
+point on, near-real-time data can be received on a push basis (meaning
+there is no need to poll) using the MTConnect streaming capability
+using the sample request. To get a completely contiguous data set, one
+uses the nextSequence number presented in the current to begin the
+push based request as follows:</p>
+<pre>
+http://localhost:5000/cnc/sample?from=100231&amp;interval=0
+</pre>
+<p>This will provide data immediately after it arrives (usually within
+3ms) to the client. The interval=0 means never delay and wait for
+additional data to arrive before sending out the updates. It is
+usually best accompanied by a filter to make sure we don’t load the
+communications or the processes unnecessarily. This can be done by
+providing a path as an argument.</p>
+<pre>
+http://localhost:5000/cnc/sample?from=100231&amp;interval=0&amp;path=//DataItem[@type="CONTROLLER_MODE"or@type="EXECUTION"or@type="CHUCK_STATE"or@type="AVAILABILITY"or\@category="CONDITION”]|//Interfaces
+</pre>
+<p>The example will give us only the controller mode, chuck state,
+execution, conditions, as well as all the information from the
+interfaces. This is the full set of data required by the Robot to
+operate.</p>
+<p>For the purposes of this discussion, we will focus on the interfaces
+and a few key <span class="caps">CNC</span> and Robot states that are required for coordination
+of interaction. The following is based on the implementation of
+interfaces for the <span class="caps">ROS</span>/I MTConnect demonstration. For more information
+on streaming data handling and event processing, please consult Part 1
+of the MTConnect standard.</p>
+<h3>State Machines</h3>
+<h4>The implementation of the machine tool <span class="caps">ICL</span> consists of 7 state machines, they are as follows:</h4>
+<ol>
+	<li>Top level machine tool</li>
+	<li>Material load</li>
+	<li>Material unload</li>
+	<li>Open chuck</li>
+	<li>Close chuck</li>
+	<li>Open door</li>
+	<li>Close door</li>
+</ol>
+<p>The top level state machine controls the main operational and
+non-operation states of the machine tool. There are two top-level
+states the machine can be in, disabled and operational. In the
+disabled state there are two sub-states, not-ready and fault. When the
+machine tool is in an alarm active state, the state machine is in a
+fault state. The other disabled state is not-ready which is when the
+machine tool is not in automatic mode or is not read to execute the
+part program.</p>
+<p>The operational states are one of the following: idle, cycle_start,
+loading, or unloading. The machine tool becomes operational when the
+machine tool’s controller mode is in automatic and it is ready to run
+the part program. If the robot is not ready, the machine tool will
+remain in an idle state until the robot is ready. When the robot is
+ready, the machine tool will transition into the loading or unloading
+states depending on whether the machine has material.</p>
+<p>Once the machine completes the material load, it will transition into
+a cycle start state. The cycle start state will transition once the
+cycle is complete indicated by the execution transitioning from active
+to ready. The machine will then go into an unloading state signaling
+the robot to remove the material.</p>
+<p style="text-align:center;"><img src="/images/2013-06-07-figure4.png" title="Figure 4" alt="Figure 4" /></p>
+<p style="text-align:center;"><em>Figure 4</em></p>
+<p>The other 6 state machines represent two interface types, request and
+response. We have two requests (load and unload) and four responses
+(open/close chuck and door). For this discussion we will be presenting
+only one representation of each, the open door and the material load.</p>
+<p>The response state machine consists of a single level where the states
+are equivalent to the MTConnect interface proposal. The states are
+not_read, ready, active, complete, and fail. The feedback from the
+machine tool’s state variable (DoorState in this instance) will
+trigger the transitions from active to complete. Since we did not have
+a real door actuator, this was simulated by a timer. The chuck state
+did operate off of the machine tool chuck’s solenoids.</p>
+<p>The door interface values will track the states in this state machine
+and are modified directly in this module. The rest of the states and
+transitions are managed externally by the top level state machine or
+the machine tool itself. One additional feature of this state machine
+is it will coordinate with its inverse operation and validate they are
+not both active at the same time. So, in the case of the open door
+interface, the close door interface will fail if the open door is
+currently active. The door cannot be opening and closing at the same
+time.</p>
+<p>Most of the complexity in the response state machine is handling of
+failures. If anything goes wrong on the robot or machine tool side, we
+immediately fail. The failure signal is used to indicate a fault has
+occurred and transitions into a fail state. In both the request and
+the response, a fail transition will transition the top level state
+machine into a failure if the operation is active. More discussion
+will be provided in the Failure and recovery section of this document.</p>
+<p style="text-align:center;"><img src="/images/2013-06-07-figure5.png" title="Figure 5" alt="Figure 5" /></p>
+<p style="text-align:center;"><em>Figure 5</em></p>
+<p>The second class of state machine is the request. The request is in
+one of the following states, not-ready, active, processing, fail, and
+ready. All states except for processing are direct parallels to the
+proposed changes to the MTConnect standard, the processing state
+tracks the active state on the Robot and transitions to not ready once
+the operation is complete. The reason we transition to not-ready
+instead of ready is because once the material has been successfully
+loaded, we cannot load again, therefor the interface is now not
+available until the machine has been unloaded.</p>
+<p style="text-align:center;"><img src="/images/2013-06-07-figure6.png" title="Figure 6" alt="Figure 6" /></p>
+<p style="text-align:center;"><em>Figure 6</em></p>
+<h3>Failure and Recovery</h3>
+<p>This section will discuss the different operational scenarios of the
+machine tools. Since all states and transitions can be derived from
+the events that occur from the state changes in robot and the machine
+tool, we will present the code used to test the state machine and the
+expected behavior. These “tests” will serve as the basis of the
+behavioral documentation for the MTConnect interface definition in the
+subsequent versions of the standard.</p>
+<p>The first set of scenarios will present the positive cases where we
+will show the successful operation of the door and the chuck. The
+later cases will walk through the steps demonstrating what happens
+when a component fails and what the recovery scenario is. All examples
+are “runnable”, meaning they have been executed and validated with the
+current implementation of the machine tool state machine.</p>
+<p>For all the tests, we make sure the devices are in an operation state
+before we begin our scenarios. Otherwise the machine tool interfaces
+will be non-operational. The initiation sequence of events are as
+follows:</p>
+<pre>
+    Given robot Availability is Available
+    And robot ControllerMode is Automatic
+    And robot Execution is Active
+    And robot MaterialLoad is Ready
+    And robot MaterialUnload is Ready
+    And robot OpenDoor is Ready
+    And robot CloseDoor is Ready
+    And robot OpenChuck is Ready
+    And robot CloseChuck is Ready
+    And cnc ControllerMode is Automatic
+    Then cnc MaterialLoad should be Active
+    And cnc MaterialUnload should be Not_Ready
+</pre>
+<p>The machine tool is now in an operational state waiting to have
+material loaded. This is asserted using the following expression and
+will precede all scenarios.</p>
+<pre>
+  Background: Machine Tool and Robot are operational
+    Given Devices are in initial state
+</pre>
+<p>Actuation of the door and chuck are operationally separate for the
+loading and unloading of material. When the machine is in cycle the
+door may not open as well as the chuck being locked. But at other
+times the robot is free to request the machine tool open and close the
+chuck and door to fulfill its needs. The following scenarios test
+these functions.</p>
+<pre>
+  Scenario: Robot asks Cnc to Open Door
+    Given cnc MaterialLoad should be Active
+    When robot OpenDoor becomes Active
+    Then cnc DoorState should be Open
+
+  Scenario: Robot asks Cnc to Open Chuck
+    Given cnc MaterialLoad should be Active
+    When robot OpenChuck becomes Active
+    Then cnc OpenChuck should be Active
+    When cnc ChuckState becomes Unlatched
+    When cnc ChuckState becomes Open
+    Then cnc ChuckState should be Open
+</pre>
+<p>The following is the full scenario of a material load with chuck and
+door operations. Once the robot completes the material load, we
+validate that the machine tool starts the cycle.</p>
+<pre>
+  Scenario: Cnc asks Robot to Load Material
+    Given cnc MaterialLoad should be Active
+    When robot MaterialLoad becomes Active
+</pre>
+<p>The following code statement validates the state of a given state
+machine.</p>
+<pre>
+    Then material load state should be processing
+</pre>
+<p>The following steps open the door and make sure we’re still in a
+loading state.</p>
+<pre>
+    And cnc DoorState should be Open
+    And cnc ChuckState becomes Open
+    And cnc ChuckState should be Open
+    Then machine state should be loading
+</pre>
+<p>Now the chuck is closed and all states are confirmed</p>
+<pre>
+    When robot CloseChuck becomes Active
+    Then cnc CloseChuck should be Active
+    And cnc ChuckState becomes Closed
+    And cnc CloseChuck should be Complete
+    And robot CloseChuck becomes Ready
+    And cnc CloseChuck should be Ready
+</pre>
+<p>After the chuck is closed and the robot has retracted a safe distance,
+the robot requests the machine tool close the door</p>
+<pre>
+    When robot CloseDoor becomes Active
+    Then cnc CloseDoor should be Active
+    Then after 1.2 seconds cnc CloseDoor should be Complete
+    And cnc DoorState should be Closed
+</pre>
+<p>The completes the material load and the machine tool cycle
+starts. Material load becomes not ready indicating the robot cannot
+load more material. The robot is still ready to load if asked to do
+so.</p>
+<pre>
+    When robot MaterialLoad becomes Complete
+    And robot MaterialLoad becomes Ready
+    Then machine state should be cycle_start
+    And cnc MaterialLoad should be Not_Ready
+    And robot MaterialLoad becomes Ready
+</pre>
+
+<h4>Failure Scheario 1:</h4>
+<pre>
+  Scenario: Cnc fails to start cycle
+    Given robot MaterialLoad becomes Active
+</pre>
+<p>The following statement causes the execution data item to fail once it
+attempt to change.</p>
+<pre>
+    And simulate fail exec
+</pre>
+<p>This section creates the correct state of all the data items and then
+takes it through a single set of operations</p>
+<pre>
+    And Chuck is closed
+    And Door is closed
+    And robot MaterialLoad becomes Complete
+    And robot MaterialLoad becomes Ready
+    And cnc MaterialLoad should be Not_Ready
+</pre>
+<p>Make sure we are in the correct fault state when the load completes</p>
+<pre>
+    And machine state should be fault
+</pre>
+
+<h4>Failure scenario 2:</h4>
+<p>The second failure scenario we will discuss is a failure to load a
+piece of material. This results in the machine tool entering into an
+idle state after acknowledging the failure of the material load. The
+scenario assert at the bottom that the machine state should be idle
+since the machine is ready to run, but the robot is not operational.</p>
+<p>The final steps are the robot clearing the fault and becoming ready
+again. The machine tool enters re-enters the loading state since the
+material never arrived successfully. The material unload operation
+work in much the same way with the same recovery pattern.</p>
+<pre>
+  Scenario: Robot can't load material
+    Given cnc MaterialLoad should be Active
+    And robot MaterialLoad becomes Active
+    And Chuck is closed
+    And Door is closed
+
+    When robot MaterialLoad becomes Fail
+    Then cnc MaterialLoad should be Fail
+    And material load state should be fail
+
+    When robot MaterialLoad becomes Not_Ready
+    And robot faults ACTUATOR with "Flame"
+    And machine state should be idle
+
+    When robot clears ACTUATOR
+    And robot MaterialLoad becomes Ready
+    And machine state should be loading
+</pre>
+<p>There are numerous additional scenarios that have been written for
+validation of the project. They can be found at: <a href="https://github.com/mtconnect/ros_bridge/tree/nist/simulator/features">https://github.com/&#8230;/simulator/features</a></p>
+<h3>Enhancements to the MTConnect Standard</h3>
+<p>To implement a basic Robot to machine tool interface where we have one
+Robot loading one Machine Tool, the possible additions to the MTConnect
+standard are pretty minimal. The following data items were required on
+the machine tool side to represent the states of all components and
+the necessary interface events.</p>
+<ol>
+	<li><code>ChuckState</code> was added to the primary <code>Rotary</code> axis “C” with the values of <code>OPEN</code>, <code>CLOSED</code>, <code>UNLATCHED</code> and <code>UNAVAILABLE</code>.</li>
+	<li>A top level device Interfaces component was added to hold all the interfaces.</li>
+	<li>A <code>MaterialLoader</code> component was added as a child of the Interfaces component with the following data items:
+	<ol>
+		<li><code>MATERIAL_LOAD</code> with subtype <code>REQUEST</code>.</li>
+		<li><code>MATERIAL_UNLOAD</code> with subtype <code>REQUEST</code>.</li>
+		<li><code>LINK_STATE</code> that indicates if the interface is active with values <code>ACTIVE</code> , <code>INACTIVE</code>, or <code>UNAVAILABLE</code>.</li>
+	</ol></li>
+	<li>A <code>ChuckInterface</code> component was added as a child of the Interfaces component with the following data items:
+	<ol>
+		<li><code>OPEN_CHUCK</code> with subtype of <code>RESPONSE</code>.</li>
+		<li><code>CLOSE_CHUCK</code> with subtype of <code>RESPONSE</code>.</li>
+	</ol></li>
+	<li>A <code>DoorInterface</code> component was added as a child of the Interfaces component with the following data items:
+	<ol>
+		<li><code>OPEN_DOOR</code> with subtype of <code>RESPONSE</code>.</li>
+		<li><code>CLOSE_CLOSE</code> with subtype of <code>RESPONSE</code>.</li>
+	</ol></li>
+</ol>
+<p>The remainder of the machine tool components and data items are the
+standard composition of any standard Mazak implementation. The entire
+Devices.xml file is provided below. The sections in bold are the areas
+we have used to drive the state machine, the sections in bold italic
+are new to the standard.</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Devices.xml  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>  <span class="cp">&lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39;?&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;MTConnectDevices</span> <span class="na">xmlns:mt=</span><span class="s">&#39;urn:mtconnect.org:MTConnectDevices:1.2&#39;</span> <span class="na">xmlns:xsi=</span><span class="s">&#39;http://www.w3.org/2001/XMLSchema-instance&#39;</span> <span class="na">xmlns=</span><span class="s">&#39;urn:mtconnect.org:MTConnectDevices:1.2&#39;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&#39;urn:mtconnect.org:MTConnectDevices:1.2 http://www.mtconnect.org/schemas/MTConnectDevices_1.2.xsd&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;Header</span> <span class="na">creationTime=</span><span class="s">&#39;2013-04-22T15:24:26Z&#39;</span> <span class="na">assetBufferSize=</span><span class="s">&#39;1024&#39;</span> <span class="na">sender=</span><span class="s">&#39;localhost&#39;</span> <span class="na">assetCount=</span><span class="s">&#39;0&#39;</span> <span class="na">version=</span><span class="s">&#39;1.2&#39;</span> <span class="na">instanceId=</span><span class="s">&#39;0&#39;</span> <span class="na">bufferSize=</span><span class="s">&#39;131072&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;Devices&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;Device</span> <span class="na">name=</span><span class="s">&#39;cnc&#39;</span> <span class="na">uuid=</span><span class="s">&#39;cnc&#39;</span> <span class="na">id=</span><span class="s">&#39;cnc_1&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Description</span> <span class="na">model=</span><span class="s">&#39;QTN&#39;</span> <span class="na">manufacturer=</span><span class="s">&#39;Mazak&#39;</span><span class="nt">&gt;</span>Mazak Quickturn - Mazak Quickturn for ROS/MTConnect<span class="nt">&lt;/Description&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;AVAILABILITY&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;dtop_2&#39;</span> <span class="na">name=</span><span class="s">&#39;avail&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Components&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;Axes</span> <span class="na">name=</span><span class="s">&#39;base&#39;</span> <span class="na">id=</span><span class="s">&#39;base_3&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;ACTUATOR&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;base_4&#39;</span> <span class="na">name=</span><span class="s">&#39;servo_cond&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;Components&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;Linear</span> <span class="na">name=</span><span class="s">&#39;X&#39;</span> <span class="na">id=</span><span class="s">&#39;X_5&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;POSITION&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;X_6&#39;</span> <span class="na">name=</span><span class="s">&#39;Xabs&#39;</span> <span class="na">subType=</span><span class="s">&#39;ACTUAL&#39;</span> <span class="na">units=</span><span class="s">&#39;MILLIMETER&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;INCH&#39;</span> <span class="na">coordinateSystem=</span><span class="s">&#39;MACHINE&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;POSITION&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;X_7&#39;</span> <span class="na">name=</span><span class="s">&#39;Xtravel&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;LOAD&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;X_8&#39;</span> <span class="na">name=</span><span class="s">&#39;Xload&#39;</span> <span class="na">units=</span><span class="s">&#39;PERCENT&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;PERCENT&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;AXIS_FEEDRATE&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;X_9&#39;</span> <span class="na">name=</span><span class="s">&#39;Xfrt&#39;</span> <span class="na">units=</span><span class="s">&#39;MILLIMETER/SECOND&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;FOOT/MINUTE&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/Linear&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;Linear</span> <span class="na">name=</span><span class="s">&#39;Z&#39;</span> <span class="na">id=</span><span class="s">&#39;Z_10&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;POSITION&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;Z_11&#39;</span> <span class="na">name=</span><span class="s">&#39;Zabs&#39;</span> <span class="na">subType=</span><span class="s">&#39;ACTUAL&#39;</span> <span class="na">units=</span><span class="s">&#39;MILLIMETER&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;INCH&#39;</span> <span class="na">coordinateSystem=</span><span class="s">&#39;MACHINE&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;POSITION&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;Z_12&#39;</span> <span class="na">name=</span><span class="s">&#39;Ztravel&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;LOAD&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;Z_13&#39;</span> <span class="na">name=</span><span class="s">&#39;Zload&#39;</span> <span class="na">units=</span><span class="s">&#39;PERCENT&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;PERCENT&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;AXIS_FEEDRATE&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;Z_14&#39;</span> <span class="na">name=</span><span class="s">&#39;Zfrt&#39;</span> <span class="na">units=</span><span class="s">&#39;MILLIMETER/SECOND&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;FOOT/MINUTE&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/Linear&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;Rotary</span> <span class="na">name=</span><span class="s">&#39;C&#39;</span> <span class="na">id=</span><span class="s">&#39;C_15&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>                  <span class="c">&lt;!-- Rotary Part --&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;LOAD&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;C_16&#39;</span> <span class="na">name=</span><span class="s">&#39;Cload&#39;</span> <span class="na">units=</span><span class="s">&#39;PERCENT&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;PERCENT&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;ANGULAR_VELOCITY&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;C_17&#39;</span> <span class="na">name=</span><span class="s">&#39;Cfrt&#39;</span> <span class="na">units=</span><span class="s">&#39;DEGREE/SECOND&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;DEGREE/MINUTE&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;ANGLE&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;C_18&#39;</span> <span class="na">name=</span><span class="s">&#39;Cdeg&#39;</span> <span class="na">subType=</span><span class="s">&#39;ACTUAL&#39;</span> <span class="na">units=</span><span class="s">&#39;DEGREE&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;DEGREE&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;ANGLE&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;C_19&#39;</span> <span class="na">name=</span><span class="s">&#39;Ctravel&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="c">&lt;!-- Spindle part --&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;SPINDLE_SPEED&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;C_20&#39;</span> <span class="na">name=</span><span class="s">&#39;Srpm&#39;</span> <span class="na">subType=</span><span class="s">&#39;ACTUAL&#39;</span> <span class="na">units=</span><span class="s">&#39;REVOLUTION/MINUTE&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;REVOLUTION/MINUTE&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;LOAD&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;C_21&#39;</span> <span class="na">name=</span><span class="s">&#39;Sload&#39;</span> <span class="na">units=</span><span class="s">&#39;PERCENT&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;PERCENT&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;TEMPERATURE&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;C_22&#39;</span> <span class="na">name=</span><span class="s">&#39;Stemp&#39;</span> <span class="na">units=</span><span class="s">&#39;CELSIUS&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;CELSIUS&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;ROTARY_MODE&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;C_23&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                    <span class="nt">&lt;Constraints&gt;</span>
+</span><span class='line'>                      <span class="nt">&lt;Value&gt;</span>SPINDLE<span class="nt">&lt;/Value&gt;</span>
+</span><span class='line'>                      <span class="nt">&lt;Value&gt;</span>INDEX<span class="nt">&lt;/Value&gt;</span>
+</span><span class='line'>                      <span class="nt">&lt;Value&gt;</span>CONTOUR<span class="nt">&lt;/Value&gt;</span>
+</span><span class='line'>                    <span class="nt">&lt;/Constraints&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;/DataItem&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;LOAD&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;C_24&#39;</span> <span class="na">name=</span><span class="s">&#39;Sload_cond&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;TEMPERATURE&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;C_25&#39;</span> <span class="na">name=</span><span class="s">&#39;Stemp_cond&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;CHUCK_STATE&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;C_26&#39;</span> <span class="na">name=</span><span class="s">&#39;chuck_status&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/Rotary&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;Rotary</span> <span class="na">name=</span><span class="s">&#39;C2&#39;</span> <span class="na">nativeName=</span><span class="s">&#39;S2&#39;</span> <span class="na">id=</span><span class="s">&#39;C2_27&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;SPINDLE_SPEED&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;C2_28&#39;</span> <span class="na">name=</span><span class="s">&#39;S2rpm&#39;</span> <span class="na">subType=</span><span class="s">&#39;ACTUAL&#39;</span> <span class="na">units=</span><span class="s">&#39;REVOLUTION/MINUTE&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;REVOLUTION/MINUTE&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;LOAD&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;C2_29&#39;</span> <span class="na">name=</span><span class="s">&#39;S2load&#39;</span> <span class="na">units=</span><span class="s">&#39;PERCENT&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;PERCENT&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;TEMPERATURE&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;C2_30&#39;</span> <span class="na">name=</span><span class="s">&#39;S2temp&#39;</span> <span class="na">units=</span><span class="s">&#39;CELSIUS&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;CELSIUS&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;ROTARY_MODE&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;C2_31&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                    <span class="nt">&lt;Constraints&gt;</span>
+</span><span class='line'>                      <span class="nt">&lt;Value&gt;</span>SPINDLE<span class="nt">&lt;/Value&gt;</span>
+</span><span class='line'>                    <span class="nt">&lt;/Constraints&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;/DataItem&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;LOAD&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;C2_32&#39;</span> <span class="na">name=</span><span class="s">&#39;S2load_cond&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;TEMPERATURE&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;C2_33&#39;</span> <span class="na">name=</span><span class="s">&#39;S2temp_cond&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/Rotary&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/Components&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/Axes&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;Controller</span> <span class="na">name=</span><span class="s">&#39;controller&#39;</span> <span class="na">id=</span><span class="s">&#39;controller_34&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;COMMUNICATIONS&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;controller_35&#39;</span> <span class="na">name=</span><span class="s">&#39;comms_cond&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;LOGIC_PROGRAM&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;controller_36&#39;</span> <span class="na">name=</span><span class="s">&#39;logic_cond&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;SYSTEM&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;controller_37&#39;</span> <span class="na">name=</span><span class="s">&#39;system_cond&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;EMERGENCY_STOP&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;controller_38&#39;</span> <span class="na">name=</span><span class="s">&#39;estop&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;Components&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;Path</span> <span class="na">name=</span><span class="s">&#39;path&#39;</span> <span class="na">id=</span><span class="s">&#39;path_39&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;SPINDLE_SPEED&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;path_40&#39;</span> <span class="na">name=</span><span class="s">&#39;Sovr&#39;</span> <span class="na">subType=</span><span class="s">&#39;OVERRIDE&#39;</span> <span class="na">units=</span><span class="s">&#39;PERCENT&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;PERCENT&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;PROGRAM&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_41&#39;</span> <span class="na">name=</span><span class="s">&#39;program&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;PROGRAM&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_42&#39;</span> <span class="na">name=</span><span class="s">&#39;subprogram&#39;</span> <span class="na">subType=</span><span class="s">&#39;x:SUB&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;LINE&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_43&#39;</span> <span class="na">name=</span><span class="s">&#39;line&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;x:UNIT&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_44&#39;</span> <span class="na">name=</span><span class="s">&#39;unitNum&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;x:SEQUENCE_NUMBER&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_45&#39;</span> <span class="na">name=</span><span class="s">&#39;sequenceNum&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;PART_COUNT&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_46&#39;</span> <span class="na">name=</span><span class="s">&#39;PartCountAct&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;PATH_FEEDRATE&#39;</span> <span class="na">category=</span><span class="s">&#39;SAMPLE&#39;</span> <span class="na">id=</span><span class="s">&#39;path_47&#39;</span> <span class="na">name=</span><span class="s">&#39;Fact&#39;</span> <span class="na">subType=</span><span class="s">&#39;ACTUAL&#39;</span> <span class="na">units=</span><span class="s">&#39;MILLIMETER/SECOND&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;FOOT/MINUTE&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;PATH_FEEDRATE&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_48&#39;</span> <span class="na">name=</span><span class="s">&#39;Frapidovr&#39;</span> <span class="na">subType=</span><span class="s">&#39;OVERRIDE&#39;</span> <span class="na">units=</span><span class="s">&#39;PERCENT&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;PERCENT&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;PATH_FEEDRATE&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_49&#39;</span> <span class="na">name=</span><span class="s">&#39;Fovr&#39;</span> <span class="na">subType=</span><span class="s">&#39;OVERRIDE&#39;</span> <span class="na">units=</span><span class="s">&#39;PERCENT&#39;</span> <span class="na">nativeUnits=</span><span class="s">&#39;PERCENT&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;TOOL_ID&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_50&#39;</span> <span class="na">name=</span><span class="s">&#39;Tool_number&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;x:TOOL_GROUP&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_51&#39;</span> <span class="na">name=</span><span class="s">&#39;Tool_group&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;x:TOOL_SUFFIX&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_52&#39;</span> <span class="na">name=</span><span class="s">&#39;Tool_suffix&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;EXECUTION&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_53&#39;</span> <span class="na">name=</span><span class="s">&#39;execution&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;CONTROLLER_MODE&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_54&#39;</span> <span class="na">name=</span><span class="s">&#39;mode&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;x:COMMENT&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_55&#39;</span> <span class="na">name=</span><span class="s">&#39;program_cmt&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;x:COMMENT&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_56&#39;</span> <span class="na">name=</span><span class="s">&#39;subprogram_cmt&#39;</span> <span class="na">subType=</span><span class="s">&#39;x:SUB&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;x:DURATION&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_57&#39;</span> <span class="na">name=</span><span class="s">&#39;auto_time&#39;</span> <span class="na">subType=</span><span class="s">&#39;x:AUTO&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;x:DURATION&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_58&#39;</span> <span class="na">name=</span><span class="s">&#39;total_time&#39;</span> <span class="na">subType=</span><span class="s">&#39;x:TOTAL&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;x:DURATION&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_59&#39;</span> <span class="na">name=</span><span class="s">&#39;cut_time&#39;</span> <span class="na">subType=</span><span class="s">&#39;x:CUT&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;MOTION_PROGRAM&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;path_60&#39;</span> <span class="na">name=</span><span class="s">&#39;motion_cond&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;SYSTEM&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;path_61&#39;</span> <span class="na">name=</span><span class="s">&#39;path_system&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;x:PALLET_NUM&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;path_62&#39;</span> <span class="na">name=</span><span class="s">&#39;pallet_num&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/Path&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/Components&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/Controller&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;Systems</span> <span class="na">name=</span><span class="s">&#39;systems&#39;</span> <span class="na">id=</span><span class="s">&#39;systems_63&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;Components&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;Electric</span> <span class="na">name=</span><span class="s">&#39;electric&#39;</span> <span class="na">id=</span><span class="s">&#39;electric_64&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;POWER_STATE&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;electric_65&#39;</span> <span class="na">name=</span><span class="s">&#39;power&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;TEMPERATURE&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;electric_66&#39;</span> <span class="na">name=</span><span class="s">&#39;electric_temp&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/Electric&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;Hydraulic</span> <span class="na">name=</span><span class="s">&#39;hydraulic&#39;</span> <span class="na">id=</span><span class="s">&#39;hydraulic_67&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;PRESSURE&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;hydraulic_68&#39;</span> <span class="na">name=</span><span class="s">&#39;hydra_cond&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/Hydraulic&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;Coolant</span> <span class="na">name=</span><span class="s">&#39;coolant&#39;</span> <span class="na">id=</span><span class="s">&#39;coolant_69&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;PRESSURE&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;coolant_70&#39;</span> <span class="na">name=</span><span class="s">&#39;coolant_pres&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;TEMPERATURE&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;coolant_71&#39;</span> <span class="na">name=</span><span class="s">&#39;coolant_temp&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;LEVEL&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;coolant_72&#39;</span> <span class="na">name=</span><span class="s">&#39;coolant_level&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/Coolant&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;Pneumatic</span> <span class="na">name=</span><span class="s">&#39;pneumatic&#39;</span> <span class="na">id=</span><span class="s">&#39;pneumatic_73&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;PRESSURE&#39;</span> <span class="na">category=</span><span class="s">&#39;CONDITION&#39;</span> <span class="na">id=</span><span class="s">&#39;pneumatic_74&#39;</span> <span class="na">name=</span><span class="s">&#39;pneu_cond&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/Pneumatic&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/Components&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/Systems&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;Interfaces</span> <span class="na">name=</span><span class="s">&#39;interfaces&#39;</span> <span class="na">id=</span><span class="s">&#39;interfaces_75&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;Components&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;MaterialLoader</span> <span class="na">name=</span><span class="s">&#39;material_loader&#39;</span> <span class="na">id=</span><span class="s">&#39;material_loader_76&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;MATERIAL_LOAD&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;material_loader_77&#39;</span> <span class="na">name=</span><span class="s">&#39;material_load&#39;</span> <span class="na">subType=</span><span class="s">&#39;REQUEST&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;MATERIAL_UNLOAD&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;material_loader_78&#39;</span> <span class="na">name=</span><span class="s">&#39;material_unload&#39;</span> <span class="na">subType=</span><span class="s">&#39;REQUEST&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;LINK_STATE&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;material_loader_79&#39;</span> <span class="na">name=</span><span class="s">&#39;robo_link&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/MaterialLoader&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;ChuckInterface</span> <span class="na">name=</span><span class="s">&#39;chuck_interface&#39;</span> <span class="na">id=</span><span class="s">&#39;chuck_interface_80&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;OPEN_CHUCK&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;chuck_interface_81&#39;</span> <span class="na">name=</span><span class="s">&#39;open_chuck&#39;</span> <span class="na">subType=</span><span class="s">&#39;RESPONSE&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;CLOSE_CHUCK&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;chuck_interface_82&#39;</span> <span class="na">name=</span><span class="s">&#39;close_chuck&#39;</span> <span class="na">subType=</span><span class="s">&#39;RESPONSE&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/ChuckInterface&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;DoorInterface</span> <span class="na">name=</span><span class="s">&#39;door_interface&#39;</span> <span class="na">id=</span><span class="s">&#39;door_interface_83&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;OPEN_DOOR&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;door_interface_84&#39;</span> <span class="na">name=</span><span class="s">&#39;open_door&#39;</span> <span class="na">subType=</span><span class="s">&#39;RESPONSE&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                  <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;CLOSE_DOOR&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;door_interface_85&#39;</span> <span class="na">name=</span><span class="s">&#39;close_door&#39;</span> <span class="na">subType=</span><span class="s">&#39;RESPONSE&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/DoorInterface&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/Components&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/Interfaces&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;Door</span> <span class="na">name=</span><span class="s">&#39;door&#39;</span> <span class="na">id=</span><span class="s">&#39;door_86&#39;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;DataItem</span> <span class="na">type=</span><span class="s">&#39;DOOR_STATE&#39;</span> <span class="na">category=</span><span class="s">&#39;EVENT&#39;</span> <span class="na">id=</span><span class="s">&#39;door_87&#39;</span> <span class="na">name=</span><span class="s">&#39;door_state&#39;</span><span class="nt">/&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/Door&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;Stock</span> <span class="na">name=</span><span class="s">&quot;stock&quot;</span> <span class="na">id=</span><span class="s">&quot;stock&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;DataItems&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;DataItem</span> <span class="na">category=</span><span class="s">&quot;EVENT&quot;</span> <span class="na">id=</span><span class="s">&quot;material&quot;</span> <span class="na">name=</span><span class="s">&quot;material&quot;</span> <span class="na">type=</span><span class="s">&quot;MATERIAL&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/DataItems&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/Stock&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Components&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/Device&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/Devices&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/MTConnectDevices&gt;</span>
+</span></code></pre></td></tr></table></div></figure></div></notextile></p>
+<h3>Future Enhancements</h3>
+<p>The most significant future enhancement to the standard and the
+messaging semantics will be the addition of multiple devices and a
+many-to-many relationship between machine tools, <span class="caps">CMMS</span>, gauges, and
+multiple fixed or mobile robots. This can be achieved using an
+extension to the standard to allow for interface bindings.</p>
+<p>We are proposing a lazy locking scheme where we provide a new data
+item within each interface that allows the devices to “pair” for the
+duration of the operation. For example, during the material load
+operation, the machine tool and the robot will each have a data item,
+for the sake of discussion, we can call it Binding that will have the
+following values: <code>UNAVAILABLE</code>, <code>AVAILABLE</code>, or &lt;device-id&gt;. If it is
+<code>AVAILABLE</code> then it can be bound to a device that is capable of
+fulfilling the request. Once bound it will change to the device Id of
+the associated device.</p>
+<p>The mechanism will resolve disputes by allowing the requestor to
+choose the responder from the available devices that are
+volunteering. So, if a machine tool wants material loaded and the cell
+has multiple Robots capable of loading material, multiple Robots may
+try to bind to the request, but only one will be accepted. The
+sequence will be as follows:</p>
+<ol>
+	<li>Cnc 1 material loader binding <code>AVAILABLE</code></li>
+	<li>Cnc 1 material loader <code>MaterialLoad</code> <code>ACTIVE</code></li>
+	<li>Robot 1 material loader binding Cnc 1</li>
+	<li>Robot 2 material loader binding Cnc 1</li>
+	<li>Cnc 1 material loader binding Robot 2</li>
+	<li>Robot 1 material loader binding <code>AVAILABLE</code></li>
+	<li>Robot 2 material loader <code>MaterialLoad</code> <code>ACTIVE</code></li>
+	<li>Robot 2 material loader <code>MaterialLoad</code> <code>COMPLETE</code></li>
+	<li>Cnc 1 material loader <code>MaterialLoad</code> <code>READY</code></li>
+	<li>Robot 2 material loader <code>MaterialLoad</code> <code>READY</code></li>
+	<li>Cnc 1 material loader binding <code>AVAILABLE</code></li>
+	<li>Robot 2 material loader binding <code>AVAILABLE</code></li>
+</ol>
+<p>In this way the robot and the cnc will coordinate the associations and
+temporary bindings between devices. The requestor selection is easiest
+way to resolve the possible locking issues between multiple devices
+and still have a complete read-only interface. The failure scenarios
+remain mainly the same with some bind timeout issues that will need to
+be resolved.</p>
+<p>This is a very high level conceptual model and will require full
+design, architecture, and testing as the previous interface went
+through. This same architecture should would with both mobile and
+stationary devices (though that will need to be explored as well.) The
+scheme borrows from optimistic locking mechanisms in databases and
+other technologies for distributed resource sharing.</p>
+<p>Additional device models and interactions will also be required if
+devices other than <span class="caps">CNC</span> machine tools are involved in these extensions
+as well. This architecture will be well suited for an electronic
+manufacture floor with full automation and device monitoring as well
+as resource management.</p></div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Will Sobel</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T23:38:00-07:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mtconnect/'>mtconnect</a>, <a class='category' href='/blog/categories/robot/'>robot</a>, <a class='category' href='/blog/categories/ros-i/'>ros-i</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration/" data-via="systeminsights" data-counturl="http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/06/05/introducing-the-vrtk-package/" title="Previous Post: Introducing the vrtk package">&laquo; Introducing the vrtk package</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration/">MTConnect ROS-I Robot CNC Integration</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/05/introducing-the-vrtk-package/">Introducing the Vrtk Package</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/03/we-are-hiring/">We Are Hiring!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/energy-consumption-in-manufacturing/">Top Manufacturing Energy Consumers: A Close Look at the Paper Industry</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/01/chennai-ruby-meetup/">chennai.rb Meetup</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $(function(){
+      getTwitterFeed("systeminsights", 4, false);
+    });
+  </script>
+  
+    <a href="http://twitter.com/systeminsights" class="twitter-follow-button" data-show-count="false">Follow @systeminsights</a>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - System Insights -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'manufacturingbigdata';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration/';
+        var disqus_url = 'http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

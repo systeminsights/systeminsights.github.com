@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: hiring | Manufacturing Big Data]]></title>
+  <link href="http://www.manufacturingbigdata.com/blog/categories/hiring/atom.xml" rel="self"/>
+  <link href="http://www.manufacturingbigdata.com/"/>
+  <updated>2013-06-11T10:39:59-07:00</updated>
+  <id>http://www.manufacturingbigdata.com/</id>
+  <author>
+    <name><![CDATA[System Insights]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[We Are Hiring!]]></title>
+    <link href="http://www.manufacturingbigdata.com/blog/2013/06/03/we-are-hiring/"/>
+    <updated>2013-06-03T06:00:00-07:00</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2013/06/03/we-are-hiring</id>
+    <content type="html"><![CDATA[<p>At System Insights, we build <a href="http://systeminsights.com/vimana/">vimana</a>, the world&rsquo;s most advanced platform for manufacturing data analytics. We are a small, fast-growing company with 15 employees globally and we are looking to grow our R&amp;D center in Chennai, India. We are currently hiring for the following positions in Chennai:</p>
+
+<p><strong>Manufacturing Engineer</strong></p>
+
+<p>You will be responsible for leading the deployment of vimana at customer facilities around the world, and working with our users to deliver vimana&rsquo;s value.</p>
+
+<ul>
+<li>B.E/B.Tech from reputed a college/university, preferably in Mechanical Engineering (or equivalent) with strong academics</li>
+<li>2~3 Years experience</li>
+<li>Hands-on shopfloor experience with Production/Process Engineering, New Product Development, Industrial Engineering, Manufacturing Systems</li>
+<li>Experience/familiarity with Value Stream Mapping, 6 Sigma, TPM etc., a plus</li>
+<li>Excellent communication skills</li>
+</ul>
+
+
+<p><strong>SW Developer</strong></p>
+
+<p>You will be responsible for developing the cutting-edge software technologies that power vimana. You will be working closely with our development team based in Berkeley, California.</p>
+
+<ul>
+<li>Strong experience in Ruby, AJAX, Java Script, HTML/CSS (at least 2 years)</li>
+<li>Experience with Web 2.0 development, Object Oriented Design and MVC Frameworks</li>
+<li>Experience with SQL and noSQL technologies</li>
+<li>Knowledge of HTML5, Git</li>
+<li>Experience in using testing frameworks and unit tests</li>
+<li>Excellent communication skills</li>
+</ul>
+
+
+<p><strong>Dev-Ops Lead</strong></p>
+
+<p>You will be responsible for monitoring, managing, and maintaining the vimana platform for SaaS and on-site deployments. You will be responsible for building and growing a team of System Administrators and DevOps Engineers to maintain the vimana platform. You will be working closely with our development team based in Berkeley, California.</p>
+
+<ul>
+<li>Strong experience in deploying, configuring and managing applications using Amazon AWS (EC2, S3, RDS, EMR &hellip;)</li>
+<li>Skills in mongodb and SQL: Replication, sharding, tuning</li>
+<li>Experience with Chef or other configuration management tool</li>
+<li>Basic understanding of network topologies and configuration (routing, subnets, NAT).</li>
+<li>Experience in application monitoring and log file management for multi-function, multi-tenant applications</li>
+<li>System administration skills for Linux (Ubuntu, Centos) and Windows</li>
+<li>Lead and work with a 24x7 distributed global team</li>
+</ul>
+
+
+<p><strong>R&amp;D Engineer</strong></p>
+
+<p>You will join our R&amp;D team to develop next-generation technology for manufacturing data analytics, this includes: data analytics, software development, and hardware engineering.</p>
+
+<ul>
+<li>Fresher/recent graduate with strong academics</li>
+<li>Experience with technical programming languages like Matlab or R</li>
+<li>Good project experience</li>
+<li>Excellent communication skills</li>
+</ul>
+
+
+<p>If you are interested, please fill out <a href="http://systeminsights.wufoo.com/forms/z7x4m1/">this application</a> (don&rsquo;t forget to attach your resume!).</p>
+]]></content>
+  </entry>
+  
+</feed>

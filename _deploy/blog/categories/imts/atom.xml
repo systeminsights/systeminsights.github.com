@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: imts | Manufacturing Big Data]]></title>
+  <link href="http://www.manufacturingbigdata.com/blog/categories/imts/atom.xml" rel="self"/>
+  <link href="http://www.manufacturingbigdata.com/"/>
+  <updated>2013-06-11T10:39:59-07:00</updated>
+  <id>http://www.manufacturingbigdata.com/</id>
+  <author>
+    <name><![CDATA[System Insights]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Oracle Partnership at IMTS]]></title>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/09/04/imts-oracle-partnership/"/>
+    <updated>2012-09-04T09:53:00-07:00</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2012/09/04/imts-oracle-partnership</id>
+    <content type="html"><![CDATA[<p>We are very happy to announce that we will be partnering with <a href="http://www.oracle.com">Oracle</a> during <a href="http://www.imts.com/">IMTS</a> to showcase integrated solutions for manufacturing data interoperability, collection, and analysis. We will be discussing the use of Java SE Embedded in building a ubiquitous embedded platform for collecting data from the shopfloor. <a href="http://www.oracle.com/technetwork/java/embedded/overview/javase/index.html">Java SE Embedded</a> has been used in products across a diverse spectrum of industries, ranging from RFID readers to parking meters to ATMs to in-flight video systems to POS terminals to wearable systems. This makes it a great fit in the manufacturing world, where we need hardware devices that can seamlessly and ubiquitously integrate data across the shop floor.</p>
+
+<p>Java SE Embedded will be applied in developing a hardware platform that can collect data across proprietary interfaces in the shopfloor, perform basic analysis, and then stream it in the MTConnect standard. Selecting MTConnect was a no-brainer – it is widely supported by the industry, it is lightweight and easy to implement, and gives us a lot of flexibility in deployment. MTConnect is also natively supported by our <a href="http://www.systeminsights.com">vimana</a> platform for manufacturing big data analysis, and MTConnect allows us to quickly integrate the factory data feeds for further analysis and reporting using vimana.</p>
+
+<p>We are very excited about our partnership with Oracle, and will be talking more about it at IMTS. You can catch us Booth N-6995 with Oracle, between September 10th and 15th, at McCormick Place, Chicago.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[IMTS 2012]]></title>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/08/22/updates-and-imts/"/>
+    <updated>2012-08-22T13:54:00-07:00</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2012/08/22/updates-and-imts</id>
+    <content type="html"><![CDATA[<p>We are back after a brief hiatus. The last few weeks have been eventful, to say the least, as we get ready for <a href="http://www.imts.com">IMTS 2012</a> in Chicago between September 10th and 15th. At IMTS we will be showcasing the <strong>vimana</strong> software platform for manufacturing productivity improvement and the <strong>ConnectOne</strong> hardware platform for MTConnect-based data acquisition and interoperability.</p>
+
+<p>Catch us at S-8300 with <a href="http://www.imts.com/visitor/exdir/exhibitor_details.cfm?exhid=00000021">Mazak</a> and at N-6995 with <a href="http://www.imts.com/visitor/exdir/exhibitor_details.cfm?exhid=00062662&amp;CFID=11122638&amp;CFTOKEN=40146151">Oracle</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

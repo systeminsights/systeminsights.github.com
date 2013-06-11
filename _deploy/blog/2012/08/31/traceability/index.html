@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Process Traceability and Big Data - Manufacturing Big Data</title>
+  <meta name="author" content="System Insights">
+
+  
+  <meta name="description" content="In a previous post we looked at the different things we can do with Big Data. Lets examine one of the applications in more detail: Process &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.manufacturingbigdata.com/blog/2012/08/31/traceability">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Manufacturing Big Data" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-5832901-5']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Manufacturing Big Data</a></h1>
+  
+    <h2>System Insights Corporate Blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.manufacturingbigdata.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Process Traceability and Big Data</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-31T22:47:00-07:00" pubdate data-updated="true">Aug 31<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In a previous post we looked at the different things we can do with Big Data. Lets examine one of the applications in more detail: Process Traceability.</p>
+
+<p>Process Traceability can be understood as being able to trace every process that happened to a part as it got manufactured. Its important to make a distinction here between <em>Part</em> Traceability and <em>Process</em> Traceability. Part Traceability primarily deals with what part was manufactured, and when. Process Traceability, on the other hand, builds on this information, and expands it greatly to understand exactly how the part was manufactured. Process Traceability is a key requirement in Aerospace manufacturing since manufacturing defects can have severe impacts on the quality of parts, and with capable Process Traceability systems we can go back in time and find out exactly how and when the manufacturing defect was introduced into the part. Of course, Process Traceability has applications in other quality-critical domins as well including medical devices and engine components.</p>
+
+<p>Currently, most companies only have Part Traceability systems (if any) &mdash; they know when which part was manufactured. When automated, this type of data is collected by MES or ERP systems, and with the right kind of aggregation and rollups, the data can reveal when a particular batch of parts was manufatured and what was the heat number (or lot number) of the castings/forgings that went into it. But this is not enough to fully understand what happened when a part was made. To build a full-fledged Process Traceability system, lets see what kind of data we can collect from the shopfloor:</p>
+
+<ul>
+<li><strong>Identity</strong> data is the most basic kind required for part traceability. This data tells us what is being made, how much was made, and when was it made. <em>Examples: Heat ID, Batch ID, Operator ID.</em></li>
+<li><strong>Operational</strong> data can tell us what the machine was doing when it had a part associated with it. We can understand the utilization of a device when it was operating on a part, how long the device was in &ldquo;auto&rdquo; mode versus &ldquo;manual&rdquo; mode, and the different downtimes that device experienced when it was working on the part. Knowing the downtimes, for instance, can indicate potential issues with part quality. For example, if a device had repeated unplanned maintenance downtimes when it had a part on it, its quite likely that the part has some quality problems as well, and might require additional metrology. <em>Examples: Device uptime, downtime, modes, states.</em></li>
+<li><strong>Diagnostic</strong> data can further embellish the correlations that we can get started with using Operational data. Alarm and condition data can reveal specific issues in the device that is manufaturing a part. <em>Examples: Alarms, warnings, messages, notifications.</em></li>
+<li><strong>Process</strong> data can help us get into a lot more detail, and can reveal how specific features were generated on the part. For example, in high speed machining of aerospace alloys, its very important to preserve a specific chip velocity when features are being created. But interpolation errors and machine tool limitations can result in significant variations between the actual feedrate and the planned feedrate. With process data, we can precisely know when these deviations happened, and can use it in understanding its impact. <em>Examples: Positions, velocities, acceleration, flow rates.</em></li>
+<li><strong>Environmental</strong> data can tell us the impact of the part as its being manufactured. With detailed knowledge of the resource flows associated with  the part, we can estimate its environmental impact. A high level of detail can also reveal which stages of the production process have the greatest impact, and that knowledge can help in targeting energy efficiency improvements. <em>Examples: Resource usage, energy consumption, effluents and emissions.</em></li>
+</ul>
+
+
+<p>The bigger challenge, is to be able to intelligently and efficiently operate on this massive set of data, and find pertinent information associated with a part. And here we can broadly look at three kinds of queries:</p>
+
+<ul>
+<li><strong>Part Search</strong>: Here we are trying to find all the information associated with a specific part (or family of parts). We start with some identifying characteristic for the part (or the family of parts). This can be a Part ID, a Heat ID, or even the day the part was manufactured. We can also identify parts based on other events, like the first part manufactured after a power outage. Information associated with a part can include all of the five kinds discussed above.</li>
+<li><strong>Similarity Search</strong>: Here we are trying to find similar parts based on one or more specific parts that have been identified. The idea here is that we have flagged a certain part or set of parts, and we want to scan our historical system and find other parts that share a similar process history. This is very useful when parts are being quarantined after a quality spill and we are trying to find all the other parts that need to be quarantined. If we know the ID of one part, then we can find other parts similar to it based on a variety of criteria, including: heat code, operator who made the defective part, machine condition, and alarm sequence during manufacture.</li>
+<li><strong>&ldquo;Black Swan&rdquo; Search</strong>: This is perhaps the most interesting application of a Process Traceability system, and it looks at identifying &ldquo;black swans&rdquo;, or the rare events that are anomalous to the norm. These queries will attempt to find parts that have been manufactured differently from the rest (starkly or subtly). These could reveal potential problems in the production process before it is identified by the customer. Examples include: excessive spindle loads, erratic feedrate override, and anomalous energy consumption during machining.</li>
+</ul>
+
+
+<p>Now, in order to bring this level of Process Traceability to the manufacturing shopfloor we need software that is capable of handling massive amount of shopfloor data and operating on it to enable the kind of querying and decision making discussed here. Our vimana manufacturing big data platform does just that. You can learn more about it <a href="http://www.systeminsights.com/vimana">here</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">athulan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-31T22:47:00-07:00" pubdate data-updated="true">Aug 31<span>st</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/big-data/'>big-data</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.manufacturingbigdata.com/blog/2012/08/31/traceability/" data-via="systeminsights" data-counturl="http://www.manufacturingbigdata.com/blog/2012/08/31/traceability/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/08/22/updates-and-imts/" title="Previous Post: IMTS 2012">&laquo; IMTS 2012</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/09/04/imts-oracle-partnership/" title="Next Post: Oracle Partnership at IMTS">Oracle Partnership at IMTS &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration/">MTConnect ROS-I Robot CNC Integration</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/05/introducing-the-vrtk-package/">Introducing the Vrtk Package</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/03/we-are-hiring/">We Are Hiring!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/energy-consumption-in-manufacturing/">Top Manufacturing Energy Consumers: A Close Look at the Paper Industry</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/01/chennai-ruby-meetup/">chennai.rb Meetup</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $(function(){
+      getTwitterFeed("systeminsights", 4, false);
+    });
+  </script>
+  
+    <a href="http://twitter.com/systeminsights" class="twitter-follow-button" data-show-count="false">Follow @systeminsights</a>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - System Insights -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'manufacturingbigdata';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.manufacturingbigdata.com/blog/2012/08/31/traceability/';
+        var disqus_url = 'http://www.manufacturingbigdata.com/blog/2012/08/31/traceability/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
