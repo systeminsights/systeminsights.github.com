@@ -18,7 +18,7 @@ h2. Robotic Interface – Machine Tool Perspective
 
 bq. This work was conducted under Grant Opportunity Number
 2012-NIST-MSE-01 for the Intelligent System Division of the National
-Institute of Standards and Technology (NIST) with the collaboration of
+Institute of Standards and Technology (NIST) with the collaboration of System Insights,
 SwRI (Southwest Research Institute), NCDMM (National Center for
 Defense Manufacturing and Machining), AMT (Association for
 Manufacturing Techknology) and Mazak USA for help with connectivity of
