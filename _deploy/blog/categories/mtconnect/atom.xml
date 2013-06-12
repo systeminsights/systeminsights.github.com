@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mtconnect | Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/blog/categories/mtconnect/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2013-06-11T13:35:57-07:00</updated>
+  <updated>2013-06-12T14:17:38-07:00</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -70,7 +70,7 @@ tool does not care where the material is going; it only needs to
 request another piece of material for subsequent processing. It is up
 to the Robot sequence the material to the next station.</p>
 
-<p>From the Robots perspective, it knows how to pick up a new piece of
+<p>From the Robot&rsquo;s perspective, it knows how to pick up a new piece of
 material and place it in the machine tool and where to place the
 material once it has removed it. It has two needs that need to be
 fulfilled from the machine tool, opening and closing the door and
@@ -163,12 +163,12 @@ to do one of the following six operations:</p>
 
 <p>These actions are invoked on the machine tool controller by sending
 the instructions that resolve into the PLC or API specific
-operations. For the demonstration at NIST this was accomplished by
+operations. For the demonstration at NIST, this was accomplished by
 invoking a small utility on the controller the set various PLC
 registers to actuate the chuck, cycle start and reset. We could not
-open and close the door since the machine was not equipped with an
+open and close the door because the machine was not equipped with an
 actuator; to do so would have incurred a large additional cost. The door
-behavior was therefor synthesized for the demonstration.</p>
+behavior was therefore synthesized for the demonstration.</p>
 
 <p>h3. Messaging Architecture</p>
 
@@ -181,9 +181,9 @@ MTConnect read-only philosophy. Instead of sending a message
 requesting an action be performed or setting a variable on a remote
 device, MTConnect has each device announce its needs to any
 application or device monitoring its state. In effect,   the request
-interface is a simple state machine that goes from Not-Ready to
-Ready. And when the interface would like the activity performed, it
-transition to Active.</p>
+interface is a simple state machine that goes from @NOT_READY@ to
+@READY@. And when the interface would like the activity performed, it
+transitions to Active.</p>
 
 <p>In turn, it waits for the device performing the activity, the
 responder, to announce it is actively performing the activity and then
@@ -216,7 +216,7 @@ which they can then parse to find the information they need. From that
 point on, near-real-time data can be received on a push basis (meaning
 there is no need to poll) using the MTConnect streaming capability
 using the sample request. To get a completely contiguous data set, one
-uses the nextSequence number presented in the current to begin the
+uses the @nextSequence@ number presented in the current to begin the
 push based request as follows:</p>
 
 <pre>
@@ -242,8 +242,9 @@ interfaces. This is the full set of data required by the Robot to
 operate.</p>
 
 <p>For the purposes of this discussion, we will focus on the interfaces
-and a few key CNC and Robot states that are required for coordination
-of interaction. The following is based on the implementation of
+and a few key Computer Numerically Controlled Machine Tool (referred
+to as CNC) and Robot states that are required for coordination of
+interaction. The following is based on the implementation of
 interfaces for the ROS/I MTConnect demonstration. For more information
 on streaming data handling and event processing, please consult Part 1
 of the MTConnect standard.</p>
@@ -269,19 +270,20 @@ of the MTConnect standard.</p>
 <p>The top level state machine controls the main operational and
 non-operation states of the machine tool. There are two top-level
 states the machine can be in, disabled and operational. In the
-disabled state there are two sub-states, not-ready and fault. When the
-machine tool is in an alarm active state, the state machine is in a
-fault state. The other disabled state is not-ready which is when the
-machine tool is not in automatic mode or is not read to execute the
-part program.</p>
+disabled state there are two sub-states, &ldquo;not-ready&rdquo; and &ldquo;fault&rdquo;. When
+the machine tool has an alarm active, the state machine is in a
+&ldquo;fault&rdquo; state. The other disabled state is &ldquo;not-ready&rdquo; which is when
+the machine tool is not in @AUTOMATIC@ controller mode or is not ready
+to execute the part program.</p>
 
-<p>The operational states are one of the following: idle, cycle_start,
-loading, or unloading. The machine tool becomes operational when the
-machine tool’s controller mode is in automatic and it is ready to run
-the part program. If the robot is not ready, the machine tool will
-remain in an idle state until the robot is ready. When the robot is
-ready, the machine tool will transition into the loading or unloading
-states depending on whether the machine has material.</p>
+<p>The operational states are one of the following: &ldquo;idle&rdquo;,
+&ldquo;cycle_start&rdquo;, &ldquo;loading&rdquo;, or &ldquo;unloading&rdquo;. The machine tool becomes
+operational when the machine tool’s controller mode is in @AUTOMATIC@
+and it is ready to run the part program. If the robot is interfaces
+are @NOT_READY@, the machine tool will remain in an &ldquo;idle&rdquo; state until
+the robot interfaces are @READY@. When the robot interfaces are
+@READY@, the machine tool will transition into the &ldquo;loading&rdquo; or
+&ldquo;unloading&rdquo; states depending on whether the machine has material.</p>
 
 <p>Once the machine completes the material load, it will transition into
 a cycle start state. The cycle start state will transition once the
@@ -991,15 +993,15 @@ sequence will be as follows:</p>
 <h1>Robot 2 material loader binding @AVAILABLE@</h1>
 
 <p>In this way the robot and the cnc will coordinate the associations and
-temporary bindings between devices. The requestor selection is easiest
-way to resolve the possible locking issues between multiple devices
-and still have a complete read-only interface. The failure scenarios
-remain mainly the same with some bind timeout issues that will need to
-be resolved.</p>
+the temporary bindings between devices. Having the requestor make the
+selection is easiest way to resolve the possible locking issues
+between multiple devices and still have a complete read-only
+interface. The failure scenarios remain mainly the same with some bind
+timeout issues that will need to be resolved.</p>
 
 <p>This is a very high level conceptual model and will require full
-design, architecture, and testing as the previous interface went
-through. This same architecture should would with both mobile and
+design, architecture, and testing, the same as the previous interface
+went through. This same architecture should work with both mobile and
 stationary devices (though that will need to be explored as well.) The
 scheme borrows from optimistic locking mechanisms in databases and
 other technologies for distributed resource sharing.</p>
