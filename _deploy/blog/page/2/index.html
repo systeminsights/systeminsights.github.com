@@ -9,7 +9,7 @@
   <meta name="author" content="System Insights">
 
   
-  <meta name="description" content="We are back after a brief hiatus. The last few weeks have been eventful, to say the least, as we get ready for IMTS 2012 in Chicago between September &hellip;">
+  <meta name="description" content="In a previous post we looked at the different things we can do with Big Data. Lets examine one of the applications in more detail: Process &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/31/traceability/">Process Traceability and Big Data</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-31T22:47:00-07:00" pubdate data-updated="true">Aug 31<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In a previous post we looked at the different things we can do with Big Data. Lets examine one of the applications in more detail: Process Traceability.</p>
+
+<p>Process Traceability can be understood as being able to trace every process that happened to a part as it got manufactured. Its important to make a distinction here between <em>Part</em> Traceability and <em>Process</em> Traceability. Part Traceability primarily deals with what part was manufactured, and when. Process Traceability, on the other hand, builds on this information, and expands it greatly to understand exactly how the part was manufactured. Process Traceability is a key requirement in Aerospace manufacturing since manufacturing defects can have severe impacts on the quality of parts, and with capable Process Traceability systems we can go back in time and find out exactly how and when the manufacturing defect was introduced into the part. Of course, Process Traceability has applications in other quality-critical domins as well including medical devices and engine components.</p>
+
+<p>Currently, most companies only have Part Traceability systems (if any) &mdash; they know when which part was manufactured. When automated, this type of data is collected by MES or ERP systems, and with the right kind of aggregation and rollups, the data can reveal when a particular batch of parts was manufatured and what was the heat number (or lot number) of the castings/forgings that went into it. But this is not enough to fully understand what happened when a part was made. To build a full-fledged Process Traceability system, lets see what kind of data we can collect from the shopfloor:</p>
+
+<ul>
+<li><strong>Identity</strong> data is the most basic kind required for part traceability. This data tells us what is being made, how much was made, and when was it made. <em>Examples: Heat ID, Batch ID, Operator ID.</em></li>
+<li><strong>Operational</strong> data can tell us what the machine was doing when it had a part associated with it. We can understand the utilization of a device when it was operating on a part, how long the device was in &ldquo;auto&rdquo; mode versus &ldquo;manual&rdquo; mode, and the different downtimes that device experienced when it was working on the part. Knowing the downtimes, for instance, can indicate potential issues with part quality. For example, if a device had repeated unplanned maintenance downtimes when it had a part on it, its quite likely that the part has some quality problems as well, and might require additional metrology. <em>Examples: Device uptime, downtime, modes, states.</em></li>
+<li><strong>Diagnostic</strong> data can further embellish the correlations that we can get started with using Operational data. Alarm and condition data can reveal specific issues in the device that is manufaturing a part. <em>Examples: Alarms, warnings, messages, notifications.</em></li>
+<li><strong>Process</strong> data can help us get into a lot more detail, and can reveal how specific features were generated on the part. For example, in high speed machining of aerospace alloys, its very important to preserve a specific chip velocity when features are being created. But interpolation errors and machine tool limitations can result in significant variations between the actual feedrate and the planned feedrate. With process data, we can precisely know when these deviations happened, and can use it in understanding its impact. <em>Examples: Positions, velocities, acceleration, flow rates.</em></li>
+<li><strong>Environmental</strong> data can tell us the impact of the part as its being manufactured. With detailed knowledge of the resource flows associated with  the part, we can estimate its environmental impact. A high level of detail can also reveal which stages of the production process have the greatest impact, and that knowledge can help in targeting energy efficiency improvements. <em>Examples: Resource usage, energy consumption, effluents and emissions.</em></li>
+</ul>
+
+
+<p>The bigger challenge, is to be able to intelligently and efficiently operate on this massive set of data, and find pertinent information associated with a part. And here we can broadly look at three kinds of queries:</p>
+
+<ul>
+<li><strong>Part Search</strong>: Here we are trying to find all the information associated with a specific part (or family of parts). We start with some identifying characteristic for the part (or the family of parts). This can be a Part ID, a Heat ID, or even the day the part was manufactured. We can also identify parts based on other events, like the first part manufactured after a power outage. Information associated with a part can include all of the five kinds discussed above.</li>
+<li><strong>Similarity Search</strong>: Here we are trying to find similar parts based on one or more specific parts that have been identified. The idea here is that we have flagged a certain part or set of parts, and we want to scan our historical system and find other parts that share a similar process history. This is very useful when parts are being quarantined after a quality spill and we are trying to find all the other parts that need to be quarantined. If we know the ID of one part, then we can find other parts similar to it based on a variety of criteria, including: heat code, operator who made the defective part, machine condition, and alarm sequence during manufacture.</li>
+<li><strong>&ldquo;Black Swan&rdquo; Search</strong>: This is perhaps the most interesting application of a Process Traceability system, and it looks at identifying &ldquo;black swans&rdquo;, or the rare events that are anomalous to the norm. These queries will attempt to find parts that have been manufactured differently from the rest (starkly or subtly). These could reveal potential problems in the production process before it is identified by the customer. Examples include: excessive spindle loads, erratic feedrate override, and anomalous energy consumption during machining.</li>
+</ul>
+
+
+<p>Now, in order to bring this level of Process Traceability to the manufacturing shopfloor we need software that is capable of handling massive amount of shopfloor data and operating on it to enable the kind of querying and decision making discussed here. Our vimana manufacturing big data platform does just that. You can learn more about it <a href="http://www.systeminsights.com/vimana">here</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -762,77 +822,6 @@ Deepak.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/">McKinsey on (Manufacturing) Big Data - Part 2 - What Do Do With It</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-21T01:17:00-07:00" pubdate data-updated="true">Mar 21<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>We are back studying McKinsey&rsquo;s report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several &ldquo;levers&rdquo; where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:</p>
-
-<p><img class="center" src="/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-levers.png"></p>
-
-<ol>
-<li>Implementing Lean Manufacturing (#5)</li>
-<li>Using sensor data-driven operations analytics (#6)</li>
-</ol>
-
-
-<p>Lets look at the first of these in this post.</p>
-
-<h2>Lean Manufacturing and the Digital Factory</h2>
-
-<p>McKinsey identifies using Big Data to &ldquo;create process transparency, develop dashboards, and visualize bottlenecks&rdquo;. Our vimana application is one example of applying Big Data to create realtime dashboards of manufacturing equipment (to learn more about vimana, please visit www.systeminsights.com/vimana.) The idea here is to provide a shopfloor user both a high-level &ldquo;macro&rdquo; view of the shopfloor, as well as a low-level &ldquo;micro&rdquo; view of a single device.  Questions the dashboards can help answer include:</p>
-
-<ul>
-<li>Which devices are producing parts today?</li>
-<li>Which parts are being made right now?</li>
-<li>How many parts have I made?</li>
-<li>What has my device been doing today?</li>
-<li>What is my efficiency?</li>
-<li>Why have I been in a downtime?
-  (This is a much more interesting question to answer than just &ldquo;What are my downtimes&rdquo;. Knowing <em>why</em> downtimes occur can directly help in reducing or eliminating the downtimes, and is a step beyond simply knowing <em>that</em> a has downtime occurred).</li>
-</ul>
-
-
-<p>The data for vimana is streamed using the MTConnect Agent associated with each machine tool. The application itself runs in the cloud, aggregating hundreds of events every second from each machine tool. The analysis is done in realtime, and the visualizations are rendered instantly. Process transparency is achieved here because the application serves as a central repository of what is going on in the shopfloor, and multiple stakeholders (production, engineering, maintenance, management) can all use it to support decisions that come under their purview. This also takes us one step closer to the Digital Factory, where detailed operational data from the factory equipment is applied in building a complete digital model of the factory&rsquo;s operations, which can then be applied in optimizing its performance.</p>
-
-<p><em>Macro Dashboard: Shopfloor</em>
-<img class="center" src="/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-dashboard.png"></p>
-
-<p><em>Micro Dashboard: Device</em>
-<img class="center" src="/images/2012-03-21-McKinsey-Part-2-What-do-do-with-it-details.png"></p>
-
-<p>Coming back to McKinsey, they estimate a reduction of 10 to 50% in costs from applying Big Data to implement Lean Manufacturing and the Digital Factory, accompanied by a marginal increase in revenue (2%). We have already seen vimana helping improve device utilization by over 25%, which directly leads to cost reductions. The real impact of Big Data here is not as much as in enabling us to ask new questions about a shop&rsquo;s productivity, but in helping us find even better answers for the same questions we have been asking for a long time and thus driving down costs. Of course, thats not to say that we cannot ask new questions based on the data –this is where data specifically from ubiquitous and low cost sensors can play a role, which we will examine in a future post.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -850,6 +839,10 @@ Deepak.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/13/mtconnect-releases-a-new-video-from-mc-2/">MTConnect Releases a New Video From MC[2]</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration/">MTConnect ROS-I Robot CNC Integration</a>
       </li>
     
@@ -863,10 +856,6 @@ Deepak.</p>
     
       <li class="post">
         <a href="/blog/2013/05/30/energy-consumption-in-manufacturing/">Top Manufacturing Energy Consumers: A Close Look at the Paper Industry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/01/chennai-ruby-meetup/">chennai.rb Meetup</a>
       </li>
     
   </ul>

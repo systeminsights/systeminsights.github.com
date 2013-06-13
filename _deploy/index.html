@@ -9,8 +9,9 @@
   <meta name="author" content="System Insights">
 
   
-  <meta name="description" content="ol { margin-left: 2.5em; }
-article blockquote { font-size: 1em; } Robotic Interface – Machine Tool Perspective This work was conducted under Grant &hellip;">
+  <meta name="description" content="Excellent video from MC 2 conference staring Jake Ervin. This was
+shot at the MC 2 conference in April and Jake, sadly, trying to strike up
+a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,46 @@ article blockquote { font-size: 1em; } Robotic Interface – Machine Tool Perspe
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/13/mtconnect-releases-a-new-video-from-mc-2/">MTConnect Releases a New Video From MC[2]</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-13T14:35:00-07:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Excellent video from MC <sup>2</sup> conference staring Jake Ervin. This was
+shot at the MC <sup>2</sup> conference in April and Jake, sadly, trying to strike up
+a meaningful conversation with a machine tool. I make a cameo at the
+end of the video. After watching myself, I&#8217;ve lost all aspirations of
+acting. Better stick to my day job!</p>
+<div style="text-align:center;"><iframe width="640" height="400" src="http://www.youtube.com/embed/aBl0QHAPurs?rel=0" frameborder="0" allowfullscreen></iframe></div></div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1456,66 +1497,6 @@ cor(sample.computed,sample.reported)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/31/traceability/">Process Traceability and Big Data</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-31T22:47:00-07:00" pubdate data-updated="true">Aug 31<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In a previous post we looked at the different things we can do with Big Data. Lets examine one of the applications in more detail: Process Traceability.</p>
-
-<p>Process Traceability can be understood as being able to trace every process that happened to a part as it got manufactured. Its important to make a distinction here between <em>Part</em> Traceability and <em>Process</em> Traceability. Part Traceability primarily deals with what part was manufactured, and when. Process Traceability, on the other hand, builds on this information, and expands it greatly to understand exactly how the part was manufactured. Process Traceability is a key requirement in Aerospace manufacturing since manufacturing defects can have severe impacts on the quality of parts, and with capable Process Traceability systems we can go back in time and find out exactly how and when the manufacturing defect was introduced into the part. Of course, Process Traceability has applications in other quality-critical domins as well including medical devices and engine components.</p>
-
-<p>Currently, most companies only have Part Traceability systems (if any) &mdash; they know when which part was manufactured. When automated, this type of data is collected by MES or ERP systems, and with the right kind of aggregation and rollups, the data can reveal when a particular batch of parts was manufatured and what was the heat number (or lot number) of the castings/forgings that went into it. But this is not enough to fully understand what happened when a part was made. To build a full-fledged Process Traceability system, lets see what kind of data we can collect from the shopfloor:</p>
-
-<ul>
-<li><strong>Identity</strong> data is the most basic kind required for part traceability. This data tells us what is being made, how much was made, and when was it made. <em>Examples: Heat ID, Batch ID, Operator ID.</em></li>
-<li><strong>Operational</strong> data can tell us what the machine was doing when it had a part associated with it. We can understand the utilization of a device when it was operating on a part, how long the device was in &ldquo;auto&rdquo; mode versus &ldquo;manual&rdquo; mode, and the different downtimes that device experienced when it was working on the part. Knowing the downtimes, for instance, can indicate potential issues with part quality. For example, if a device had repeated unplanned maintenance downtimes when it had a part on it, its quite likely that the part has some quality problems as well, and might require additional metrology. <em>Examples: Device uptime, downtime, modes, states.</em></li>
-<li><strong>Diagnostic</strong> data can further embellish the correlations that we can get started with using Operational data. Alarm and condition data can reveal specific issues in the device that is manufaturing a part. <em>Examples: Alarms, warnings, messages, notifications.</em></li>
-<li><strong>Process</strong> data can help us get into a lot more detail, and can reveal how specific features were generated on the part. For example, in high speed machining of aerospace alloys, its very important to preserve a specific chip velocity when features are being created. But interpolation errors and machine tool limitations can result in significant variations between the actual feedrate and the planned feedrate. With process data, we can precisely know when these deviations happened, and can use it in understanding its impact. <em>Examples: Positions, velocities, acceleration, flow rates.</em></li>
-<li><strong>Environmental</strong> data can tell us the impact of the part as its being manufactured. With detailed knowledge of the resource flows associated with  the part, we can estimate its environmental impact. A high level of detail can also reveal which stages of the production process have the greatest impact, and that knowledge can help in targeting energy efficiency improvements. <em>Examples: Resource usage, energy consumption, effluents and emissions.</em></li>
-</ul>
-
-
-<p>The bigger challenge, is to be able to intelligently and efficiently operate on this massive set of data, and find pertinent information associated with a part. And here we can broadly look at three kinds of queries:</p>
-
-<ul>
-<li><strong>Part Search</strong>: Here we are trying to find all the information associated with a specific part (or family of parts). We start with some identifying characteristic for the part (or the family of parts). This can be a Part ID, a Heat ID, or even the day the part was manufactured. We can also identify parts based on other events, like the first part manufactured after a power outage. Information associated with a part can include all of the five kinds discussed above.</li>
-<li><strong>Similarity Search</strong>: Here we are trying to find similar parts based on one or more specific parts that have been identified. The idea here is that we have flagged a certain part or set of parts, and we want to scan our historical system and find other parts that share a similar process history. This is very useful when parts are being quarantined after a quality spill and we are trying to find all the other parts that need to be quarantined. If we know the ID of one part, then we can find other parts similar to it based on a variety of criteria, including: heat code, operator who made the defective part, machine condition, and alarm sequence during manufacture.</li>
-<li><strong>&ldquo;Black Swan&rdquo; Search</strong>: This is perhaps the most interesting application of a Process Traceability system, and it looks at identifying &ldquo;black swans&rdquo;, or the rare events that are anomalous to the norm. These queries will attempt to find parts that have been manufactured differently from the rest (starkly or subtly). These could reveal potential problems in the production process before it is identified by the customer. Examples include: excessive spindle loads, erratic feedrate override, and anomalous energy consumption during machining.</li>
-</ul>
-
-
-<p>Now, in order to bring this level of Process Traceability to the manufacturing shopfloor we need software that is capable of handling massive amount of shopfloor data and operating on it to enable the kind of querying and decision making discussed here. Our vimana manufacturing big data platform does just that. You can learn more about it <a href="http://www.systeminsights.com/vimana">here</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1531,6 +1512,10 @@ cor(sample.computed,sample.reported)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/13/mtconnect-releases-a-new-video-from-mc-2/">MTConnect Releases a New Video From MC[2]</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration/">MTConnect ROS-I Robot CNC Integration</a>
       </li>
     
@@ -1544,10 +1529,6 @@ cor(sample.computed,sample.reported)
     
       <li class="post">
         <a href="/blog/2013/05/30/energy-consumption-in-manufacturing/">Top Manufacturing Energy Consumers: A Close Look at the Paper Industry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/01/chennai-ruby-meetup/">chennai.rb Meetup</a>
       </li>
     
   </ul>
