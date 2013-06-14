@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mtconnect | Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/blog/categories/mtconnect/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2013-06-13T14:50:24-07:00</updated>
+  <updated>2013-06-14T07:59:43+05:30</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -14,24 +14,9 @@
 
   
   <entry>
-    <title type="html"><![CDATA[MTConnect Releases a new Video from MC[2]]]></title>
-    <link href="http://www.manufacturingbigdata.com/blog/2013/06/13/mtconnect-releases-a-new-video-from-mc-2/"/>
-    <updated>2013-06-13T14:35:00-07:00</updated>
-    <id>http://www.manufacturingbigdata.com/blog/2013/06/13/mtconnect-releases-a-new-video-from-mc-2</id>
-    <content type="html"><![CDATA[<p>Excellent video from MC ^2^ conference staring Jake Ervin. This was
-shot at the MC ^2^ conference in April and Jake, sadly, trying to strike up
-a meaningful conversation with a machine tool. I make a cameo at the
-end of the video. After watching myself, I&rsquo;ve lost all aspirations of
-acting. Better stick to my day job!</p>
-
-<p>div=. <iframe width="640" height="400" src="http://www.youtube.com/embed/aBl0QHAPurs?rel=0" frameborder="0" allowfullscreen></iframe></p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[MTConnect ROS-I Robot CNC Integration]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration/"/>
-    <updated>2013-06-07T23:38:00-07:00</updated>
+    <updated>2013-06-07T23:38:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration</id>
     <content type="html"><![CDATA[<p>
   <style type="text/css"></p>
@@ -56,7 +41,7 @@ for Manufacturing Techknowlogy) and &ldquo;Mazak USA&rdquo;:<a href="http://www.
 for help with connectivity of the machine tool used in the
 demonstration.</p>
 
-<p>div=. <iframe width="640" height="480" src="http://www.youtube.com/embed/JHzcgyi2DsQ" frameborder="0" allowfullscreen></iframe></p>
+<p>div=. <iframe src="https://docs.google.com/a/systeminsights.com/file/d/0B3fQZcJeBjGOekNuZzJQMm1IeEU/preview" width="640" height="385"></iframe></p>
 
 <ol type="a">
 <li><br/></li>
@@ -85,7 +70,7 @@ tool does not care where the material is going; it only needs to
 request another piece of material for subsequent processing. It is up
 to the Robot sequence the material to the next station.</p>
 
-<p>From the Robot&rsquo;s perspective, it knows how to pick up a new piece of
+<p>From the Robots perspective, it knows how to pick up a new piece of
 material and place it in the machine tool and where to place the
 material once it has removed it. It has two needs that need to be
 fulfilled from the machine tool, opening and closing the door and
@@ -178,12 +163,12 @@ to do one of the following six operations:</p>
 
 <p>These actions are invoked on the machine tool controller by sending
 the instructions that resolve into the PLC or API specific
-operations. For the demonstration at NIST, this was accomplished by
+operations. For the demonstration at NIST this was accomplished by
 invoking a small utility on the controller the set various PLC
 registers to actuate the chuck, cycle start and reset. We could not
-open and close the door because the machine was not equipped with an
+open and close the door since the machine was not equipped with an
 actuator; to do so would have incurred a large additional cost. The door
-behavior was therefore synthesized for the demonstration.</p>
+behavior was therefor synthesized for the demonstration.</p>
 
 <p>h3. Messaging Architecture</p>
 
@@ -196,9 +181,9 @@ MTConnect read-only philosophy. Instead of sending a message
 requesting an action be performed or setting a variable on a remote
 device, MTConnect has each device announce its needs to any
 application or device monitoring its state. In effect,   the request
-interface is a simple state machine that goes from @NOT_READY@ to
-@READY@. And when the interface would like the activity performed, it
-transitions to Active.</p>
+interface is a simple state machine that goes from Not-Ready to
+Ready. And when the interface would like the activity performed, it
+transition to Active.</p>
 
 <p>In turn, it waits for the device performing the activity, the
 responder, to announce it is actively performing the activity and then
@@ -231,7 +216,7 @@ which they can then parse to find the information they need. From that
 point on, near-real-time data can be received on a push basis (meaning
 there is no need to poll) using the MTConnect streaming capability
 using the sample request. To get a completely contiguous data set, one
-uses the @nextSequence@ number presented in the current to begin the
+uses the nextSequence number presented in the current to begin the
 push based request as follows:</p>
 
 <pre>
@@ -257,9 +242,8 @@ interfaces. This is the full set of data required by the Robot to
 operate.</p>
 
 <p>For the purposes of this discussion, we will focus on the interfaces
-and a few key Computer Numerically Controlled Machine Tool (referred
-to as CNC) and Robot states that are required for coordination of
-interaction. The following is based on the implementation of
+and a few key CNC and Robot states that are required for coordination
+of interaction. The following is based on the implementation of
 interfaces for the ROS/I MTConnect demonstration. For more information
 on streaming data handling and event processing, please consult Part 1
 of the MTConnect standard.</p>
@@ -285,20 +269,19 @@ of the MTConnect standard.</p>
 <p>The top level state machine controls the main operational and
 non-operation states of the machine tool. There are two top-level
 states the machine can be in, disabled and operational. In the
-disabled state there are two sub-states, &ldquo;not-ready&rdquo; and &ldquo;fault&rdquo;. When
-the machine tool has an alarm active, the state machine is in a
-&ldquo;fault&rdquo; state. The other disabled state is &ldquo;not-ready&rdquo; which is when
-the machine tool is not in @AUTOMATIC@ controller mode or is not ready
-to execute the part program.</p>
+disabled state there are two sub-states, not-ready and fault. When the
+machine tool is in an alarm active state, the state machine is in a
+fault state. The other disabled state is not-ready which is when the
+machine tool is not in automatic mode or is not read to execute the
+part program.</p>
 
-<p>The operational states are one of the following: &ldquo;idle&rdquo;,
-&ldquo;cycle_start&rdquo;, &ldquo;loading&rdquo;, or &ldquo;unloading&rdquo;. The machine tool becomes
-operational when the machine tool’s controller mode is in @AUTOMATIC@
-and it is ready to run the part program. If the robot is interfaces
-are @NOT_READY@, the machine tool will remain in an &ldquo;idle&rdquo; state until
-the robot interfaces are @READY@. When the robot interfaces are
-@READY@, the machine tool will transition into the &ldquo;loading&rdquo; or
-&ldquo;unloading&rdquo; states depending on whether the machine has material.</p>
+<p>The operational states are one of the following: idle, cycle_start,
+loading, or unloading. The machine tool becomes operational when the
+machine tool’s controller mode is in automatic and it is ready to run
+the part program. If the robot is not ready, the machine tool will
+remain in an idle state until the robot is ready. When the robot is
+ready, the machine tool will transition into the loading or unloading
+states depending on whether the machine has material.</p>
 
 <p>Once the machine completes the material load, it will transition into
 a cycle start state. The cycle start state will transition once the
@@ -1008,15 +991,15 @@ sequence will be as follows:</p>
 <h1>Robot 2 material loader binding @AVAILABLE@</h1>
 
 <p>In this way the robot and the cnc will coordinate the associations and
-the temporary bindings between devices. Having the requestor make the
-selection is easiest way to resolve the possible locking issues
-between multiple devices and still have a complete read-only
-interface. The failure scenarios remain mainly the same with some bind
-timeout issues that will need to be resolved.</p>
+temporary bindings between devices. The requestor selection is easiest
+way to resolve the possible locking issues between multiple devices
+and still have a complete read-only interface. The failure scenarios
+remain mainly the same with some bind timeout issues that will need to
+be resolved.</p>
 
 <p>This is a very high level conceptual model and will require full
-design, architecture, and testing, the same as the previous interface
-went through. This same architecture should work with both mobile and
+design, architecture, and testing as the previous interface went
+through. This same architecture should would with both mobile and
 stationary devices (though that will need to be explored as well.) The
 scheme borrows from optimistic locking mechanisms in databases and
 other technologies for distributed resource sharing.</p>
@@ -1032,7 +1015,7 @@ as resource management.</p>
   <entry>
     <title type="html"><![CDATA[Monitoring MTConnect Streams: MTConnect Graphr]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr/"/>
-    <updated>2012-07-02T11:15:00-07:00</updated>
+    <updated>2012-07-02T11:15:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr</id>
     <content type="html"><![CDATA[<p>A few months back I took up the fun task of exploring MTConnect streams and the amazing possibilities which it presented to a developer. That culminated into a web base monitoring app, MTConnect Graphr, which can now be downloaded from <a href="http://github.com/princearora/mtconnect-graphr">Github</a>. In this post I&rsquo;ll run down through the development process of the same.</p>
 
@@ -1155,7 +1138,7 @@ var line1 = new TimeSeries();
   <entry>
     <title type="html"><![CDATA[Setting up a MTConnect Agent on a Linux (Ubuntu) machine]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/"/>
-    <updated>2012-03-16T03:40:00-07:00</updated>
+    <updated>2012-03-16T16:10:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine</id>
     <content type="html"><![CDATA[<p>This was blogged first at my personal blog <a href="http://princearora.wordpress.com/2012/02/24/setting-up-a-mtconnect-agent-on-a-unixubuntu-machine/">here</a>.</p>
 
@@ -1197,9 +1180,9 @@ var line1 = new TimeSeries();
   
   <entry>
     <title type="html"><![CDATA[Introducing our Intern - Prince Arora]]></title>
-    <link href="http://www.manufacturingbigdata.com/blog/2012/03/15/Introducing-our-Intern-Price-Arora/"/>
-    <updated>2012-03-15T21:00:00-07:00</updated>
-    <id>http://www.manufacturingbigdata.com/blog/2012/03/15/Introducing-our-Intern-Price-Arora</id>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora/"/>
+    <updated>2012-03-16T09:30:00+05:30</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora</id>
     <content type="html"><![CDATA[<p>I want to introduce Prince Arora, a student from IIT Madras, who is interning with us at our Chennai office. Prince is developing a suite of MTConnect-based tools to track the maintenance status of machine tools. He is blogging about his experiences at System Insights at his blog, <a href="http://princearora.in">The 20four hour log</a>.</p>
 
 <p>Prince started out by building a simple webapp to display various maintenance-related parameters from an MTConnect data stream. Specifically <a href="http://princearora.wordpress.com/2012/02/14/mtconnect-the-problem-statement/">he developed an app</a> to:</p>
@@ -1221,6 +1204,19 @@ var line1 = new TimeSeries();
 <p><img class="center" src="/images/2012-03-16-Introducing-our-Intern-Price-Arora-pic-2.jpeg"></p>
 
 <p>Prince will be posting more about his internship in these pages. Stay tuned!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MTConnect Screencasts]]></title>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/02/28/MTConnect-Screencasts/"/>
+    <updated>2012-02-28T02:27:00+05:30</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2012/02/28/MTConnect-Screencasts</id>
+    <content type="html"><![CDATA[<p>I will producing a series of MTConnect screencasts in the near future on various topics. The first in the series will cover extending the MTConnect standard by adding custom Data Items and Components. The tutorial will take you through all the steps necessary to develop an extension using the open source tools and deploy an integrated solution with all the schema files deployed on the MTConnect Agent. I am working on the screen casts right now and learning my way through the various technologies necessary to make a usable online education series.</p>
+
+<p>If this is a success, we will be producing additional tutorials on adapter development demonstrating how to get data from machine tools as well as many more. Another I&rsquo;m considering will provide guidance on collecting tooling data from your controller and publishing it through MTConnect in compliance with part 1.2. All the source code, tools, and documentation will be made freely available to the community. I am currently looking for an XMLSpy equivalent or at least a good schema validator to use since XMLSpy has a high price tag. If anyone knows of anything, please reply. Any help in that area will be appreciated. I have used XMLSpy for many years, but for the purposes of these tutorials, I don&rsquo;t want to burden everyone with the cost, even though it is a great tool.</p>
+
+<p>If there are any tutorials you would be interested in seeing, I will be taking suggestions and will prioritize based on the responses I get. Otherwise I will make up my own priorities and guess as best I can what the community would like to see&hellip;</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2013-06-13T14:50:24-07:00</updated>
+  <updated>2013-06-14T07:59:43+05:30</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -14,22 +14,18 @@
 
   
   <entry>
-    <title type="html"><![CDATA[MTConnect Releases a new Video from MC[2]]]></title>
-    <link href="http://www.manufacturingbigdata.com/blog/2013/06/13/mtconnect-releases-a-new-video-from-mc-2/"/>
-    <updated>2013-06-13T14:35:00-07:00</updated>
-    <id>http://www.manufacturingbigdata.com/blog/2013/06/13/mtconnect-releases-a-new-video-from-mc-2</id>
-    <content type="html"><![CDATA[<p>Excellent video from MC <sup>2</sup> conference staring Jake Ervin. This was
-shot at the MC <sup>2</sup> conference in April and Jake, sadly, trying to strike up
-a meaningful conversation with a machine tool. I make a cameo at the
-end of the video. After watching myself, I&#8217;ve lost all aspirations of
-acting. Better stick to my day job!</p>
-<div style="text-align:center;"><iframe width="640" height="400" src="http://www.youtube.com/embed/aBl0QHAPurs?rel=0" frameborder="0" allowfullscreen></iframe></div>]]></content>
+    <title type="html"><![CDATA[Call for Papers: Information Modeling and Big Data]]></title>
+    <link href="http://www.manufacturingbigdata.com/blog/2013/06/14/cfp/"/>
+    <updated>2013-06-14T07:46:00+05:30</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2013/06/14/cfp</id>
+    <content type="html"><![CDATA[<p>I am the guest editor for a special issue on &ldquo;Information Modeling and Big Data: Issues and Challenges&rdquo; to be published in the <a href="http://computingengineering.asmedigitalcollection.asme.org/">ASME Journal of Computing and Information Science in Engineering</a>. We are soliciting papers for this special issue, and if you are more interested, please see <a href="https://www.asme.org/getmedia/440280f8-9861-455f-b7e5-8b69193e6d70/ASME-JCIS-SPECIAL-ISSUE-PROPOSAL-5-2013.aspx">here</a>. If you have any questions you can contact me as well (my information is in the ASME link).</p>
+]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[MTConnect ROS-I Robot CNC Integration]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration/"/>
-    <updated>2013-06-07T23:38:00-07:00</updated>
+    <updated>2013-06-07T23:38:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration</id>
     <content type="html"><![CDATA[<style type="text/css">
 ol { margin-left: 2.5em; }
@@ -48,7 +44,7 @@ for Manufacturing Techknowlogy) and <a href="http://www.mazakusa.com">Mazak <spa
 for help with connectivity of the machine tool used in the
 demonstration.</p>
 </blockquote>
-<div style="text-align:center;"><iframe width="640" height="480" src="http://www.youtube.com/embed/JHzcgyi2DsQ" frameborder="0" allowfullscreen></iframe></div>
+<div style="text-align:center;"><iframe src="https://docs.google.com/a/systeminsights.com/file/d/0B3fQZcJeBjGOekNuZzJQMm1IeEU/preview" width="640" height="385"></iframe></div>
 <p><br/></p>
 <p>From the machine tool perspective, the Robot is an external entity
 that loads and unloads material into and from its work-holding. This
@@ -69,7 +65,7 @@ by requesting the material get unloaded. At that point, the machine
 tool does not care where the material is going; it only needs to
 request another piece of material for subsequent processing. It is up
 to the Robot sequence the material to the next station.</p>
-<p>From the Robot&#8217;s perspective, it knows how to pick up a new piece of
+<p>From the Robots perspective, it knows how to pick up a new piece of
 material and place it in the machine tool and where to place the
 material once it has removed it. It has two needs that need to be
 fulfilled from the machine tool, opening and closing the door and
@@ -146,12 +142,12 @@ to do one of the following six operations:</p>
 </ol>
 <p>These actions are invoked on the machine tool controller by sending
 the instructions that resolve into the <span class="caps">PLC</span> or <span class="caps">API</span> specific
-operations. For the demonstration at <span class="caps">NIST</span>, this was accomplished by
+operations. For the demonstration at <span class="caps">NIST</span> this was accomplished by
 invoking a small utility on the controller the set various <span class="caps">PLC</span>
 registers to actuate the chuck, cycle start and reset. We could not
-open and close the door because the machine was not equipped with an
+open and close the door since the machine was not equipped with an
 actuator; to do so would have incurred a large additional cost. The door
-behavior was therefore synthesized for the demonstration.</p>
+behavior was therefor synthesized for the demonstration.</p>
 <h3>Messaging Architecture</h3>
 <p style="text-align:center;"><img src="http://www.manufacturingbigdata.com/images/2013-06-07-figure2.png" title="Figure 2" alt="Figure 2" /></p>
 <p style="text-align:center;"><em>Figure 2</em></p>
@@ -160,9 +156,9 @@ MTConnect read-only philosophy. Instead of sending a message
 requesting an action be performed or setting a variable on a remote
 device, MTConnect has each device announce its needs to any
 application or device monitoring its state. In effect,	 the request
-interface is a simple state machine that goes from <code>NOT_READY</code> to
-<code>READY</code>. And when the interface would like the activity performed, it
-transitions to Active.</p>
+interface is a simple state machine that goes from Not-Ready to
+Ready. And when the interface would like the activity performed, it
+transition to Active.</p>
 <p>In turn, it waits for the device performing the activity, the
 responder, to announce it is actively performing the activity and then
 to change to the complete state when its done. This provides the basis
@@ -191,7 +187,7 @@ which they can then parse to find the information they need. From that
 point on, near-real-time data can be received on a push basis (meaning
 there is no need to poll) using the MTConnect streaming capability
 using the sample request. To get a completely contiguous data set, one
-uses the <code>nextSequence</code> number presented in the current to begin the
+uses the nextSequence number presented in the current to begin the
 push based request as follows:</p>
 <pre>
 http://localhost:5000/cnc/sample?from=100231&amp;interval=0
@@ -210,9 +206,8 @@ execution, conditions, as well as all the information from the
 interfaces. This is the full set of data required by the Robot to
 operate.</p>
 <p>For the purposes of this discussion, we will focus on the interfaces
-and a few key Computer Numerically Controlled Machine Tool (referred
-to as <span class="caps">CNC</span>) and Robot states that are required for coordination of
-interaction. The following is based on the implementation of
+and a few key <span class="caps">CNC</span> and Robot states that are required for coordination
+of interaction. The following is based on the implementation of
 interfaces for the <span class="caps">ROS</span>/I MTConnect demonstration. For more information
 on streaming data handling and event processing, please consult Part 1
 of the MTConnect standard.</p>
@@ -230,19 +225,18 @@ of the MTConnect standard.</p>
 <p>The top level state machine controls the main operational and
 non-operation states of the machine tool. There are two top-level
 states the machine can be in, disabled and operational. In the
-disabled state there are two sub-states, &#8220;not-ready&#8221; and &#8220;fault&#8221;. When
-the machine tool has an alarm active, the state machine is in a
-&#8220;fault&#8221; state. The other disabled state is &#8220;not-ready&#8221; which is when
-the machine tool is not in <code>AUTOMATIC</code> controller mode or is not ready
-to execute the part program.</p>
-<p>The operational states are one of the following: &#8220;idle&#8221;,
-&#8220;cycle_start&#8221;, &#8220;loading&#8221;, or &#8220;unloading&#8221;. The machine tool becomes
-operational when the machine tool’s controller mode is in <code>AUTOMATIC</code>
-and it is ready to run the part program. If the robot is interfaces
-are <code>NOT_READY</code>, the machine tool will remain in an &#8220;idle&#8221; state until
-the robot interfaces are <code>READY</code>. When the robot interfaces are
-<code>READY</code>, the machine tool will transition into the &#8220;loading&#8221; or
-&#8220;unloading&#8221; states depending on whether the machine has material.</p>
+disabled state there are two sub-states, not-ready and fault. When the
+machine tool is in an alarm active state, the state machine is in a
+fault state. The other disabled state is not-ready which is when the
+machine tool is not in automatic mode or is not read to execute the
+part program.</p>
+<p>The operational states are one of the following: idle, cycle_start,
+loading, or unloading. The machine tool becomes operational when the
+machine tool’s controller mode is in automatic and it is ready to run
+the part program. If the robot is not ready, the machine tool will
+remain in an idle state until the robot is ready. When the robot is
+ready, the machine tool will transition into the loading or unloading
+states depending on whether the machine has material.</p>
 <p>Once the machine completes the material load, it will transition into
 a cycle start state. The cycle start state will transition once the
 cycle is complete indicated by the execution transitioning from active
@@ -865,14 +859,14 @@ sequence will be as follows:</p>
 	<li>Robot 2 material loader binding <code>AVAILABLE</code></li>
 </ol>
 <p>In this way the robot and the cnc will coordinate the associations and
-the temporary bindings between devices. Having the requestor make the
-selection is easiest way to resolve the possible locking issues
-between multiple devices and still have a complete read-only
-interface. The failure scenarios remain mainly the same with some bind
-timeout issues that will need to be resolved.</p>
+temporary bindings between devices. The requestor selection is easiest
+way to resolve the possible locking issues between multiple devices
+and still have a complete read-only interface. The failure scenarios
+remain mainly the same with some bind timeout issues that will need to
+be resolved.</p>
 <p>This is a very high level conceptual model and will require full
-design, architecture, and testing, the same as the previous interface
-went through. This same architecture should work with both mobile and
+design, architecture, and testing as the previous interface went
+through. This same architecture should would with both mobile and
 stationary devices (though that will need to be explored as well.) The
 scheme borrows from optimistic locking mechanisms in databases and
 other technologies for distributed resource sharing.</p>
@@ -886,7 +880,7 @@ as resource management.</p>]]></content>
   <entry>
     <title type="html"><![CDATA[Introducing the vrtk package]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/05/introducing-the-vrtk-package/"/>
-    <updated>2013-06-05T08:29:00-07:00</updated>
+    <updated>2013-06-05T08:29:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/05/introducing-the-vrtk-package</id>
     <content type="html"><![CDATA[<p>As part of my internship project here at System Insights, Chennai, I&rsquo;ve been involved in developing an R-package called the &lsquo;vrtk&rsquo;, essentially a set of tools for reading and working with data from the vimana platform.</p>
 
@@ -1008,7 +1002,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[We Are Hiring!]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/03/we-are-hiring/"/>
-    <updated>2013-06-03T06:00:00-07:00</updated>
+    <updated>2013-06-03T06:00:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/03/we-are-hiring</id>
     <content type="html"><![CDATA[<p>At System Insights, we build <a href="http://systeminsights.com/vimana/">vimana</a>, the world&rsquo;s most advanced platform for manufacturing data analytics. We are a small, fast-growing company with 15 employees globally and we are looking to grow our R&amp;D center in Chennai, India. We are currently hiring for the following positions in Chennai:</p>
 
@@ -1073,7 +1067,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[Top Manufacturing Energy Consumers: A Close Look at the Paper Industry]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/05/30/energy-consumption-in-manufacturing/"/>
-    <updated>2013-05-30T12:00:00-07:00</updated>
+    <updated>2013-05-30T12:00:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/05/30/energy-consumption-in-manufacturing</id>
     <content type="html"><![CDATA[<p><a href="http://www.linkedin.com/pub/jes%C3%BAs-nieto-gonz%C3%A1lez/30/a92/943/">Jesus Nieto Gonzalez</a> from the UC Berkeley Haas School of Business Class of 2014 worked with us on a research project to identify the top energy consumers in the manufacturing sector. Here are some of his findings:</p>
 
@@ -1092,7 +1086,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[chennai.rb Meetup]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/04/01/chennai-ruby-meetup/"/>
-    <updated>2013-04-01T14:45:00-07:00</updated>
+    <updated>2013-04-01T14:45:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/04/01/chennai-ruby-meetup</id>
     <content type="html"><![CDATA[<p>We will be hosting the next chennai.rb meetup on the 6th of April in our <a href="http://systeminsights.com/locations">Chennai office</a>. The talks include:</p>
 
@@ -1109,7 +1103,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[The Green Manufacturing Book]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/04/01/green-manufacturing-book/"/>
-    <updated>2013-04-01T11:15:00-07:00</updated>
+    <updated>2013-04-01T11:15:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/04/01/green-manufacturing-book</id>
     <content type="html"><![CDATA[<p>Had questions about Green Manufacturing but were too bashful to ask? You are in luck, you can pick up a copy of the excellent &ldquo;Green Manufacturing: Fundamentals and Applications&rdquo; from <a href="http://www.amazon.com/Green-Manufacturing-Fundamentals-Applications-Technology/dp/1441960155/">Amazon.com</a> and other fashionable purveyors of fine reading material. Full Disclosure: I have co-authored 4 chapters in the book, including the penultimate chapter &ldquo;Enabling Technologies for Assuring Green Manufacturing&rdquo;, which, among other things, talks  about the need for a highly scalable software architecture to enable realtime monitoring and reporting of manufacturing performance (hint: we have a built a little <a href="http://www.systeminsights.com/vimana">product</a> to address that need).</p>
 
@@ -1120,7 +1114,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[JavaOne Presentation]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/01/08/javaone-presentation/"/>
-    <updated>2013-01-08T09:28:00-08:00</updated>
+    <updated>2013-01-08T09:28:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/01/08/javaone-presentation</id>
     <content type="html"><![CDATA[<p>We presented at <a href="http://www.oracle.com/javaone/index.html">JavaOne</a> in early October 2012 in San Francisco on applying Embedded technologies in enabling Manufacturing Big Data. Here are our slides.</p>
 
@@ -1132,7 +1126,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[Precision Manufacturing Lecture Videos]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/01/08/precision-manufacturing/"/>
-    <updated>2013-01-08T09:00:00-08:00</updated>
+    <updated>2013-01-08T09:00:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/01/08/precision-manufacturing</id>
     <content type="html"><![CDATA[<p>I am back to my regular blogging duties after a hiatus of a few months.</p>
 
@@ -1150,7 +1144,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[Oracle Partnership at IMTS]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/09/04/imts-oracle-partnership/"/>
-    <updated>2012-09-04T09:53:00-07:00</updated>
+    <updated>2012-09-04T09:53:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/09/04/imts-oracle-partnership</id>
     <content type="html"><![CDATA[<p>We are very happy to announce that we will be partnering with <a href="http://www.oracle.com">Oracle</a> during <a href="http://www.imts.com/">IMTS</a> to showcase integrated solutions for manufacturing data interoperability, collection, and analysis. We will be discussing the use of Java SE Embedded in building a ubiquitous embedded platform for collecting data from the shopfloor. <a href="http://www.oracle.com/technetwork/java/embedded/overview/javase/index.html">Java SE Embedded</a> has been used in products across a diverse spectrum of industries, ranging from RFID readers to parking meters to ATMs to in-flight video systems to POS terminals to wearable systems. This makes it a great fit in the manufacturing world, where we need hardware devices that can seamlessly and ubiquitously integrate data across the shop floor.</p>
 
@@ -1163,7 +1157,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[Process Traceability and Big Data]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/08/31/traceability/"/>
-    <updated>2012-08-31T22:47:00-07:00</updated>
+    <updated>2012-08-31T22:47:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/08/31/traceability</id>
     <content type="html"><![CDATA[<p>In a previous post we looked at the different things we can do with Big Data. Lets examine one of the applications in more detail: Process Traceability.</p>
 
@@ -1196,7 +1190,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[IMTS 2012]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/08/22/updates-and-imts/"/>
-    <updated>2012-08-22T13:54:00-07:00</updated>
+    <updated>2012-08-22T13:54:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/08/22/updates-and-imts</id>
     <content type="html"><![CDATA[<p>We are back after a brief hiatus. The last few weeks have been eventful, to say the least, as we get ready for <a href="http://www.imts.com">IMTS 2012</a> in Chicago between September 10th and 15th. At IMTS we will be showcasing the <strong>vimana</strong> software platform for manufacturing productivity improvement and the <strong>ConnectOne</strong> hardware platform for MTConnect-based data acquisition and interoperability.</p>
 
@@ -1207,7 +1201,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[Energy Regulations in Tamil Nadu, India]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/07/10/tneb-regulations/"/>
-    <updated>2012-07-10T11:00:00-07:00</updated>
+    <updated>2012-07-10T11:00:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/07/10/tneb-regulations</id>
     <content type="html"><![CDATA[<p>Industrial energy consumers in Tamil Nadu, India have seen a sharp increase in energy costs beginning from April 2012. In this post we look at the revised tariff of the Tamil Nadu Electricity Board (TNEB), and examine its impact on the overall energy costs for a manufacturing plant.</p>
 
@@ -1344,7 +1338,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[Monitoring MTConnect Streams: MTConnect Graphr]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr/"/>
-    <updated>2012-07-02T11:15:00-07:00</updated>
+    <updated>2012-07-02T11:15:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr</id>
     <content type="html"><![CDATA[<p>A few months back I took up the fun task of exploring MTConnect streams and the amazing possibilities which it presented to a developer. That culminated into a web base monitoring app, MTConnect Graphr, which can now be downloaded from <a href="http://github.com/princearora/mtconnect-graphr">Github</a>. In this post I&rsquo;ll run down through the development process of the same.</p>
 
@@ -1467,7 +1461,7 @@ var line1 = new TimeSeries();
   <entry>
     <title type="html"><![CDATA[Octopress + S3 + Cloudfront]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/06/13/s3/"/>
-    <updated>2012-06-13T07:03:00-07:00</updated>
+    <updated>2012-06-13T07:03:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/06/13/s3</id>
     <content type="html"><![CDATA[<p>We have finally migrated to Octopress from Google Blogger. Feels a lot better to write in Markdown than using Blogger&rsquo;s editor! The static content is being stored in an S3 bucket and served through AWS Cloudfront.</p>
 
@@ -1478,7 +1472,7 @@ var line1 = new TimeSeries();
   <entry>
     <title type="html"><![CDATA[Why SaaS?]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/06/08/why-saas/"/>
-    <updated>2012-06-08T11:16:00-07:00</updated>
+    <updated>2012-06-08T11:16:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/06/08/why-saas</id>
     <content type="html"><![CDATA[<p>A common question that we always get is why vimana is a software-as-a-service (SaaS) product. Surely, given how much data we are collecting, it must be easier to run it locally inside a plant, right? Well, if all vimana was doing was creating plots of part counts and utilization, then yes, running it locally does make sense. But vimana does a lot more &mdash; it helps understand the patterns behind productivity (and the lack thereof), and being able to support these capabilities requires a whole lot more of computational resources.</p>
 
@@ -1498,7 +1492,7 @@ var line1 = new TimeSeries();
   <entry>
     <title type="html"><![CDATA[BEC Article in Livebetter Magazine]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/06/08/livebetter-article/"/>
-    <updated>2012-06-08T08:23:00-07:00</updated>
+    <updated>2012-06-08T08:23:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/06/08/livebetter-article</id>
     <content type="html"><![CDATA[<p>The June issue of the <a href="http://livebettermagazine.com">Livebetter Magazine</a> features an article about the BEC standard by Ralph Resnick from the National Center for Defense Manufacturing and Machining and myself. You can read the article <a href="http://livebettermagazine.com/eng/magazine/article_detail.lasso?id=307">here</a>.</p>
 ]]></content>
@@ -1507,7 +1501,7 @@ var line1 = new TimeSeries();
   <entry>
     <title type="html"><![CDATA[Powered by Octopress]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/05/30/powered-by-octopress/"/>
-    <updated>2012-05-30T10:00:00-07:00</updated>
+    <updated>2012-05-30T10:00:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/05/30/powered-by-octopress</id>
     <content type="html"><![CDATA[<p>We are moving to the Octopress framework. The blog will be hosted on Github Pages.</p>
 ]]></content>
@@ -1516,7 +1510,7 @@ var line1 = new TimeSeries();
   <entry>
     <title type="html"><![CDATA[MongoDB and Replica Sets]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/05/08/mongo-replica-sets/"/>
-    <updated>2012-05-08T10:50:00-07:00</updated>
+    <updated>2012-05-08T10:50:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/05/08/mongo-replica-sets</id>
     <content type="html"><![CDATA[<h2>Why do we care</h2>
 
@@ -1628,7 +1622,7 @@ Deepak.</p>
   <entry>
     <title type="html"><![CDATA[Welcome Deepak!]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/04/14/welcome-deepak/"/>
-    <updated>2012-04-14T10:48:00-07:00</updated>
+    <updated>2012-04-14T10:48:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/04/14/welcome-deepak</id>
     <content type="html"><![CDATA[<p>We would like to welcome Deepak Prasanna to System Insights. Deepak starts this month as a Software Developer working from our Chennai office. You will be hearing from him soon in this blog.</p>
 ]]></content>
