@@ -4,7 +4,7 @@
   <title><![CDATA[Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2013-06-14T07:59:43+05:30</updated>
+  <updated>2013-06-14T12:51:43+05:30</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -12,6 +12,18 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MTConnect Releases a new Video from MC<sup>2</sup>]]></title>
+    <link href="http://www.manufacturingbigdata.com/blog/2013/06/14/mtconnect-releases-a-new-video-from-mc-2/"/>
+    <updated>2013-06-14T12:46:00+05:30</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2013/06/14/mtconnect-releases-a-new-video-from-mc-2</id>
+    <content type="html"><![CDATA[<p>Excellent video from MC <sup>2</sup> conference starring Jake Ervin. This was shot at the MC<sup>2</sup> conference in April and Jake is &mdash; sadly &mdash; trying to strike up a meaningful conversation with a machine tool. I make a cameo at the end of the video. After watching myself, I&rsquo;ve lost all aspirations of acting. Better stick to my day job!</p>
+
+<div style="text-align:center;"><iframe width="640" height="400" src="http://www.youtube.com/embed/aBl0QHAPurs?rel=0" frameborder="0" allowfullscreen></iframe></div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Call for Papers: Information Modeling and Big Data]]></title>
@@ -1616,15 +1628,6 @@ If the secondary comes up again, mongo will take care of replicating the records
 
 <p>Happy hacking, <br/>
 Deepak.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Welcome Deepak!]]></title>
-    <link href="http://www.manufacturingbigdata.com/blog/2012/04/14/welcome-deepak/"/>
-    <updated>2012-04-14T10:48:00+05:30</updated>
-    <id>http://www.manufacturingbigdata.com/blog/2012/04/14/welcome-deepak</id>
-    <content type="html"><![CDATA[<p>We would like to welcome Deepak Prasanna to System Insights. Deepak starts this month as a Software Developer working from our Chennai office. You will be hearing from him soon in this blog.</p>
 ]]></content>
   </entry>
   
