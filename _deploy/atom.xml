@@ -4,7 +4,7 @@
   <title><![CDATA[Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2013-06-14T14:52:52-07:00</updated>
+  <updated>2013-06-14T16:04:28-07:00</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -49,7 +49,7 @@ article blockquote { font-size: 1em; }
 <p>This work was conducted under Grant Opportunity Number
 2012-<span class="caps">NIST</span>-<span class="caps">MSE</span>-01 for the Intelligent System Division of the National
 Institute of Standards and Technology (<a href="http://www.nist.gov"><span class="caps">NIST</span></a>)
-with the collaboration of <a href="http://www.systeminsights.com">System Insights</a>, 
+with the collaboration of <a href="http://www.systeminsights.com">System Insights</a>,
 <a href="http://www.swri.org">SwRI</a> (Southwest Research
 Institute), <a href="http://ncdmm.org"><span class="caps">NCDMM</span></a> (National Center for Defense
 Manufacturing and Machining), <a href="http://amtonline.org"><span class="caps">AMT</span></a> (Association
@@ -71,7 +71,7 @@ to complete the task. To load material into a machine tool, the robot
 has to have knowledge of the location of the work-holding and the
 necessary approach angles as well as any collision domains within the
 machine enclosure. From the machine tools perspective, this is all
-inconsequencial as long as it gets its material.</p>
+inconsequential as long as it gets its material.</p>
 <p>Once complete, the machine tool needs to be able to ask for the
 material to be removed. This is also accomplished at the higher level
 by requesting the material get unloaded. At that point, the machine
@@ -188,7 +188,6 @@ in-depth discussion of the failure scenarios and how recovery is to be
 handled. The MTConnect machine tool simulator and state machine
 implements many of these scenarios and references to the actual
 implementation will be provided.</p>
-
 <p style="text-align:center;"><img src="http://www.manufacturingbigdata.com/images/2013-06-07-figure3.png" title="Figure 3" alt="Figure 3" /></p>
 <p style="text-align:center;"><em>Figure 3</em></p>
 <p>In the MTConnect standard, the current state of a device can be
@@ -407,7 +406,6 @@ so.</p>
     And cnc MaterialLoad should be Not_Ready
     And robot MaterialLoad becomes Ready
 </pre>
-
 <h4>Failure Scheario 1:</h4>
 <pre>
   Scenario: Cnc fails to start cycle
@@ -431,7 +429,6 @@ takes it through a single set of operations</p>
 <pre>
     And machine state should be fault
 </pre>
-
 <h4>Failure scenario 2:</h4>
 <p>The second failure scenario we will discuss is a failure to load a
 piece of material. This results in the machine tool entering into an
@@ -853,7 +850,7 @@ following values: <code>UNAVAILABLE</code>, <code>AVAILABLE</code>, or &lt;devic
 <code>AVAILABLE</code> then it can be bound to a device that is capable of
 fulfilling the request. Once bound it will change to the device Id of
 the associated device.</p>
-<p>The mechanism will resolve disputes by allowing the requestor to
+<p>The mechanism will resolve disputes by allowing the requester to
 choose the responder from the available devices that are
 volunteering. So, if a machine tool wants material loaded and the cell
 has multiple Robots capable of loading material, multiple Robots may
@@ -873,8 +870,8 @@ sequence will be as follows:</p>
 	<li>Cnc 1 material loader binding <code>AVAILABLE</code></li>
 	<li>Robot 2 material loader binding <code>AVAILABLE</code></li>
 </ol>
-<p>In this way the robot and the cnc will coordinate the associations and
-the temporary bindings between devices. Having the requestor make the
+<p>In this way the robot and the <span class="caps">CNC</span> will coordinate the associations and
+the temporary bindings between devices. Having the requester make the
 selection is easiest way to resolve the possible locking issues
 between multiple devices and still have a complete read-only
 interface. The failure scenarios remain mainly the same with some bind
