@@ -4,7 +4,7 @@
   <title><![CDATA[Category: research | Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/blog/categories/research/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2013-06-14T12:51:43+05:30</updated>
+  <updated>2013-06-14T09:39:25-07:00</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[The Green Manufacturing Book]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/04/01/green-manufacturing-book/"/>
-    <updated>2013-04-01T11:15:00+05:30</updated>
+    <updated>2013-04-01T11:15:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/04/01/green-manufacturing-book</id>
     <content type="html"><![CDATA[<p>Had questions about Green Manufacturing but were too bashful to ask? You are in luck, you can pick up a copy of the excellent &ldquo;Green Manufacturing: Fundamentals and Applications&rdquo; from <a href="http://www.amazon.com/Green-Manufacturing-Fundamentals-Applications-Technology/dp/1441960155/">Amazon.com</a> and other fashionable purveyors of fine reading material. Full Disclosure: I have co-authored 4 chapters in the book, including the penultimate chapter &ldquo;Enabling Technologies for Assuring Green Manufacturing&rdquo;, which, among other things, talks  about the need for a highly scalable software architecture to enable realtime monitoring and reporting of manufacturing performance (hint: we have a built a little <a href="http://www.systeminsights.com/vimana">product</a> to address that need).</p>
 
