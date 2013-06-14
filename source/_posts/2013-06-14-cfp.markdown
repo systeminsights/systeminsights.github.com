@@ -1,0 +1,9 @@
+---
+layout: post
+title: "Call for Papers: Information Modeling and Big Data"
+date: 2013-06-14 07:46
+comments: true
+categories: big-data
+author: athulan
+---
+I am the guest editor for a special issue on "Information Modeling and Big Data: Issues and Challenges" to be published in the [ASME Journal of Computing and Information Science in Engineering](http://computingengineering.asmedigitalcollection.asme.org/). We are soliciting papers for this special issue, and if you are more interested, please see [here](https://www.asme.org/getmedia/440280f8-9861-455f-b7e5-8b69193e6d70/ASME-JCIS-SPECIAL-ISSUE-PROPOSAL-5-2013.aspx). If you have any questions you can contact me as well (my information is in the ASME link). 
