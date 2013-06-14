@@ -9,7 +9,7 @@ author: Will Sobel
 
 {% raw %}
   <style type="text/css">
-    ol { margin-left: 2.5em; } 
+    ol { margin-left: 2.5em; }
     article blockquote { font-size: 1em; }
   </style>
 {% endraw %}
@@ -19,7 +19,7 @@ h2. Robotic Interface – Machine Tool Perspective
 bq. This work was conducted under Grant Opportunity Number
 2012-NIST-MSE-01 for the Intelligent System Division of the National
 Institute of Standards and Technology ("NIST":http://www.nist.gov)
-with the collaboration of "System Insights":http://www.systeminsights.com, 
+with the collaboration of "System Insights":http://www.systeminsights.com,
 "SwRI":http://www.swri.org (Southwest Research
 Institute), "NCDMM":http://ncdmm.org (National Center for Defense
 Manufacturing and Machining), "AMT":http://amtonline.org (Association
@@ -44,7 +44,7 @@ to complete the task. To load material into a machine tool, the robot
 has to have knowledge of the location of the work-holding and the
 necessary approach angles as well as any collision domains within the
 machine enclosure. From the machine tools perspective, this is all
-inconsequencial as long as it gets its material.
+inconsequential as long as it gets its material.
 
 Once complete, the machine tool needs to be able to ask for the
 material to be removed. This is also accomplished at the higher level
@@ -68,8 +68,8 @@ h4. The “interfaces” provided by each device is as follows:
 # UnloadMaterial
 
 *Robot Requests:*
-# OpenDoor 
-# CloseDoor 
+# OpenDoor
+# CloseDoor
 # OpenCluck
 # CloseChuck
 
@@ -121,7 +121,7 @@ this project. That addition will be proposed to the MTConnect standard
 in future versions (more on that later.)
 
 p=. !/images/2013-06-07-figure1.png(Figure 1)!
- 
+
 p=. _Figure 1_
 
 The ICL layer is a client of both the CNC agent and the Robot agent
@@ -145,7 +145,7 @@ invoking a small utility on the controller the set various PLC
 registers to actuate the chuck, cycle start and reset. We could not
 open and close the door because the machine was not equipped with an
 actuator; to do so would have incurred a large additional cost. The door
-behavior was therefore synthesized for the demonstration.  
+behavior was therefore synthesized for the demonstration.
 
 h3. Messaging Architecture
 
@@ -180,7 +180,7 @@ handled. The MTConnect machine tool simulator and state machine
 implements many of these scenarios and references to the actual
 implementation will be provided.
 
- 
+
 p=. !/images/2013-06-07-figure3.png(Figure 3)!
 
 p=. _Figure 3_
@@ -260,7 +260,7 @@ a cycle start state. The cycle start state will transition once the
 cycle is complete indicated by the execution transitioning from active
 to ready. The machine will then go into an unloading state signaling
 the robot to remove the material.
- 
+
 p=. !/images/2013-06-07-figure4.png(Figure 4)!
 
 p=. _Figure 4_
@@ -295,7 +295,7 @@ occurred and transitions into a fail state. In both the request and
 the response, a fail transition will transition the top level state
 machine into a failure if the operation is active. More discussion
 will be provided in the Failure and recovery section of this document.
- 
+
 p=. !/images/2013-06-07-figure5.png(Figure 5)!
 
 p=. _Figure 5_
@@ -313,7 +313,7 @@ available until the machine has been unloaded.
 p=. !/images/2013-06-07-figure6.png(Figure 6)!
 
 p=. _Figure 6_
- 
+
 h3. Failure and Recovery
 
 This section will discuss the different operational scenarios of the
@@ -442,7 +442,7 @@ so.
     And cnc MaterialLoad should be Not_Ready
     And robot MaterialLoad becomes Ready
 </pre>
-    
+
 h4. Failure Scheario 1:
 
 <pre>
@@ -473,7 +473,7 @@ Make sure we are in the correct fault state when the load completes
 <pre>
     And machine state should be fault
 </pre>
-    
+
 h4. Failure scenario 2:
 
 The second failure scenario we will discuss is a failure to load a
@@ -730,7 +730,7 @@ following values: @UNAVAILABLE@, @AVAILABLE@, or &lt;device-id&gt;. If it is
 fulfilling the request. Once bound it will change to the device Id of
 the associated device.
 
-The mechanism will resolve disputes by allowing the requestor to
+The mechanism will resolve disputes by allowing the requester to
 choose the responder from the available devices that are
 volunteering. So, if a machine tool wants material loaded and the cell
 has multiple Robots capable of loading material, multiple Robots may
@@ -750,8 +750,8 @@ sequence will be as follows:
 # Cnc 1 material loader binding @AVAILABLE@
 # Robot 2 material loader binding @AVAILABLE@
 
-In this way the robot and the cnc will coordinate the associations and
-the temporary bindings between devices. Having the requestor make the
+In this way the robot and the CNC will coordinate the associations and
+the temporary bindings between devices. Having the requester make the
 selection is easiest way to resolve the possible locking issues
 between multiple devices and still have a complete read-only
 interface. The failure scenarios remain mainly the same with some bind
@@ -769,4 +769,3 @@ devices other than CNC machine tools are involved in these extensions
 as well. This architecture will be well suited for an electronic
 manufacture floor with full automation and device monitoring as well
 as resource management.
-
