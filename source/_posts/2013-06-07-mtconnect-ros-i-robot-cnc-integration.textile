@@ -23,7 +23,7 @@ with the collaboration of "System Insights":http://www.systeminsights.com,
 "SwRI":http://www.swri.org (Southwest Research
 Institute), "NCDMM":http://ncdmm.org (National Center for Defense
 Manufacturing and Machining), "AMT":http://amtonline.org (Association
-for Manufacturing Techknowlogy) and "Mazak USA":http://www.mazakusa.com
+for Manufacturing Technology) and "Mazak USA":http://www.mazakusa.com
 for help with connectivity of the machine tool used in the
 demonstration.
 
