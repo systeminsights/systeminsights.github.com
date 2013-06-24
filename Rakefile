@@ -93,15 +93,20 @@ end
 
 # usage rake new_post[my-new-post] or rake new_post['my new post'] or rake new_post (defaults to "new-post")
 desc "Begin a new post in #{source_dir}/#{posts_dir}"
-task :new_post, :title do |t, args|
+task :new_post, :title, :markup do |t, args|
   if args.title
     title = args.title
   else
     title = get_stdin("Enter a title for your post: ")
   end
+  if args.markup
+    extension = args.markup
+  else
+    extension = ask("Enter markup synax", [new_post_ext, 'textile'], new_post_ext)
+  end
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
   mkdir_p "#{source_dir}/#{posts_dir}"
-  filename = "#{source_dir}/#{posts_dir}/#{Time.now.strftime('%Y-%m-%d')}-#{title.to_url}.#{new_post_ext}"
+  filename = "#{source_dir}/#{posts_dir}/#{Time.now.strftime('%Y-%m-%d')}-#{title.to_url}.#{extension}"
   if File.exist?(filename)
     abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
   end
@@ -115,11 +120,12 @@ task :new_post, :title do |t, args|
     post.puts "categories: "
     post.puts "---"
   end
+  system "git add #{filename}"
 end
 
 # usage rake new_page[my-new-page] or rake new_page[my-new-page.html] or rake new_page (defaults to "new-page.markdown")
 desc "Create a new page in #{source_dir}/(filename)/index.#{new_page_ext}"
-task :new_page, :filename do |t, args|
+task :new_page, :filename, :markup do |t, args|
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
   args.with_defaults(:filename => 'new-page')
   page_dir = [source_dir]
@@ -131,7 +137,11 @@ task :new_page, :filename do |t, args|
       page_dir << filename
       filename = "index"
     end
-    extension ||= new_page_ext
+    if extension.nil? and args.markup
+      extension = args.markup
+    elsif extension.nil?
+      extension = ask("Enter markup synax", [new_page_ext, 'textile'], new_page_ext)
+    end
     page_dir = page_dir.map! { |d| d = d.to_url }.join('/')                # Sanitize path
     filename = filename.downcase.to_url
 
@@ -151,6 +161,7 @@ task :new_page, :filename do |t, args|
       page.puts "footer: true"
       page.puts "---"
     end
+    system "git add #{file}"
   else
     puts "Syntax error: #{args.filename} contains unsupported characters"
   end
@@ -369,11 +380,22 @@ def get_stdin(message)
   STDIN.gets.chomp
 end
 
-def ask(message, valid_options)
+def ask(message, valid_options = nil, default = nil)
   if valid_options
-    answer = get_stdin("#{message} #{valid_options.to_s.gsub(/"/, '').gsub(/, /,'/')} ") while !valid_options.include?(answer)
+    options = valid_options.to_s.gsub(/"/, '').gsub(/, /,'/')
+    if default
+      message = "#{message} #{options} [default: #{default}]: "
+    else
+      message = "#{message} #{options}: "
+    end
+    begin
+      answer = get_stdin(message)
+      answer = default if answer == '' and !default.nil?
+    end while !valid_options.include?(answer)
   else
+    message = "#{message} [default: #{default}]: " if default
     answer = get_stdin(message)
+    answer = default if answer == '' and !default.nil?
   end
   answer
 end
