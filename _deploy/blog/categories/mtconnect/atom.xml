@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mtconnect | Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/blog/categories/mtconnect/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2013-06-14T16:04:28-07:00</updated>
+  <updated>2013-06-24T16:56:24-07:00</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Next Generation of American Manufacturing]]></title>
+    <link href="http://www.manufacturingbigdata.com/blog/2013/06/24/the-next-generation-of-american-manufacturing/"/>
+    <updated>2013-06-24T11:53:00-07:00</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2013/06/24/the-next-generation-of-american-manufacturing</id>
+    <content type="html"><![CDATA[<p>Steve Fritzinger, NetApp&rsquo;s Virtualization Alliance Manager, Java
+Author and Economics Writer, discusses the future of American
+manufacturing with Penny Brown from IMTS TV. America is by no means a
+laggard in the world of manufacturing; we are very competitive and
+with a proper educational foundation and technology, we can retain our
+position and exceed our current standing. But in order to do so,
+American manufacturing must adapt to survive.</p>
+
+<p>div=. <iframe width="560" height="315" src="http://www.youtube.com/embed/c1qtzgr9KN0?rel=0" frameborder="0" allowfullscreen></iframe></p>
+
+<p>At the heart of this revolution is technology. The new manufacturing
+jobs will be more technical and require increasingly skilled
+labor. The machines and technology will do the simple tasks, leaving
+our labor force to focus on performance, new processes, and
+materials. Standards and standards based solutions will enable this
+revolution because manufactures will have the ability to leverage a
+wider choice of solutions that specifically address their needs.</p>
+
+<p>Unlike the current situation, each product shares a common
+infrastructure with no additional per-product cost for
+connectivity. As well, this reduces the barrier of entry for new
+products and services, so there are more options and faster
+deployment. In the end the market grows as the demand increase,
+creating a larger aggregate for everyone.</p>
+
+<p>Our product, vimana, exclusively uses standard based data collection to
+drive our analytics platform. We believe that promoting the industry
+and developing standards will increase the understanding of what is
+possible and in the end will push the boundaries of the industry. If
+the industry is more advanced, then our solutions will be able to
+leverage an informed market that is asking for ways to improve and
+compete effectively, regardless of where they&rsquo;re located.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MTConnect Releases a new Video from MC[2]]]></title>
@@ -1192,35 +1232,6 @@ var line1 = new TimeSeries();
 <p>The agent service should be up and running. You may change the agent.cfg file in any text editor based on the instructions here.</p>
 
 <p>Have fun!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Introducing our Intern - Prince Arora]]></title>
-    <link href="http://www.manufacturingbigdata.com/blog/2012/03/15/Introducing-our-Intern-Price-Arora/"/>
-    <updated>2012-03-15T21:00:00-07:00</updated>
-    <id>http://www.manufacturingbigdata.com/blog/2012/03/15/Introducing-our-Intern-Price-Arora</id>
-    <content type="html"><![CDATA[<p>I want to introduce Prince Arora, a student from IIT Madras, who is interning with us at our Chennai office. Prince is developing a suite of MTConnect-based tools to track the maintenance status of machine tools. He is blogging about his experiences at System Insights at his blog, <a href="http://princearora.in">The 20four hour log</a>.</p>
-
-<p>Prince started out by building a simple webapp to display various maintenance-related parameters from an MTConnect data stream. Specifically <a href="http://princearora.wordpress.com/2012/02/14/mtconnect-the-problem-statement/">he developed an app</a> to:</p>
-
-<ul>
-<li>Connect to any MTConnect Stream specified by the user</li>
-<li>Recognize all the devices within the stream</li>
-<li>Continuously read &amp; display multiple parameters for each of the device</li>
-<li>Display condition of all components</li>
-<li>Plot a curve of the variation of a parameter over time</li>
-<li>Allow user to monitor a parameter and alarm if it moves outside the range of values entered</li>
-</ul>
-
-
-<p>Here is a screenshot of viewing realtime data from an MTConnect Agent. The app plots the value of an MTConnect Sample DataItem in realtime. The screen below shows the app plotting the X position, but this can also be used to plot maintenance-related data like a vibration or temperature.</p>
-
-<p>You can also load up the status of various conditions active in the machine tool, and see if the parameter that is being plotted is within some user-determined bounds. The screen below shows bounds set for the DataItem Commanded Y Position between 3 and -2. A green indication is shown because the data item is operating within bounds.</p>
-
-<p><img class="center" src="/images/2012-03-16-Introducing-our-Intern-Price-Arora-pic-2.jpeg"></p>
-
-<p>Prince will be posting more about his internship in these pages. Stay tuned!</p>
 ]]></content>
   </entry>
   

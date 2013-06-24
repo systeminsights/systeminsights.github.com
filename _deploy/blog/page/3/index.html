@@ -9,7 +9,7 @@
   <meta name="author" content="System Insights">
 
   
-  <meta name="description" content="We would like to welcome Deepak Prasanna to System Insights. Deepak starts this month as a Software Developer working from our Chennai office. You &hellip;">
+  <meta name="description" content="Why do we care We use mongoDB to persist data from the vimana tenants. All historical data from our customers is stored in mongo, and its very &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,145 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/05/08/mongo-replica-sets/">MongoDB and Replica Sets</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-08T10:50:00-07:00" pubdate data-updated="true">May 8<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Why do we care</h2>
+
+<p>We use mongoDB to persist data from the vimana tenants. All historical data from our customers is stored in mongo, and its very important that we can continuously persist into mongo without losing data. We are using replica sets to make sure that our data is redundantly stored and to ensure that we have a failover mechanism when one of the mongoDBs lose connection.</p>
+
+<h2>Introduction to Replica Sets</h2>
+
+<p>Replica sets are a form of asynchronous master/slave replication, adding automatic failover and automatic recovery of member nodes. A replica set consists of two or more nodes that are copies of each other. (i.e.: replicas). The replica set automatically elects a primary (master). Drivers (and mongos) can automatically detect when a replica set primary changes and will begin sending writes to the new primary.</p>
+
+<h2>Those GOTCHAs</h2>
+
+<p>In order enable replica sets, you need to pass the &ldquo;replSet&rdquo; parameter while starting the mongod processes.
+Replica sets cannot be initiated on those mongod instance which were already started with out &ldquo;replSet&rdquo; parameter.  Stop and restart the mongod processes with replSet parameter.
+When replica sets are configured, all the writes will only go to the primary!!! Mongo has its own algorithms for syncing the data across the nodes.</p>
+
+<h2>That setup</h2>
+
+<p>Starting multiple mongo instances.</p>
+
+<pre><code>$ mongod --dbpath mongo_rpl/data1 --replSet set1 --port 27018
+$ mongod --dbpath mongo_rpl/data2 --replSet set1 --port 27019
+$ mongod --dbpath mongo_rpl/data3 --replSet set1 --port 27020
+</code></pre>
+
+<p>This starts 3 different instances of mongo running on different ports.</p>
+
+<h2>Setting up the replica config</h2>
+
+<pre><code>➜  ~  mongo localhost:27018
+MongoDB shell version: 1.8.2
+Mon Apr 30 11:13:59 *** warning: spider monkey build without utf8 support.  consider rebuilding with utf8 support
+connecting to: localhost:27018/test
+&gt; config = {_id: "set1", members: [{_id: 0, host: "localhost:27018"}, {_id: 1, host: "localhost:27019"},{_id: 2, host:"localhost:27020"}]}
+{
+   "_id" : "set1",
+  "members" : [
+ {
+    "_id" : 0, 
+   "host" : "localhost:27018"
+},
+{
+   "_id" : 1,
+  "host" : "localhost:27019"
+},
+{
+   "_id" : 2,
+  "host" : "localhost:27020"
+}
+]
+}
+&gt; rs.initiate(config)
+{
+   "info" : "Config now saved locally.  Should come online in about a minute.",
+  "ok" : 1
+}
+&gt;
+</code></pre>
+
+<p>This config enables the replicas to talk with each other. The talking would involve the replicas communicating who is the primary and who are all the secondaries.</p>
+
+<h2>That app</h2>
+
+<p>We wrote a <a href="https://github.com/deepakprasanna/mongo_oplog_watcher">small app</a> which would tail the oplog of our test servers and insert some interesting records into the replicas.</p>
+
+<h2>Those observations</h2>
+
+<p>The most interesting part of playing with replica sets is to understand how mongoDB behaves and handles a node failure.
+I have classified my observations into two catagories, a node failure during a read and during a write.</p>
+
+<h3>Reading Scenarios</h3>
+
+<p>MongoDB doesnot by default support serving reads from the replicas. MongoDB will serve all reads from primary by default. Reads from secondaries can be configured, which is actually a 2 step process.  The first step is to configure &ldquo;slaveOK&rdquo; in the mongo console. This will tell mongo, it is okay to serve the reads from the secondaries. The second step is to instantiate the MongoReplConnection with :read => :secondary option.
+This will tell the driver that it is okay to send the reads to the secondaries. Mongo driver will randomly select one of the secondaries to serve the reads. The distribution of the reads across the secondaries is handled by the driver.</p>
+
+<ul>
+<li><p><strong>Secondary goes down:</strong> <br/>
+<strong>slaveOk:</strong> <code>Mongo::ConnectionFailure</code> will be raised when there is a failure. Mongo driver is intelligent, when it sees a <code>Mongo::ConnectionFailure</code> it prevents the next reads from going to that dead secondary.
+The driver has its own algorithm to find out if the dead secondary is back alive or not. As far a read is concerned we need to catch <code>Mongo::ConnectionFailure</code> and make the read once more(Assuming that another secondary will be up).
+If the secondaries are configured to serve the reads, then the primary is not touched at all until all other secondaries are dead. But there is no real way to find out which mongod instance served the read. <br/>
+<strong>Without SlaveOk:</strong>  Rest of the world goes as usual.</p></li>
+<li><p><strong>Primary goes down:</strong>  <br/>
+<strong>slaveOk:</strong> Rest of the world goes as usual. <br/>
+<strong>without SlaveOk:</strong> All the reads are going to fail since primary can only serve the reads. There are 2 ways to solve this problem, catch the exception and throw an error message. Or keep polling the server until one of the other secondaries becomes a primary and read becomes successful. If the client decides to retry, it&rsquo;s not guaranteed that another member of the replica set will have been promoted to primary right away, so it&rsquo;s still possible that the driver will raise another <code>Mongo::ConnectionFailure</code>.</p></li>
+</ul>
+
+
+<h3>Writing scenarios</h3>
+
+<ul>
+<li><strong>Secondary goes down:</strong> When replica sets are configured in mongoDB, all the writes go to the primary. So there is no problem at all if a secondary goes down.
+If the secondary comes up again, mongo will take care of replicating the records which were lost by the time when it was down. Perfect!</li>
+<li><strong>Primary goes down:</strong> The ruby mongo driver raises <code>Mongo::ConnectionFailure</code>. Checkout the oplog watcher, we have caught this exception and we are doing a <code>puts</code> that the connection is lost.
+  But how ever the after a few seconds, when one of the other secondaries get elected as the primary the writes become successful. The interesting fact is that all the writes which failed
+  during this recovery process is lost. Since we are able to catch <code>Mongo::ConnectionFailure</code>, it is up-to the client to pull the sleeves and persist the data somewhere else until another
+  secondary becomes a primary.While testing we lost about 20-30 records when the primary was down. I guess this number would be more or less depending the latency which we would face in the realtime.</li>
+<li><strong>Last mongod instance is not becoming primary:</strong> As you can see from the config above, we have 3 replicas. So we would have one primary(27018) and two secondaries(27019 and 27020). We are stopping the primary(27018). Now one of the secondaries becomes a primary(say 28019). Now we would have one primary(27019) and one secondary(27020). Again we are stopping the primary(27019). But the left over secondary(27020) will not become the primary!!!!!!! This causes all the writes to fail. But if we bring another dead mongod instance(27018) up, the leftover secondary(27020) becomes the primary and from then on the writes become successful.  This was found while digging into the mongo logs.</li>
+</ul>
+
+
+<p><code>[rs Manager] replSet can't see a majority, will not try to elect self:</code></p>
+
+<p>From what I understand , Replica sets will do the election process only if there are 2 or more replicas available. If at all we have only one replica alive, the election will not happen and all the writes will fail because there will be no primary. We need have 2 replicas alive at anytime for the writes to become successful. This is interesting.</p>
+
+<p>Happy hacking, <br/>
+Deepak.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -542,58 +681,6 @@ First, lets start with how the &ldquo;Big Data&rdquo; is defined:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/16/Baseline-Energy-Consumption/">Baseline Energy Consumption</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-16T23:39:00-08:00" pubdate data-updated="true">Jan 16<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Measuring machine tool energy consumption has always been tricky because of the diversity and complexity of machine tools. We took a first stab at developing a standard to measure machine tool energy consumption as part of a project supported by General Dynamics – OTS, National Center for Defense Manufacturing and Machining (NCDMM), and AMT. We developed the Baseline Energy Consumption (BEC) metric as a standard measure of the energy consumption of machine tools along with a companion test methodology. Applications of this metric include:</p>
-
-<ul>
-<li>Estimating the approximate energy requirements of operating a machine tool to manufacture a specific part</li>
-<li>Comparing the energy requirements of two machine tools that are being applied in similar activities</li>
-<li>Performing Return-on-Investment calculations to justify energy efficiency improvements in machine tool and machining technologies</li>
-<li>Assessing environmental impact of manufacturing processes from equipment energy consumption</li>
-</ul>
-
-
-<p>A key consideration in designing the test methodology was to ensure that they could be performed within a reasonable amount of a time in a standard industrial setting without requiring any special workpieces, fixtures, or equipment. This pragmatic approach was explicitly selected because the goal of this metric is to serve as a figure of merit for the energy consumption of machine tools and manufacturing equipment. This metric does not intend to serve as a precise indication of the energy required by a machine tool to manufacture a specific part or to execute a specific operation. The first edition of the standard focused on measuring the BEC of lathe-type machine tools based on recording the power consumption during a series of controlled tests.</p>
-
-<p>The energy consumption of a machine tool in a factory environment is determined by the relative time it spends in different states, including, idle, axes movement, and cutting. To capture the effect of these states, the baseline tests measure the average power consumption during tare usage, axes / component usage, and machining usage. Tare usage is measured based on the power consumption of the machine tool when it is in standby with its peripheral units turned on. Component usage is measured based on the power consumption when the machine tool components are being exercised, without any loaded workpiece (analogous to “air-cutting”). Machining usage is measured based on power consumption  during metal cutting at a fixed spindle speed at varying material removal rates on an arbitrary workpiece. These tests are based on the observation that the energy required to remove unit volume of material in a machine tool is largely dependent on the volumetric rate of removal, or material removal rate, and not on the process parameters.</p>
-
-<p>The BEC metric is based on the average power consumed during these states. The three terms are weighted by duration factors to estimate the energy consumed by the machine during one hour of representative operation, where it is assumed that the machine tool spends 25% of the duration in tare usage, 25% in component usage (air-cutting/warmup etc.,) and 50% in machining usage.</p>
-
-<p>We will be following up with case studies looking at how this standard was applied in comparing different machine tools.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -609,6 +696,10 @@ First, lets start with how the &ldquo;Big Data&rdquo; is defined:</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/06/24/the-next-generation-of-american-manufacturing/">The Next Generation of American Manufacturing</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/06/14/cfp/">Call for Papers: Information Modeling and Big Data</a>
@@ -628,6 +719,22 @@ First, lets start with how the &ldquo;Big Data&rdquo; is defined:</p>
     
       <li class="post">
         <a href="/blog/2013/06/03/we-are-hiring/">We Are Hiring!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/energy-consumption-in-manufacturing/">Top Manufacturing Energy Consumers: A Close Look at the Paper Industry</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/01/chennai-ruby-meetup/">chennai.rb Meetup</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/01/green-manufacturing-book/">The Green Manufacturing Book</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/08/javaone-presentation/">JavaOne Presentation</a>
       </li>
     
   </ul>
