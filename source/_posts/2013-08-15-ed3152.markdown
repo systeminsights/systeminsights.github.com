@@ -1,0 +1,9 @@
+---
+layout: post
+title: "ED3152 @ IIT Madras"
+date: 2013-08-15 12:05
+comments: true
+categories: research
+author: athulan
+---
+I am teaching the course ED3152: Precision Processes and Systems at [IIT Madras](http://www.iitm.ac.in). You can follow the course material and discussions on the course [website](http://ed3152.manufacturingbigdata.com/).
