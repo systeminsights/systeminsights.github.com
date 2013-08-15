@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mtconnect | Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/blog/categories/mtconnect/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2013-06-24T16:56:24-07:00</updated>
+  <updated>2013-08-15T12:08:18+05:30</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[The Next Generation of American Manufacturing]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/24/the-next-generation-of-american-manufacturing/"/>
-    <updated>2013-06-24T11:53:00-07:00</updated>
+    <updated>2013-06-24T11:53:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/24/the-next-generation-of-american-manufacturing</id>
     <content type="html"><![CDATA[<p>Steve Fritzinger, NetApp&rsquo;s Virtualization Alliance Manager, Java
 Author and Economics Writer, discusses the future of American
@@ -56,7 +56,7 @@ compete effectively, regardless of where they&rsquo;re located.</p>
   <entry>
     <title type="html"><![CDATA[MTConnect Releases a new Video from MC[2]]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/13/mtconnect-releases-a-new-video-from-mc-2/"/>
-    <updated>2013-06-13T14:35:00-07:00</updated>
+    <updated>2013-06-13T14:35:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/13/mtconnect-releases-a-new-video-from-mc-2</id>
     <content type="html"><![CDATA[<p>Excellent video from MC ^2^ conference staring Jake Ervin. This was
 shot at the MC ^2^ conference in April and Jake, sadly, trying to strike up
@@ -71,7 +71,7 @@ acting. Better stick to my day job!</p>
   <entry>
     <title type="html"><![CDATA[MTConnect ROS-I Robot CNC Integration]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration/"/>
-    <updated>2013-06-07T23:38:00-07:00</updated>
+    <updated>2013-06-07T23:38:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration</id>
     <content type="html"><![CDATA[<p>
   <style type="text/css"></p>
@@ -1072,7 +1072,7 @@ as resource management.</p>
   <entry>
     <title type="html"><![CDATA[Monitoring MTConnect Streams: MTConnect Graphr]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr/"/>
-    <updated>2012-07-02T11:15:00-07:00</updated>
+    <updated>2012-07-02T11:15:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr</id>
     <content type="html"><![CDATA[<p>A few months back I took up the fun task of exploring MTConnect streams and the amazing possibilities which it presented to a developer. That culminated into a web base monitoring app, MTConnect Graphr, which can now be downloaded from <a href="http://github.com/princearora/mtconnect-graphr">Github</a>. In this post I&rsquo;ll run down through the development process of the same.</p>
 
@@ -1195,7 +1195,7 @@ var line1 = new TimeSeries();
   <entry>
     <title type="html"><![CDATA[Setting up a MTConnect Agent on a Linux (Ubuntu) machine]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/"/>
-    <updated>2012-03-16T03:40:00-07:00</updated>
+    <updated>2012-03-16T16:10:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine</id>
     <content type="html"><![CDATA[<p>This was blogged first at my personal blog <a href="http://princearora.wordpress.com/2012/02/24/setting-up-a-mtconnect-agent-on-a-unixubuntu-machine/">here</a>.</p>
 

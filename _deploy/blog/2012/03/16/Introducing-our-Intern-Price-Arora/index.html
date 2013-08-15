@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Baseline Energy Consumption - Manufacturing Big Data</title>
+  <title>Introducing our Intern - Prince Arora - Manufacturing Big Data</title>
   <meta name="author" content="System Insights">
 
   
-  <meta name="description" content="Measuring machine tool energy consumption has always been tricky because of the diversity and complexity of machine tools. We took a first stab at &hellip;">
+  <meta name="description" content="I want to introduce Prince Arora, a student from IIT Madras, who is interning with us at our Chennai office. Prince is developing a suite of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.manufacturingbigdata.com/blog/2012/01/16/Baseline-Energy-Consumption">
+  <link rel="canonical" href="http://www.manufacturingbigdata.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Manufacturing Big Data" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Baseline Energy Consumption</h1>
+      <h1 class="entry-title">Introducing Our Intern - Prince Arora</h1>
     
     
       <p class="meta">
@@ -96,30 +96,34 @@
   
 
 
-<time datetime="2012-01-16T23:39:00-08:00" pubdate data-updated="true">Jan 16<span>th</span>, 2012</time>
+<time datetime="2012-03-16T09:30:00+05:30" pubdate data-updated="true">Mar 16<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Measuring machine tool energy consumption has always been tricky because of the diversity and complexity of machine tools. We took a first stab at developing a standard to measure machine tool energy consumption as part of a project supported by General Dynamics – OTS, National Center for Defense Manufacturing and Machining (NCDMM), and AMT. We developed the Baseline Energy Consumption (BEC) metric as a standard measure of the energy consumption of machine tools along with a companion test methodology. Applications of this metric include:</p>
+<div class="entry-content"><p>I want to introduce Prince Arora, a student from IIT Madras, who is interning with us at our Chennai office. Prince is developing a suite of MTConnect-based tools to track the maintenance status of machine tools. He is blogging about his experiences at System Insights at his blog, <a href="http://princearora.in">The 20four hour log</a>.</p>
+
+<p>Prince started out by building a simple webapp to display various maintenance-related parameters from an MTConnect data stream. Specifically <a href="http://princearora.wordpress.com/2012/02/14/mtconnect-the-problem-statement/">he developed an app</a> to:</p>
 
 <ul>
-<li>Estimating the approximate energy requirements of operating a machine tool to manufacture a specific part</li>
-<li>Comparing the energy requirements of two machine tools that are being applied in similar activities</li>
-<li>Performing Return-on-Investment calculations to justify energy efficiency improvements in machine tool and machining technologies</li>
-<li>Assessing environmental impact of manufacturing processes from equipment energy consumption</li>
+<li>Connect to any MTConnect Stream specified by the user</li>
+<li>Recognize all the devices within the stream</li>
+<li>Continuously read &amp; display multiple parameters for each of the device</li>
+<li>Display condition of all components</li>
+<li>Plot a curve of the variation of a parameter over time</li>
+<li>Allow user to monitor a parameter and alarm if it moves outside the range of values entered</li>
 </ul>
 
 
-<p>A key consideration in designing the test methodology was to ensure that they could be performed within a reasonable amount of a time in a standard industrial setting without requiring any special workpieces, fixtures, or equipment. This pragmatic approach was explicitly selected because the goal of this metric is to serve as a figure of merit for the energy consumption of machine tools and manufacturing equipment. This metric does not intend to serve as a precise indication of the energy required by a machine tool to manufacture a specific part or to execute a specific operation. The first edition of the standard focused on measuring the BEC of lathe-type machine tools based on recording the power consumption during a series of controlled tests.</p>
+<p>Here is a screenshot of viewing realtime data from an MTConnect Agent. The app plots the value of an MTConnect Sample DataItem in realtime. The screen below shows the app plotting the X position, but this can also be used to plot maintenance-related data like a vibration or temperature.</p>
 
-<p>The energy consumption of a machine tool in a factory environment is determined by the relative time it spends in different states, including, idle, axes movement, and cutting. To capture the effect of these states, the baseline tests measure the average power consumption during tare usage, axes / component usage, and machining usage. Tare usage is measured based on the power consumption of the machine tool when it is in standby with its peripheral units turned on. Component usage is measured based on the power consumption when the machine tool components are being exercised, without any loaded workpiece (analogous to “air-cutting”). Machining usage is measured based on power consumption  during metal cutting at a fixed spindle speed at varying material removal rates on an arbitrary workpiece. These tests are based on the observation that the energy required to remove unit volume of material in a machine tool is largely dependent on the volumetric rate of removal, or material removal rate, and not on the process parameters.</p>
+<p>You can also load up the status of various conditions active in the machine tool, and see if the parameter that is being plotted is within some user-determined bounds. The screen below shows bounds set for the DataItem Commanded Y Position between 3 and -2. A green indication is shown because the data item is operating within bounds.</p>
 
-<p>The BEC metric is based on the average power consumed during these states. The three terms are weighted by duration factors to estimate the energy consumed by the machine during one hour of representative operation, where it is assumed that the machine tool spends 25% of the duration in tare usage, 25% in component usage (air-cutting/warmup etc.,) and 50% in machining usage.</p>
+<p><img class="center" src="/images/2012-03-16-Introducing-our-Intern-Price-Arora-pic-2.jpeg"></p>
 
-<p>We will be following up with case studies looking at how this standard was applied in comparing different machine tools.</p>
+<p>Prince will be posting more about his internship in these pages. Stay tuned!</p>
 </div>
 
 
@@ -142,12 +146,12 @@
   
 
 
-<time datetime="2012-01-16T23:39:00-08:00" pubdate data-updated="true">Jan 16<span>th</span>, 2012</time>
+<time datetime="2012-03-16T09:30:00+05:30" pubdate data-updated="true">Mar 16<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/energy/'>energy</a>
+    <a class='category' href='/blog/categories/interns/'>interns</a>, <a class='category' href='/blog/categories/mtconnect/'>mtconnect</a>
   
 </span>
 
@@ -156,7 +160,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.manufacturingbigdata.com/blog/2012/01/16/Baseline-Energy-Consumption/" data-via="systeminsights" data-counturl="http://www.manufacturingbigdata.com/blog/2012/01/16/Baseline-Energy-Consumption/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.manufacturingbigdata.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora/" data-via="systeminsights" data-counturl="http://www.manufacturingbigdata.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora/" >Tweet</a>
   
   
   
@@ -165,10 +169,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/01/10/It%27s-all-about-Parts/" title="Previous Post: It's all about Parts">&laquo; It's all about Parts</a>
+        <a class="basic-alignment left" href="/blog/2012/02/28/MTConnect-Screencasts/" title="Previous Post: MTConnect Screencasts">&laquo; MTConnect Screencasts</a>
       
       
-        <a class="basic-alignment right" href="/blog/2012/02/08/BEC-Case-Study-1/" title="Next Post: Baseline Energy Consumption - Case Study 1">Baseline Energy Consumption - Case Study 1 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/" title="Next Post: Setting up a MTConnect Agent on a Linux (Ubuntu) machine">Setting up a MTConnect Agent on a Linux (Ubuntu) machine &raquo;</a>
       
     </p>
   </footer>
@@ -187,6 +191,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/15/ed3152/">ED3152 @ IIT Madras</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/06/24/the-next-generation-of-american-manufacturing/">The Next Generation of American Manufacturing</a>
@@ -222,10 +230,6 @@
     
       <li class="post">
         <a href="/blog/2013/04/01/green-manufacturing-book/">The Green Manufacturing Book</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/01/08/javaone-presentation/">JavaOne Presentation</a>
       </li>
     
   </ul>
@@ -271,8 +275,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.manufacturingbigdata.com/blog/2012/01/16/Baseline-Energy-Consumption/';
-        var disqus_url = 'http://www.manufacturingbigdata.com/blog/2012/01/16/Baseline-Energy-Consumption/';
+        var disqus_identifier = 'http://www.manufacturingbigdata.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora/';
+        var disqus_url = 'http://www.manufacturingbigdata.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora/';
         var disqus_script = 'embed.js';
       
     (function () {

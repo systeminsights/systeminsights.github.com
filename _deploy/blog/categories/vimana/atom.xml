@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vimana | Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/blog/categories/vimana/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2013-06-24T16:56:24-07:00</updated>
+  <updated>2013-08-15T12:08:18+05:30</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Why SaaS?]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/06/08/why-saas/"/>
-    <updated>2012-06-08T11:16:00-07:00</updated>
+    <updated>2012-06-08T11:16:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/06/08/why-saas</id>
     <content type="html"><![CDATA[<p>A common question that we always get is why vimana is a software-as-a-service (SaaS) product. Surely, given how much data we are collecting, it must be easier to run it locally inside a plant, right? Well, if all vimana was doing was creating plots of part counts and utilization, then yes, running it locally does make sense. But vimana does a lot more &mdash; it helps understand the patterns behind productivity (and the lack thereof), and being able to support these capabilities requires a whole lot more of computational resources.</p>
 
@@ -36,7 +36,7 @@
   <entry>
     <title type="html"><![CDATA[McKinsey on (Manufacturing) Big Data - Part 2 - What do do with it]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it/"/>
-    <updated>2012-03-21T01:17:00-07:00</updated>
+    <updated>2012-03-21T13:47:00+05:30</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/03/21/McKinsey-Part-2-What-do-do-with-it</id>
     <content type="html"><![CDATA[<p>We are back studying McKinsey&rsquo;s report on Big Data following the last post, and here lets take a closer look at what we can do with Big Data. The report identifies several &ldquo;levers&rdquo; where data can be used to improve manufacturing performance (see below), and of these levers, we are primarily interested in these two:</p>
 
