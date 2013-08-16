@@ -3,9 +3,10 @@ layout: post
 title: M.Eng Capstone @ UC Berkeley
 date: 2013-08-16 09:19
 comments: true
-categories: 
+categories: research
+author: athulan
 ---
 
-We are sponsoring a Masters of Engineering capstone project at UC Berkeley Fung Institute for Engineering Leadership titled "Industrial Energy Management". Here is an overview of the project (thanks Moneer Helu for the presentation):
+We are sponsoring a Masters of Engineering capstone project at UC Berkeley [Fung Institute for Engineering Leadership](http://funginstitute.berkeley.edu/) titled "Industrial Energy Management". Here is an overview of the project (thanks Moneer Helu for the presentation):
 
 <script async class="speakerdeck-embed" data-id="622be1b0e8530130f62e52ef769eb8f4" data-ratio="1.29456384323641" src="//speakerdeck.com/assets/embed.js"></script>
