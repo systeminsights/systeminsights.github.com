@@ -9,8 +9,7 @@
   <meta name="author" content="System Insights">
 
   
-  <meta name="description" content="We are moving to the Octopress framework. The blog will be hosted on Github Pages.
-">
+  <meta name="description" content="A common question that we always get is why vimana is a software-as-a-service (SaaS) product. Surely, given how much data we are collecting, it must &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +77,89 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/08/why-saas/">Why SaaS?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-08T11:16:00+05:30" pubdate data-updated="true">Jun 8<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A common question that we always get is why vimana is a software-as-a-service (SaaS) product. Surely, given how much data we are collecting, it must be easier to run it locally inside a plant, right? Well, if all vimana was doing was creating plots of part counts and utilization, then yes, running it locally does make sense. But vimana does a lot more &mdash; it helps understand the patterns behind productivity (and the lack thereof), and being able to support these capabilities requires a whole lot more of computational resources.</p>
+
+<p>So lets dig deeper &mdash; why SaaS?</p>
+
+<ol>
+<li><strong>Keep it Growing</strong>: SaaS allows us to scale product functionality as your operations grow. This means that vimana can scale to support an increasing number of devices, along with the analytical capabilities required to support them. SaaS also allows us to keep the app at the latest version without requiring long downtimes for the updates.</li>
+<li><strong>Keep it All</strong>: SaaS allows us to keep historical plant data securely for as long as you want us to. This makes it possible to baseline against historical data to put current performance in context, and to make better decisions about the future based on past usage and operational patterns.</li>
+<li><strong>Keep it Lean</strong>: SaaS enables simple, annual, pay-as-you-go pricing, where you pay based on the number of devices you have connected to vimana, and the kind of analysis being performed on the devices. Since the app is delivered over the web, any number of users can access it (even simultaneously!).</li>
+</ol>
+
+
+<p>SaaS deployments also allow us to farm out specific analytical processes to elastic clusters, using map reduce and other big-data-crunching technologies. We will be talking about this in detail in upcoming posts.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/08/livebetter-article/">BEC Article in Livebetter Magazine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-08T08:23:00+05:30" pubdate data-updated="true">Jun 8<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The June issue of the <a href="http://livebettermagazine.com">Livebetter Magazine</a> features an article about the BEC standard by Ralph Resnick from the National Center for Defense Manufacturing and Machining and myself. You can read the article <a href="http://livebettermagazine.com/eng/magazine/article_detail.lasso?id=307">here</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -566,104 +648,6 @@ Deepak.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/14/McKinsey-Part-1-How-Much-Data/">McKinsey on (Manufacturing) Big Data - Part 1 - How Much Data?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-14T12:20:00+05:30" pubdate data-updated="true">Feb 14<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>McKinsey recently published a report about Big Data, going into considerable detail about its impact on different fields, including manufacturing. In the next few posts, I will be digging into this report looking at the specific impacts of big data on machining-related manufacturing, focusing on ways that improve productivity and efficiency.
-First, lets start with how the &ldquo;Big Data&rdquo; is defined:</p>
-
-<blockquote><p>“Big data” refers to datasets whose size is beyond the ability of typical database software tools to capture, store, manage, and analyze. This definition is intentionally subjective and incorporates a moving definition of how big a dataset needs to be in order to be considered big data—i.e., we don’t define big data in terms of being larger than a certain number of terabytes (thousands of gigabytes).</p></blockquote>
-
-<p>This definition applies remarkably well to Manufacturing Big Data. The &ldquo;bigness&rdquo; of the data is not necessarily its absolute size, because process data from a machine tool might be in the tens of gigabytes, which is paltry compared to Internet data like website click-throughs or ad impressions. The bigness comes from the fact that traditional manufacturing decision making systems (spreadsheets, sticky-notes-on-whiteboards, MES systems) deal with very small sets of data – perhaps in the megabytes – and we are now looking at harnessing data that is several orders of magnitude larger than that.</p>
-
-<p>So how much data are we exactly talking about? Lets take the case of collecting MTConnect-based data streams from manufacturing equipment. With Basic monitoring (looking at production efficiency, part count, alarms, messages, and overrides), we can estimate a data rate of about 10 samples a second, with each sample consisting of 10 data items. This generates over 400MB of data daily, or more than 150GB annually per device. With Advanced monitoring (which will complement Basic monitoring with data from embedded and external sensors), this grows to over 21 GB a day, or close to 8 TB a year. With these estimates, a small manufacturing shop with about 10 devices, wil generate over 2 TB of data a day with Basic monitoring, or close to 80 TB with Advanced monitoring. Moving up to a multi-facility enterprise with about 500 devices, we are looking at about 80 TB a year with Basic monitoring, and close to 4 PB (Petabytes) with Advanced monitoring. The table below gives a few more examples.</p>
-
-<iframe frameborder="0" height="360" src="https://docs.google.com/spreadsheet/pub?key=0AnJkF2eeISMAdG5yTjZ4TkgyVEVEWE5rM2E5bmE1eUE&amp;single=true&amp;gid=0&amp;output=html&amp;widget=true" width="500"></iframe>
-
-
-<p>If we extrapolated this further to look at the total number of machine tools currently installed in the United States today (approximately 1.2 Million, based on estimates from AMT), Basic monitoring will generate over 189 PB of data, while Advanced monitoring will generate over 9,400 PB of data (over 9.4 Exabytes). Of course, this does overstate the total data load since not all of these machines can be readily addressed, but it gives a sense of the scale of manufacturing data, and &mdash; more importantly &mdash; the opportunity to harness it.</p>
-
-<p><img class="center" src="/images/2012-02-14-McKinsey-Part-1-How-Much-Data-Sectoral-Data-Storage.png"></p>
-
-<p>McKinsey estimates about 966 PB of stored data in the Discrete Manufacturing sector (see above). Add Process data to that, we are looking at greatly increasing the total storage requirements of the sector. Manufacturing has the largest storage needs of all the surveyed sectors, and the potential of Big Data analytics on process data will further increase them.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/13/Big-Data-in-the-news/">Big Data in the News</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-13T13:49:00+05:30" pubdate data-updated="true">Feb 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The New York Times <a href="http://www.nytimes.com/2012/02/12/sunday-review/big-datas-impact-in-the-world.html">talks</a> about the impact of Big Data across a variety of fields, including retailing, voice recognition, and public health. They cite a report by Prof. Erik Brynjolfsson from MIT Sloan that</p>
-
-<blockquote><p>studied 179 large companies and found that those adopting “data-driven decision making” achieved productivity gains that were 5 percent to 6 percent higher than other factors could explain.</p></blockquote>
-
-<p>Certainly we can expect a larger impact in productivity gains in manufacturing. Traditional &ldquo;data driven&rdquo; techniques like process monitoring has itself brought productivity gains of over 10%. Big Data Analytics gives the opportunity to wring out further gains, because of the ability to handle unstructured data, which the article mentions:</p>
-
-<blockquote><p>Data is not only becoming more available but also more understandable to computers. Most of the Big Data surge is data in the wild — unruly stuff like words, images and video on the Web and those streams of sensor data. It is called unstructured data and is not typically grist for traditional databases.</p></blockquote>
-
-<p>But the computer tools for gleaning knowledge and insights from the Internet era’s vast trove of unstructured data are fast gaining ground. At the forefront are the rapidly advancing techniques of artificial intelligence like natural-language processing, pattern recognition and machine learning.</p>
-
-<p>We apply similar tools and techniques to look at unstructured manufacturing data. More about this coming up!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -679,6 +663,14 @@ First, lets start with how the &ldquo;Big Data&rdquo; is defined:</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/20/green-supply-chains/">Green Supply Chain Management</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/16/meng/">M.Eng Capstone @ UC Berkeley</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/08/15/ed3152/">ED3152 @ IIT Madras</a>
@@ -710,14 +702,6 @@ First, lets start with how the &ldquo;Big Data&rdquo; is defined:</p>
     
       <li class="post">
         <a href="/blog/2013/05/30/energy-consumption-in-manufacturing/">Top Manufacturing Energy Consumers: A Close Look at the Paper Industry</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/01/chennai-ruby-meetup/">chennai.rb Meetup</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/01/green-manufacturing-book/">The Green Manufacturing Book</a>
       </li>
     
   </ul>
