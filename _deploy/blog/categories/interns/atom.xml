@@ -4,7 +4,7 @@
   <title><![CDATA[Category: interns | Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/blog/categories/interns/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2013-08-20T09:58:00+05:30</updated>
+  <updated>2013-09-02T11:07:53-07:00</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Monitoring MTConnect Streams: MTConnect Graphr]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr/"/>
-    <updated>2012-07-02T11:15:00+05:30</updated>
+    <updated>2012-07-02T11:15:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr</id>
     <content type="html"><![CDATA[<p>A few months back I took up the fun task of exploring MTConnect streams and the amazing possibilities which it presented to a developer. That culminated into a web base monitoring app, MTConnect Graphr, which can now be downloaded from <a href="http://github.com/princearora/mtconnect-graphr">Github</a>. In this post I&rsquo;ll run down through the development process of the same.</p>
 
@@ -139,7 +139,7 @@ var line1 = new TimeSeries();
   <entry>
     <title type="html"><![CDATA[Setting up a MTConnect Agent on a Linux (Ubuntu) machine]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine/"/>
-    <updated>2012-03-16T16:10:00+05:30</updated>
+    <updated>2012-03-16T03:40:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/03/16/Setting-up-a-MTConnect-Agent-on-a-Linux-machine</id>
     <content type="html"><![CDATA[<p>This was blogged first at my personal blog <a href="http://princearora.wordpress.com/2012/02/24/setting-up-a-mtconnect-agent-on-a-unixubuntu-machine/">here</a>.</p>
 
@@ -181,9 +181,9 @@ var line1 = new TimeSeries();
   
   <entry>
     <title type="html"><![CDATA[Introducing our Intern - Prince Arora]]></title>
-    <link href="http://www.manufacturingbigdata.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora/"/>
-    <updated>2012-03-16T09:30:00+05:30</updated>
-    <id>http://www.manufacturingbigdata.com/blog/2012/03/16/Introducing-our-Intern-Price-Arora</id>
+    <link href="http://www.manufacturingbigdata.com/blog/2012/03/15/Introducing-our-Intern-Price-Arora/"/>
+    <updated>2012-03-15T21:00:00-07:00</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2012/03/15/Introducing-our-Intern-Price-Arora</id>
     <content type="html"><![CDATA[<p>I want to introduce Prince Arora, a student from IIT Madras, who is interning with us at our Chennai office. Prince is developing a suite of MTConnect-based tools to track the maintenance status of machine tools. He is blogging about his experiences at System Insights at his blog, <a href="http://princearora.in">The 20four hour log</a>.</p>
 
 <p>Prince started out by building a simple webapp to display various maintenance-related parameters from an MTConnect data stream. Specifically <a href="http://princearora.wordpress.com/2012/02/14/mtconnect-the-problem-statement/">he developed an app</a> to:</p>
@@ -202,7 +202,7 @@ var line1 = new TimeSeries();
 
 <p>You can also load up the status of various conditions active in the machine tool, and see if the parameter that is being plotted is within some user-determined bounds. The screen below shows bounds set for the DataItem Commanded Y Position between 3 and -2. A green indication is shown because the data item is operating within bounds.</p>
 
-<p><img class="center" src="/images/2012-03-16-Introducing-our-Intern-Price-Arora-pic-2.jpeg"></p>
+<p>{% img center /images/2012-03-16-Introducing-our-Intern-Price-Arora-pic-2.jpeg %}</p>
 
 <p>Prince will be posting more about his internship in these pages. Stay tuned!</p>
 ]]></content>

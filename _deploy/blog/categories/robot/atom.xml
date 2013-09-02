@@ -4,7 +4,7 @@
   <title><![CDATA[Category: robot | Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/blog/categories/robot/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2013-08-20T09:58:00+05:30</updated>
+  <updated>2013-09-02T11:07:53-07:00</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -16,9 +16,9 @@
   <entry>
     <title type="html"><![CDATA[MTConnect ROS-I Robot CNC Integration]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration/"/>
-    <updated>2013-06-07T23:38:00+05:30</updated>
+    <updated>2013-06-07T23:38:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration</id>
-    <content type="html"><![CDATA[<p>
+    <content type="html"><![CDATA[<p>{% raw %}
   <style type="text/css"></p>
 
 <pre><code>ol { margin-left: 2.5em; }
@@ -26,7 +26,7 @@ article blockquote { font-size: 1em; }
 </code></pre>
 
 <p>  </style>
-</p>
+{% endraw %}</p>
 
 <p>h2. Robotic Interface – Machine Tool Perspective</p>
 
@@ -592,356 +592,182 @@ Devices.xml file is provided below. The sections in bold are the areas
 we have used to drive the state machine, the sections in bold italic
 are new to the standard.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Devices.xml  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-<span class='line-number'>104</span>
-<span class='line-number'>105</span>
-<span class='line-number'>106</span>
-<span class='line-number'>107</span>
-<span class='line-number'>108</span>
-<span class='line-number'>109</span>
-<span class='line-number'>110</span>
-<span class='line-number'>111</span>
-<span class='line-number'>112</span>
-<span class='line-number'>113</span>
-<span class='line-number'>114</span>
-<span class='line-number'>115</span>
-<span class='line-number'>116</span>
-<span class='line-number'>117</span>
-<span class='line-number'>118</span>
-<span class='line-number'>119</span>
-<span class='line-number'>120</span>
-<span class='line-number'>121</span>
-<span class='line-number'>122</span>
-<span class='line-number'>123</span>
-<span class='line-number'>124</span>
-<span class='line-number'>125</span>
-<span class='line-number'>126</span>
-<span class='line-number'>127</span>
-<span class='line-number'>128</span>
-<span class='line-number'>129</span>
-<span class='line-number'>130</span>
-<span class='line-number'>131</span>
-<span class='line-number'>132</span>
-<span class='line-number'>133</span>
-<span class='line-number'>134</span>
-<span class='line-number'>135</span>
-<span class='line-number'>136</span>
-<span class='line-number'>137</span>
-<span class='line-number'>138</span>
-<span class='line-number'>139</span>
-<span class='line-number'>140</span>
-<span class='line-number'>141</span>
-<span class='line-number'>142</span>
-<span class='line-number'>143</span>
-<span class='line-number'>144</span>
-<span class='line-number'>145</span>
-<span class='line-number'>146</span>
-<span class='line-number'>147</span>
-<span class='line-number'>148</span>
-<span class='line-number'>149</span>
-<span class='line-number'>150</span>
-<span class='line-number'>151</span>
-<span class='line-number'>152</span>
-<span class='line-number'>153</span>
-<span class='line-number'>154</span>
-<span class='line-number'>155</span>
-<span class='line-number'>156</span>
-<span class='line-number'>157</span>
-<span class='line-number'>158</span>
-<span class='line-number'>159</span>
-<span class='line-number'>160</span>
-<span class='line-number'>161</span>
-<span class='line-number'>162</span>
-<span class='line-number'>163</span>
-<span class='line-number'>164</span>
-<span class='line-number'>165</span>
-<span class='line-number'>166</span>
-<span class='line-number'>167</span>
-<span class='line-number'>168</span>
-<span class='line-number'>169</span>
-<span class='line-number'>170</span>
-<span class='line-number'>171</span>
-<span class='line-number'>172</span>
-<span class='line-number'>173</span>
-<span class='line-number'>174</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'>  <span class="ni">&amp;lt;</span>?xml version=<span class="ni">&amp;lsquo;</span>1.0<span class="ni">&amp;rsquo;</span> encoding=<span class="ni">&amp;lsquo;</span>UTF-8<span class="ni">&amp;rsquo;</span>?&gt;
-</span><span class='line'>  <span class="nt">&lt;MTConnectDevices</span> <span class="na">xmlns:mt=</span><span class="s">&#39;urn:mtconnect.org:MTConnectDevices:1.2&#39;</span> <span class="na">xmlns:xsi=</span><span class="s">&#39;http://www.w3.org/2001/XMLSchema-instance&#39;</span> <span class="na">xmlns=</span><span class="s">&#39;urn:mtconnect.org:MTConnectDevices:1.2&#39;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&#39;urn:mtconnect.org:MTConnectDevices:1.2 http://www.mtconnect.org/schemas/MTConnectDevices_1.2.xsd&#39;</span><span class="nt">&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>Header creationTime=&#39;2013-04-22T15:24:26Z&#39; assetBufferSize=&#39;1024&#39; sender=&#39;localhost&#39; assetCount=&#39;0&#39; version=&#39;1.2&#39; instanceId=&#39;0&#39; bufferSize=&#39;131072&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'><span class="ni">&amp;lt;</span>Devices<span class="ni">&amp;gt;</span>
-</span><span class='line'>  <span class="ni">&amp;lt;</span>Device name=&#39;cnc&#39; uuid=&#39;cnc&#39; id=&#39;cnc_1&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>    <span class="ni">&amp;lt;</span>Description model=&#39;QTN&#39; manufacturer=&#39;Mazak&#39;<span class="ni">&amp;gt;</span>Mazak Quickturn - Mazak Quickturn for ROS/MTConnect<span class="ni">&amp;lt;</span>/Description<span class="ni">&amp;gt;</span>
-</span><span class='line'>    <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>DataItem type=&#39;AVAILABILITY&#39; category=&#39;EVENT&#39; id=&#39;dtop_2&#39; name=&#39;avail&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>    <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>    <span class="ni">&amp;lt;</span>Components<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>Axes name=&#39;base&#39; id=&#39;base_3&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>DataItem type=&#39;ACTUATOR&#39; category=&#39;CONDITION&#39; id=&#39;base_4&#39; name=&#39;servo_cond&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>Components<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>Linear name=&#39;X&#39; id=&#39;X_5&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;POSITION&#39; category=&#39;SAMPLE&#39; id=&#39;X_6&#39; name=&#39;Xabs&#39; subType=&#39;ACTUAL&#39; units=&#39;MILLIMETER&#39; nativeUnits=&#39;INCH&#39; coordinateSystem=&#39;MACHINE&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;POSITION&#39; category=&#39;CONDITION&#39; id=&#39;X_7&#39; name=&#39;Xtravel&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;LOAD&#39; category=&#39;SAMPLE&#39; id=&#39;X_8&#39; name=&#39;Xload&#39; units=&#39;PERCENT&#39; nativeUnits=&#39;PERCENT&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;AXIS_FEEDRATE&#39; category=&#39;SAMPLE&#39; id=&#39;X_9&#39; name=&#39;Xfrt&#39; units=&#39;MILLIMETER/SECOND&#39; nativeUnits=&#39;FOOT/MINUTE&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/Linear<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>Linear name=&#39;Z&#39; id=&#39;Z_10&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;POSITION&#39; category=&#39;SAMPLE&#39; id=&#39;Z_11&#39; name=&#39;Zabs&#39; subType=&#39;ACTUAL&#39; units=&#39;MILLIMETER&#39; nativeUnits=&#39;INCH&#39; coordinateSystem=&#39;MACHINE&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;POSITION&#39; category=&#39;CONDITION&#39; id=&#39;Z_12&#39; name=&#39;Ztravel&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;LOAD&#39; category=&#39;SAMPLE&#39; id=&#39;Z_13&#39; name=&#39;Zload&#39; units=&#39;PERCENT&#39; nativeUnits=&#39;PERCENT&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;AXIS_FEEDRATE&#39; category=&#39;SAMPLE&#39; id=&#39;Z_14&#39; name=&#39;Zfrt&#39; units=&#39;MILLIMETER/SECOND&#39; nativeUnits=&#39;FOOT/MINUTE&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/Linear<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>Rotary name=&#39;C&#39; id=&#39;C_15&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>!-- Rotary Part --<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;LOAD&#39; category=&#39;SAMPLE&#39; id=&#39;C_16&#39; name=&#39;Cload&#39; units=&#39;PERCENT&#39; nativeUnits=&#39;PERCENT&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;ANGULAR_VELOCITY&#39; category=&#39;SAMPLE&#39; id=&#39;C_17&#39; name=&#39;Cfrt&#39; units=&#39;DEGREE/SECOND&#39; nativeUnits=&#39;DEGREE/MINUTE&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;ANGLE&#39; category=&#39;SAMPLE&#39; id=&#39;C_18&#39; name=&#39;Cdeg&#39; subType=&#39;ACTUAL&#39; units=&#39;DEGREE&#39; nativeUnits=&#39;DEGREE&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;ANGLE&#39; category=&#39;CONDITION&#39; id=&#39;C_19&#39; name=&#39;Ctravel&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>!-- Spindle part --<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;SPINDLE_SPEED&#39; category=&#39;SAMPLE&#39; id=&#39;C_20&#39; name=&#39;Srpm&#39; subType=&#39;ACTUAL&#39; units=&#39;REVOLUTION/MINUTE&#39; nativeUnits=&#39;REVOLUTION/MINUTE&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;LOAD&#39; category=&#39;SAMPLE&#39; id=&#39;C_21&#39; name=&#39;Sload&#39; units=&#39;PERCENT&#39; nativeUnits=&#39;PERCENT&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;TEMPERATURE&#39; category=&#39;SAMPLE&#39; id=&#39;C_22&#39; name=&#39;Stemp&#39; units=&#39;CELSIUS&#39; nativeUnits=&#39;CELSIUS&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;ROTARY_MODE&#39; category=&#39;EVENT&#39; id=&#39;C_23&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>Constraints<span class="ni">&amp;gt;</span>
-</span><span class='line'>                  <span class="ni">&amp;lt;</span>Value<span class="ni">&amp;gt;</span>SPINDLE<span class="ni">&amp;lt;</span>/Value<span class="ni">&amp;gt;</span>
-</span><span class='line'>                  <span class="ni">&amp;lt;</span>Value<span class="ni">&amp;gt;</span>INDEX<span class="ni">&amp;lt;</span>/Value<span class="ni">&amp;gt;</span>
-</span><span class='line'>                  <span class="ni">&amp;lt;</span>Value<span class="ni">&amp;gt;</span>CONTOUR<span class="ni">&amp;lt;</span>/Value<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>/Constraints<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>/DataItem<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;LOAD&#39; category=&#39;CONDITION&#39; id=&#39;C_24&#39; name=&#39;Sload_cond&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;TEMPERATURE&#39; category=&#39;CONDITION&#39; id=&#39;C_25&#39; name=&#39;Stemp_cond&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;CHUCK_STATE&#39; category=&#39;EVENT&#39; id=&#39;C_26&#39; name=&#39;chuck_status&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/Rotary<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>Rotary name=&#39;C2&#39; nativeName=&#39;S2&#39; id=&#39;C2_27&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;SPINDLE_SPEED&#39; category=&#39;SAMPLE&#39; id=&#39;C2_28&#39; name=&#39;S2rpm&#39; subType=&#39;ACTUAL&#39; units=&#39;REVOLUTION/MINUTE&#39; nativeUnits=&#39;REVOLUTION/MINUTE&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;LOAD&#39; category=&#39;SAMPLE&#39; id=&#39;C2_29&#39; name=&#39;S2load&#39; units=&#39;PERCENT&#39; nativeUnits=&#39;PERCENT&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;TEMPERATURE&#39; category=&#39;SAMPLE&#39; id=&#39;C2_30&#39; name=&#39;S2temp&#39; units=&#39;CELSIUS&#39; nativeUnits=&#39;CELSIUS&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;ROTARY_MODE&#39; category=&#39;EVENT&#39; id=&#39;C2_31&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>Constraints<span class="ni">&amp;gt;</span>
-</span><span class='line'>                  <span class="ni">&amp;lt;</span>Value<span class="ni">&amp;gt;</span>SPINDLE<span class="ni">&amp;lt;</span>/Value<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>/Constraints<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>/DataItem<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;LOAD&#39; category=&#39;CONDITION&#39; id=&#39;C2_32&#39; name=&#39;S2load_cond&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;TEMPERATURE&#39; category=&#39;CONDITION&#39; id=&#39;C2_33&#39; name=&#39;S2temp_cond&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/Rotary<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>/Components<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>/Axes<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>Controller name=&#39;controller&#39; id=&#39;controller_34&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>DataItem type=&#39;COMMUNICATIONS&#39; category=&#39;CONDITION&#39; id=&#39;controller_35&#39; name=&#39;comms_cond&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>DataItem type=&#39;LOGIC_PROGRAM&#39; category=&#39;CONDITION&#39; id=&#39;controller_36&#39; name=&#39;logic_cond&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>DataItem type=&#39;SYSTEM&#39; category=&#39;CONDITION&#39; id=&#39;controller_37&#39; name=&#39;system_cond&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>DataItem type=&#39;EMERGENCY_STOP&#39; category=&#39;EVENT&#39; id=&#39;controller_38&#39; name=&#39;estop&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>Components<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>Path name=&#39;path&#39; id=&#39;path_39&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;SPINDLE_SPEED&#39; category=&#39;SAMPLE&#39; id=&#39;path_40&#39; name=&#39;Sovr&#39; subType=&#39;OVERRIDE&#39; units=&#39;PERCENT&#39; nativeUnits=&#39;PERCENT&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;PROGRAM&#39; category=&#39;EVENT&#39; id=&#39;path_41&#39; name=&#39;program&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;PROGRAM&#39; category=&#39;EVENT&#39; id=&#39;path_42&#39; name=&#39;subprogram&#39; subType=&#39;x:SUB&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;LINE&#39; category=&#39;EVENT&#39; id=&#39;path_43&#39; name=&#39;line&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;x:UNIT&#39; category=&#39;EVENT&#39; id=&#39;path_44&#39; name=&#39;unitNum&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;x:SEQUENCE_NUMBER&#39; category=&#39;EVENT&#39; id=&#39;path_45&#39; name=&#39;sequenceNum&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;PART_COUNT&#39; category=&#39;EVENT&#39; id=&#39;path_46&#39; name=&#39;PartCountAct&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;PATH_FEEDRATE&#39; category=&#39;SAMPLE&#39; id=&#39;path_47&#39; name=&#39;Fact&#39; subType=&#39;ACTUAL&#39; units=&#39;MILLIMETER/SECOND&#39; nativeUnits=&#39;FOOT/MINUTE&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;PATH_FEEDRATE&#39; category=&#39;EVENT&#39; id=&#39;path_48&#39; name=&#39;Frapidovr&#39; subType=&#39;OVERRIDE&#39; units=&#39;PERCENT&#39; nativeUnits=&#39;PERCENT&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;PATH_FEEDRATE&#39; category=&#39;EVENT&#39; id=&#39;path_49&#39; name=&#39;Fovr&#39; subType=&#39;OVERRIDE&#39; units=&#39;PERCENT&#39; nativeUnits=&#39;PERCENT&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;TOOL_ID&#39; category=&#39;EVENT&#39; id=&#39;path_50&#39; name=&#39;Tool_number&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;x:TOOL_GROUP&#39; category=&#39;EVENT&#39; id=&#39;path_51&#39; name=&#39;Tool_group&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;x:TOOL_SUFFIX&#39; category=&#39;EVENT&#39; id=&#39;path_52&#39; name=&#39;Tool_suffix&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;EXECUTION&#39; category=&#39;EVENT&#39; id=&#39;path_53&#39; name=&#39;execution&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;CONTROLLER_MODE&#39; category=&#39;EVENT&#39; id=&#39;path_54&#39; name=&#39;mode&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;x:COMMENT&#39; category=&#39;EVENT&#39; id=&#39;path_55&#39; name=&#39;program_cmt&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;x:COMMENT&#39; category=&#39;EVENT&#39; id=&#39;path_56&#39; name=&#39;subprogram_cmt&#39; subType=&#39;x:SUB&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;x:DURATION&#39; category=&#39;EVENT&#39; id=&#39;path_57&#39; name=&#39;auto_time&#39; subType=&#39;x:AUTO&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;x:DURATION&#39; category=&#39;EVENT&#39; id=&#39;path_58&#39; name=&#39;total_time&#39; subType=&#39;x:TOTAL&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;x:DURATION&#39; category=&#39;EVENT&#39; id=&#39;path_59&#39; name=&#39;cut_time&#39; subType=&#39;x:CUT&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;MOTION_PROGRAM&#39; category=&#39;CONDITION&#39; id=&#39;path_60&#39; name=&#39;motion_cond&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;SYSTEM&#39; category=&#39;CONDITION&#39; id=&#39;path_61&#39; name=&#39;path_system&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;x:PALLET_NUM&#39; category=&#39;EVENT&#39; id=&#39;path_62&#39; name=&#39;pallet_num&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/Path<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>/Components<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>/Controller<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>Systems name=&#39;systems&#39; id=&#39;systems_63&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>Components<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>Electric name=&#39;electric&#39; id=&#39;electric_64&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;POWER_STATE&#39; category=&#39;EVENT&#39; id=&#39;electric_65&#39; name=&#39;power&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;TEMPERATURE&#39; category=&#39;CONDITION&#39; id=&#39;electric_66&#39; name=&#39;electric_temp&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/Electric<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>Hydraulic name=&#39;hydraulic&#39; id=&#39;hydraulic_67&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;PRESSURE&#39; category=&#39;CONDITION&#39; id=&#39;hydraulic_68&#39; name=&#39;hydra_cond&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/Hydraulic<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>Coolant name=&#39;coolant&#39; id=&#39;coolant_69&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;PRESSURE&#39; category=&#39;CONDITION&#39; id=&#39;coolant_70&#39; name=&#39;coolant_pres&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;TEMPERATURE&#39; category=&#39;CONDITION&#39; id=&#39;coolant_71&#39; name=&#39;coolant_temp&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;LEVEL&#39; category=&#39;CONDITION&#39; id=&#39;coolant_72&#39; name=&#39;coolant_level&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/Coolant<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>Pneumatic name=&#39;pneumatic&#39; id=&#39;pneumatic_73&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;PRESSURE&#39; category=&#39;CONDITION&#39; id=&#39;pneumatic_74&#39; name=&#39;pneu_cond&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/Pneumatic<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>/Components<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>/Systems<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>Interfaces name=&#39;interfaces&#39; id=&#39;interfaces_75&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>Components<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>MaterialLoader name=&#39;material_loader&#39; id=&#39;material_loader_76&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;MATERIAL_LOAD&#39; category=&#39;EVENT&#39; id=&#39;material_loader_77&#39; name=&#39;material_load&#39; subType=&#39;REQUEST&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;MATERIAL_UNLOAD&#39; category=&#39;EVENT&#39; id=&#39;material_loader_78&#39; name=&#39;material_unload&#39; subType=&#39;REQUEST&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;LINK_STATE&#39; category=&#39;EVENT&#39; id=&#39;material_loader_79&#39; name=&#39;robo_link&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/MaterialLoader<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>ChuckInterface name=&#39;chuck_interface&#39; id=&#39;chuck_interface_80&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;OPEN_CHUCK&#39; category=&#39;EVENT&#39; id=&#39;chuck_interface_81&#39; name=&#39;open_chuck&#39; subType=&#39;RESPONSE&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;CLOSE_CHUCK&#39; category=&#39;EVENT&#39; id=&#39;chuck_interface_82&#39; name=&#39;close_chuck&#39; subType=&#39;RESPONSE&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/ChuckInterface<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>DoorInterface name=&#39;door_interface&#39; id=&#39;door_interface_83&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;OPEN_DOOR&#39; category=&#39;EVENT&#39; id=&#39;door_interface_84&#39; name=&#39;open_door&#39; subType=&#39;RESPONSE&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>DataItem type=&#39;CLOSE_DOOR&#39; category=&#39;EVENT&#39; id=&#39;door_interface_85&#39; name=&#39;close_door&#39; subType=&#39;RESPONSE&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/DoorInterface<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>/Components<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>/Interfaces<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>Door name=&#39;door&#39; id=&#39;door_86&#39;<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>DataItem type=&#39;DOOR_STATE&#39; category=&#39;EVENT&#39; id=&#39;door_87&#39; name=&#39;door_state&#39;/<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>/Door<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>Stock name=&quot;stock&quot; id=&quot;stock&quot;<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>DataItem category=&quot;EVENT&quot; id=&quot;material&quot; name=&quot;material&quot; type=&quot;MATERIAL&quot; /<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>/DataItems<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>/Stock<span class="ni">&amp;gt;</span>
-</span><span class='line'>    <span class="ni">&amp;lt;</span>/Components<span class="ni">&amp;gt;</span>
-</span><span class='line'>  <span class="ni">&amp;lt;</span>/Device<span class="ni">&amp;gt;</span>
-</span><span class='line'><span class="ni">&amp;lt;</span>/Devices<span class="ni">&amp;gt;</span>
-</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;/MTConnectDevices&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock Devices.xml  %}
+  &lt;?xml version=&lsquo;1.0&rsquo; encoding=&lsquo;UTF-8&rsquo;?>
+  <MTConnectDevices xmlns:mt='urn:mtconnect.org:MTConnectDevices:1.2' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns='urn:mtconnect.org:MTConnectDevices:1.2' xsi:schemaLocation='urn:mtconnect.org:MTConnectDevices:1.2 http://www.mtconnect.org/schemas/MTConnectDevices_1.2.xsd'></p>
+
+<pre><code>&lt;Header creationTime='2013-04-22T15:24:26Z' assetBufferSize='1024' sender='localhost' assetCount='0' version='1.2' instanceId='0' bufferSize='131072'/&gt;
+&lt;Devices&gt;
+  &lt;Device name='cnc' uuid='cnc' id='cnc_1'&gt;
+    &lt;Description model='QTN' manufacturer='Mazak'&gt;Mazak Quickturn - Mazak Quickturn for ROS/MTConnect&lt;/Description&gt;
+    &lt;DataItems&gt;
+      &lt;DataItem type='AVAILABILITY' category='EVENT' id='dtop_2' name='avail'/&gt;
+    &lt;/DataItems&gt;
+    &lt;Components&gt;
+      &lt;Axes name='base' id='base_3'&gt;
+        &lt;DataItems&gt;
+          &lt;DataItem type='ACTUATOR' category='CONDITION' id='base_4' name='servo_cond'/&gt;
+        &lt;/DataItems&gt;
+        &lt;Components&gt;
+          &lt;Linear name='X' id='X_5'&gt;
+            &lt;DataItems&gt;
+              &lt;DataItem type='POSITION' category='SAMPLE' id='X_6' name='Xabs' subType='ACTUAL' units='MILLIMETER' nativeUnits='INCH' coordinateSystem='MACHINE'/&gt;
+              &lt;DataItem type='POSITION' category='CONDITION' id='X_7' name='Xtravel'/&gt;
+              &lt;DataItem type='LOAD' category='SAMPLE' id='X_8' name='Xload' units='PERCENT' nativeUnits='PERCENT'/&gt;
+              &lt;DataItem type='AXIS_FEEDRATE' category='SAMPLE' id='X_9' name='Xfrt' units='MILLIMETER/SECOND' nativeUnits='FOOT/MINUTE'/&gt;
+            &lt;/DataItems&gt;
+          &lt;/Linear&gt;
+          &lt;Linear name='Z' id='Z_10'&gt;
+            &lt;DataItems&gt;
+              &lt;DataItem type='POSITION' category='SAMPLE' id='Z_11' name='Zabs' subType='ACTUAL' units='MILLIMETER' nativeUnits='INCH' coordinateSystem='MACHINE'/&gt;
+              &lt;DataItem type='POSITION' category='CONDITION' id='Z_12' name='Ztravel'/&gt;
+              &lt;DataItem type='LOAD' category='SAMPLE' id='Z_13' name='Zload' units='PERCENT' nativeUnits='PERCENT'/&gt;
+              &lt;DataItem type='AXIS_FEEDRATE' category='SAMPLE' id='Z_14' name='Zfrt' units='MILLIMETER/SECOND' nativeUnits='FOOT/MINUTE'/&gt;
+            &lt;/DataItems&gt;
+          &lt;/Linear&gt;
+          &lt;Rotary name='C' id='C_15'&gt;
+            &lt;DataItems&gt;
+              &lt;!-- Rotary Part --&gt;
+              &lt;DataItem type='LOAD' category='SAMPLE' id='C_16' name='Cload' units='PERCENT' nativeUnits='PERCENT'/&gt;
+              &lt;DataItem type='ANGULAR_VELOCITY' category='SAMPLE' id='C_17' name='Cfrt' units='DEGREE/SECOND' nativeUnits='DEGREE/MINUTE'/&gt;
+              &lt;DataItem type='ANGLE' category='SAMPLE' id='C_18' name='Cdeg' subType='ACTUAL' units='DEGREE' nativeUnits='DEGREE'/&gt;
+              &lt;DataItem type='ANGLE' category='CONDITION' id='C_19' name='Ctravel'/&gt;
+              &lt;!-- Spindle part --&gt;
+              &lt;DataItem type='SPINDLE_SPEED' category='SAMPLE' id='C_20' name='Srpm' subType='ACTUAL' units='REVOLUTION/MINUTE' nativeUnits='REVOLUTION/MINUTE'/&gt;
+              &lt;DataItem type='LOAD' category='SAMPLE' id='C_21' name='Sload' units='PERCENT' nativeUnits='PERCENT'/&gt;
+              &lt;DataItem type='TEMPERATURE' category='SAMPLE' id='C_22' name='Stemp' units='CELSIUS' nativeUnits='CELSIUS'/&gt;
+              &lt;DataItem type='ROTARY_MODE' category='EVENT' id='C_23'&gt;
+                &lt;Constraints&gt;
+                  &lt;Value&gt;SPINDLE&lt;/Value&gt;
+                  &lt;Value&gt;INDEX&lt;/Value&gt;
+                  &lt;Value&gt;CONTOUR&lt;/Value&gt;
+                &lt;/Constraints&gt;
+              &lt;/DataItem&gt;
+              &lt;DataItem type='LOAD' category='CONDITION' id='C_24' name='Sload_cond'/&gt;
+              &lt;DataItem type='TEMPERATURE' category='CONDITION' id='C_25' name='Stemp_cond'/&gt;
+              &lt;DataItem type='CHUCK_STATE' category='EVENT' id='C_26' name='chuck_status'/&gt;
+            &lt;/DataItems&gt;
+          &lt;/Rotary&gt;
+          &lt;Rotary name='C2' nativeName='S2' id='C2_27'&gt;
+            &lt;DataItems&gt;
+              &lt;DataItem type='SPINDLE_SPEED' category='SAMPLE' id='C2_28' name='S2rpm' subType='ACTUAL' units='REVOLUTION/MINUTE' nativeUnits='REVOLUTION/MINUTE'/&gt;
+              &lt;DataItem type='LOAD' category='SAMPLE' id='C2_29' name='S2load' units='PERCENT' nativeUnits='PERCENT'/&gt;
+              &lt;DataItem type='TEMPERATURE' category='SAMPLE' id='C2_30' name='S2temp' units='CELSIUS' nativeUnits='CELSIUS'/&gt;
+              &lt;DataItem type='ROTARY_MODE' category='EVENT' id='C2_31'&gt;
+                &lt;Constraints&gt;
+                  &lt;Value&gt;SPINDLE&lt;/Value&gt;
+                &lt;/Constraints&gt;
+              &lt;/DataItem&gt;
+              &lt;DataItem type='LOAD' category='CONDITION' id='C2_32' name='S2load_cond'/&gt;
+              &lt;DataItem type='TEMPERATURE' category='CONDITION' id='C2_33' name='S2temp_cond'/&gt;
+            &lt;/DataItems&gt;
+          &lt;/Rotary&gt;
+        &lt;/Components&gt;
+      &lt;/Axes&gt;
+      &lt;Controller name='controller' id='controller_34'&gt;
+        &lt;DataItems&gt;
+          &lt;DataItem type='COMMUNICATIONS' category='CONDITION' id='controller_35' name='comms_cond'/&gt;
+          &lt;DataItem type='LOGIC_PROGRAM' category='CONDITION' id='controller_36' name='logic_cond'/&gt;
+          &lt;DataItem type='SYSTEM' category='CONDITION' id='controller_37' name='system_cond'/&gt;
+          &lt;DataItem type='EMERGENCY_STOP' category='EVENT' id='controller_38' name='estop'/&gt;
+        &lt;/DataItems&gt;
+        &lt;Components&gt;
+          &lt;Path name='path' id='path_39'&gt;
+            &lt;DataItems&gt;
+              &lt;DataItem type='SPINDLE_SPEED' category='SAMPLE' id='path_40' name='Sovr' subType='OVERRIDE' units='PERCENT' nativeUnits='PERCENT'/&gt;
+              &lt;DataItem type='PROGRAM' category='EVENT' id='path_41' name='program'/&gt;
+              &lt;DataItem type='PROGRAM' category='EVENT' id='path_42' name='subprogram' subType='x:SUB'/&gt;
+              &lt;DataItem type='LINE' category='EVENT' id='path_43' name='line'/&gt;
+              &lt;DataItem type='x:UNIT' category='EVENT' id='path_44' name='unitNum'/&gt;
+              &lt;DataItem type='x:SEQUENCE_NUMBER' category='EVENT' id='path_45' name='sequenceNum'/&gt;
+              &lt;DataItem type='PART_COUNT' category='EVENT' id='path_46' name='PartCountAct'/&gt;
+              &lt;DataItem type='PATH_FEEDRATE' category='SAMPLE' id='path_47' name='Fact' subType='ACTUAL' units='MILLIMETER/SECOND' nativeUnits='FOOT/MINUTE'/&gt;
+              &lt;DataItem type='PATH_FEEDRATE' category='EVENT' id='path_48' name='Frapidovr' subType='OVERRIDE' units='PERCENT' nativeUnits='PERCENT'/&gt;
+              &lt;DataItem type='PATH_FEEDRATE' category='EVENT' id='path_49' name='Fovr' subType='OVERRIDE' units='PERCENT' nativeUnits='PERCENT'/&gt;
+              &lt;DataItem type='TOOL_ID' category='EVENT' id='path_50' name='Tool_number'/&gt;
+              &lt;DataItem type='x:TOOL_GROUP' category='EVENT' id='path_51' name='Tool_group'/&gt;
+              &lt;DataItem type='x:TOOL_SUFFIX' category='EVENT' id='path_52' name='Tool_suffix'/&gt;
+              &lt;DataItem type='EXECUTION' category='EVENT' id='path_53' name='execution'/&gt;
+              &lt;DataItem type='CONTROLLER_MODE' category='EVENT' id='path_54' name='mode'/&gt;
+              &lt;DataItem type='x:COMMENT' category='EVENT' id='path_55' name='program_cmt'/&gt;
+              &lt;DataItem type='x:COMMENT' category='EVENT' id='path_56' name='subprogram_cmt' subType='x:SUB'/&gt;
+              &lt;DataItem type='x:DURATION' category='EVENT' id='path_57' name='auto_time' subType='x:AUTO'/&gt;
+              &lt;DataItem type='x:DURATION' category='EVENT' id='path_58' name='total_time' subType='x:TOTAL'/&gt;
+              &lt;DataItem type='x:DURATION' category='EVENT' id='path_59' name='cut_time' subType='x:CUT'/&gt;
+              &lt;DataItem type='MOTION_PROGRAM' category='CONDITION' id='path_60' name='motion_cond'/&gt;
+              &lt;DataItem type='SYSTEM' category='CONDITION' id='path_61' name='path_system'/&gt;
+              &lt;DataItem type='x:PALLET_NUM' category='EVENT' id='path_62' name='pallet_num'/&gt;
+            &lt;/DataItems&gt;
+          &lt;/Path&gt;
+        &lt;/Components&gt;
+      &lt;/Controller&gt;
+      &lt;Systems name='systems' id='systems_63'&gt;
+        &lt;Components&gt;
+          &lt;Electric name='electric' id='electric_64'&gt;
+            &lt;DataItems&gt;
+              &lt;DataItem type='POWER_STATE' category='EVENT' id='electric_65' name='power'/&gt;
+              &lt;DataItem type='TEMPERATURE' category='CONDITION' id='electric_66' name='electric_temp'/&gt;
+            &lt;/DataItems&gt;
+          &lt;/Electric&gt;
+          &lt;Hydraulic name='hydraulic' id='hydraulic_67'&gt;
+            &lt;DataItems&gt;
+              &lt;DataItem type='PRESSURE' category='CONDITION' id='hydraulic_68' name='hydra_cond'/&gt;
+            &lt;/DataItems&gt;
+          &lt;/Hydraulic&gt;
+          &lt;Coolant name='coolant' id='coolant_69'&gt;
+            &lt;DataItems&gt;
+              &lt;DataItem type='PRESSURE' category='CONDITION' id='coolant_70' name='coolant_pres'/&gt;
+              &lt;DataItem type='TEMPERATURE' category='CONDITION' id='coolant_71' name='coolant_temp'/&gt;
+              &lt;DataItem type='LEVEL' category='CONDITION' id='coolant_72' name='coolant_level'/&gt;
+            &lt;/DataItems&gt;
+          &lt;/Coolant&gt;
+          &lt;Pneumatic name='pneumatic' id='pneumatic_73'&gt;
+            &lt;DataItems&gt;
+              &lt;DataItem type='PRESSURE' category='CONDITION' id='pneumatic_74' name='pneu_cond'/&gt;
+            &lt;/DataItems&gt;
+          &lt;/Pneumatic&gt;
+        &lt;/Components&gt;
+      &lt;/Systems&gt;
+      &lt;Interfaces name='interfaces' id='interfaces_75'&gt;
+        &lt;Components&gt;
+          &lt;MaterialLoader name='material_loader' id='material_loader_76'&gt;
+            &lt;DataItems&gt;
+              &lt;DataItem type='MATERIAL_LOAD' category='EVENT' id='material_loader_77' name='material_load' subType='REQUEST'/&gt;
+              &lt;DataItem type='MATERIAL_UNLOAD' category='EVENT' id='material_loader_78' name='material_unload' subType='REQUEST'/&gt;
+              &lt;DataItem type='LINK_STATE' category='EVENT' id='material_loader_79' name='robo_link'/&gt;
+            &lt;/DataItems&gt;
+          &lt;/MaterialLoader&gt;
+          &lt;ChuckInterface name='chuck_interface' id='chuck_interface_80'&gt;
+            &lt;DataItems&gt;
+              &lt;DataItem type='OPEN_CHUCK' category='EVENT' id='chuck_interface_81' name='open_chuck' subType='RESPONSE'/&gt;
+              &lt;DataItem type='CLOSE_CHUCK' category='EVENT' id='chuck_interface_82' name='close_chuck' subType='RESPONSE'/&gt;
+            &lt;/DataItems&gt;
+          &lt;/ChuckInterface&gt;
+          &lt;DoorInterface name='door_interface' id='door_interface_83'&gt;
+            &lt;DataItems&gt;
+              &lt;DataItem type='OPEN_DOOR' category='EVENT' id='door_interface_84' name='open_door' subType='RESPONSE'/&gt;
+              &lt;DataItem type='CLOSE_DOOR' category='EVENT' id='door_interface_85' name='close_door' subType='RESPONSE'/&gt;
+            &lt;/DataItems&gt;
+          &lt;/DoorInterface&gt;
+        &lt;/Components&gt;
+      &lt;/Interfaces&gt;
+      &lt;Door name='door' id='door_86'&gt;
+        &lt;DataItems&gt;
+          &lt;DataItem type='DOOR_STATE' category='EVENT' id='door_87' name='door_state'/&gt;
+        &lt;/DataItems&gt;
+      &lt;/Door&gt;
+      &lt;Stock name="stock" id="stock"&gt;
+        &lt;DataItems&gt;
+          &lt;DataItem category="EVENT" id="material" name="material" type="MATERIAL" /&gt;
+        &lt;/DataItems&gt;
+      &lt;/Stock&gt;
+    &lt;/Components&gt;
+  &lt;/Device&gt;
+&lt;/Devices&gt;
+</code></pre>
+
+<p>  </MTConnectDevices>
+{% endcodeblock %}</p>
 
 <p>h3. Future Enhancements</p>
 
