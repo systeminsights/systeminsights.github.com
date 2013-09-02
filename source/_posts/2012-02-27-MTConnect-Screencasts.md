@@ -4,7 +4,7 @@ title: MTConnect Screencasts
 date: 2012-02-27 20:57:00 UTC
 comments: true
 categories: mtconnect
-author: will
+author: Will Sobel
 ---
 
 I will producing a series of MTConnect screencasts in the near future on various topics. The first in the series will cover extending the MTConnect standard by adding custom Data Items and Components. The tutorial will take you through all the steps necessary to develop an extension using the open source tools and deploy an integrated solution with all the schema files deployed on the MTConnect Agent. I am working on the screen casts right now and learning my way through the various technologies necessary to make a usable online education series.
