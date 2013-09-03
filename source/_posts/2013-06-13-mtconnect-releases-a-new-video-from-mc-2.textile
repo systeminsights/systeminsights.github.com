@@ -4,6 +4,7 @@ title: "MTConnect Releases a new Video from MC[2]"
 date: 2013-06-13 14:35
 comments: true
 categories: mtconnect
+author: Will Sobel
 ---
 
 Excellent video from MC ^2^ conference staring Jake Ervin. This was

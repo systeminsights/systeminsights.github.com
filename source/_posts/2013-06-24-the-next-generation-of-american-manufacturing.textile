@@ -4,6 +4,7 @@ title: "The Next Generation of American Manufacturing"
 date: 2013-06-24 11:53
 comments: true
 categories: mtconnect MC2
+author: Will Sobel
 ---
 
 Steve Fritzinger, NetApp's Virtualization Alliance Manager, Java

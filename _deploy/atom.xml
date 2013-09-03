@@ -4,7 +4,7 @@
   <title><![CDATA[Manufacturing Big Data]]></title>
   <link href="http://www.manufacturingbigdata.com/atom.xml" rel="self"/>
   <link href="http://www.manufacturingbigdata.com/"/>
-  <updated>2013-08-20T09:58:00+05:30</updated>
+  <updated>2013-09-02T11:28:47-07:00</updated>
   <id>http://www.manufacturingbigdata.com/</id>
   <author>
     <name><![CDATA[System Insights]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Green Supply Chain Management]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/08/20/green-supply-chains/"/>
-    <updated>2013-08-20T12:00:00+05:30</updated>
+    <updated>2013-08-20T12:00:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/08/20/green-supply-chains</id>
     <content type="html"><![CDATA[<p>Designing and implementing sustainable supply chains is gaining importance these days, as depleting natural resources and increasing climate change risks have emphasized the need for eco-friendly manufacturing practices. The process of integrating environmental drivers into Supply Chain Management (SCM) is called Green Supply Chain Management. Green Supply Chain Management is motivated by:</p>
 
@@ -64,7 +64,7 @@
   <entry>
     <title type="html"><![CDATA[M.Eng Capstone @ UC Berkeley]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/08/16/meng/"/>
-    <updated>2013-08-16T09:19:00+05:30</updated>
+    <updated>2013-08-16T09:19:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/08/16/meng</id>
     <content type="html"><![CDATA[<p>We are sponsoring a Masters of Engineering capstone project at UC Berkeley <a href="http://funginstitute.berkeley.edu/">Fung Institute for Engineering Leadership</a> titled &ldquo;Industrial Energy Management&rdquo;. Here is an overview of the project (thanks Moneer Helu for the presentation):</p>
 
@@ -74,9 +74,18 @@
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[green_supply_chains]]></title>
+    <link href="http://www.manufacturingbigdata.com/blog/2013/08/15/green-supply-chains/"/>
+    <updated>2013-08-15T12:22:00-07:00</updated>
+    <id>http://www.manufacturingbigdata.com/blog/2013/08/15/green-supply-chains</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[ED3152 @ IIT Madras]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/08/15/ed3152/"/>
-    <updated>2013-08-15T12:05:00+05:30</updated>
+    <updated>2013-08-15T12:05:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/08/15/ed3152</id>
     <content type="html"><![CDATA[<p>I am teaching the course ED3152: Precision Processes and Systems at <a href="http://www.iitm.ac.in">IIT Madras</a>. You can follow the course material and discussions on the course <a href="http://ed3152.manufacturingbigdata.com/">website</a>.</p>
 ]]></content>
@@ -85,7 +94,7 @@
   <entry>
     <title type="html"><![CDATA[The Next Generation of American Manufacturing]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/24/the-next-generation-of-american-manufacturing/"/>
-    <updated>2013-06-24T11:53:00+05:30</updated>
+    <updated>2013-06-24T11:53:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/24/the-next-generation-of-american-manufacturing</id>
     <content type="html"><![CDATA[<p>Steve Fritzinger, NetApp&#8217;s Virtualization Alliance Manager, Java
 Author and Economics Writer, discusses the future of American
@@ -120,7 +129,7 @@ compete effectively, regardless of where they&#8217;re located.</p>]]></content>
   <entry>
     <title type="html"><![CDATA[Call for Papers: Information Modeling and Big Data]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/14/cfp/"/>
-    <updated>2013-06-14T07:46:00+05:30</updated>
+    <updated>2013-06-14T07:46:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/14/cfp</id>
     <content type="html"><![CDATA[<p>I am the guest editor for a special issue on &ldquo;Information Modeling and Big Data: Issues and Challenges&rdquo; to be published in the <a href="http://computingengineering.asmedigitalcollection.asme.org/">ASME Journal of Computing and Information Science in Engineering</a>. We are soliciting papers for this special issue, and if you are more interested, please see <a href="https://www.asme.org/getmedia/440280f8-9861-455f-b7e5-8b69193e6d70/ASME-JCIS-SPECIAL-ISSUE-PROPOSAL-5-2013.aspx">here</a>. If you have any questions you can contact me as well (my information is in the ASME link).</p>
 ]]></content>
@@ -129,7 +138,7 @@ compete effectively, regardless of where they&#8217;re located.</p>]]></content>
   <entry>
     <title type="html"><![CDATA[MTConnect Releases a new Video from MC[2]]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/13/mtconnect-releases-a-new-video-from-mc-2/"/>
-    <updated>2013-06-13T14:35:00+05:30</updated>
+    <updated>2013-06-13T14:35:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/13/mtconnect-releases-a-new-video-from-mc-2</id>
     <content type="html"><![CDATA[<p>Excellent video from MC <sup>2</sup> conference staring Jake Ervin. This was
 shot at the MC <sup>2</sup> conference in April and Jake, sadly, trying to strike up
@@ -142,7 +151,7 @@ acting. Better stick to my day job!</p>
   <entry>
     <title type="html"><![CDATA[MTConnect ROS-I Robot CNC Integration]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration/"/>
-    <updated>2013-06-07T23:38:00+05:30</updated>
+    <updated>2013-06-07T23:38:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/07/mtconnect-ros-i-robot-cnc-integration</id>
     <content type="html"><![CDATA[<style type="text/css">
 ol { margin-left: 2.5em; }
@@ -996,7 +1005,7 @@ as resource management.</p>]]></content>
   <entry>
     <title type="html"><![CDATA[Introducing the vrtk package]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/05/introducing-the-vrtk-package/"/>
-    <updated>2013-06-05T08:29:00+05:30</updated>
+    <updated>2013-06-05T08:29:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/05/introducing-the-vrtk-package</id>
     <content type="html"><![CDATA[<p>As part of my internship project here at System Insights, Chennai, I&rsquo;ve been involved in developing an R-package called the &lsquo;vrtk&rsquo;, essentially a set of tools for reading and working with data from the vimana platform.</p>
 
@@ -1118,7 +1127,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[We Are Hiring!]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/06/03/we-are-hiring/"/>
-    <updated>2013-06-03T06:00:00+05:30</updated>
+    <updated>2013-06-03T06:00:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/06/03/we-are-hiring</id>
     <content type="html"><![CDATA[<p>At System Insights, we build <a href="http://systeminsights.com/vimana/">vimana</a>, the world&rsquo;s most advanced platform for manufacturing data analytics. We are a small, fast-growing company with 15 employees globally and we are looking to grow our R&amp;D center in Chennai, India. We are currently hiring for the following positions in Chennai:</p>
 
@@ -1183,7 +1192,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[Top Manufacturing Energy Consumers: A Close Look at the Paper Industry]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/05/30/energy-consumption-in-manufacturing/"/>
-    <updated>2013-05-30T12:00:00+05:30</updated>
+    <updated>2013-05-30T12:00:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/05/30/energy-consumption-in-manufacturing</id>
     <content type="html"><![CDATA[<p><a href="http://www.linkedin.com/pub/jes%C3%BAs-nieto-gonz%C3%A1lez/30/a92/943/">Jesus Nieto Gonzalez</a> from the UC Berkeley Haas School of Business Class of 2014 worked with us on a research project to identify the top energy consumers in the manufacturing sector. Here are some of his findings:</p>
 
@@ -1202,7 +1211,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[chennai.rb Meetup]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/04/01/chennai-ruby-meetup/"/>
-    <updated>2013-04-01T14:45:00+05:30</updated>
+    <updated>2013-04-01T14:45:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/04/01/chennai-ruby-meetup</id>
     <content type="html"><![CDATA[<p>We will be hosting the next chennai.rb meetup on the 6th of April in our <a href="http://systeminsights.com/locations">Chennai office</a>. The talks include:</p>
 
@@ -1219,7 +1228,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[The Green Manufacturing Book]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/04/01/green-manufacturing-book/"/>
-    <updated>2013-04-01T11:15:00+05:30</updated>
+    <updated>2013-04-01T11:15:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/04/01/green-manufacturing-book</id>
     <content type="html"><![CDATA[<p>Had questions about Green Manufacturing but were too bashful to ask? You are in luck, you can pick up a copy of the excellent &ldquo;Green Manufacturing: Fundamentals and Applications&rdquo; from <a href="http://www.amazon.com/Green-Manufacturing-Fundamentals-Applications-Technology/dp/1441960155/">Amazon.com</a> and other fashionable purveyors of fine reading material. Full Disclosure: I have co-authored 4 chapters in the book, including the penultimate chapter &ldquo;Enabling Technologies for Assuring Green Manufacturing&rdquo;, which, among other things, talks  about the need for a highly scalable software architecture to enable realtime monitoring and reporting of manufacturing performance (hint: we have a built a little <a href="http://www.systeminsights.com/vimana">product</a> to address that need).</p>
 
@@ -1230,7 +1239,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[JavaOne Presentation]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/01/08/javaone-presentation/"/>
-    <updated>2013-01-08T09:28:00+05:30</updated>
+    <updated>2013-01-08T09:28:00-08:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/01/08/javaone-presentation</id>
     <content type="html"><![CDATA[<p>We presented at <a href="http://www.oracle.com/javaone/index.html">JavaOne</a> in early October 2012 in San Francisco on applying Embedded technologies in enabling Manufacturing Big Data. Here are our slides.</p>
 
@@ -1242,7 +1251,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[Precision Manufacturing Lecture Videos]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2013/01/08/precision-manufacturing/"/>
-    <updated>2013-01-08T09:00:00+05:30</updated>
+    <updated>2013-01-08T09:00:00-08:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2013/01/08/precision-manufacturing</id>
     <content type="html"><![CDATA[<p>I am back to my regular blogging duties after a hiatus of a few months.</p>
 
@@ -1260,7 +1269,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[Oracle Partnership at IMTS]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/09/04/imts-oracle-partnership/"/>
-    <updated>2012-09-04T09:53:00+05:30</updated>
+    <updated>2012-09-04T09:53:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/09/04/imts-oracle-partnership</id>
     <content type="html"><![CDATA[<p>We are very happy to announce that we will be partnering with <a href="http://www.oracle.com">Oracle</a> during <a href="http://www.imts.com/">IMTS</a> to showcase integrated solutions for manufacturing data interoperability, collection, and analysis. We will be discussing the use of Java SE Embedded in building a ubiquitous embedded platform for collecting data from the shopfloor. <a href="http://www.oracle.com/technetwork/java/embedded/overview/javase/index.html">Java SE Embedded</a> has been used in products across a diverse spectrum of industries, ranging from RFID readers to parking meters to ATMs to in-flight video systems to POS terminals to wearable systems. This makes it a great fit in the manufacturing world, where we need hardware devices that can seamlessly and ubiquitously integrate data across the shop floor.</p>
 
@@ -1273,7 +1282,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[Process Traceability and Big Data]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/08/31/traceability/"/>
-    <updated>2012-08-31T22:47:00+05:30</updated>
+    <updated>2012-08-31T22:47:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/08/31/traceability</id>
     <content type="html"><![CDATA[<p>In a previous post we looked at the different things we can do with Big Data. Lets examine one of the applications in more detail: Process Traceability.</p>
 
@@ -1306,7 +1315,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[IMTS 2012]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/08/22/updates-and-imts/"/>
-    <updated>2012-08-22T13:54:00+05:30</updated>
+    <updated>2012-08-22T13:54:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/08/22/updates-and-imts</id>
     <content type="html"><![CDATA[<p>We are back after a brief hiatus. The last few weeks have been eventful, to say the least, as we get ready for <a href="http://www.imts.com">IMTS 2012</a> in Chicago between September 10th and 15th. At IMTS we will be showcasing the <strong>vimana</strong> software platform for manufacturing productivity improvement and the <strong>ConnectOne</strong> hardware platform for MTConnect-based data acquisition and interoperability.</p>
 
@@ -1317,7 +1326,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[Energy Regulations in Tamil Nadu, India]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/07/10/tneb-regulations/"/>
-    <updated>2012-07-10T11:00:00+05:30</updated>
+    <updated>2012-07-10T11:00:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/07/10/tneb-regulations</id>
     <content type="html"><![CDATA[<p>Industrial energy consumers in Tamil Nadu, India have seen a sharp increase in energy costs beginning from April 2012. In this post we look at the revised tariff of the Tamil Nadu Electricity Board (TNEB), and examine its impact on the overall energy costs for a manufacturing plant.</p>
 
@@ -1454,7 +1463,7 @@ cor(sample.computed,sample.reported)
   <entry>
     <title type="html"><![CDATA[Monitoring MTConnect Streams: MTConnect Graphr]]></title>
     <link href="http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr/"/>
-    <updated>2012-07-02T11:15:00+05:30</updated>
+    <updated>2012-07-02T11:15:00-07:00</updated>
     <id>http://www.manufacturingbigdata.com/blog/2012/07/02/monitoring-mtc-streams-mtconnect-graphr</id>
     <content type="html"><![CDATA[<p>A few months back I took up the fun task of exploring MTConnect streams and the amazing possibilities which it presented to a developer. That culminated into a web base monitoring app, MTConnect Graphr, which can now be downloaded from <a href="http://github.com/princearora/mtconnect-graphr">Github</a>. In this post I&rsquo;ll run down through the development process of the same.</p>
 
@@ -1571,17 +1580,6 @@ var line1 = new TimeSeries();
 <p>I guess that&rsquo;s it. The app is ready to roll. I checked it out locally on a PC, iPOD touch and an android device. Seems to be working fine for me. Let me know if any of you notice anything off about it.</p>
 
 <p>PS: Please ensure that the application is run on a PHP server. Otherwise the application will fail to connect to the stream and all you will see is a white blank page. I&rsquo;d recommend WAMP/LAMP for users trying it on their personal PCs.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress + S3 + Cloudfront]]></title>
-    <link href="http://www.manufacturingbigdata.com/blog/2012/06/13/s3/"/>
-    <updated>2012-06-13T07:03:00+05:30</updated>
-    <id>http://www.manufacturingbigdata.com/blog/2012/06/13/s3</id>
-    <content type="html"><![CDATA[<p>We have finally migrated to Octopress from Google Blogger. Feels a lot better to write in Markdown than using Blogger&rsquo;s editor! The static content is being stored in an S3 bucket and served through AWS Cloudfront.</p>
-
-<p>Thank you: <a href="http://www.jerome-bernard.com/blog/2011/08/20/quick-tip-for-easily-deploying-octopress-blog-on-amazon-cloudfront/">Jerome Bernard</a>, <a href="http://blog.jacobelder.com/2012/03/octopress-and-cloudfront/">Jacob Elder</a>, <a href="http://www.octopress.org">Octopress</a>, and <a href="http://www.github.com">Github</a>.</p>
 ]]></content>
   </entry>
   
