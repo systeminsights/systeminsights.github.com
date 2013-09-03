@@ -3,7 +3,7 @@ layout: post
 title: "Green Supply Chain Management"
 date: 2013-08-20 12:00
 comments: true
-categories: karthik
+author: karthik
 ---
 Designing and implementing sustainable supply chains is gaining importance these days, as depleting natural resources and increasing climate change risks have emphasized the need for eco-friendly manufacturing practices. The process of integrating environmental drivers into Supply Chain Management (SCM) is called Green Supply Chain Management. Green Supply Chain Management is motivated by:
 
